@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiragana & Katakana Guide | NIHONGO WORK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F6F2; --s1: #FFFFFF; --s2: #F0EFE9; --s3: #E8E7E0;
+  --acc: #E4572E; --acc2: #C94120; --accG: #6BA368; --accB: #1F3A5F;
+  --accY: #D4A017; --accP: #8B5CF6; --accC: #0891B2;
+  --tx: #1A1A2E; --txM: #4A5568; --txD: #9AA5B4;
+  --brd: rgba(0,0,0,0.08);
+  --g1: linear-gradient(135deg,#E4572E,#C94120);
+  --g2: linear-gradient(135deg,#1F3A5F,#2D4A7A);
+  --g3: linear-gradient(135deg,#D4A017,#E4572E);
+  --g4: linear-gradient(135deg,#8B5CF6,#1F3A5F);
+  --g5: linear-gradient(135deg,#6BA368,#0891B2);
+  --r: 14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
+
+/* ── TOP BAR ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-sub{font-size:11px;color:var(--txD);-webkit-text-fill-color:var(--txD);font-weight:400}
+.pill{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--txM)}
+
+/* ── HERO ── */
+.hero{max-width:720px;margin:0 auto;padding:52px 24px 44px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;right:-10px;top:30px;font-family:'Zen Maru Gothic',sans-serif;font-size:120px;font-weight:900;opacity:.05;line-height:1;pointer-events:none;user-select:none}
+.hero-cat{display:inline-flex;align-items:center;gap:6px;background:var(--s1);border:1px solid var(--brd);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--txM);letter-spacing:.08em;margin-bottom:18px}
+.hero-cat b{color:var(--acc)}
+.hero-title{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(26px,4.8vw,40px);font-weight:900;line-height:1.18;color:var(--tx);margin-bottom:8px}
+.hero-title .ha{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-title .ka{background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:13px;color:var(--txD);margin-bottom:16px;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.hero-desc{font-size:14px;color:var(--txM);line-height:1.9;max-width:560px;margin-bottom:24px}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap}
+.hstat{background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:10px 16px;text-align:center}
+.hstat-n{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.hstat-l{font-size:10px;color:var(--txD);margin-top:3px;letter-spacing:.06em}
+
+/* ── TOC ── */
+.toc{max-width:720px;margin:0 auto;padding:0 24px 28px}
+.toc-inner{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px 18px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.toc-lbl{font-size:11px;color:var(--txD);letter-spacing:.06em;flex-shrink:0;margin-right:2px}
+.toc-a{text-decoration:none;background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--txM);transition:all .15s;display:flex;align-items:center;gap:4px}
+.toc-a:hover{background:var(--s3);color:var(--tx)}
+
+/* ── CONTENT ── */
+.content{max-width:720px;margin:0 auto;padding:0 24px 80px}
+section[id]{scroll-margin-top:68px}
+
+/* ── SECTION HEADER ── */
+.sh{display:flex;align-items:center;gap:10px;margin:44px 0 20px}
+.sh-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#fff;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.sh-title{font-family:'Zen Maru Gothic',sans-serif;font-size:17px;font-weight:900;color:var(--tx)}
+.sh-line{flex:1;height:1px;background:var(--brd)}
+
+/* ── KANA GRID ── */
+.kana-grid-wrap{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.kg-header{padding:14px 18px 10px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.kg-title{font-family:'Zen Maru Gothic',sans-serif;font-size:15px;font-weight:900;color:var(--tx)}
+.kg-sub{font-size:11px;color:var(--txD);font-family:'DM Mono',monospace}
+.kg-count{margin-left:auto;background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--txM);font-family:'DM Mono',monospace}
+
+/* 5-column grid matching the gojuuon table */
+.kana-table{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--brd);padding:0}
+.kana-table.wide{grid-template-columns:repeat(5,1fr)}
+.kana-cell{background:var(--s1);padding:10px 6px;text-align:center;transition:background .15s}
+.kana-cell:hover{background:var(--s2)}
+.kana-cell.header{background:var(--s2);font-size:10px;color:var(--txD);letter-spacing:.06em;font-family:'DM Mono',monospace;font-weight:500;padding:8px 4px}
+.kana-cell.empty{background:var(--s2);opacity:.4}
+.kana-ch{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:700;color:var(--tx);line-height:1;margin-bottom:4px;display:block}
+.kana-rom{font-family:'DM Mono',monospace;font-size:10px;color:var(--txD);letter-spacing:.04em}
+/* Dakuten cells slightly different */
+.kana-cell.daku .kana-ch{color:var(--accB)}
+.kana-cell.hpa  .kana-ch{color:var(--acc)}
+
+/* ── COMPARE TABLE ── */
+.compare-wrap{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.cw-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--s2);border-bottom:1px solid var(--brd)}
+.cw-head div{padding:9px 14px;font-size:10px;color:var(--txD);letter-spacing:.08em;font-family:'DM Mono',monospace;border-right:1px solid var(--brd)}
+.cw-head div:last-child{border-right:none}
+.cw-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--brd)}
+.cw-row:last-child{border-bottom:none}
+.cw-row:hover{background:var(--s2)}
+.cw-cell{padding:12px 14px;font-size:13px;color:var(--txM);border-right:1px solid var(--brd);line-height:1.55;vertical-align:top}
+.cw-cell:last-child{border-right:none}
+.cw-cell:first-child{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--tx)}
+.cw-cell.kata{color:var(--accB);font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700}
+
+/* ── TIP BOX ── */
+.tip{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:10px;margin-bottom:10px;font-size:13px;line-height:1.8}
+.tip.green{background:rgba(107,163,104,.08);border:1px solid rgba(107,163,104,.22);color:#3a6e37}
+.tip.blue {background:rgba(31,58,95,.07);  border:1px solid rgba(31,58,95,.18); color:var(--accB)}
+.tip.orange{background:rgba(228,87,46,.07); border:1px solid rgba(228,87,46,.22);color:var(--acc2)}
+.tip.yellow{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.25);color:#7a5800}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+
+/* ── TRICK CARDS ── */
+.tricks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:500px){.tricks{grid-template-columns:1fr}}
+.trick-card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:18px 16px;position:relative;overflow:hidden;transition:all .2s}
+.trick-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.trick-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.tc1::before{background:var(--g1)}.tc2::before{background:var(--g2)}
+.tc3::before{background:var(--g3)}.tc4::before{background:var(--g4)}
+.tc5::before{background:var(--g5)}
+.trick-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--txD);letter-spacing:.08em;margin-bottom:6px}
+.trick-title{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:900;color:var(--tx);margin-bottom:6px}
+.trick-desc{font-size:12px;color:var(--txM);line-height:1.7}
+.trick-ex{margin-top:8px;background:var(--s2);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--txM);line-height:1.65}
+.trick-ex b{color:var(--acc);font-family:'Zen Maru Gothic',sans-serif;font-size:16px}
+
+/* ── MISTAKE TABLE ── */
+.mistake-wrap{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.mw-head{display:grid;grid-template-columns:60px 60px 1fr;background:var(--s2);border-bottom:1px solid var(--brd)}
+.mw-head div{padding:8px 12px;font-size:10px;color:var(--txD);letter-spacing:.07em;font-family:'DM Mono',monospace;border-right:1px solid var(--brd)}
+.mw-head div:last-child{border-right:none}
+.mw-row{display:grid;grid-template-columns:60px 60px 1fr;border-bottom:1px solid var(--brd)}
+.mw-row:last-child{border-bottom:none}
+.mw-row:hover{background:var(--s2)}
+.mw-cell{padding:10px 12px;font-size:13px;border-right:1px solid var(--brd);display:flex;align-items:center}
+.mw-cell:last-child{border-right:none;color:var(--txM);font-size:12px;line-height:1.6}
+.pair{display:flex;align-items:center;gap:6px}
+.ch{font-family:'Zen Maru Gothic',sans-serif;font-size:20px;font-weight:700;color:var(--tx)}
+.rom{font-family:'DM Mono',monospace;font-size:11px;color:var(--txD)}
+
+/* ── STUDY PLAN ── */
+.plan{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.plan-row{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;border-bottom:1px solid var(--brd);transition:background .15s}
+.plan-row:last-child{border-bottom:none}
+.plan-row:hover{background:var(--s2)}
+.plan-day{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#fff;padding:4px 9px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.plan-body{}
+.plan-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px}
+.plan-desc{font-size:12px;color:var(--txM);line-height:1.7}
+
+/* ── BIG CTA ── */
+.cta-banner{background:var(--accB);border-radius:var(--r);padding:32px 28px;margin-top:48px;position:relative;overflow:hidden;text-align:center}
+.cta-banner::before{content:'あ';font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:180px;opacity:.05;position:absolute;left:-10px;top:-20px;line-height:1;pointer-events:none}
+.cta-banner::after{content:'ア';font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:180px;opacity:.05;position:absolute;right:-10px;bottom:-30px;line-height:1;pointer-events:none}
+.cta-eye{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.12em;margin-bottom:10px;font-family:'DM Mono',monospace}
+.cta-title{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.8vw,30px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:12px}
+.cta-title span{color:#f0c040}
+.cta-desc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.85;max-width:460px;margin:0 auto 24px}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-family:'Zen Maru Gothic',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;border:none}
+.cta-btn.primary{background:#f0c040;color:var(--accB)}
+.cta-btn.primary:hover{background:#ffe060;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.cta-btn.secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.cta-btn.secondary:hover{background:rgba(255,255,255,.2)}
+
+/* ── FOOTER ── */
+.guide-footer{border-top:1px solid var(--brd);padding:32px 24px;text-align:center;max-width:720px;margin:0 auto}
+.guide-footer-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:900;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.guide-footer-sub{font-size:13px;color:var(--txD)}
+
+/* ANIM */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero{animation:fadeUp .45s ease both}
+.toc{animation:fadeUp .45s .08s ease both}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="logo" href="#">NIHONGO WORK <span class="logo-sub">にほんごワーク</span></a>
+  <div class="pill">📝 Kana Guide</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">あア</div>
+  <div class="hero-cat">📝 Stage 0 &nbsp;·&nbsp; <b>Must-learn first</b></div>
+  <h1 class="hero-title">
+    <span class="ha">Hiragana</span> &amp; <span class="ka">Katakana</span><br>
+    Complete Guide
+  </h1>
+  <p class="hero-sub">ひらがな・カタカナ 完全一覧 + 覚え方</p>
+  <p class="hero-desc">
+    Before vocabulary, kanji, or grammar — you need to read Japanese characters fluently. This guide covers every character, how they are organised, the most common mistakes, and a proven 2–4 week study plan.
+  </p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n" style="color:var(--acc)">46</div><div class="hstat-l">HIRAGANA</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accB)">46</div><div class="hstat-l">KATAKANA</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accY)">25+25</div><div class="hstat-l">DAKUTEN</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accG)">2–4</div><div class="hstat-l">WEEKS</div></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="toc-lbl">JUMP TO</span>
+    <a href="#what"     class="toc-a">❓ What is kana?</a>
+    <a href="#hiragana" class="toc-a">あ Hiragana</a>
+    <a href="#katakana" class="toc-a">ア Katakana</a>
+    <a href="#dakuten"  class="toc-a">゛Dakuten</a>
+    <a href="#confuse"  class="toc-a">⚠ Confusing pairs</a>
+    <a href="#tips"     class="toc-a">💡 How to memorise</a>
+    <a href="#plan"     class="toc-a">📅 Study plan</a>
+    <a href="#quiz"     class="toc-a">🎯 Start quiz</a>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- ── WHAT IS KANA ── -->
+  <section id="what">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--txM)">BASICS</div>
+      <div class="sh-title">What is Kana?</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="compare-wrap">
+      <div class="cw-head"><div>SCRIPT</div><div>CHARACTER</div><div>PURPOSE &amp; USE</div></div>
+      <div class="cw-row">
+        <div class="cw-cell">ひらがな<br><span style="font-size:11px;color:var(--txD)">Hiragana</span></div>
+        <div class="cw-cell kata" style="color:var(--acc)">あ い う</div>
+        <div class="cw-cell">The core script for native Japanese words, verb endings, particles (は, が, を), and furigana (reading guides over kanji). Every beginner must master this first.</div>
+      </div>
+      <div class="cw-row">
+        <div class="cw-cell">カタカナ<br><span style="font-size:11px;color:var(--txD)">Katakana</span></div>
+        <div class="cw-cell kata" style="color:var(--accB)">ア イ ウ</div>
+        <div class="cw-cell">Used mainly for loanwords (foreign words adapted into Japanese): コーヒー (coffee), テレビ (TV), スマート (smart). Also for emphasis, sound effects, and scientific terms.</div>
+      </div>
+      <div class="cw-row">
+        <div class="cw-cell">かんじ<br><span style="font-size:11px;color:var(--txD)">Kanji</span></div>
+        <div class="cw-cell kata" style="color:var(--txM);font-size:14px">日 本 語</div>
+        <div class="cw-cell">Chinese-derived characters for nouns and roots. Each has its own reading. Covered in the N5/N4 Kanji module — <em>after</em> you master kana.</div>
+      </div>
+    </div>
+
+    <div class="tip blue">
+      <div class="tip-icon">💡</div>
+      <div><b>Hiragana and Katakana represent the same sounds.</b> They are two different ways of writing the same 46 phonetic syllables — like having a printed and cursive version of the same alphabet. Once you learn one, the other comes much faster.</div>
+    </div>
+  </section>
+
+  <!-- ── HIRAGANA TABLE ── -->
+  <section id="hiragana">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--acc)">STEP 1</div>
+      <div class="sh-title">Hiragana — ひらがな</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip orange">
+      <div class="tip-icon">📌</div>
+      <div>Learn hiragana in <b>row order</b> (a-i-u-e-o, ka-ki-ku-ke-ko…). Each row shares the same consonant. Memorise one row per day for 9 days, then review everything.</div>
+    </div>
+
+    <!-- Basic 46 -->
+    <div class="kana-grid-wrap">
+      <div class="kg-header">
+        <div class="kg-title">Basic Hiragana</div>
+        <div class="kg-sub">清音 — seion</div>
+        <div class="kg-count">46 characters</div>
+      </div>
+      <div class="kana-table" style="grid-template-columns:repeat(5,1fr)">
+        <!-- Headers -->
+        <div class="kana-cell header">a</div>
+        <div class="kana-cell header">i</div>
+        <div class="kana-cell header">u</div>
+        <div class="kana-cell header">e</div>
+        <div class="kana-cell header">o</div>
+        <!-- Vowels -->
+        <div class="kana-cell"><span class="kana-ch">あ</span><span class="kana-rom">a</span></div>
+        <div class="kana-cell"><span class="kana-ch">い</span><span class="kana-rom">i</span></div>
+        <div class="kana-cell"><span class="kana-ch">う</span><span class="kana-rom">u</span></div>
+        <div class="kana-cell"><span class="kana-ch">え</span><span class="kana-rom">e</span></div>
+        <div class="kana-cell"><span class="kana-ch">お</span><span class="kana-rom">o</span></div>
+        <!-- K -->
+        <div class="kana-cell"><span class="kana-ch">か</span><span class="kana-rom">ka</span></div>
+        <div class="kana-cell"><span class="kana-ch">き</span><span class="kana-rom">ki</span></div>
+        <div class="kana-cell"><span class="kana-ch">く</span><span class="kana-rom">ku</span></div>
+        <div class="kana-cell"><span class="kana-ch">け</span><span class="kana-rom">ke</span></div>
+        <div class="kana-cell"><span class="kana-ch">こ</span><span class="kana-rom">ko</span></div>
+        <!-- S -->
+        <div class="kana-cell"><span class="kana-ch">さ</span><span class="kana-rom">sa</span></div>
+        <div class="kana-cell"><span class="kana-ch">し</span><span class="kana-rom">shi</span></div>
+        <div class="kana-cell"><span class="kana-ch">す</span><span class="kana-rom">su</span></div>
+        <div class="kana-cell"><span class="kana-ch">せ</span><span class="kana-rom">se</span></div>
+        <div class="kana-cell"><span class="kana-ch">そ</span><span class="kana-rom">so</span></div>
+        <!-- T -->
+        <div class="kana-cell"><span class="kana-ch">た</span><span class="kana-rom">ta</span></div>
+        <div class="kana-cell"><span class="kana-ch">ち</span><span class="kana-rom">chi</span></div>
+        <div class="kana-cell"><span class="kana-ch">つ</span><span class="kana-rom">tsu</span></div>
+        <div class="kana-cell"><span class="kana-ch">て</span><span class="kana-rom">te</span></div>
+        <div class="kana-cell"><span class="kana-ch">と</span><span class="kana-rom">to</span></div>
+        <!-- N -->
+        <div class="kana-cell"><span class="kana-ch">な</span><span class="kana-rom">na</span></div>
+        <div class="kana-cell"><span class="kana-ch">に</span><span class="kana-rom">ni</span></div>
+        <div class="kana-cell"><span class="kana-ch">ぬ</span><span class="kana-rom">nu</span></div>
+        <div class="kana-cell"><span class="kana-ch">ね</span><span class="kana-rom">ne</span></div>
+        <div class="kana-cell"><span class="kana-ch">の</span><span class="kana-rom">no</span></div>
+        <!-- H -->
+        <div class="kana-cell"><span class="kana-ch">は</span><span class="kana-rom">ha</span></div>
+        <div class="kana-cell"><span class="kana-ch">ひ</span><span class="kana-rom">hi</span></div>
+        <div class="kana-cell"><span class="kana-ch">ふ</span><span class="kana-rom">fu</span></div>
+        <div class="kana-cell"><span class="kana-ch">へ</span><span class="kana-rom">he</span></div>
+        <div class="kana-cell"><span class="kana-ch">ほ</span><span class="kana-rom">ho</span></div>
+        <!-- M -->
+        <div class="kana-cell"><span class="kana-ch">ま</span><span class="kana-rom">ma</span></div>
+        <div class="kana-cell"><span class="kana-ch">み</span><span class="kana-rom">mi</span></div>
+        <div class="kana-cell"><span class="kana-ch">む</span><span class="kana-rom">mu</span></div>
+        <div class="kana-cell"><span class="kana-ch">め</span><span class="kana-rom">me</span></div>
+        <div class="kana-cell"><span class="kana-ch">も</span><span class="kana-rom">mo</span></div>
+        <!-- Y — gaps -->
+        <div class="kana-cell"><span class="kana-ch">や</span><span class="kana-rom">ya</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">ゆ</span><span class="kana-rom">yu</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">よ</span><span class="kana-rom">yo</span></div>
+        <!-- R -->
+        <div class="kana-cell"><span class="kana-ch">ら</span><span class="kana-rom">ra</span></div>
+        <div class="kana-cell"><span class="kana-ch">り</span><span class="kana-rom">ri</span></div>
+        <div class="kana-cell"><span class="kana-ch">る</span><span class="kana-rom">ru</span></div>
+        <div class="kana-cell"><span class="kana-ch">れ</span><span class="kana-rom">re</span></div>
+        <div class="kana-cell"><span class="kana-ch">ろ</span><span class="kana-rom">ro</span></div>
+        <!-- W + N -->
+        <div class="kana-cell"><span class="kana-ch">わ</span><span class="kana-rom">wa</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">を</span><span class="kana-rom">wo</span></div>
+        <!-- N standalone -->
+        <div class="kana-cell"><span class="kana-ch">ん</span><span class="kana-rom">n</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KATAKANA TABLE ── -->
+  <section id="katakana">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accB)">STEP 2</div>
+      <div class="sh-title">Katakana — カタカナ</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip blue">
+      <div class="tip-icon">📌</div>
+      <div>Katakana uses the same sounds as hiragana — only the shapes differ. After mastering hiragana, <b>map each new shape to the hiragana you already know</b>. Many students find katakana faster to learn because of this.</div>
+    </div>
+
+    <div class="kana-grid-wrap">
+      <div class="kg-header">
+        <div class="kg-title">Basic Katakana</div>
+        <div class="kg-sub">清音 — seion</div>
+        <div class="kg-count">46 characters</div>
+      </div>
+      <div class="kana-table">
+        <div class="kana-cell header">a</div>
+        <div class="kana-cell header">i</div>
+        <div class="kana-cell header">u</div>
+        <div class="kana-cell header">e</div>
+        <div class="kana-cell header">o</div>
+        <div class="kana-cell"><span class="kana-ch">ア</span><span class="kana-rom">a</span></div>
+        <div class="kana-cell"><span class="kana-ch">イ</span><span class="kana-rom">i</span></div>
+        <div class="kana-cell"><span class="kana-ch">ウ</span><span class="kana-rom">u</span></div>
+        <div class="kana-cell"><span class="kana-ch">エ</span><span class="kana-rom">e</span></div>
+        <div class="kana-cell"><span class="kana-ch">オ</span><span class="kana-rom">o</span></div>
+        <div class="kana-cell"><span class="kana-ch">カ</span><span class="kana-rom">ka</span></div>
+        <div class="kana-cell"><span class="kana-ch">キ</span><span class="kana-rom">ki</span></div>
+        <div class="kana-cell"><span class="kana-ch">ク</span><span class="kana-rom">ku</span></div>
+        <div class="kana-cell"><span class="kana-ch">ケ</span><span class="kana-rom">ke</span></div>
+        <div class="kana-cell"><span class="kana-ch">コ</span><span class="kana-rom">ko</span></div>
+        <div class="kana-cell"><span class="kana-ch">サ</span><span class="kana-rom">sa</span></div>
+        <div class="kana-cell"><span class="kana-ch">シ</span><span class="kana-rom">shi</span></div>
+        <div class="kana-cell"><span class="kana-ch">ス</span><span class="kana-rom">su</span></div>
+        <div class="kana-cell"><span class="kana-ch">セ</span><span class="kana-rom">se</span></div>
+        <div class="kana-cell"><span class="kana-ch">ソ</span><span class="kana-rom">so</span></div>
+        <div class="kana-cell"><span class="kana-ch">タ</span><span class="kana-rom">ta</span></div>
+        <div class="kana-cell"><span class="kana-ch">チ</span><span class="kana-rom">chi</span></div>
+        <div class="kana-cell"><span class="kana-ch">ツ</span><span class="kana-rom">tsu</span></div>
+        <div class="kana-cell"><span class="kana-ch">テ</span><span class="kana-rom">te</span></div>
+        <div class="kana-cell"><span class="kana-ch">ト</span><span class="kana-rom">to</span></div>
+        <div class="kana-cell"><span class="kana-ch">ナ</span><span class="kana-rom">na</span></div>
+        <div class="kana-cell"><span class="kana-ch">ニ</span><span class="kana-rom">ni</span></div>
+        <div class="kana-cell"><span class="kana-ch">ヌ</span><span class="kana-rom">nu</span></div>
+        <div class="kana-cell"><span class="kana-ch">ネ</span><span class="kana-rom">ne</span></div>
+        <div class="kana-cell"><span class="kana-ch">ノ</span><span class="kana-rom">no</span></div>
+        <div class="kana-cell"><span class="kana-ch">ハ</span><span class="kana-rom">ha</span></div>
+        <div class="kana-cell"><span class="kana-ch">ヒ</span><span class="kana-rom">hi</span></div>
+        <div class="kana-cell"><span class="kana-ch">フ</span><span class="kana-rom">fu</span></div>
+        <div class="kana-cell"><span class="kana-ch">ヘ</span><span class="kana-rom">he</span></div>
+        <div class="kana-cell"><span class="kana-ch">ホ</span><span class="kana-rom">ho</span></div>
+        <div class="kana-cell"><span class="kana-ch">マ</span><span class="kana-rom">ma</span></div>
+        <div class="kana-cell"><span class="kana-ch">ミ</span><span class="kana-rom">mi</span></div>
+        <div class="kana-cell"><span class="kana-ch">ム</span><span class="kana-rom">mu</span></div>
+        <div class="kana-cell"><span class="kana-ch">メ</span><span class="kana-rom">me</span></div>
+        <div class="kana-cell"><span class="kana-ch">モ</span><span class="kana-rom">mo</span></div>
+        <div class="kana-cell"><span class="kana-ch">ヤ</span><span class="kana-rom">ya</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">ユ</span><span class="kana-rom">yu</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">ヨ</span><span class="kana-rom">yo</span></div>
+        <div class="kana-cell"><span class="kana-ch">ラ</span><span class="kana-rom">ra</span></div>
+        <div class="kana-cell"><span class="kana-ch">リ</span><span class="kana-rom">ri</span></div>
+        <div class="kana-cell"><span class="kana-ch">ル</span><span class="kana-rom">ru</span></div>
+        <div class="kana-cell"><span class="kana-ch">レ</span><span class="kana-rom">re</span></div>
+        <div class="kana-cell"><span class="kana-ch">ロ</span><span class="kana-rom">ro</span></div>
+        <div class="kana-cell"><span class="kana-ch">ワ</span><span class="kana-rom">wa</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell"><span class="kana-ch">ヲ</span><span class="kana-rom">wo</span></div>
+        <div class="kana-cell"><span class="kana-ch">ン</span><span class="kana-rom">n</span></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+        <div class="kana-cell empty"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DAKUTEN ── -->
+  <section id="dakuten">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accP)">STEP 3</div>
+      <div class="sh-title">Dakuten &amp; Handakuten ゛゜</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip yellow">
+      <div class="tip-icon">✏️</div>
+      <div>Adding <b>゛</b> (dakuten, two small strokes) or <b>゜</b> (handakuten, small circle) to a base character changes the consonant. You don't need to memorise these separately — they follow a simple rule from the base sounds you already know.</div>
+    </div>
+
+    <div class="kana-grid-wrap">
+      <div class="kg-header">
+        <div class="kg-title">Voiced &amp; Semi-voiced (Hiragana)</div>
+        <div class="kg-sub">濁音・半濁音</div>
+        <div class="kg-count">25 characters</div>
+      </div>
+      <div class="kana-table">
+        <div class="kana-cell header">a</div><div class="kana-cell header">i</div><div class="kana-cell header">u</div><div class="kana-cell header">e</div><div class="kana-cell header">o</div>
+        <!-- G (k→g) -->
+        <div class="kana-cell daku"><span class="kana-ch">が</span><span class="kana-rom">ga</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぎ</span><span class="kana-rom">gi</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぐ</span><span class="kana-rom">gu</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">げ</span><span class="kana-rom">ge</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ご</span><span class="kana-rom">go</span></div>
+        <!-- Z (s→z) -->
+        <div class="kana-cell daku"><span class="kana-ch">ざ</span><span class="kana-rom">za</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">じ</span><span class="kana-rom">ji</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ず</span><span class="kana-rom">zu</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぜ</span><span class="kana-rom">ze</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぞ</span><span class="kana-rom">zo</span></div>
+        <!-- D (t→d) -->
+        <div class="kana-cell daku"><span class="kana-ch">だ</span><span class="kana-rom">da</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぢ</span><span class="kana-rom">di</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">づ</span><span class="kana-rom">du</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">で</span><span class="kana-rom">de</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ど</span><span class="kana-rom">do</span></div>
+        <!-- B (h→b) -->
+        <div class="kana-cell daku"><span class="kana-ch">ば</span><span class="kana-rom">ba</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">び</span><span class="kana-rom">bi</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぶ</span><span class="kana-rom">bu</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">べ</span><span class="kana-rom">be</span></div>
+        <div class="kana-cell daku"><span class="kana-ch">ぼ</span><span class="kana-rom">bo</span></div>
+        <!-- P (h→p with circle) -->
+        <div class="kana-cell hpa"><span class="kana-ch">ぱ</span><span class="kana-rom">pa</span></div>
+        <div class="kana-cell hpa"><span class="kana-ch">ぴ</span><span class="kana-rom">pi</span></div>
+        <div class="kana-cell hpa"><span class="kana-ch">ぷ</span><span class="kana-rom">pu</span></div>
+        <div class="kana-cell hpa"><span class="kana-ch">ぺ</span><span class="kana-rom">pe</span></div>
+        <div class="kana-cell hpa"><span class="kana-ch">ぽ</span><span class="kana-rom">po</span></div>
+      </div>
+    </div>
+
+    <div class="tip green">
+      <div class="tip-icon">🔑</div>
+      <div>
+        <b>The dakuten rule:</b><br>
+        か→が (k→g) &nbsp;·&nbsp; さ→ざ (s→z) &nbsp;·&nbsp; た→だ (t→d) &nbsp;·&nbsp; は→ば (h→b)<br>
+        <b>The handakuten rule:</b> は→ぱ (h→p). Only the は-row gets the circle ゜.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONFUSING PAIRS ── -->
+  <section id="confuse">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--acc)">WATCH OUT</div>
+      <div class="sh-title">Characters That Look Alike</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip orange">
+      <div class="tip-icon">⚠️</div>
+      <div>These pairs are responsible for the majority of beginner mistakes. Study the differences closely — the quiz will test exactly these characters.</div>
+    </div>
+
+    <div class="mistake-wrap">
+      <div class="mw-head"><div>CHAR 1</div><div>CHAR 2</div><div>HOW TO TELL APART</div></div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">さ</span><span class="rom">sa</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">き</span><span class="rom">ki</span></div></div>
+        <div class="mw-cell">さ has two strokes crossing at the top. き has a fourth stroke hanging below — look for the "tail".</div>
+      </div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">ぬ</span><span class="rom">nu</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">め</span><span class="rom">me</span></div></div>
+        <div class="mw-cell">Both have a loop, but ぬ ends with a curling tail. め ends with a closed loop on the right. Think: ぬ = "noodle with a tail".</div>
+      </div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">る</span><span class="rom">ru</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">ろ</span><span class="rom">ro</span></div></div>
+        <div class="mw-cell">る has a loop at the bottom. ろ does not — it ends with a straight horizontal stroke. One loop vs. no loop.</div>
+      </div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">ソ</span><span class="rom">so</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">ン</span><span class="rom">n</span></div></div>
+        <div class="mw-cell">Both are katakana and look nearly identical! ソ has two short diagonal strokes leaning LEFT, then a long stroke. ン has two strokes leaning RIGHT. Rotate: ソ = "so" (looks like a smile), ン = "n" (frown).</div>
+      </div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">シ</span><span class="rom">shi</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">ツ</span><span class="rom">tsu</span></div></div>
+        <div class="mw-cell">The classic katakana trap. シ (shi) has two dots on the LEFT side and a stroke going right. ツ (tsu) has two dots on TOP and a stroke going down-right. Think: シ is sideways, ツ is upright.</div>
+      </div>
+      <div class="mw-row">
+        <div class="mw-cell"><div class="pair"><span class="ch">ア</span><span class="rom">a</span></div></div>
+        <div class="mw-cell"><div class="pair"><span class="ch">マ</span><span class="rom">ma</span></div></div>
+        <div class="mw-cell">ア has a diagonal stroke crossing the top. マ has a horizontal stroke at the top with a hook. ア looks like an "A" with a slant.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW TO MEMORISE ── -->
+  <section id="tips">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accG)">MEMORISATION</div>
+      <div class="sh-title">How to Memorise Kana Fast</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tricks">
+      <div class="trick-card tc1">
+        <div class="trick-num">METHOD 01</div>
+        <div class="trick-title">Row-by-row chunking</div>
+        <div class="trick-desc">Learn one row (5 characters) per session. Each row shares a consonant — your brain groups them as a family, not isolated facts.</div>
+        <div class="trick-ex">Day 1: <b>あいうえお</b><br>Day 2: <b>かきくけこ</b><br>Day 3: <b>さしすせそ</b> …</div>
+      </div>
+      <div class="trick-card tc2">
+        <div class="trick-num">METHOD 02</div>
+        <div class="trick-title">Shape stories (mnemonics)</div>
+        <div class="trick-desc">Link each character to a visual story. The sillier, the better — your brain retains unusual images far longer than abstract symbols.</div>
+        <div class="trick-ex"><b>め</b> looks like an eye — <b>me</b> means eye in Japanese.<br><b>山</b> looks like a mountain — <b>yama</b> means mountain.</div>
+      </div>
+      <div class="trick-card tc3">
+        <div class="trick-num">METHOD 03</div>
+        <div class="trick-title">Romaji typing drill</div>
+        <div class="trick-desc">The app's type-in mode forces you to recall the sound from the shape — not just recognise it. Recognition ≠ production. Type-in drills production.</div>
+        <div class="trick-ex">See <b>あ</b> → type <b>a</b> → press Enter<br>See <b>き</b> → type <b>ki</b> → press Enter</div>
+      </div>
+      <div class="trick-card tc4">
+        <div class="trick-num">METHOD 04</div>
+        <div class="trick-title">Read real words immediately</div>
+        <div class="trick-desc">As soon as you know a row, find real Japanese words using those characters. Seeing them in context wires them into long-term memory.</div>
+        <div class="trick-ex">After か-row: <b>かき</b> (kaki, oyster), <b>かこ</b> (kako, past), <b>かく</b> (kaku, to write)</div>
+      </div>
+      <div class="trick-card tc5">
+        <div class="trick-num">METHOD 05</div>
+        <div class="trick-title">Daily 10-minute review</div>
+        <div class="trick-desc">Short daily review beats long weekly cram sessions by a wide margin. 10 minutes every day for 3 weeks outperforms 3.5 hours in one sitting.</div>
+        <div class="trick-ex">Use the <b>🔖 Review Quiz</b> inside the app. Wrong answers auto-queue — zero prep needed.</div>
+      </div>
+      <div class="trick-card tc1">
+        <div class="trick-num">METHOD 06</div>
+        <div class="trick-title">Katakana via loanwords</div>
+        <div class="trick-desc">Katakana is much easier if you learn it through loanwords you already know in English. The shape becomes attached to a word you already own.</div>
+        <div class="trick-ex"><b>コーヒー</b> (kōhī) = coffee<br><b>テレビ</b> (terebi) = TV<br><b>バス</b> (basu) = bus</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STUDY PLAN ── -->
+  <section id="plan">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accY)">STUDY PLAN</div>
+      <div class="sh-title">2-Week Schedule</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip green">
+      <div class="tip-icon">⏱</div>
+      <div>Study for <b>20–30 minutes per day</b>. Each session: learn new characters → immediately quiz yourself → end with a short review of everything so far. Do not skip the quiz step.</div>
+    </div>
+
+    <div class="plan">
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--acc)">Day 1–2</div>
+        <div class="plan-body">
+          <div class="plan-title">あいうえお + かきくけこ + さしすせそ</div>
+          <div class="plan-desc">Vowels first (5 characters), then K-row, then S-row. Use Grid mode to see the table, then switch to Type-in mode to drill. 15 characters total.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--accY)">Day 3–4</div>
+        <div class="plan-body">
+          <div class="plan-title">たちつてと + なにぬねの + はひふへほ</div>
+          <div class="plan-desc">T-row contains the irregular sounds: ち (chi) and つ (tsu). Say them aloud while writing. Add H-row and N-row. Review all previous rows at end of Day 4.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--accG)">Day 5–6</div>
+        <div class="plan-body">
+          <div class="plan-title">まみむめも + やゆよ + らりるれろ + わをん</div>
+          <div class="plan-desc">Final rows of basic hiragana. M-row, Y-row (only 3!), R-row, W-row. After Day 6, you know all 46 basic hiragana. Use "All" filter quiz to confirm.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--accP)">Day 7</div>
+        <div class="plan-body">
+          <div class="plan-title">Dakuten — voiced sounds (が ざ だ ば + ぱ)</div>
+          <div class="plan-desc">Learn all 25 voiced characters. The pattern (か→が, さ→ざ, etc.) means this goes faster than basic hiragana. Switch to "Dakuten" filter in the app.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--accB)">Day 8–9</div>
+        <div class="plan-body">
+          <div class="plan-title">Full hiragana review + start Katakana vowels</div>
+          <div class="plan-desc">Set filter to "All" and take the combined quiz. Target 90%+. Begin katakana: ア イ ウ エ オ — compare each to its hiragana pair.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--accC)">Day 10–12</div>
+        <div class="plan-body">
+          <div class="plan-title">Katakana rows カ→ホ (basic 46)</div>
+          <div class="plan-desc">Work through katakana rows at the same pace. Pay extra attention to シ/ツ and ソ/ン (see confusing pairs above). Use loanword examples to anchor each shape.</div>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-day" style="background:var(--acc)">Day 13–14</div>
+        <div class="plan-body">
+          <div class="plan-title">Katakana dakuten + full mixed review</div>
+          <div class="plan-desc">Add voiced katakana (ガ ザ ダ バ パ). Final two days: run the combined hiragana + katakana quiz until you score 95%+ consistently. You're ready for N5.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section id="quiz">
+    <div class="cta-banner">
+      <div class="cta-eye">YOU'VE READ THE GUIDE — NOW TEST YOURSELF</div>
+      <div class="cta-title">
+        Ready to start?<br>
+        <span>Open the Hiragana Quiz now.</span>
+      </div>
+      <div class="cta-desc">
+        The quiz inside NIHONGO WORK covers all 46 basic characters + dakuten in type-in mode, 4-choice mode, and grid review. Your score is tracked automatically — wrong answers feed into the Review Quiz so you never forget a character.
+      </div>
+      <div class="cta-buttons">
+        <a href="index.html" onclick="sessionStorage.setItem('nw_goto','kana');return true" class="cta-btn primary">
+          ✏️ Start Hiragana Quiz
+        </a>
+        <a href="index.html" onclick="sessionStorage.setItem('nw_goto','kana_kata');return true" class="cta-btn secondary">
+          ア Start Katakana Quiz
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="guide-footer">
+  <div class="guide-footer-title">NIHONGO WORK</div>
+  <div class="guide-footer-sub">にほんごワーク · Japanese for Bangladeshi Learners</div>
+</footer>
+
+<script>
+/* ── CTA button → open kana module on the main app ──
+   Works two ways:
+   1. If this page is served alongside index.html in the same directory,
+      the link opens index.html and sessionStorage signals which module to open.
+   2. If you embed this guide inside the app (e.g. as a route), replace
+      the href with: javascript:openM('kana')  directly.
+
+   Add this snippet to index.html's DOMContentLoaded to honour the signal:
+   -----------------------------------------------------------------------
+   const goto = sessionStorage.getItem('nw_goto');
+   if (goto === 'kana') {
+     sessionStorage.removeItem('nw_goto');
+     openM('kana');            // opens ひらがな tab
+   } else if (goto === 'kana_kata') {
+     sessionStorage.removeItem('nw_goto');
+     openM('kana');
+     // after openM fires, click the カタカナ tab
+     setTimeout(() => {
+       const btn = document.querySelector('[onclick*="kt(1)"]');
+       if (btn) btn.click();
+     }, 200);
+   }
+   -----------------------------------------------------------------------
+*/
+
+// Smooth active-nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const links    = document.querySelectorAll('.toc-a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.style.background = '');
+      const t = document.querySelector(`.toc-a[href="#${e.target.id}"]`);
+      if (t) t.style.background = 'var(--s3)';
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

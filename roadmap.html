@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Roadmap | NIHONGO WORK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F6F2;
+  --s1: #FFFFFF;
+  --s2: #F0EFE9;
+  --s3: #E8E7E0;
+  --acc:  #E4572E;
+  --acc2: #C94120;
+  --accG: #6BA368;
+  --accB: #1F3A5F;
+  --accY: #D4A017;
+  --accP: #8B5CF6;
+  --accC: #0891B2;
+  --tx:  #1A1A2E;
+  --txM: #4A5568;
+  --txD: #9AA5B4;
+  --brd: rgba(0,0,0,0.08);
+  --g1: linear-gradient(135deg,#E4572E,#C94120);
+  --g2: linear-gradient(135deg,#1F3A5F,#2D4A7A);
+  --g3: linear-gradient(135deg,#D4A017,#E4572E);
+  --g4: linear-gradient(135deg,#8B5CF6,#1F3A5F);
+  --g5: linear-gradient(135deg,#6BA368,#0891B2);
+  --r: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--tx);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh; overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 3px; }
+
+/* TOP BAR */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(247,246,242,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--brd);
+  position: sticky; top: 0; z-index: 100;
+}
+.logo {
+  font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: 18px;
+  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+}
+.logo-sub { font-size: 11px; color: var(--txD); -webkit-text-fill-color: var(--txD); font-weight: 400; }
+.pill { background: var(--s2); border: 1px solid var(--brd); border-radius: 20px; padding: 4px 12px; font-size: 11px; color: var(--txM); }
+
+/* HERO */
+.hero {
+  max-width: 720px; margin: 0 auto;
+  padding: 52px 24px 44px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; top: -20px; right: -30px;
+  font-size: 160px; opacity: .04; line-height: 1;
+  pointer-events: none; user-select: none;
+  font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900;
+}
+.hero-cat {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11px; color: var(--txM); letter-spacing: .08em; margin-bottom: 18px;
+}
+.hero-cat b { color: var(--acc); }
+.hero-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(26px, 4.8vw, 40px); font-weight: 900; line-height: 1.18;
+  color: var(--tx); margin-bottom: 8px;
+}
+.hero-title .hl { background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-title .hl2 { background: var(--g2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: 13px; color: var(--txD); margin-bottom: 16px; font-family: 'DM Mono', monospace; letter-spacing: .04em; }
+.hero-desc { font-size: 14px; color: var(--txM); line-height: 1.9; max-width: 540px; margin-bottom: 24px; }
+
+.hero-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.hstat {
+  background: var(--s1); border: 1px solid var(--brd); border-radius: 12px;
+  padding: 10px 16px; text-align: center;
+}
+.hstat-n { font-family: 'Zen Maru Gothic', sans-serif; font-size: 22px; font-weight: 900; line-height: 1; }
+.hstat-l { font-size: 10px; color: var(--txD); margin-top: 3px; letter-spacing: .06em; }
+
+/* TOC */
+.toc { max-width: 720px; margin: 0 auto; padding: 0 24px 28px; }
+.toc-inner {
+  background: var(--s1); border: 1px solid var(--brd); border-radius: var(--r);
+  padding: 14px 18px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+}
+.toc-lbl { font-size: 11px; color: var(--txD); letter-spacing: .06em; flex-shrink: 0; margin-right: 2px; }
+.toc-a {
+  text-decoration: none; background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--txM);
+  transition: all .15s; display: flex; align-items: center; gap: 4px;
+}
+.toc-a:hover { background: var(--s3); color: var(--tx); }
+
+/* CONTENT */
+.content { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+section[id] { scroll-margin-top: 68px; }
+
+/* SECTION HEADER */
+.sh {
+  display: flex; align-items: center; gap: 10px;
+  margin: 48px 0 22px;
+}
+.sh-badge {
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700; color: #fff;
+  padding: 4px 10px; border-radius: 6px; white-space: nowrap; flex-shrink: 0;
+}
+.sh-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 900; color: var(--tx); }
+.sh-line { flex: 1; height: 1px; background: var(--brd); }
+
+/* LEVEL CARD — the main roadmap block */
+.level-card {
+  border-radius: var(--r); overflow: hidden;
+  margin-bottom: 16px; border: 1px solid var(--brd);
+  position: relative;
+}
+.lc-header {
+  padding: 20px 22px 18px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.lc-badge {
+  font-family: 'Zen Maru Gothic', sans-serif; font-size: 28px; font-weight: 900;
+  color: #fff; border-radius: 12px; width: 54px; height: 54px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; letter-spacing: -.02em;
+}
+.lc-meta { flex: 1; }
+.lc-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 16px; font-weight: 900; color: var(--tx); margin-bottom: 3px; }
+.lc-en   { font-size: 12px; color: var(--txD); letter-spacing: .06em; margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+.lc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.lc-tag  { font-size: 10px; border-radius: 10px; padding: 3px 9px; border: 1px solid; font-family: 'DM Mono', monospace; letter-spacing: .02em; }
+
+.lc-body { padding: 0 22px 20px; }
+.lc-desc { font-size: 13px; color: var(--txM); line-height: 1.85; margin-bottom: 16px; }
+
+/* Modules inside level card */
+.lc-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+@media (max-width: 480px) { .lc-modules { grid-template-columns: 1fr; } }
+.lc-mod {
+  background: var(--s2); border: 1px solid var(--brd); border-radius: 10px;
+  padding: 10px 13px; display: flex; align-items: flex-start; gap: 10px;
+}
+.lc-mod-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.lc-mod-name { font-size: 12px; font-weight: 700; color: var(--tx); margin-bottom: 2px; }
+.lc-mod-desc { font-size: 11px; color: var(--txD); line-height: 1.5; }
+
+/* Timeline inside level */
+.timeline { border-left: 2px solid var(--brd); margin-left: 8px; padding-left: 18px; }
+.tl-item {
+  position: relative; margin-bottom: 14px;
+  font-size: 13px; color: var(--txM); line-height: 1.75;
+}
+.tl-item::before {
+  content: ''; position: absolute; left: -23px; top: 6px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--s3); border: 2px solid var(--brd);
+}
+.tl-item.done::before { background: var(--accG); border-color: var(--accG); }
+.tl-item b { color: var(--tx); }
+
+/* MONTHS badge */
+.months-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; color: var(--txM); font-family: 'DM Mono', monospace;
+  margin-bottom: 14px;
+}
+.months-badge b { color: var(--accY); }
+
+/* N3 HIGHLIGHT — the big CTA */
+.n3-hero {
+  background: var(--accB); border-radius: var(--r);
+  padding: 28px 26px; margin-bottom: 16px;
+  position: relative; overflow: hidden;
+}
+.n3-hero::before {
+  content: '🇯🇵';
+  position: absolute; right: 20px; bottom: -10px;
+  font-size: 100px; opacity: .12; line-height: 1;
+}
+.n3-hero-eye {
+  font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .1em;
+  margin-bottom: 10px; font-family: 'DM Mono', monospace;
+}
+.n3-hero-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(20px, 3.5vw, 28px); font-weight: 900;
+  color: #fff; line-height: 1.25; margin-bottom: 12px;
+}
+.n3-hero-title span { color: #f0c040; }
+.n3-hero-desc { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.85; margin-bottom: 20px; }
+.n3-bullets { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.n3-bullet {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,.9); line-height: 1.65;
+}
+.n3-bullet-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0; margin-top: 1px;
+}
+.n3-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.n3-stat {
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; padding: 10px 16px; text-align: center;
+}
+.n3-stat-n { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 700; color: #f0c040; line-height: 1; }
+.n3-stat-l { font-size: 10px; color: rgba(255,255,255,.45); margin-top: 4px; letter-spacing: .06em; }
+
+/* JOB CARDS */
+.job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+@media (max-width: 500px) { .job-grid { grid-template-columns: 1fr; } }
+.job-card {
+  background: var(--s1); border: 1px solid var(--brd); border-radius: var(--r);
+  padding: 16px; position: relative; overflow: hidden;
+  transition: all .2s;
+}
+.job-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
+.job-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.jc1::before { background: var(--g2); }
+.jc2::before { background: var(--g5); }
+.jc3::before { background: var(--g3); }
+.jc4::before { background: var(--g4); }
+.job-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.job-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 900; color: var(--tx); margin-bottom: 4px; }
+.job-desc { font-size: 11px; color: var(--txD); line-height: 1.6; margin-bottom: 8px; }
+.job-req {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(31,58,95,.08); border: 1px solid rgba(31,58,95,.18);
+  border-radius: 10px; padding: 3px 9px; font-size: 10px; color: var(--accB);
+  font-family: 'DM Mono', monospace;
+}
+
+/* SITE STRENGTH — unique module callouts */
+.strength-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+.strength-card {
+  background: var(--s1); border: 1px solid var(--brd); border-radius: var(--r);
+  padding: 18px 20px; display: flex; align-items: flex-start; gap: 16px;
+  transition: all .2s;
+}
+.strength-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.sc-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.sc-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 900; color: var(--tx); margin-bottom: 4px; }
+.sc-desc { font-size: 13px; color: var(--txM); line-height: 1.75; }
+.sc-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.sc-tag { font-size: 10px; border-radius: 10px; padding: 3px 9px; border: 1px solid; font-family: 'DM Mono', monospace; }
+
+/* TIP */
+.tip {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border-radius: 10px; margin-bottom: 10px;
+  font-size: 13px; line-height: 1.8;
+}
+.tip.green { background: rgba(107,163,104,.08); border: 1px solid rgba(107,163,104,.22); color: #3a6e37; }
+.tip.blue  { background: rgba(31,58,95,.07);    border: 1px solid rgba(31,58,95,.18);   color: var(--accB); }
+.tip.orange{ background: rgba(228,87,46,.07);    border: 1px solid rgba(228,87,46,.22);  color: var(--acc2); }
+.tip.yellow{ background: rgba(212,160,23,.08);   border: 1px solid rgba(212,160,23,.25); color: #7a5800; }
+.tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+/* ROADMAP CONNECTOR */
+.roadmap-connector {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin: 4px 0 4px;
+  font-size: 11px; color: var(--txD); letter-spacing: .06em;
+}
+.rc-line { flex: 1; height: 1px; background: var(--brd); max-width: 60px; }
+.rc-icon { font-size: 18px; }
+
+/* SUMMARY TABLE */
+.summary-table {
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r); overflow: hidden; margin-bottom: 16px;
+}
+.st-head {
+  display: grid; grid-template-columns: 80px 1fr 1fr 1fr;
+  background: var(--s2); border-bottom: 1px solid var(--brd);
+}
+.st-head div {
+  padding: 9px 14px; font-size: 10px; color: var(--txD);
+  letter-spacing: .08em; font-family: 'DM Mono', monospace;
+  border-right: 1px solid var(--brd);
+}
+.st-head div:last-child { border-right: none; }
+.st-row {
+  display: grid; grid-template-columns: 80px 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--brd);
+}
+.st-row:last-child { border-bottom: none; }
+.st-row:hover { background: var(--s2); }
+.st-cell {
+  padding: 12px 14px; font-size: 12px; color: var(--txM);
+  border-right: 1px solid var(--brd); line-height: 1.5;
+}
+.st-cell:last-child { border-right: none; }
+.st-cell.level {
+  font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 900;
+  display: flex; align-items: center;
+}
+@media (max-width: 520px) {
+  .st-head, .st-row { grid-template-columns: 60px 1fr 1fr; }
+  .st-head div:nth-child(3), .st-cell:nth-child(3) { display: none; }
+}
+
+/* FOOTER */
+.guide-footer {
+  border-top: 1px solid var(--brd); padding: 32px 24px;
+  text-align: center; max-width: 720px; margin: 0 auto;
+}
+.guide-footer-title {
+  font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 900;
+  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px;
+}
+.guide-footer-sub { font-size: 13px; color: var(--txD); }
+
+/* ANIM */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero { animation: fadeUp .45s ease both; }
+.toc  { animation: fadeUp .45s .08s ease both; }
+
+/* N3 pulse */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(31,58,95,.25); }
+  50%       { box-shadow: 0 0 0 8px rgba(31,58,95,.0); }
+}
+.n3-hero { animation: pulse 3.5s ease infinite; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="logo" href="#">NIHONGO WORK <span class="logo-sub">にほんごワーク</span></a>
+  <div class="pill">🗺 Learning Roadmap</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">🗺</div>
+  <div class="hero-cat">🎯 Study Plan &nbsp;·&nbsp; <b>Zero → Job in Japan</b></div>
+  <h1 class="hero-title">
+    Your Complete<br>
+    <span class="hl">Japanese Learning</span><br>
+    <span class="hl2">Roadmap</span>
+  </h1>
+  <p class="hero-sub">N5 → N4 → N3 → Work in Japan</p>
+  <p class="hero-desc">
+    A clear, step-by-step path from absolute beginner to JLPT N3 — the level that opens the door to real employment in Japan. Every stage maps directly to modules inside NIHONGO WORK.
+  </p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n" style="color:var(--acc)">3</div><div class="hstat-l">JLPT LEVELS</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accY)">12–18</div><div class="hstat-l">MONTHS</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accG)">10+</div><div class="hstat-l">MODULES</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--accB)">🇯🇵</div><div class="hstat-l">GOAL</div></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="toc-lbl">JUMP TO</span>
+    <a href="#n5"      class="toc-a">🌱 N5 Beginner</a>
+    <a href="#n4"      class="toc-a">📈 N4 Elementary</a>
+    <a href="#n3"      class="toc-a">🎯 N3 → Japan</a>
+    <a href="#jobs"    class="toc-a">💼 Job Opportunities</a>
+    <a href="#modules" class="toc-a">⚡ Site Strengths</a>
+    <a href="#overview"class="toc-a">📋 Overview</a>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- ── STAGE 0: FOUNDATION ── -->
+  <section id="foundation">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--txD)">STAGE 0</div>
+      <div class="sh-title">Before You Begin</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="level-card" style="background:var(--s1)">
+      <div class="lc-header">
+        <div class="lc-badge" style="background:var(--s3);color:var(--txM);font-size:20px">あ ア</div>
+        <div class="lc-meta">
+          <div class="lc-name">Hiragana &amp; Katakana</div>
+          <div class="lc-en">THE JAPANESE ALPHABETS · 2–4 WEEKS</div>
+          <div class="lc-tags">
+            <span class="lc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">Non-negotiable first step</span>
+          </div>
+        </div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-desc">
+          Before any vocabulary, grammar, or kanji — you must be able to read hiragana and katakana fluently. These two phonetic scripts are the foundation of everything else. Most learners master both within 2–4 weeks of daily practice.
+        </div>
+        <div class="lc-modules">
+          <div class="lc-mod">
+            <div class="lc-mod-icon">あ</div>
+            <div>
+              <div class="lc-mod-name">📝 Characters Module</div>
+              <div class="lc-mod-desc">Flash + quiz for all 46+46 characters. Speed-drill until recognition is instant.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tip green" style="margin-bottom:0">
+          <div class="tip-icon">🎯</div>
+          <div><b>Target:</b> Read any hiragana or katakana without hesitation before moving to N5.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="roadmap-connector"><div class="rc-line"></div><div class="rc-icon">⬇</div><div class="rc-line"></div></div>
+
+  <!-- ── N5 ── -->
+  <section id="n5">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accG)">STAGE 1</div>
+      <div class="sh-title">JLPT N5 — Beginner</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="months-badge">⏱ Estimated time: <b>2–3 months</b> (daily study ~45 min)</div>
+
+    <div class="level-card" style="background:var(--s1)">
+      <div class="lc-header">
+        <div class="lc-badge" style="background:var(--accG)">N5</div>
+        <div class="lc-meta">
+          <div class="lc-name">JLPT N5 — Absolute Beginner</div>
+          <div class="lc-en">~800 WORDS · ~100 KANJI · BASIC GRAMMAR</div>
+          <div class="lc-tags">
+            <span class="lc-tag" style="background:rgba(107,163,104,.1);border-color:rgba(107,163,104,.3);color:#3e7a3b">Entry level</span>
+            <span class="lc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">Survival Japanese</span>
+          </div>
+        </div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-desc">
+          N5 covers the very basics — greetings, numbers, time, everyday objects, and simple sentence structures. After passing N5 you can introduce yourself, ask for directions, read simple signs, and have very basic conversations. It is not enough for employment, but it proves you have made a start.
+        </div>
+        <div class="lc-modules">
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📖</div>
+            <div>
+              <div class="lc-mod-name">Vocabulary — N5</div>
+              <div class="lc-mod-desc">~800 words with readings, meanings &amp; Bengali translations.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🈶</div>
+            <div>
+              <div class="lc-mod-name">Kanji — N5</div>
+              <div class="lc-mod-desc">~100 basic kanji: readings and usage examples.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🕐</div>
+            <div>
+              <div class="lc-mod-name">Time &amp; Numbers</div>
+              <div class="lc-mod-desc">Hours, dates, counters — essential for daily life.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📗</div>
+            <div>
+              <div class="lc-mod-name">Grammar &amp; Particles</div>
+              <div class="lc-mod-desc">N5 sentence patterns + 18 particle types.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🔄</div>
+            <div>
+              <div class="lc-mod-name">Verb Conjugation — N5</div>
+              <div class="lc-mod-desc">Basic forms: te-form, nai-form, ta-form.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📝</div>
+            <div>
+              <div class="lc-mod-name">Adjective Conjugation</div>
+              <div class="lc-mod-desc">い-adj and な-adj: negative, past, te-form.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item done"><b>Month 1:</b> Complete hiragana/katakana drill + N5 vocabulary (first 400 words).</div>
+          <div class="tl-item done"><b>Month 2:</b> N5 kanji + grammar + time/numbers. Start verb conjugation.</div>
+          <div class="tl-item"><b>Month 3:</b> Review all weak items via Review Quiz. Take N5 mock exam. Sit the JLPT exam.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip orange">
+      <div class="tip-icon">📌</div>
+      <div>N5 alone is <b>not enough for employment in Japan</b>. It is the foundation. Keep going — the real opportunities start at N4 and open fully at N3.</div>
+    </div>
+  </section>
+
+  <div class="roadmap-connector"><div class="rc-line"></div><div class="rc-icon">⬇</div><div class="rc-line"></div></div>
+
+  <!-- ── N4 ── -->
+  <section id="n4">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accY)">STAGE 2</div>
+      <div class="sh-title">JLPT N4 — Elementary</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="months-badge">⏱ Estimated time: <b>4–6 months</b> after N5</div>
+
+    <div class="level-card" style="background:var(--s1)">
+      <div class="lc-header">
+        <div class="lc-badge" style="background:var(--accY)">N4</div>
+        <div class="lc-meta">
+          <div class="lc-name">JLPT N4 — Elementary</div>
+          <div class="lc-en">~1,500 WORDS · ~300 KANJI · EXPANDED GRAMMAR</div>
+          <div class="lc-tags">
+            <span class="lc-tag" style="background:rgba(212,160,23,.1);border-color:rgba(212,160,23,.3);color:#7a5800">First milestone</span>
+            <span class="lc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">Simple conversations</span>
+          </div>
+        </div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-desc">
+          N4 significantly expands vocabulary, kanji, and grammar. You can now understand everyday conversations at a slower pace, read simple texts, and handle basic workplace communication. Some technical jobs and factories in Japan accept N4 holders, but most office and professional roles require N3.
+        </div>
+        <div class="lc-modules">
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📖</div>
+            <div>
+              <div class="lc-mod-name">Vocabulary — N4</div>
+              <div class="lc-mod-desc">~700 new words on top of N5. Includes work &amp; life vocabulary.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🈶</div>
+            <div>
+              <div class="lc-mod-name">Kanji — N4</div>
+              <div class="lc-mod-desc">~200 new kanji. Many appear in job sites and documents.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🔄</div>
+            <div>
+              <div class="lc-mod-name">Verb Conjugation — N4</div>
+              <div class="lc-mod-desc">Passive, potential, causative, conditional forms.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🎓</div>
+            <div>
+              <div class="lc-mod-name">JLPT N4 Mock Tests A–D</div>
+              <div class="lc-mod-desc">4 full-length vocabulary exams with timer. Real exam format.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">💼</div>
+            <div>
+              <div class="lc-mod-name">Business Etiquette Quiz</div>
+              <div class="lc-mod-desc">99 ○× questions on Japanese workplace culture. Start now.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📖</div>
+            <div>
+              <div class="lc-mod-name">Irodori Vocabulary</div>
+              <div class="lc-mod-desc">Practical Japanese for life and work in Japan (immigrant-focused).</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item"><b>Month 1–2:</b> N4 vocabulary + kanji. Daily Review Quiz to consolidate N5 + new items.</div>
+          <div class="tl-item"><b>Month 3–4:</b> N4 verb conjugation + start Business Etiquette quiz.</div>
+          <div class="tl-item"><b>Month 5–6:</b> Take all 4 mock tests (A–D). Target 70%+ on each before the real exam.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip blue">
+      <div class="tip-icon">💡</div>
+      <div>Use the <b>Long-term Memory Test</b> daily in the final month before the exam. It pulls your weakest questions from every module at once — the fastest way to close gaps.</div>
+    </div>
+  </section>
+
+  <div class="roadmap-connector"><div class="rc-line"></div><div class="rc-icon">⬇</div><div class="rc-line"></div></div>
+
+  <!-- ── N3 HIGHLIGHT ── -->
+  <section id="n3">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--acc)">STAGE 3</div>
+      <div class="sh-title">JLPT N3 — The Gateway</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="months-badge">⏱ Estimated time: <b>6–8 months</b> after N4</div>
+
+    <!-- BIG N3 CTA -->
+    <div class="n3-hero">
+      <div class="n3-hero-eye">THE TURNING POINT</div>
+      <div class="n3-hero-title">
+        Pass N3 and<br><span>Japan is within reach.</span>
+      </div>
+      <div class="n3-hero-desc">
+        JLPT N3 is widely recognised as the minimum level for professional employment in Japan. At this level you can understand the main points of texts on everyday topics, follow standard-speed conversation, and communicate clearly in most workplace situations. For Bangladeshi engineers and technical workers, N3 combined with a specialist skill is a powerful combination.
+      </div>
+      <div class="n3-bullets">
+        <div class="n3-bullet">
+          <div class="n3-bullet-icon">✅</div>
+          <div>Most Japanese companies list <b>N3 or above</b> as the minimum language requirement for technical and skilled worker visas.</div>
+        </div>
+        <div class="n3-bullet">
+          <div class="n3-bullet-icon">🏗</div>
+          <div>The <b>Specified Skilled Worker (特定技能)</b> visa — the most accessible route for Bangladeshi workers — requires N4 for the visa but N3 for most actual hiring.</div>
+        </div>
+        <div class="n3-bullet">
+          <div class="n3-bullet-icon">⚡</div>
+          <div>Electrical workers with the <b>電気工事士 licence</b> and N3 Japanese are in active demand. Our specialised module prepares you for both simultaneously.</div>
+        </div>
+        <div class="n3-bullet">
+          <div class="n3-bullet-icon">💴</div>
+          <div>Average monthly salary in Japan for skilled workers: <b>¥200,000–¥280,000</b> (approx. ৳180,000–৳250,000). Significantly higher than comparable roles in Bangladesh.</div>
+        </div>
+      </div>
+      <div class="n3-stats">
+        <div class="n3-stat"><div class="n3-stat-n">~3,750</div><div class="n3-stat-l">VOCABULARY</div></div>
+        <div class="n3-stat"><div class="n3-stat-n">~650</div><div class="n3-stat-l">KANJI</div></div>
+        <div class="n3-stat"><div class="n3-stat-n">N4+</div><div class="n3-stat-l">REQUIRED</div></div>
+      </div>
+    </div>
+
+    <div class="level-card" style="background:var(--s1);border-color:rgba(31,58,95,.2)">
+      <div class="lc-header">
+        <div class="lc-badge" style="background:var(--acc)">N3</div>
+        <div class="lc-meta">
+          <div class="lc-name">JLPT N3 — Intermediate</div>
+          <div class="lc-en">~3,750 WORDS · ~650 KANJI · NATURAL CONVERSATION</div>
+          <div class="lc-tags">
+            <span class="lc-tag" style="background:rgba(228,87,46,.1);border-color:rgba(228,87,46,.3);color:var(--acc2)">Employment threshold</span>
+            <span class="lc-tag" style="background:rgba(31,58,95,.08);border-color:rgba(31,58,95,.2);color:var(--accB)">Workplace ready</span>
+          </div>
+        </div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-desc">
+          N3 bridges everyday Japanese and professional Japanese. At this level you can read news articles, understand television programmes at normal speed, and communicate independently in most work situations without a translator. The vocabulary includes many words used in professional and technical contexts.
+        </div>
+        <div class="lc-modules">
+          <div class="lc-mod">
+            <div class="lc-mod-icon">📖</div>
+            <div>
+              <div class="lc-mod-name">Vocabulary — N3</div>
+              <div class="lc-mod-desc">Advanced vocabulary layer. Study via flash + quiz, then Review.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">🈶</div>
+            <div>
+              <div class="lc-mod-name">Kanji — N3</div>
+              <div class="lc-mod-desc">~280 additional kanji. Many appear in contracts and official documents.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">⚡</div>
+            <div>
+              <div class="lc-mod-name">Electrical Worker Module</div>
+              <div class="lc-mod-desc">599 specialist terms. Study alongside N3 for maximum efficiency.</div>
+            </div>
+          </div>
+          <div class="lc-mod">
+            <div class="lc-mod-icon">💼</div>
+            <div>
+              <div class="lc-mod-name">Business Etiquette Quiz</div>
+              <div class="lc-mod-desc">Master all 99 situations. Japanese workplace culture is as important as language.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item"><b>Month 1–3:</b> N3 vocabulary + kanji. Heavy use of Review Quiz and Long-term Memory.</div>
+          <div class="tl-item"><b>Month 4–5:</b> Add Electrical Worker module if relevant to your career. Study 30 min/day.</div>
+          <div class="tl-item"><b>Month 6–8:</b> Full exam simulation. Target 60%+ pass score on all sections.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── JOBS ── -->
+  <section id="jobs">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accB)">AFTER N3</div>
+      <div class="sh-title">Job Opportunities in Japan</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="tip green">
+      <div class="tip-icon">🇯🇵</div>
+      <div>Japan is currently facing a severe labour shortage in skilled trades. The government actively recruits through the <b>特定技能 (Specified Skilled Worker)</b> visa program. Bangladeshi workers with N3 Japanese and a technical skill are among the most sought-after candidates.</div>
+    </div>
+
+    <div class="job-grid">
+      <div class="job-card jc1">
+        <span class="job-icon">⚡</span>
+        <div class="job-name">Electrical Worker</div>
+        <div class="job-desc">Installation, maintenance, and inspection. High demand in construction and manufacturing.</div>
+        <div class="job-req">⚡ N3 + 電気工事士</div>
+      </div>
+      <div class="job-card jc2">
+        <span class="job-icon">🏗</span>
+        <div class="job-name">Construction &amp; Civil</div>
+        <div class="job-desc">Structural work, site management assistant, equipment operation.</div>
+        <div class="job-req">🏗 N3 + Technical cert</div>
+      </div>
+      <div class="job-card jc3">
+        <span class="job-icon">🏭</span>
+        <div class="job-name">Manufacturing</div>
+        <div class="job-desc">Machine operation, quality control, production line work in factories.</div>
+        <div class="job-req">🏭 N3 minimum</div>
+      </div>
+      <div class="job-card jc4">
+        <span class="job-icon">🖥</span>
+        <div class="job-name">IT / Engineering</div>
+        <div class="job-desc">Software development, system maintenance, technical support for Japanese companies.</div>
+        <div class="job-req">🖥 N3 + IT skills</div>
+      </div>
+    </div>
+
+    <div class="tip blue">
+      <div class="tip-icon">📋</div>
+      <div>
+        <b>Specified Skilled Worker Visa (特定技能)</b><br>
+        This visa allows Bangladeshi nationals to work in Japan in 12 designated industries. Requirements: pass the Japanese Language Test (N4 minimum, N3 preferred) + pass the relevant industry skills test. Duration: up to 5 years, renewable.
+      </div>
+    </div>
+    <div class="tip yellow">
+      <div class="tip-icon">💡</div>
+      <div>
+        The <b>電気工事士</b> (Electrical Worker) licence exam is available in Bangladesh through JITCO-certified test centres. Passing it alongside JLPT N3 gives you a <b>two-credential advantage</b> that very few candidates have.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SITE STRENGTHS ── -->
+  <section id="modules">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--accP)">WHY THIS SITE</div>
+      <div class="sh-title">NIHONGO WORK's Unique Strengths</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="strength-grid">
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(232,168,76,.15)">⚡</div>
+        <div>
+          <div class="sc-name">⚡ Electrical Worker Specialist Course</div>
+          <div class="sc-desc">
+            No other Japanese learning platform offers a dedicated 電気工事士 module. Our 599-word database — 409 kanji, 106 katakana terms, 84 technical compound terms — is drawn directly from the exam curriculum and real job-site vocabulary. Study it alongside N3 and you graduate ready for both the language exam and the trade licence in one go.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(232,168,76,.1);border-color:rgba(232,168,76,.3);color:#8a6200">Exclusive content</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">599 specialist terms</span>
+          </div>
+        </div>
+      </div>
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(31,58,95,.1)">🎓</div>
+        <div>
+          <div class="sc-name">🎓 Four Full N4 Mock Exams</div>
+          <div class="sc-desc">
+            Tests A, B, C, and D each replicate the real JLPT N4 vocabulary section with authentic question types (問1–問5). Timed at 30 minutes. Wrong answers feed directly into the Review Quiz system, creating a personalised weak-point drill after every exam session.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(31,58,95,.08);border-color:rgba(31,58,95,.2);color:var(--accB)">Real exam format</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">4 × 30-min tests</span>
+          </div>
+        </div>
+      </div>
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(107,163,104,.12)">🧠</div>
+        <div>
+          <div class="sc-name">🧠 Adaptive Review System</div>
+          <div class="sc-desc">
+            Every wrong answer from every quiz is automatically captured. The Review Quiz and Long-term Memory Test draw on this pool to generate personalised drills that focus exactly where you need it most. The system works across all modules — vocabulary, kanji, verbs, business etiquette, and electrical terms.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(107,163,104,.1);border-color:rgba(107,163,104,.25);color:#3e7a3b">Cross-module</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">Personalised</span>
+          </div>
+        </div>
+      </div>
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(8,145,178,.1)">📖</div>
+        <div>
+          <div class="sc-name">📖 Irodori + JLPT in One Place</div>
+          <div class="sc-desc">
+            Most apps cover JLPT vocabulary only. NIHONGO WORK also includes the <b>いろどり (Irodori)</b> practical Japanese series — the curriculum designed specifically for foreign workers living in Japan. This real-life vocabulary complements JLPT study and prepares you for conversations that textbooks miss.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(8,145,178,.1);border-color:rgba(8,145,178,.25);color:var(--accC)">Irodori included</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">N5 · N4 · N3</span>
+          </div>
+        </div>
+      </div>
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(228,87,46,.1)">💼</div>
+        <div>
+          <div class="sc-name">💼 Business Etiquette — 99 Situations</div>
+          <div class="sc-desc">
+            Language alone is not enough for a Japanese workplace. Our ○× quiz covers 99 real business etiquette scenarios — bowing etiquette, business card exchange, meeting protocols, email conventions, and more. Passing this quiz mentally prepares you before you even land at Narita.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(228,87,46,.08);border-color:rgba(228,87,46,.22);color:var(--acc2)">Culture &amp; language</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">99 situations</span>
+          </div>
+        </div>
+      </div>
+      <div class="strength-card">
+        <div class="sc-icon" style="background:rgba(139,92,246,.1)">🇧🇩</div>
+        <div>
+          <div class="sc-name">🇧🇩 Built for Bangladeshi Learners</div>
+          <div class="sc-desc">
+            Every vocabulary item includes a Bengali translation. The interface supports Japanese, English, and Bengali. All content is calibrated to the learning challenges and career goals of Bangladeshi engineers — not generic Western learners. This is the only JLPT platform made specifically for you.
+          </div>
+          <div class="sc-tags">
+            <span class="sc-tag" style="background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.25);color:var(--accP)">Trilingual</span>
+            <span class="sc-tag" style="background:var(--s2);border-color:var(--brd);color:var(--txM)">Bengali translations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OVERVIEW TABLE ── -->
+  <section id="overview">
+    <div class="sh">
+      <div class="sh-badge" style="background:var(--tx)">OVERVIEW</div>
+      <div class="sh-title">Full Roadmap at a Glance</div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="summary-table">
+      <div class="st-head">
+        <div>LEVEL</div>
+        <div>KEY MODULES ON THIS SITE</div>
+        <div>TIMELINE</div>
+        <div>OUTCOME</div>
+      </div>
+      <div class="st-row">
+        <div class="st-cell level" style="color:var(--txD)">あ ア</div>
+        <div class="st-cell">📝 Characters</div>
+        <div class="st-cell">2–4 weeks</div>
+        <div class="st-cell">Read hiragana &amp; katakana fluently</div>
+      </div>
+      <div class="st-row">
+        <div class="st-cell level" style="color:var(--accG)">N5</div>
+        <div class="st-cell">📖 Vocab · 🈶 Kanji · 🕐 Time · 📗 Grammar · 🔄 Verbs</div>
+        <div class="st-cell">2–3 months</div>
+        <div class="st-cell">JLPT N5 pass. Survival Japanese.</div>
+      </div>
+      <div class="st-row">
+        <div class="st-cell level" style="color:var(--accY)">N4</div>
+        <div class="st-cell">📖 Vocab · 🈶 Kanji · 🔄 Verbs · 🎓 Mock Tests A–D · 💼 Biz</div>
+        <div class="st-cell">4–6 months</div>
+        <div class="st-cell">JLPT N4 pass. Basic workplace Japanese.</div>
+      </div>
+      <div class="st-row" style="background:rgba(31,58,95,.03)">
+        <div class="st-cell level" style="color:var(--acc)">N3</div>
+        <div class="st-cell">📖 Vocab · 🈶 Kanji · ⚡ Electrical · 💼 Biz · 🧠 LT Review</div>
+        <div class="st-cell">6–8 months</div>
+        <div class="st-cell" style="color:var(--accB);font-weight:700">JLPT N3 pass → Japan employment ready 🇯🇵</div>
+      </div>
+    </div>
+
+    <div class="tip green">
+      <div class="tip-icon">🚀</div>
+      <div>
+        <b>Total timeline: 12–18 months of consistent study.</b> That is one to one-and-a-half years from zero Japanese to being job-ready for Japan. Every hour you put into this platform compounds — the Review System means no study is ever wasted.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="guide-footer">
+  <div class="guide-footer-title">NIHONGO WORK</div>
+  <div class="guide-footer-sub">にほんごワーク · Japanese for Bangladeshi Learners · Start today.</div>
+</footer>
+
+</body>
+</html>

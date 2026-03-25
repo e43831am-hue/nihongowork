@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japanese Workplace Phrases | NIHONGO WORK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F6F2;
+  --s1: #FFFFFF;
+  --s2: #F0EFE9;
+  --s3: #E8E7E0;
+  --acc:  #E4572E;
+  --acc2: #C94120;
+  --accG: #6BA368;
+  --accB: #1F3A5F;
+  --accY: #D4A017;
+  --accP: #8B5CF6;
+  --accC: #0891B2;
+  --tx:  #1A1A2E;
+  --txM: #4A5568;
+  --txD: #9AA5B4;
+  --brd: rgba(0,0,0,0.08);
+  --g1: linear-gradient(135deg,#E4572E,#C94120);
+  --g2: linear-gradient(135deg,#1F3A5F,#2D4A7A);
+  --g3: linear-gradient(135deg,#D4A017,#E4572E);
+  --g4: linear-gradient(135deg,#8B5CF6,#1F3A5F);
+  --g5: linear-gradient(135deg,#6BA368,#0891B2);
+  --r: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 3px; }
+
+/* ── TOP BAR ── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(247,246,242,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--brd);
+  position: sticky; top: 0; z-index: 100;
+}
+.logo {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 900; font-size: 18px;
+  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+}
+.logo-sub { font-size: 11px; color: var(--txD); -webkit-text-fill-color: var(--txD); font-weight: 400; }
+.pill {
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; color: var(--txM);
+}
+
+/* ── HERO ── */
+.hero {
+  max-width: 720px; margin: 0 auto;
+  padding: 52px 24px 40px;
+  position: relative;
+}
+.hero::after {
+  content: '💼';
+  position: absolute; right: 24px; top: 48px;
+  font-size: 72px; opacity: .07; line-height: 1;
+  pointer-events: none;
+}
+.hero-cat {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11px; color: var(--txM); letter-spacing: .08em;
+  margin-bottom: 18px;
+}
+.hero-cat b { color: var(--accB); }
+.hero-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(24px, 4.5vw, 36px);
+  font-weight: 900; line-height: 1.2; color: var(--tx);
+  margin-bottom: 6px;
+}
+.hero-title span {
+  background: var(--g2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-ja {
+  font-size: 13px; color: var(--txD); margin-bottom: 16px;
+  font-family: 'DM Mono', monospace; letter-spacing: .05em;
+}
+.hero-desc {
+  font-size: 14px; color: var(--txM); line-height: 1.9;
+  max-width: 540px;
+}
+.hero-meta {
+  display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;
+}
+.meta-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--txD);
+}
+.meta-item b { color: var(--txM); }
+
+/* ── TOC ── */
+.toc {
+  max-width: 720px; margin: 0 auto 0;
+  padding: 0 24px 24px;
+}
+.toc-inner {
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 16px 20px;
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+}
+.toc-label { font-size: 11px; color: var(--txD); letter-spacing: .06em; margin-right: 4px; flex-shrink: 0; }
+.toc-link {
+  text-decoration: none;
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 12px; color: var(--txM);
+  transition: all .15s; display: flex; align-items: center; gap: 5px;
+}
+.toc-link:hover { background: var(--s3); color: var(--tx); }
+
+/* ── CONTENT ── */
+.content { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+
+section[id] { scroll-margin-top: 68px; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  display: flex; align-items: center; gap: 10px;
+  margin: 44px 0 20px;
+}
+.sec-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500; color: #fff;
+  width: 24px; height: 24px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sec-icon { font-size: 22px; }
+.sec-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 17px; font-weight: 900; color: var(--tx);
+}
+.sec-en { font-size: 11px; color: var(--txD); margin-left: auto; letter-spacing: .06em; }
+.sec-line { flex: 1; height: 1px; background: var(--brd); }
+
+/* ── PHRASE CARD ── */
+.phrase-card {
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r); overflow: hidden;
+  margin-bottom: 12px;
+  transition: box-shadow .2s;
+}
+.phrase-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.07); }
+
+.pc-top {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--brd);
+  position: relative;
+}
+.pc-jp {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 22px; font-weight: 900;
+  color: var(--tx); margin-bottom: 4px;
+  line-height: 1.4;
+}
+.pc-roma {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: var(--txD); letter-spacing: .05em;
+}
+.pc-play {
+  position: absolute; top: 18px; right: 18px;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--brd); background: var(--s2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px;
+  transition: all .15s; flex-shrink: 0;
+}
+.pc-play:hover { background: var(--acc); border-color: var(--acc); }
+.pc-play:hover .play-icon { filter: brightness(10); }
+
+.pc-body { padding: 16px 22px; }
+.pc-en {
+  font-size: 14px; font-weight: 600; color: var(--tx);
+  margin-bottom: 10px;
+}
+.pc-usage {
+  font-size: 13px; color: var(--txM); line-height: 1.8;
+  margin-bottom: 12px;
+}
+.pc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.pc-tag {
+  font-size: 10px; border-radius: 10px; padding: 3px 9px;
+  border: 1px solid; font-family: 'DM Mono', monospace;
+  letter-spacing: .03em;
+}
+.tag-formal   { background: rgba(31,58,95,.07);   border-color: rgba(31,58,95,.2);  color: var(--accB); }
+.tag-casual   { background: rgba(107,163,104,.08); border-color: rgba(107,163,104,.25); color: #3e7a3b; }
+.tag-polite   { background: rgba(228,87,46,.07);   border-color: rgba(228,87,46,.22); color: var(--acc2); }
+.tag-keigo    { background: rgba(139,92,246,.08);  border-color: rgba(139,92,246,.25); color: var(--accP); }
+.tag-everyone { background: var(--s2); border-color: var(--brd); color: var(--txM); }
+
+/* ── DIALOGUE BOX ── */
+.dialogue {
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.dialogue-title {
+  font-size: 10px; color: var(--txD); letter-spacing: .1em;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+}
+.dialogue-title::after { content: ''; flex: 1; height: 1px; background: var(--brd); }
+.dl-row {
+  display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start;
+}
+.dl-row:last-child { margin-bottom: 0; }
+.dl-who {
+  font-size: 10px; color: #fff; border-radius: 6px;
+  padding: 3px 7px; white-space: nowrap; flex-shrink: 0;
+  font-family: 'DM Mono', monospace; margin-top: 2px;
+}
+.dl-you  { background: var(--accB); }
+.dl-them { background: var(--accG); }
+.dl-text { font-size: 13px; color: var(--tx); line-height: 1.7; }
+.dl-text small { display: block; font-size: 11px; color: var(--txD); margin-top: 2px; }
+
+/* ── CONTEXT BANNER ── */
+.ctx-banner {
+  border-radius: 10px; padding: 14px 16px;
+  margin-bottom: 16px; font-size: 13px; line-height: 1.8;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.ctx-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.ctx-text { color: var(--txM); }
+.ctx-text b { color: var(--tx); }
+
+/* ── COMPARE TABLE ── */
+.compare {
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r); overflow: hidden;
+  margin-bottom: 16px;
+}
+.compare-head {
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--s2); border-bottom: 1px solid var(--brd);
+}
+.compare-head div {
+  padding: 8px 16px; font-size: 10px; color: var(--txD);
+  letter-spacing: .08em; font-family: 'DM Mono', monospace;
+}
+.compare-head div:first-child { border-right: 1px solid var(--brd); }
+.compare-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--brd);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-cell {
+  padding: 13px 16px; font-size: 13px; line-height: 1.65;
+}
+.compare-cell:first-child {
+  border-right: 1px solid var(--brd);
+  font-weight: 700; color: var(--accB);
+  font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px;
+}
+.compare-cell small { display: block; font-size: 11px; color: var(--txD); font-weight: 400; font-family: 'Noto Sans JP', sans-serif; margin-top: 2px; }
+.compare-cell:last-child { color: var(--txM); }
+
+/* ── SECTION DIVIDER ── */
+.divider {
+  height: 1px; background: var(--brd); margin: 8px 0 0;
+}
+
+/* ── SUMMARY BOX ── */
+.summary {
+  background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 24px;
+  margin-top: 40px;
+}
+.summary-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 16px; font-weight: 900; color: var(--tx);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.summary-item {
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 12px 14px;
+}
+.si-num {
+  font-size: 10px; color: var(--txD); letter-spacing: .06em;
+  margin-bottom: 4px; font-family: 'DM Mono', monospace;
+}
+.si-jp {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--tx);
+  margin-bottom: 2px;
+}
+.si-en { font-size: 11px; color: var(--txD); }
+
+/* ── FOOTER ── */
+.guide-footer {
+  border-top: 1px solid var(--brd); padding: 32px 24px;
+  text-align: center; max-width: 720px; margin: 0 auto;
+}
+.guide-footer-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 18px; font-weight: 900;
+  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+.guide-footer-sub { font-size: 13px; color: var(--txD); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero    { animation: fadeUp .45s ease both; }
+.toc     { animation: fadeUp .45s .08s ease both; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a class="logo" href="#">
+    NIHONGO WORK <span class="logo-sub">にほんごワーク</span>
+  </a>
+  <div class="pill">💼 Workplace Japanese</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-cat">💼 Business Japanese &nbsp;·&nbsp; <b>Beginner Phrases</b></div>
+  <h1 class="hero-title"><span>Essential Japanese</span><br>for Your First Day at Work</h1>
+  <p class="hero-ja">職場で使う日本語フレーズ集</p>
+  <p class="hero-desc">
+    10 phrases, 5 situations. From saying good morning to clocking out — learn exactly what to say, when to say it, and why it matters in Japanese workplace culture.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">🗂 <b>5</b> situations</div>
+    <div class="meta-item">💬 <b>10</b> phrases</div>
+    <div class="meta-item">🎯 <b>N4–N5</b> level</div>
+    <div class="meta-item">🏢 Office &amp; Site use</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="toc-label">JUMP TO</span>
+    <a href="#morning"   class="toc-link">🌅 Morning</a>
+    <a href="#approach"  class="toc-link">🗣 Approach</a>
+    <a href="#request"   class="toc-link">🙏 Request</a>
+    <a href="#thanks"    class="toc-link">🤝 Thanks</a>
+    <a href="#leaving"   class="toc-link">🌙 Leaving</a>
+    <a href="#summary"   class="toc-link">📋 All Phrases</a>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- ① MORNING -->
+  <section id="morning">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--accY)">①</div>
+      <div class="sec-icon">🌅</div>
+      <div class="sec-title">Arriving at Work</div>
+      <div class="sec-en">出社・朝</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="ctx-banner" style="background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.2)">
+      <div class="ctx-icon">💡</div>
+      <div class="ctx-text">In Japanese companies, the way you greet people when you arrive sets the tone for the whole day. These phrases are said to <b>everyone</b> — your manager, teammates, and even people you pass in the corridor.</div>
+    </div>
+
+    <!-- Phrase 1 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">おはようございます。</div>
+        <div class="pc-roma">Ohayō gozaimasu.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Good morning.</div>
+        <div class="pc-usage">
+          The standard morning greeting in any professional setting. Use it the moment you walk through the door until roughly noon. Say it clearly and with a slight bow — even a 5-degree nod shows respect. Saying it quietly or not at all can give the impression that you are unfriendly or arrogant.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-formal">Formal</span>
+          <span class="pc-tag tag-everyone">To anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase 2 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">今日もよろしくお願いします。</div>
+        <div class="pc-roma">Kyō mo yoroshiku onegaishimasu.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">I look forward to working with you today as well.</div>
+        <div class="pc-usage">
+          Literally "please treat me well again today." Japanese has no direct translation for this feeling — it is an expression of goodwill and readiness to collaborate. Say it right after your morning greeting, especially to your team leader or the first colleague you speak to. It signals that you are motivated and cooperative.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-everyone">To anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue">
+      <div class="dialogue-title">EXAMPLE CONVERSATION</div>
+      <div class="dl-row">
+        <div class="dl-who dl-you">YOU</div>
+        <div class="dl-text">おはようございます。今日もよろしくお願いします。<small>Good morning. I look forward to working with you today.</small></div>
+      </div>
+      <div class="dl-row">
+        <div class="dl-who dl-them">THEM</div>
+        <div class="dl-text">おはようございます。こちらこそ、よろしくお願いします。<small>Good morning. Likewise!</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② APPROACH -->
+  <section id="approach">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--accB)">②</div>
+      <div class="sec-icon">🗣</div>
+      <div class="sec-title">Approaching a Colleague</div>
+      <div class="sec-en">仕事開始・声かけ</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="ctx-banner" style="background:rgba(31,58,95,.06);border:1px solid rgba(31,58,95,.15)">
+      <div class="ctx-icon">💡</div>
+      <div class="ctx-text">In Japan, interrupting someone without asking first is considered rude. Always <b>ask permission before speaking</b>, even if you just need 30 seconds. This single habit will make a strong positive impression.</div>
+    </div>
+
+    <!-- Phrase 3 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">今、お時間よろしいですか。</div>
+        <div class="pc-roma">Ima, ojikan yoroshii desu ka.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Do you have a moment right now?</div>
+        <div class="pc-usage">
+          Use this before asking a question or starting any conversation that will take more than a few seconds. <b>お時間</b> (ojikan) is the polite form of 時間 (time). Saying <b>今</b> (ima, "now") is important — it shows you understand they might be busy and gives them a way to say "not right now."
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-formal">Workplace standard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase 4 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">少しよろしいでしょうか。</div>
+        <div class="pc-roma">Sukoshi yoroshii deshō ka.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">May I have a brief moment?</div>
+        <div class="pc-usage">
+          A slightly more formal version. <b>でしょうか</b> (deshō ka) is softer and more indirect than <b>ですか</b> (desu ka), which makes it more respectful toward managers or senior colleagues. Use this when speaking to your 上司 (jōshi, supervisor) or in any formal situation.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-keigo">Keigo (Respectful)</span>
+          <span class="pc-tag tag-formal">For managers</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-head">
+        <div>PHRASE</div>
+        <div>BEST USED WITH</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">今、お時間よろしいですか。<small>Ima, ojikan yoroshii desu ka.</small></div>
+        <div class="compare-cell">Teammates, peers, junior staff — everyday conversation</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">少しよろしいでしょうか。<small>Sukoshi yoroshii deshō ka.</small></div>
+        <div class="compare-cell">Managers, supervisors, clients — formal or first meetings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ REQUEST -->
+  <section id="request">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--acc)">③</div>
+      <div class="sec-icon">🙏</div>
+      <div class="sec-title">Making a Request</div>
+      <div class="sec-en">依頼・協力</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="ctx-banner" style="background:rgba(228,87,46,.06);border:1px solid rgba(228,87,46,.18)">
+      <div class="ctx-icon">💡</div>
+      <div class="ctx-text">Japanese requests are almost always phrased as <b>questions</b>, not commands. The phrase structure "Could you please…?" (〜ていただけますか) shows humility and is the default polite form. Direct commands like "Do this" (これをやってください) sound harsh in most workplace contexts.</div>
+    </div>
+
+    <!-- Phrase 5 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">すみませんが、こちらをお願いできますか。</div>
+        <div class="pc-roma">Sumimasen ga, kochira wo onegai dekimasu ka.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Excuse me, could I ask you to handle this?</div>
+        <div class="pc-usage">
+          <b>すみませんが</b> (sumimasen ga) — "Excuse me, but…" — is a softener that cushions the request before you even make it. <b>こちら</b> (kochira) means "this" but sounds more polite than <b>これ</b> (kore). Use when handing someone a document, task, or question. It is direct enough to be clear, but polite enough for any colleague.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-everyone">To anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase 6 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">ご確認いただけますか。</div>
+        <div class="pc-roma">Go-kakunin itadakemasu ka.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Could you please check / review this?</div>
+        <div class="pc-usage">
+          <b>ご確認</b> (go-kakunin) is the polite prefix <b>ご</b> + 確認 (kakunin, "confirmation / review"). <b>いただけますか</b> is the humble form of "could you please give me…" — one of the most important keigo patterns in daily work life. Use whenever you send a document, email, or completed task to a superior for approval.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-keigo">Keigo</span>
+          <span class="pc-tag tag-formal">For superiors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue">
+      <div class="dialogue-title">EXAMPLE CONVERSATION</div>
+      <div class="dl-row">
+        <div class="dl-who dl-you">YOU</div>
+        <div class="dl-text">すみませんが、少しよろしいでしょうか。<small>Excuse me, may I have a brief moment?</small></div>
+      </div>
+      <div class="dl-row">
+        <div class="dl-who dl-them">MANAGER</div>
+        <div class="dl-text">はい、どうぞ。<small>Yes, go ahead.</small></div>
+      </div>
+      <div class="dl-row">
+        <div class="dl-who dl-you">YOU</div>
+        <div class="dl-text">こちらの書類、ご確認いただけますか。<small>Could you please review this document?</small></div>
+      </div>
+      <div class="dl-row">
+        <div class="dl-who dl-them">MANAGER</div>
+        <div class="dl-text">わかりました。後で見ておきます。<small>Understood. I will look at it later.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ THANKS -->
+  <section id="thanks">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--accG)">④</div>
+      <div class="sec-icon">🤝</div>
+      <div class="sec-title">Expressing Gratitude</div>
+      <div class="sec-en">感謝</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="ctx-banner" style="background:rgba(107,163,104,.07);border:1px solid rgba(107,163,104,.22)">
+      <div class="ctx-icon">💡</div>
+      <div class="ctx-text">Japanese people express thanks frequently and specifically. Two phrases cover most situations — a standard thank-you and a phrase that says "you really helped me." The second is especially valued because it shows you <b>noticed</b> the other person's effort.</div>
+    </div>
+
+    <!-- Phrase 7 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">ありがとうございます。</div>
+        <div class="pc-roma">Arigatō gozaimasu.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Thank you very much.</div>
+        <div class="pc-usage">
+          The standard thank-you for any completed favour, help, or kind act. In the workplace, <b>ありがとうございます</b> is used far more than the casual <b>ありがとう</b> — always use the full form with people you work with. Accompany it with a brief bow. When thanking someone for something done in the past, say <b>ありがとうございました</b> (past tense).
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-everyone">To anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase 8 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">助かりました。</div>
+        <div class="pc-roma">Tasukarimashita.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">That was a great help. / You saved me.</div>
+        <div class="pc-usage">
+          Literally "I was saved / rescued." This phrase carries more emotional weight than a simple thank-you. It tells the other person that their help made a real difference. Combine it with ありがとうございます for maximum impact: <b>ありがとうございます。本当に助かりました。</b> ("Thank you. That was a really big help.")
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-everyone">To anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-head">
+        <div>PHRASE</div>
+        <div>NUANCE</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">ありがとうございます。<small>Arigatō gozaimasu.</small></div>
+        <div class="compare-cell">Standard polite thanks — suitable for any situation, any person</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">助かりました。<small>Tasukarimashita.</small></div>
+        <div class="compare-cell">Personal thanks — expresses that the help was genuinely meaningful to you</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ LEAVING -->
+  <section id="leaving">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--accP)">⑤</div>
+      <div class="sec-icon">🌙</div>
+      <div class="sec-title">Leaving Work</div>
+      <div class="sec-en">退社・終了</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="ctx-banner" style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2)">
+      <div class="ctx-icon">💡</div>
+      <div class="ctx-text">Leaving before others is a sensitive moment in Japanese work culture. The phrase <b>お先に失礼します</b> is a small but important social act — it acknowledges that you are leaving early and apologises for it, showing that you respect your colleagues' continued effort.</div>
+    </div>
+
+    <!-- Phrase 9 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">お先に失礼します。</div>
+        <div class="pc-roma">Osaki ni shitsurei shimasu.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Excuse me for leaving first. / I'll head out now.</div>
+        <div class="pc-usage">
+          <b>お先に</b> (osaki ni) means "before you / ahead of you." <b>失礼します</b> (shitsurei shimasu) literally means "I am being rude." Together they form a humble apology for leaving while others are still working. Say it to your immediate team and anyone nearby as you prepare to leave. In return, they will usually say <b>お疲れ様でした</b> to you.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-polite">Polite</span>
+          <span class="pc-tag tag-everyone">Said by the person leaving</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase 10 -->
+    <div class="phrase-card">
+      <div class="pc-top">
+        <div class="pc-jp">お疲れ様でした。</div>
+        <div class="pc-roma">Otsukaresama deshita.</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-en">Good work today. / Thank you for your hard work.</div>
+        <div class="pc-usage">
+          One of the most important phrases in the Japanese workplace. <b>お疲れ様</b> (otsukaresama) acknowledges that the other person worked hard and is tired. Use it when a colleague finishes a task, when someone is leaving, or at the end of the day. It can also be used as a general greeting after midday, similar to "hey" between colleagues who have been working together.
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag tag-everyone">To anyone</span>
+          <span class="pc-tag tag-polite">Universal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-head">
+        <div>WHO SAYS IT</div>
+        <div>PHRASE</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Person leaving<small>The one going home first</small></div>
+        <div class="compare-cell">お先に失礼します。<br><span style="font-size:11px;color:var(--txD)">Osaki ni shitsurei shimasu.</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">People staying<small>Those still at work</small></div>
+        <div class="compare-cell">お疲れ様でした。<br><span style="font-size:11px;color:var(--txD)">Otsukaresama deshita.</span></div>
+      </div>
+    </div>
+
+    <div class="dialogue">
+      <div class="dialogue-title">EXAMPLE CONVERSATION</div>
+      <div class="dl-row">
+        <div class="dl-who dl-you">YOU</div>
+        <div class="dl-text">お先に失礼します。<small>Excuse me for leaving first.</small></div>
+      </div>
+      <div class="dl-row">
+        <div class="dl-who dl-them">COLLEAGUE</div>
+        <div class="dl-text">お疲れ様でした。気をつけて。<small>Good work today. Take care.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <div class="sec-header">
+      <div class="sec-num" style="background:var(--tx)">⊞</div>
+      <div class="sec-icon">📋</div>
+      <div class="sec-title">All 10 Phrases at a Glance</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">🌅 Morning</div>
+      <div class="summary-grid" style="margin-bottom:20px">
+        <div class="summary-item">
+          <div class="si-num">① — 01</div>
+          <div class="si-jp">おはようございます。</div>
+          <div class="si-en">Good morning.</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-num">① — 02</div>
+          <div class="si-jp">今日もよろしくお願いします。</div>
+          <div class="si-en">I look forward to working with you today.</div>
+        </div>
+      </div>
+
+      <div class="summary-title">🗣 Approach</div>
+      <div class="summary-grid" style="margin-bottom:20px">
+        <div class="summary-item">
+          <div class="si-num">② — 03</div>
+          <div class="si-jp">今、お時間よろしいですか。</div>
+          <div class="si-en">Do you have a moment now?</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-num">② — 04</div>
+          <div class="si-jp">少しよろしいでしょうか。</div>
+          <div class="si-en">May I have a brief moment?</div>
+        </div>
+      </div>
+
+      <div class="summary-title">🙏 Request</div>
+      <div class="summary-grid" style="margin-bottom:20px">
+        <div class="summary-item">
+          <div class="si-num">③ — 05</div>
+          <div class="si-jp">すみませんが、こちらをお願いできますか。</div>
+          <div class="si-en">Could I ask you to handle this?</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-num">③ — 06</div>
+          <div class="si-jp">ご確認いただけますか。</div>
+          <div class="si-en">Could you please review this?</div>
+        </div>
+      </div>
+
+      <div class="summary-title">🤝 Thanks</div>
+      <div class="summary-grid" style="margin-bottom:20px">
+        <div class="summary-item">
+          <div class="si-num">④ — 07</div>
+          <div class="si-jp">ありがとうございます。</div>
+          <div class="si-en">Thank you very much.</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-num">④ — 08</div>
+          <div class="si-jp">助かりました。</div>
+          <div class="si-en">That was a great help.</div>
+        </div>
+      </div>
+
+      <div class="summary-title">🌙 Leaving</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="si-num">⑤ — 09</div>
+          <div class="si-jp">お先に失礼します。</div>
+          <div class="si-en">Excuse me for leaving first.</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-num">⑤ — 10</div>
+          <div class="si-jp">お疲れ様でした。</div>
+          <div class="si-en">Good work today.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="guide-footer">
+  <div class="guide-footer-title">NIHONGO WORK</div>
+  <div class="guide-footer-sub">にほんごワーク · Japanese for Bangladeshi Learners</div>
+</footer>
+
+</body>
+</html>
