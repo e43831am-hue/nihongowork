@@ -539,6 +539,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
   <div style="display:flex;gap:20px;">
     <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
     <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
+    <a href="#" onclick="openArticles();return false;" style="color:#e8a84c;text-decoration:none;font-size:13px;font-weight:600;">Articles</a>
     <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
     <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
   </div>
@@ -682,6 +683,35 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
     <div class="cd c5" onclick="openM('denkou')" style="background:linear-gradient(135deg,var(--s1),rgba(107,163,104,0.06))"><span class="cd-i">⚡</span><div class="cd-n">電気工事士</div><div class="cd-d">電工漢字・専門用語</div></div>
   </div>
 
+  <!-- ── 記事一覧ショートカット ── -->
+  <div class="sec-t" style="margin-top:28px">📚 Articles &amp; Guides</div>
+  <div style="padding:0 4px 8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px">
+    <div onclick="openArticle('kana.html')" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px 14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#E4572E,#C94120)"></div>
+      <div style="font-size:28px;margin-bottom:8px">あア</div>
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;color:var(--tx)">Kana Guide</div>
+      <div style="font-size:10px;color:var(--txD);line-height:1.5">ひらがな・カタカナ一覧と覚え方</div>
+    </div>
+    <div onclick="openArticle('phrases.html')" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px 14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#1F3A5F,#2D4A7A)"></div>
+      <div style="font-size:28px;margin-bottom:8px">💼</div>
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;color:var(--tx)">Workplace Phrases</div>
+      <div style="font-size:10px;color:var(--txD);line-height:1.5">職場で使う日本語フレーズ集</div>
+    </div>
+    <div onclick="openArticle('roadmap.html')" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px 14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#D4A017,#E4572E)"></div>
+      <div style="font-size:28px;margin-bottom:8px">🗺</div>
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;color:var(--tx)">Learning Roadmap</div>
+      <div style="font-size:10px;color:var(--txD);line-height:1.5">N5→N4→N3→日本就職ガイド</div>
+    </div>
+    <div onclick="openArticle('guide.html')" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px 14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#6BA368,#0891B2)"></div>
+      <div style="font-size:28px;margin-bottom:8px">📖</div>
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;color:var(--tx)">How to Use</div>
+      <div style="font-size:10px;color:var(--txD);line-height:1.5">クイズの使い方ガイド</div>
+    </div>
+  </div>
+
   <div style="text-align:center;padding:30px 0 60px;color:var(--txD);font-size:11px">NIHONGO WORK v10 — Built for Bangladeshi workers in Japan</div>
 </div>
 
@@ -699,6 +729,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
 <div class="mod" id="m-review"></div>
 <div class="mod" id="m-longterm"></div>
 <div class="mod" id="m-denkou"></div>
+<div class="mod" id="m-articles"></div>
 <script>
 const I_ADJ=[["大きい","big","大きくない","大きかった","大きくなかった","大きくて","大きく","大きければ"],["小さい","small","小さくない","小さかった","小さくなかった","小さくて","小さく","小さければ"],["高い","expensive/tall","高くない","高かった","高くなかった","高くて","高く","高ければ"],["安い","cheap","安くない","安かった","安くなかった","安くて","安く","安ければ"],["新しい","new","新しくない","新しかった","新しくなかった","新しくて","新しく","新しければ"],["古い","old","古くない","古かった","古くなかった","古くて","古く","古ければ"],["良い","good","良くない","良かった","良くなかった","良くて","良く","良ければ"],["悪い","bad","悪くない","悪かった","悪くなかった","悪くて","悪く","悪ければ"],["熱い","hot","熱くない","熱かった","熱くなかった","熱くて","熱く","熱ければ"],["冷たい","cold","冷たくない","冷たかった","冷たくなかった","冷たくて","冷たく","冷たければ"],["寒い","cold(weather)","寒くない","寒かった","寒くなかった","寒くて","寒く","寒ければ"],["暑い","hot(weather)","暑くない","暑かった","暑くなかった","暑くて","暑く","暑ければ"],["広い","wide/spacious","広くない","広かった","広くなかった","広くて","広く","広ければ"],["狭い","narrow","狭くない","狭かった","狭くなかった","狭くて","狭く","狭ければ"],["長い","long","長くない","長かった","長くなかった","長くて","長く","長ければ"],["短い","short","短くない","短かった","短くなかった","短くて","短く","短ければ"],["早い","early/fast","早くない","早かった","早くなかった","早くて","早く","早ければ"],["遅い","late/slow","遅くない","遅かった","遅くなかった","遅くて","遅く","遅ければ"],["重い","heavy","重くない","重かった","重くなかった","重くて","重く","重ければ"],["軽い","light","軽くない","軽かった","軽くなかった","軽くて","軽く","軽ければ"],["甘い","sweet","甘くない","甘かった","甘くなかった","甘くて","甘く","甘ければ"],["辛い","spicy","辛くない","辛かった","辛くなかった","辛くて","辛く","辛ければ"],["面白い","interesting","面白くない","面白かった","面白くなかった","面白くて","面白く","面白ければ"],["つまらない","boring","つまらなくない","つまらなかった","つまらなくなかった","つまらなくて","つまらなく","つまらなければ"],["難しい","difficult","難しくない","難しかった","難しくなかった","難しくて","難しく","難しければ"],["易しい","easy","易しくない","易しかった","易しくなかった","易しくて","易しく","易しければ"],["忙しい","busy","忙しくない","忙しかった","忙しくなかった","忙しくて","忙しく","忙しければ"],["楽しい","fun","楽しくない","楽しかった","楽しくなかった","楽しくて","楽しく","楽しければ"],["嬉しい","happy","嬉しくない","嬉しかった","嬉しくなかった","嬉しくて","嬉しく","嬉しければ"],["悲しい","sad","悲しくない","悲しかった","悲しくなかった","悲しくて","悲しく","悲しければ"],["痛い","painful","痛くない","痛かった","痛くなかった","痛くて","痛く","痛ければ"],["眠い","sleepy","眠くない","眠かった","眠くなかった","眠くて","眠く","眠ければ"],["美味しい","delicious","美味しくない","美味しかった","美味しくなかった","美味しくて","美味しく","美味しければ"],["不味い","bad tasting","不味くない","不味かった","不味くなかった","不味くて","不味く","不味ければ"],["強い","strong","強くない","強かった","強くなかった","強くて","強く","強ければ"],["弱い","weak","弱くない","弱かった","弱くなかった","弱くて","弱く","弱ければ"],["明るい","bright","明るくない","明るかった","明るくなかった","明るくて","明るく","明るければ"],["暗い","dark","暗くない","暗かった","暗くなかった","暗くて","暗く","暗ければ"],["近い","near","近くない","近かった","近くなかった","近くて","近く","近ければ"],["遠い","far","遠くない","遠かった","遠くなかった","遠くて","遠く","遠ければ"],["優しい","kind","優しくない","優しかった","優しくなかった","優しくて","優しく","優しければ"],["厳しい","strict","厳しくない","厳しかった","厳しくなかった","厳しくて","厳しく","厳しければ"],["うるさい","noisy","うるさくない","うるさかった","うるさくなかった","うるさくて","うるさく","うるさければ"],["丸い","round","丸くない","丸かった","丸くなかった","丸くて","丸く","丸ければ"],["若い","young","若くない","若かった","若くなかった","若くて","若く","若ければ"]];
 const NA_ADJ=[["きれい","beautiful/clean","きれいじゃない","きれいだった","きれいじゃなかった","きれいで","きれいに","きれいなら"],["静か","quiet","静かじゃない","静かだった","静かじゃなかった","静かで","静かに","静かなら"],["元気","energetic","元気じゃない","元気だった","元気じゃなかった","元気で","元気に","元気なら"],["好き","like","好きじゃない","好きだった","好きじゃなかった","好きで","好きに","好きなら"],["嫌い","dislike","嫌いじゃない","嫌いだった","嫌いじゃなかった","嫌いで","嫌いに","嫌いなら"],["上手","skillful","上手じゃない","上手だった","上手じゃなかった","上手で","上手に","上手なら"],["下手","unskillful","下手じゃない","下手だった","下手じゃなかった","下手で","下手に","下手なら"],["有名","famous","有名じゃない","有名だった","有名じゃなかった","有名で","有名に","有名なら"],["大変","tough/terrible","大変じゃない","大変だった","大変じゃなかった","大変で","大変に","大変なら"],["便利","convenient","便利じゃない","便利だった","便利じゃなかった","便利で","便利に","便利なら"],["不便","inconvenient","不便じゃない","不便だった","不便じゃなかった","不便で","不便に","不便なら"],["大切","important","大切じゃない","大切だった","大切じゃなかった","大切で","大切に","大切なら"],["大丈夫","OK/alright","大丈夫じゃない","大丈夫だった","大丈夫じゃなかった","大丈夫で","大丈夫に","大丈夫なら"],["丁寧","polite","丁寧じゃない","丁寧だった","丁寧じゃなかった","丁寧で","丁寧に","丁寧なら"],["親切","kind","親切じゃない","親切だった","親切じゃなかった","親切で","親切に","親切なら"],["簡単","simple","簡単じゃない","簡単だった","簡単じゃなかった","簡単で","簡単に","簡単なら"],["複雑","complicated","複雑じゃない","複雑だった","複雑じゃなかった","複雑で","複雑に","複雑なら"],["安全","safe","安全じゃない","安全だった","安全じゃなかった","安全で","安全に","安全なら"],["危険","dangerous","危険じゃない","危険だった","危険じゃなかった","危険で","危険に","危険なら"],["必要","necessary","必要じゃない","必要だった","必要じゃなかった","必要で","必要に","必要なら"],["特別","special","特別じゃない","特別だった","特別じゃなかった","特別で","特別に","特別なら"],["自由","free","自由じゃない","自由だった","自由じゃなかった","自由で","自由に","自由なら"],["真面目","serious","真面目じゃない","真面目だった","真面目じゃなかった","真面目で","真面目に","真面目なら"],["暇","free(time)","暇じゃない","暇だった","暇じゃなかった","暇で","暇に","暇なら"],["にぎやか","lively","にぎやかじゃない","にぎやかだった","にぎやかじゃなかった","にぎやかで","にぎやかに","にぎやかなら"]];
@@ -3710,12 +3741,93 @@ function initM(c,id){
       mkDenkou(c);
       break;}
 
+    case 'articles':{
+      renderArticlesList(c);
+      break;}
+
 
   }
 }
 
 document.addEventListener('DOMContentLoaded', updateRankWidget);
 document.addEventListener('DOMContentLoaded',()=>setTimeout(updateRankWidget,100));
+
+// ── Articles ──
+function openArticles(){
+  if(window._nwTmr)clearInterval(window._nwTmr);
+  curMod='articles';
+  document.getElementById('homeV').style.display='none';
+  document.querySelectorAll('.mod').forEach(m=>m.style.display='none');
+  const c=document.getElementById('m-articles');
+  c.style.display='block';
+  renderArticlesList(c);
+  window.scrollTo(0,0);
+  const hb=document.getElementById('home-btn');if(hb)hb.style.display='flex';
+  if(typeof trackPV==='function')trackPV('/articles','Articles');
+}
+
+function openArticle(url){
+  if(window._nwTmr)clearInterval(window._nwTmr);
+  curMod='articles';
+  document.getElementById('homeV').style.display='none';
+  document.querySelectorAll('.mod').forEach(m=>m.style.display='none');
+  const c=document.getElementById('m-articles');
+  c.style.display='block';
+  // Render iframe viewer
+  const slug=url.replace('.html','');
+  c.innerHTML=`
+    <div style="max-width:720px;margin:0 auto;padding:8px 12px 0">
+      <button onclick="openArticles()" style="display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit;margin-bottom:8px">
+        ← All Articles
+      </button>
+    </div>
+    <iframe
+      src="${url}"
+      style="width:100%;height:calc(100vh - 120px);border:none;display:block"
+      title="Article"
+      id="article-iframe">
+    </iframe>`;
+  window.scrollTo(0,0);
+  const hb=document.getElementById('home-btn');if(hb)hb.style.display='flex';
+  if(typeof trackPV==='function')trackPV('/articles/'+slug,'Article: '+slug);
+}
+
+function renderArticlesList(c){
+  const ARTICLES=[
+    {url:'kana.html',    icon:'あア', title:'Kana Guide',         ja:'ひらがな・カタカナ一覧と覚え方',  tag:'Stage 0',  color:'linear-gradient(135deg,#E4572E,#C94120)',  desc:'Complete hiragana & katakana tables, confusing pairs, memorisation tricks, and a 2-week study plan.'},
+    {url:'phrases.html', icon:'💼',   title:'Workplace Phrases',  ja:'職場で使う日本語フレーズ集',       tag:'Beginner', color:'linear-gradient(135deg,#1F3A5F,#2D4A7A)',  desc:'10 essential phrases for 5 daily situations — morning greetings to saying goodbye with full cultural context.'},
+    {url:'roadmap.html', icon:'🗺',   title:'Learning Roadmap',   ja:'N5 → N4 → N3 → 日本就職',       tag:'Planning', color:'linear-gradient(135deg,#D4A017,#E4572E)',  desc:'Complete study roadmap from zero to JLPT N3 — the level that opens real job opportunities in Japan.'},
+    {url:'guide.html',   icon:'📖',   title:'How to Use the App', ja:'クイズ・電工モジュールの使い方',  tag:'Guide',    color:'linear-gradient(135deg,#6BA368,#0891B2)',  desc:'Step-by-step guide to every module including the Electrical Worker specialist course and JLPT mock tests.'},
+  ];
+  let h=`<div style="max-width:720px;margin:0 auto;padding:16px 16px 60px">`;
+  // Header
+  h+=`<div style="margin-bottom:24px">
+    <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;color:var(--tx);margin-bottom:4px">📚 Articles &amp; Guides</div>
+    <div style="font-size:13px;color:var(--txM)">Study tips, phrase guides, and roadmaps — all written for Bangladeshi learners.</div>
+  </div>`;
+  // Cards
+  ARTICLES.forEach(a=>{
+    h+=`<div onclick="openArticle('${a.url}')" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:20px;margin-bottom:12px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden"
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.08)';this.style.borderColor='rgba(0,0,0,.14)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--brd)'">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${a.color}"></div>
+      <div style="display:flex;align-items:flex-start;gap:16px">
+        <div style="font-size:36px;flex-shrink:0;line-height:1;margin-top:2px">${a.icon}</div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+            <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:900;color:var(--tx)">${a.title}</div>
+            <span style="font-size:10px;background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:2px 9px;color:var(--txD);font-family:'DM Mono',monospace;white-space:nowrap">${a.tag}</span>
+          </div>
+          <div style="font-size:11px;color:var(--txD);margin-bottom:6px;font-family:'DM Mono',monospace">${a.ja}</div>
+          <div style="font-size:13px;color:var(--txM);line-height:1.7">${a.desc}</div>
+        </div>
+        <div style="color:var(--txD);font-size:18px;flex-shrink:0;align-self:center">›</div>
+      </div>
+    </div>`;
+  });
+  h+=`</div>`;
+  c.innerHTML=h;
+}
 
 // ── Browser back/forward: return to home ──
 window.addEventListener('popstate',function(e){
