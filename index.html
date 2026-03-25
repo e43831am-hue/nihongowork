@@ -346,46 +346,6 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .cd .cd-sub{font-size:10px;color:var(--txD);margin-top:4px}
 
 
-/* ── JLPT Mock Test ── */
-.jlpt-intro{text-align:center;padding:30px 16px}
-.jlpt-intro h2{font-size:28px;font-weight:900;color:var(--accY);margin-bottom:8px}
-.jlpt-intro .sub{font-size:14px;color:var(--txM);margin-bottom:24px}
-.jlpt-stats{display:flex;gap:12px;justify-content:center;margin-bottom:24px}
-.jlpt-stat{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:14px 20px;text-align:center}
-.jlpt-stat .num{font-size:28px;font-weight:900;color:var(--acc);font-family:'DM Mono',monospace}
-.jlpt-stat .lbl{font-size:11px;color:var(--txM);margin-top:2px}
-.jlpt-start{padding:16px 48px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--accY),var(--acc2));color:#000;font-size:18px;font-weight:900;cursor:pointer;transition:all .2s;font-family:'Zen Maru Gothic',sans-serif}
-.jlpt-start:hover{transform:scale(1.03);filter:brightness(1.1)}
-.jlpt-sec-hdr{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:12px 16px;margin:16px 0 10px;font-weight:700;color:var(--accY);font-size:14px}
-.jlpt-q{background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:16px;margin-bottom:12px}
-.jlpt-q .qnum{font-size:11px;color:var(--txD);margin-bottom:6px;font-weight:700}
-.jlpt-q .qtext{font-size:17px;line-height:1.8;color:var(--tx);margin-bottom:14px}
-.jlpt-q .qtext u{text-decoration:none;border-bottom:2px solid var(--acc);color:var(--acc);padding-bottom:1px}
-.jlpt-q .qtext b{color:var(--accY)}
-.jlpt-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.jlpt-opts.long-grid{grid-template-columns:1fr}
-.jlpt-opt{padding:10px 12px;border:1px solid var(--brd);border-radius:10px;background:var(--s2);cursor:pointer;font-size:14px;color:var(--tx);transition:all .15s;text-align:left}
-.jlpt-opt:hover{background:var(--s3);border-color:var(--accB)}
-.jlpt-opt.sel{background:rgba(84,160,255,.15);border-color:var(--accB);color:var(--accB);font-weight:600}
-.jlpt-opt.ok{background:rgba(107,191,138,.15);border-color:var(--grn);color:var(--grn)}
-.jlpt-opt.ng{background:rgba(217,107,107,.15);border-color:var(--red);color:var(--red)}
-.jlpt-opt.long{grid-column:1/-1;font-size:13px;line-height:1.6}
-.jlpt-nav{display:flex;gap:8px;justify-content:center;margin-top:20px;flex-wrap:wrap}
-.jlpt-nav .nb{padding:10px 24px;border:1px solid var(--brd);border-radius:10px;background:var(--s2);color:var(--tx);font-size:14px;cursor:pointer;transition:all .15s}
-.jlpt-nav .nb:hover{background:var(--s3)}
-.jlpt-nav .nb.primary{background:var(--accY);color:#000;border-color:transparent;font-weight:700}
-.jlpt-timer{position:sticky;top:48px;z-index:10;background:var(--bg);border-bottom:1px solid var(--brd);padding:8px 16px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace}
-.jlpt-timer .time{font-size:20px;font-weight:700;color:var(--accY)}
-.jlpt-timer .time.danger{color:var(--red);animation:pulse .6s ease infinite}
-.jlpt-timer .progress{font-size:12px;color:var(--txM)}
-.jlpt-result{text-align:center;padding:30px 16px}
-.jlpt-result .big{font-size:64px;font-weight:900;font-family:'DM Mono',monospace}
-.jlpt-result .big.pass{color:var(--grn)}.jlpt-result .big.fail{color:var(--red)}
-.jlpt-result .msg{font-size:20px;margin:12px 0 24px;font-weight:700}
-.jlpt-breakdown{display:grid;gap:8px;max-width:400px;margin:0 auto 24px}
-.jlpt-bd{display:flex;justify-content:space-between;align-items:center;background:var(--s2);border-radius:10px;padding:10px 14px}
-.jlpt-bd .name{font-size:13px;color:var(--txM)}.jlpt-bd .score{font-weight:700;color:var(--tx);font-family:'DM Mono',monospace}
-
 </style>
 <script>
 // ── Translation system (in head for document.write) ──
@@ -394,7 +354,7 @@ const L={
   logo:{ja:'にほんごワーク',en:'NIHONGO WORK',bn:'নিহঙ্গো ওয়ার্ক'},
   heroT:{ja:'バングラデシュから日本へ',en:'From Bangladesh to Japan',bn:'বাংলাদেশ থেকে জাপানে'},
   heroD:{ja:'就労のための日本語学習プラットフォーム',en:'Japanese learning platform for employment',bn:'কর্মসংস্থানের জন্য জাপানি শেখার প্ল্যাটফর্ম'},
-  heroD2:{ja:'JLPT N5〜N3 + いろどり対応',en:'JLPT N5–N3 + Irodori',bn:'JLPT N5–N3 + ইরোদোরি'},
+  heroD2:{ja:'N5〜N3 + いろどり対応',en:'N5–N3 + Irodori',bn:'N5–N3 + ইরোদোরি'},
   streak:{ja:'🔥 連続',en:'🔥 STREAK',bn:'🔥 ধারা'},correct:{ja:'✓ 正解',en:'✓ CORRECT',bn:'✓ সঠিক'},
   vocabL:{ja:'📖 語彙',en:'📖 VOCAB',bn:'📖 শব্দ'},kanjiL:{ja:'🈶 漢字',en:'🈶 KANJI',bn:'🈶 কাঞ্জি'},
   // Sections
@@ -497,23 +457,6 @@ const L={
   cGQ:{ja:'助詞クイズ',en:'Particle Quiz',bn:'পার্টিকেল কুইজ'},
   resultPageLabel:{ja:'📋 解説',en:'📋 Answer',bn:'📋 উত্তর ব্যাখ্যা'},
 
-  secJlpt:{ja:'🎓 JLPT対策',en:'🎓 JLPT Practice',bn:'🎓 JLPT অনুশীলন'},
-  cdJlpt:{ja:'N4 語彙 模擬試験',en:'N4 Vocabulary Mock Test',bn:'N4 শব্দভাণ্ডার মক টেস্ট'},
-  jlptStart:{ja:'試験開始',en:'Start Test',bn:'পরীক্ষা শুরু'},
-  jlptTime:{ja:'制限時間',en:'Time limit',bn:'সময়সীমা'},
-  jlptMin:{ja:'分',en:'min',bn:'মিনিট'},
-  jlptQ:{ja:'問',en:'questions',bn:'প্রশ্ন'},
-  jlptSec:{ja:'セクション',en:'Section',bn:'বিভাগ'},
-  jlptResult:{ja:'結果',en:'Result',bn:'ফলাফল'},
-  jlptPass:{ja:'🎉 合格ライン突破！',en:'🎉 Passed!',bn:'🎉 উত্তীর্ণ!'},
-  jlptFail:{ja:'もう少し頑張ろう！',en:'Keep studying!',bn:'আরও পড়ুন!'},
-  jlptReview:{ja:'📋 復習する',en:'📋 Review',bn:'📋 পুনরালোচনা'},
-  jlptMondai1:{ja:'もんだい１：漢字の読み',en:'Part 1: Kanji Reading',bn:'অংশ ১: কাঞ্জি পড়া'},
-  jlptMondai2:{ja:'もんだい２：漢字の書き',en:'Part 2: Kanji Writing',bn:'অংশ ২: কাঞ্জি লেখা'},
-  jlptMondai3:{ja:'もんだい３：文脈語彙',en:'Part 3: Contextual Vocabulary',bn:'অংশ ৩: প্রসঙ্গ শব্দ'},
-  jlptMondai4:{ja:'もんだい４：同義文',en:'Part 4: Synonyms',bn:'অংশ ৪: সমার্থক'},
-  jlptMondai5:{ja:'もんだい５：語の用法',en:'Part 5: Word Usage',bn:'অংশ ৫: শব্দ ব্যবহার'},
-
   // ── Review / LongTerm / Dashboard strings ──
   revTitle:{ja:'📋 復習クイズ',en:'📋 Review Quiz',bn:'📋 পুনরালোচনা কুইজ'},
   revSelectCat:{ja:'カテゴリーを選んでください',en:'Choose a category',bn:'একটি বিভাগ বেছে নিন'},
@@ -543,7 +486,7 @@ const L={
   boostBtn2:{ja:'📈 合格率を上げる！',en:'📈 Boost Pass Rate!',bn:'📈 পাসের হার বাড়ান!'},
   n5passRate:{ja:'N5合格率',en:'N5 Pass Rate',bn:'N5 পাসের হার'},
   dashTitle:{ja:'📊 ダッシュボード',en:'📊 Dashboard',bn:'📊 ড্যাশবোর্ড'},
-  dashSub:{ja:'進捗確認・JLPT合格率・ランクアップ',en:'Progress · Pass Rate · Rank Up',bn:'অগ্রগতি · পাসের হার · র্যাংক আপ'},
+  dashSub:{ja:'進捗確認・合格率・ランクアップ',en:'Progress · Pass Rate · Rank Up',bn:'অগ্রগতি · পাসের হার · র্যাংক আপ'},
   homeBtnLbl:{ja:'🏠 ホーム',en:'🏠 Home',bn:'🏠 হোম'},
   specialSec:{ja:'🚀 スペシャル学習',en:'🚀 Special Learning',bn:'🚀 বিশেষ শিক্ষা'},
 
@@ -730,9 +673,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
     <div class="cd c2" onclick="openM('grammar')"><span class="cd-i">📗</span><div class="cd-n"><script>document.write(T('secGram'))</script></div><div class="cd-d"><script>document.write(T('cdGram'))</script></div><div class="cd-count">26+18</div></div>
   </div>
 
-  <div class="sec-t"><script>document.write(T('secJlpt'))</script></div>
-  <div class="cg">
-    <div class="cd c4" onclick="openM('jlpt')" style="background:linear-gradient(135deg,var(--s1),rgba(212,160,23,.06))"><span class="cd-i">🎓</span><div class="cd-n"><script>document.write(T('secJlpt'))</script></div><div class="cd-d"><script>document.write(T('cdJlpt'))</script></div><div class="cd-count">4回 模擬試験</div></div>
+  
   </div>
 
   <div class="sec-t"><script>document.write(T('specialSec'))</script></div>
@@ -752,7 +693,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
 <div class="mod" id="m-adj"></div>
 <div class="mod" id="m-timenum"></div>
 <div class="mod" id="m-grammar"></div>
-<div class="mod" id="m-jlpt"></div>
+
 <div class="mod" id="m-biz"></div>
 <div class="mod" id="m-dashboard"></div>
 <div class="mod" id="m-review"></div>
@@ -777,11 +718,6 @@ const HD=[["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],["ざ
 const KB=[["ア","a"],["イ","i"],["ウ","u"],["エ","e"],["オ","o"],["カ","ka"],["キ","ki"],["ク","ku"],["ケ","ke"],["コ","ko"],["サ","sa"],["シ","shi"],["ス","su"],["セ","se"],["ソ","so"],["タ","ta"],["チ","chi"],["ツ","tsu"],["テ","te"],["ト","to"],["ナ","na"],["ニ","ni"],["ヌ","nu"],["ネ","ne"],["ノ","no"],["ハ","ha"],["ヒ","hi"],["フ","fu"],["ヘ","he"],["ホ","ho"],["マ","ma"],["ミ","mi"],["ム","mu"],["メ","me"],["モ","mo"],["ヤ","ya"],["ユ","yu"],["ヨ","yo"],["ラ","ra"],["リ","ri"],["ル","ru"],["レ","re"],["ロ","ro"],["ワ","wa"],["ヲ","wo"],["ン","n"]];
 const KD=[["ガ","ga"],["ギ","gi"],["グ","gu"],["ゲ","ge"],["ゴ","go"],["ザ","za"],["ジ","ji"],["ズ","zu"],["ゼ","ze"],["ゾ","zo"],["ダ","da"],["ヂ","di"],["ヅ","du"],["デ","de"],["ド","do"],["バ","ba"],["ビ","bi"],["ブ","bu"],["ベ","be"],["ボ","bo"],["パ","pa"],["ピ","pi"],["プ","pu"],["ペ","pe"],["ポ","po"]];
 const K_EN={'名':'name','前':'before, front','国':'country','私':'I, private','父':'father','母':'mother','子':'child','日':'day, sun','本':'book, origin','水':'water','食':'eat, food','飲':'drink','魚':'fish','肉':'meat','好':'like','家':'house, home','新':'new','広':'wide','古':'old','上':'up, above','下':'down, below','中':'middle, inside','月':'moon, month','火':'fire','木':'tree, wood','金':'gold, money','土':'earth, ground','曜':'weekday','朝':'morning','昼':'noon, daytime','夜':'night','時':'time, hour','分':'minute, part','半':'half','枚':'counter (flat)','読':'read','聞':'hear, ask','見':'see, look','友':'friend','何':'what','年':'year','今':'now','週':'week','度':'degree, time','東':'east','西':'west','南':'south','北':'north','会':'meet','社':'company','来':'come, next','行':'go','乗':'ride','大':'big','小':'small','高':'tall, expensive','低':'low','後':'after, behind','横':'side, horizontal','入':'enter','口':'mouth, entrance','出':'exit, go out','階':'floor, stairs','押':'push','引':'pull','安':'cheap, safe','一':'one','二':'two','三':'three','四':'four','五':'five','六':'six','七':'seven','八':'eight','九':'nine','十':'ten','百':'hundred','千':'thousand','万':'ten thousand','円':'yen, circle','休':'rest','映':'reflect, project','画':'picture, plan','語':'language','勉':'effort','強':'strong','買':'buy','温':'warm','泉':'spring (water)','予':'beforehand','定':'fix, decide','旅':'travel','学':'study','生':'life, birth','校':'school','活':'active, life','去':'leave, past','先':'previous, ahead','仕':'serve','事':'thing, matter','元':'origin','気':'spirit, energy','忙':'busy','働':'work','作':'make','人':'person','犬':'dog','族':'family, tribe','夕':'evening','方':'direction, person','英':'English','音':'sound','楽':'pleasure, music','習':'learn','話':'talk, story','季':'season','節':'season, joint','春':'spring','夏':'summer','秋':'autumn','冬':'winter','花':'flower','同':'same','暑':'hot (weather)','寒':'cold (weather)','天':'heaven, sky','晴':'clear (weather)','雨':'rain','雪':'snow','風':'wind','昨':'yesterday','明':'bright, tomorrow','毎':'every','町':'town','店':'shop','堂':'hall','便':'convenience','利':'benefit, profit','不':'not, un-','静':'quiet','有':'have, exist','多':'many, much','少':'few, little','遠':'far','道':'road, way','公':'public','園':'garden, park','銀':'silver','寺':'temple','神':'god','右':'right','左':'left','近':'near','車':'car','送':'send','間':'between, space','場':'place','所':'place','駅':'station','受':'receive','付':'attach','門':'gate','電':'electricity','待':'wait','止':'stop','着':'wear, arrive','急':'hurry','博':'extensive','物':'thing','館':'hall, building','動':'move','試':'try, test','合':'match, fit','難':'difficult','登':'climb','練':'practice','漢':'China, kanji','字':'character','無':'nothing, without','料':'fee, material','言':'say, word','書':'write','貸':'lend','教':'teach','説':'explain','午':'noon','科':'subject, section','室':'room','全':'all, whole','部':'section, part','回':'times, turn','参':'participate','加':'add, join','用':'use','意':'meaning, mind','茶':'tea','酒':'alcohol, sake','材':'material','野':'field','菜':'vegetable','牛':'cow, beef','豚':'pig, pork','皿':'plate, dish','売':'sell','持':'hold, have','卵':'egg','理':'reason, manage','湯':'hot water','調':'investigate, tune','法':'law, method','味':'taste','甘':'sweet','辛':'spicy, hard','苦':'bitter, suffer','手':'hand','機':'machine, opportunity','数':'number, count','机':'desk','都':'capital, city','悪':'bad, evil','使':'use','終':'end, finish','願':'wish, request','氏':'Mr/Ms, clan','由':'reason, cause','連':'connect','絡':'contact, entwine','別':'separate','早':'early, fast','吸':'inhale, smoke','取':'take','帰':'return home','伝':'convey, transmit','熱':'heat, fever','薬':'medicine','病':'sick','院':'institution','医':'medicine, doctor','者':'person (suffix)','住':'live, reside','才':'talent, age','痛':'pain, hurt','眠':'sleep','寝':'sleep, lie down','記':'record, write','体':'body','顔':'face','目':'eye','耳':'ear','頭':'head','足':'foot, leg','起':'wake up, occur','歩':'walk','走':'run','運':'carry, luck','兄':'older brother','姉':'older sister','弟':'younger brother','妹':'younger sister','夫':'husband','妻':'wife','両':'both','親':'parent','男':'male','女':'female','祝':'celebrate','誕':'birth','結':'tie, bind','婚':'marriage','計':'measure, plan','幸':'happiness','思':'think','選':'choose, elect','格':'status, case','山':'mountain','川':'river','海':'sea','島':'island','森':'forest','客':'guest, customer','観':'view, observe','光':'light','地':'ground, earth','経':'pass through','験':'examine, test','写':'copy, photo','真':'true, real','歌':'song, sing','長':'long','短':'short','立':'stand','泣':'cry','注':'pour, note','文':'sentence, writing','約':'promise, about','番':'number, turn','号':'number, sign','様':'Mr/Ms, manner','飯':'rice, meal','乳':'milk','禁':'prohibit','煙':'smoke','自':'self','塩':'salt','油':'oil','量':'quantity','屋':'shop, roof','満':'full','切':'cut','焼':'bake, grill','然':'so, natural','交':'mix, exchange','通':'pass, traffic','船':'ship, boat','転':'roll, turn','京':'capital','遊':'play, enjoy','発':'depart, emit','故':'reason, therefore','障':'hinder','指':'finger, point','席':'seat','末':'end, tip','絵':'picture, drawing','空':'sky, empty','泳':'swim','到':'arrive, reach','知':'know','工':'craft, work','条':'article, stripe','件':'matter, case','以':'by means of','開':'open','産':'produce, birth','世':'world, generation','界':'world, boundary','際':'occasion, edge','流':'flow, style','紙':'paper','始':'begin, start','申':'say (humble), apply','込':'crowded, put in','化':'change, transform','祭':'festival','正':'correct, right','式':'ceremony, style','米':'rice, America','特':'special','服':'clothes','袋':'bag','員':'member','慣':'accustom','普':'general, ordinary','暗':'dark','怒':'angry','色':'color','赤':'red','青':'blue','黒':'black','白':'white','性':'nature, gender','営':'manage, operate','業':'business, industry','案':'idea, plan','内':'inside','商':'commerce','品':'goods, quality','値':'value, price','段':'step, rank','価':'price, value','消':'erase, extinguish','費':'expense, spend','税':'tax','重':'heavy, important'};
-const N4_EXAM={"title":"N4 語彙 模擬試験 C","time":30,"sections":[{"type":"mondai1","instruction":{"ja":"漢字の読み方を選んでください","en":"Choose the correct reading for the kanji","bn":"কাঞ্জির সঠিক পড়া নির্বাচন করুন"},"questions":[{"q":"パーティーは とても <u>楽しかった</u>です。","opts":["いそがしかった","すずしかった","たのしかった","かなしかった"],"ans":2},{"q":"このスープの <u>味</u>は いいですね。","opts":["かたち","いろ","におい","あじ"],"ans":3},{"q":"バスターミナルは ちょっと <u>不便</u>な ところです。","opts":["ふべん","ぶべん","ふへん","ぶへん"],"ans":0},{"q":"ニンジンを <u>切って</u> スープに 入れます。","opts":["とって","きって","あらって","もって"],"ans":1},{"q":"田中さん <u>以外</u>の みんなで 映画を 見に 行きました。","opts":["にそと","にがい","いそと","いがい"],"ans":3},{"q":"空を 見上げたら、白い <u>雲</u>が ふわふわ 浮んで いました。","opts":["ほし","ゆき","くも","そら"],"ans":2},{"q":"朝の <u>急行</u>電車は とても こんでいます。","opts":["きゅこ","きゅこう","きゅうこ","きゅうこう"],"ans":3},{"q":"プライバシーに 関する 情報は <u>写さないで</u> ください。","opts":["おさないで","うつさないで","けさないで","おとさないで"],"ans":1},{"q":"その 計画に ついて、わたしは <u>反対</u>の 立場です。","opts":["はんたい","ほんたい","はんだい","ほんだい"],"ans":0}]},{"type":"mondai2","instruction":{"ja":"正しい漢字を選んでください","en":"Choose the correct kanji","bn":"সঠিক কাঞ্জি নির্বাচন করুন"},"questions":[{"q":"冬は <u>くろい</u> セーターが 欲しいです。","opts":["白い","黒い","赤い","青い"],"ans":1},{"q":"来年の <u>けいかく</u>は もう 決まって いますか。","opts":["計書","訂画","計画","訂書"],"ans":2},{"q":"わたしは 子どもの とき、<u>いしゃ</u>に なりたかったです。","opts":["匠員","医員","匠者","医者"],"ans":3},{"q":"明日の <u>よる</u>、友達と 会う 約束が あります。","opts":["夜","昼","夕","朝"],"ans":0},{"q":"その 傘を ちょっと <u>かして</u> もらえますか。","opts":["貨して","資して","貸して","質して"],"ans":2},{"q":"来週は 子どもの <u>しあい</u>を 見に 行きます。","opts":["誡会","誡合","試会","試合"],"ans":3}]},{"type":"mondai3","instruction":{"ja":"（　）に入る言葉を選んでください","en":"Choose the word that fits in the blank","bn":"শূন্যস্থানে উপযুক্ত শব্দ নির্বাচন করুন"},"questions":[{"q":"田中さんが 入院した と 聞いて、みんな （　）しました。","opts":["しんぱい","けいけん","しつれい","おじぎ"],"ans":0},{"q":"私には、大学を 卒業したら 会社を 立てると いう （　）が あります。","opts":["けしき","ゆめ","おもいで","せわ"],"ans":1},{"q":"今度の マラソン大会に ぜひ （　） 参加して ください。","opts":["ひじょうに","ぜひ","じゅうぶん","いつも"],"ans":1},{"q":"これから この 新しい ソフトの 使い方を （　）しますから、よく 聞いて ください。","opts":["じゅんび","りよう","せつめい","せいさん"],"ans":2},{"q":"歯が 悪いので、硬い （　） ものは 避けて います。","opts":["たべもの","たべもの","飲み物","のみもの"],"ans":0}]}]};
-const N4_EXAM_V={"title":"N4 語彙 模擬試験 D","time":30,"sections":[{"type":"mondai1","instruction":{"ja":"＿＿の ことばは ひらがなで どう かきますか。","en":"How do you write the underlined word in hiragana?","bn":"আন্ডারলাইন করা শব্দটি হিরাগানায় কীভাবে লেখা হয়?"},"questions":[{"q":"くつに <u>石</u>が 入って いました。","opts":["いし","すな","くさ","えだ"],"ans":0},{"q":"にほんで いろいろな <u>経験</u>を しました。","opts":["けいけん","けいげん","けけん","けげん"],"ans":0},{"q":"<u>店員</u>に トイレが どこに あるか 聞きました。","opts":["てにん","てんにん","ていん","てんいん"],"ans":3},{"q":"きょうは <u>食堂</u>が こんで いました。","opts":["しゅくど","しょくどう","しょくど","しゅくどう"],"ans":1},{"q":"この まどから <u>港</u>が 見えます。","opts":["うみ","みなと","みずうみ","いけ"],"ans":1},{"q":"この <u>小説</u>は おもしろかったです。","opts":["しょせつ","しょぜつ","しょうせつ","しょうぜつ"],"ans":2},{"q":"まいばん <u>日記</u>を 書いて います。","opts":["にっき","にちき","にっきい","にちきい"],"ans":0},{"q":"<u>夕方</u>、雨が ふりました。","opts":["ゆうほう","ゆうがた","ゆほう","ゆがた"],"ans":1},{"q":"もうすぐ <u>秋</u>ですね。","opts":["ふゆ","なつ","はる","あき"],"ans":3}]},{"type":"mondai2","instruction":{"ja":"＿＿の ことばは どう かきますか。","en":"How do you write the underlined word?","bn":"আন্ডারলাইন করা শব্দটি কীভাবে লেখা হয়?"},"questions":[{"q":"すずきさんは <u>あおい</u> シャツを きて います。","opts":["青い","黒い","赤い","白い"],"ans":0},{"q":"かいぎの <u>ばしょ</u>を おしえて ください。","opts":["揚斤","場斤","揚所","場所"],"ans":3},{"q":"わたしの いえは えきから <u>あるいて</u> 5分です。","opts":["走いて","走いて","歩いて","歩いて"],"ans":2},{"q":"ちかてつが できて <u>べんり</u>に なりました。","opts":["便利","便理","便理","便利"],"ans":0},{"q":"とても <u>ねむかった</u>ので、コーヒーを 飲みました。","opts":["眠むかった","眠かった","眠むかった","眠かった"],"ans":1},{"q":"きょうは <u>ゆき</u>が ふって います。","opts":["雪","電","雷","雲"],"ans":0}]},{"type":"mondai3","instruction":{"ja":"（　）に なにを いれますか。","en":"What goes in the blank?","bn":"শূন্যস্থানে কী বসবে?"},"questions":[{"q":"けさ せんたくした ふくが まだ （　） いません。","opts":["ひえて","なおって","ぬれて","かわいて"],"ans":3},{"q":"スミスさんは いつも （　） べんきょうして います。","opts":["だいじに","たいせつに","ねっしんに","まっすぐに"],"ans":2},{"q":"わたしは にほんの まんがに （　）が あります。","opts":["きぶん","きょうみ","こころ","しゅみ"],"ans":1},{"q":"わたしは テニスの （　）を よく しりません。","opts":["アイディア","ルール","あんない","せつめい"],"ans":1},{"q":"りょこうの にもつは もう （　） できましたか。","opts":["やくそく","りよう","せわ","ようい"],"ans":3},{"q":"おとうとと （　） して 母に あげる プレゼントを えらびました。","opts":["さんせい","あいさつ","そうだん","へんじ"],"ans":2},{"q":"この にもつを あそこに （　） ください。","opts":["はこんで","つたえて","ひろって","むかえて"],"ans":0},{"q":"この きかいは つかいかたを まちがえると とても （　） です。","opts":["けっこう","きけん","じゆう","あんぜん"],"ans":1},{"q":"入口の 前には 車を （　） ください。","opts":["やめないで","しめないで","とめないで","きめないで"],"ans":2}]},{"type":"mondai4","instruction":{"ja":"＿＿の ぶんと だいたい おなじ いみの ぶんが あります。","en":"Choose the sentence with approximately the same meaning.","bn":"প্রায় একই অর্থের বাক্য নির্বাচন করুন。"},"questions":[{"q":"バスが <u>しゅっぱつしました</u>。","opts":["バスが とまりました。","バスが つきました。","バスが でました。","バスが まがりました。"],"ans":2},{"q":"もっと <u>ていねいに</u> かいて ください。","opts":["もっと おおきく かいて ください。","もっと きれいに かいて ください。","もっと ふとく かいて ください。","もっと かんたんに かいて ください。"],"ans":1},{"q":"あには えが <u>うまい</u>です。","opts":["あには えが じょうずです。","あには えが きらいです。","あには えが へたです。","あには えが すきです。"],"ans":0},{"q":"きのうは <u>ねぼうしました</u>。","opts":["きのうは ねるのが おそく なって しまいました。","きのうは はやく ねて しまいました。","きのうは おきるのが おそく なって しまいました。","きのうは はやく おきて しまいました。"],"ans":2},{"q":"たなかさんは 先生に <u>ほめられました</u>。","opts":["先生は たなかさんに「気を つけてね」と 言いました。","先生は たなかさんに「とても よかったですよ」と 言いました。","先生は たなかさんに「ちょっと 休みましょう」と 言いました。","先生は たなかさんに「たいへんですね」と 言いました。"],"ans":1}]},{"type":"mondai5","instruction":{"ja":"つぎの ことばの つかいかたで いちばん いい ものを えらんで ください。","en":"Choose the best usage of the word.","bn":"শব্দের সবচেয়ে সঠিক ব্যবহার নির্বাচন করুন。"},"questions":[{"q":"<b>るす</b>","opts":["さいきん いそがしくて、しごとが るすに なりません。","あの デパートは きょうは るすです。","この ひこうきには るすの せきが ありません。","ともだちの いえに 行ったら るすでした。"],"ans":3},{"q":"<b>しんせつ</b>","opts":["この りょうりは からだに とても しんせつですよ。","コンビニは 何でも 買えるので とても しんせつです。","この びょういんの おいしゃさんは とても しんせつですよ。","わたしの 母は にわの 花に とても しんせつです。"],"ans":2},{"q":"<b>にがい</b>","opts":["かぜを ひいたので、こえが にがいです。","くらい みちを 一人で あるくのは にがいです。","にもつが おもかったので、うでが にがいです。","この くすりは とても にがいです。"],"ans":3},{"q":"<b>わる</b>","opts":["おさらを おとして、わって しまいました。","しんぶんを わって、かばんに 入れました。","ようふくを わって、母に おこられました。","この ジャムを 三本の びんに わって ください。"],"ans":0},{"q":"<b>ちこく</b>","opts":["あの とけいは ちょっと ちこくして います。","じゅぎょうに ちこくして すみません。","10時の でんしゃに ちこくして しまいました。","れんらくが ちこくして すみません。"],"ans":1}]}]};
-const N4_EXAM_W={"title":"N4 語彙 模擬試験 A","time":30,"sections":[{"type":"mondai1","instruction":{"ja":"＿＿の ことばは ひらがなで どう かきますか。","en":"How do you write the underlined word in hiragana?","bn":"আন্ডারলাইন করা শব্দটি হিরাগানায় কীভাবে লেখা হয়?"},"questions":[{"q":"彼女は とても <u>優しい</u> 人です。","opts":["うつくしい","やさしい","かなしい","さびしい"],"ans":1},{"q":"あしたの <u>授業</u>は 何時からですか。","opts":["じゅきょう","じゅぎょう","じゅうきょう","じゅうぎょう"],"ans":1},{"q":"<u>辞書</u>で しらべて ください。","opts":["にしょ","じしょ","じっしょ","じしょう"],"ans":1},{"q":"<u>自転車</u>で 学校に 行きます。","opts":["じどうしゃ","じてんしゃ","じでんしゃ","してんしゃ"],"ans":1},{"q":"<u>地震</u>が あったので こわかったです。","opts":["かじ","じこ","じしん","たいふう"],"ans":2},{"q":"<u>毎朝</u> さんぽを して います。","opts":["まいちょう","まいにち","まいあさ","まいばん"],"ans":2},{"q":"にほんの <u>歴史</u>に きょうみが あります。","opts":["れいし","りきし","れきし","れっし"],"ans":2},{"q":"お金を <u>払って</u> ください。","opts":["はらって","つかって","もらって","わたって"],"ans":0},{"q":"<u>静かな</u> ところで べんきょうしたいです。","opts":["しずかな","たしかな","にぎやかな","ゆたかな"],"ans":0}]},{"type":"mondai2","instruction":{"ja":"＿＿の ことばは どう かきますか。","en":"How do you write the underlined word?","bn":"আন্ডারলাইন করা শব্দটি কীভাবে লেখা হয়?"},"questions":[{"q":"きょうは とても <u>あつい</u> ですね。","opts":["厚い","暑い","熱い","暖い"],"ans":1},{"q":"<u>おとうと</u>は まだ 学生です。","opts":["弟","妹","兄","姉"],"ans":0},{"q":"えきの <u>ちかく</u>に 住んで います。","opts":["遠く","近く","速く","早く"],"ans":1},{"q":"<u>あたらしい</u> くつを 買いました。","opts":["親しい","楽しい","新しい","美しい"],"ans":2},{"q":"やまの うえから うみが <u>みえます</u>。","opts":["見えます","聞えます","覚えます","教えます"],"ans":0},{"q":"しゅくだいが やっと <u>おわりました</u>。","opts":["始わりました","絡わりました","終わりました","結わりました"],"ans":2}]},{"type":"mondai3","instruction":{"ja":"（　）に なにを いれますか。","en":"What goes in the blank?","bn":"শূন্যস্থানে কী বসবে?"},"questions":[{"q":"にほんの （　）は 春、夏、秋、冬の よっつ あります。","opts":["天気","季節","景色","気分"],"ans":1},{"q":"りょこうの まえに ホテルの （　）を しました。","opts":["やくそく","よやく","れんらく","しょうかい"],"ans":1},{"q":"テストの 前に しっかり （　）しなければ なりません。","opts":["復習","研究","経験","見物"],"ans":0},{"q":"えきに 着いたら、すぐ （　）して ください。","opts":["出発","連絡","出席","紹介"],"ans":1},{"q":"きのうの しあいは にほんが （　）。","opts":["勝ちました","負けました","始まりました","終わりました"],"ans":0},{"q":"にほんの ぶんかに （　）が あります。","opts":["きもち","きぶん","きょうみ","けいけん"],"ans":2},{"q":"来月の スケジュールは まだ （　）が きまっていません。","opts":["よてい","よやく","やくそく","じゅんび"],"ans":0},{"q":"あの レストランは （　）も いいし、りょうりも おいしいです。","opts":["けしき","サービス","きそく","きけん"],"ans":1},{"q":"おきゃくさんが 来るので、へやを （　）して おきましょう。","opts":["洗濯","散歩","掃除","運動"],"ans":2}]},{"type":"mondai4","instruction":{"ja":"＿＿の ぶんと だいたい おなじ いみの ぶんが あります。","en":"Choose the sentence with approximately the same meaning.","bn":"প্রায় একই অর্থের বাক্য নির্বাচন করুন。"},"questions":[{"q":"この もんだいは とても <u>簡単</u>でした。","opts":["この もんだいは とても むずかしかったです。","この もんだいは とても やさしかったです。","この もんだいは とても ながかったです。","この もんだいは とても おもしろかったです。"],"ans":1},{"q":"やまださんは ドイツ語を <u>勉強して</u> います。","opts":["やまださんは ドイツ語を ならって います。","やまださんは ドイツ語を おしえて います。","やまださんは ドイツ語を はなして います。","やまださんは ドイツ語を よんで います。"],"ans":0},{"q":"あの 映画は とても <u>悲しかった</u>です。","opts":["あの 映画を みて なきたく なりました。","あの 映画を みて わらいたく なりました。","あの 映画を みて おどりたく なりました。","あの 映画を みて おこりたく なりました。"],"ans":0},{"q":"きのう こうえんを <u>散歩</u>しました。","opts":["きのう こうえんで およぎました。","きのう こうえんで はしりました。","きのう こうえんを あるきました。","きのう こうえんで やすみました。"],"ans":2},{"q":"この へやを <u>掃除して</u> ください。","opts":["この へやを きれいに して ください。","この へやを あたたかく して ください。","この へやを しずかに して ください。","この へやを ひろく して ください。"],"ans":0}]},{"type":"mondai5","instruction":{"ja":"つぎの ことばの つかいかたで いちばん いい ものを えらんで ください。","en":"Choose the best usage of the word.","bn":"শব্দের সবচেয়ে সঠিক ব্যবহার নির্বাচন করুন。"},"questions":[{"q":"<b>残念</b>","opts":["天気が いいので、残念ですね。","テストに おちて しまって、とても 残念です。","お金が たくさん もらえて、残念です。","友だちに 会えて、残念です。"],"ans":1},{"q":"<b>見つかる</b>","opts":["来月 あたらしい 映画が 見つかります。","さがして いた かぎが やっと 見つかりました。","テレビで おもしろい ばんぐみを 見つかって います。","まいにち しんぶんを 見つかって います。"],"ans":1},{"q":"<b>普通</b>","opts":["この りょうりは 普通 おいしいですね。","明日の 天気は 普通 はれです。","日本では でんしゃに のるとき 普通 ならびます。","わたしは 普通 を もって います。"],"ans":2},{"q":"<b>壊れる</b>","opts":["テレビが 壊れて しまったので、新しいのを 買います。","やくそくが 壊れて しまいました。","天気が 壊れて、雨が ふりました。","じかんが 壊れて しまいました。"],"ans":0},{"q":"<b>届ける</b>","opts":["じしょで ことばを 届けて ください。","友だちに にもつを 届けて きました。","先生に テストを 届けて もらいました。","えきまで バスを 届けて ください。"],"ans":1}]}]};
-const N4_EXAM_X={"title":"N4 語彙 模擬試験 B","time":30,"sections":[{"type":"mondai1","instruction":{"ja":"＿＿の ことばは ひらがなで どう かきますか。","en":"How do you write the underlined word in hiragana?","bn":"আন্ডারলাইন করা শব্দটি হিরাগানায় কীভাবে লেখা হয়?"},"questions":[{"q":"まいにち <u>練習</u>すれば、上手に なります。","opts":["れいしゅう","れんしゅう","れんしゅ","れっしゅう"],"ans":1},{"q":"<u>冷蔵庫</u>に ぎゅうにゅうが あります。","opts":["れいぞうこ","れいとうこ","れいぞうご","れいとうご"],"ans":0},{"q":"<u>質問</u>が あったら、きいて ください。","opts":["しちもん","しつもん","してもん","しっもん"],"ans":1},{"q":"あの みせは <u>有名</u>ですよ。","opts":["ゆうめ","ゆめい","ゆうめい","ゆめ"],"ans":2},{"q":"<u>卒業</u>した あとで、なにを しますか。","opts":["そつきょう","そっぎょう","そっきょう","そつぎょう"],"ans":3},{"q":"<u>社会</u>の テストが ありました。","opts":["しかい","しゃかい","しゃっかい","しゃがい"],"ans":1},{"q":"この ふくは <u>洗濯</u>して ください。","opts":["そうじ","かたづけ","せんたく","せいり"],"ans":2},{"q":"<u>忙しくて</u> あそぶ じかんが ありません。","opts":["むずかしくて","いそがしくて","さびしくて","くるしくて"],"ans":1},{"q":"この 本を <u>図書館</u>に かえします。","opts":["びじゅつかん","としょかん","はくぶつかん","びょういん"],"ans":1}]},{"type":"mondai2","instruction":{"ja":"＿＿の ことばは どう かきますか。","en":"How do you write the underlined word?","bn":"আন্ডারলাইন করা শব্দটি কীভাবে লেখা হয়?"},"questions":[{"q":"あそこに <u>やま</u>が みえます。","opts":["川","山","海","島"],"ans":1},{"q":"この こうえんは とても <u>ひろい</u>ですね。","opts":["広い","太い","厚い","古い"],"ans":0},{"q":"<u>でんわ</u>を かけて ください。","opts":["電車","電気","電話","電池"],"ans":2},{"q":"<u>はるやすみ</u>に りょこうに 行きます。","opts":["夏休み","冬休み","秋休み","春休み"],"ans":3},{"q":"この じてんしゃは <u>かるい</u>です。","opts":["重い","軽い","短い","長い"],"ans":1},{"q":"<u>つよい</u> かぜが ふいて います。","opts":["強い","弱い","太い","遠い"],"ans":0}]},{"type":"mondai3","instruction":{"ja":"（　）に なにを いれますか。","en":"What goes in the blank?","bn":"শূন্যস্থানে কী বসবে?"},"questions":[{"q":"このあいだの 台風で 木が たくさん （　）。","opts":["たおれました","おちました","こわれました","われました"],"ans":0},{"q":"にほんごが 上手に なりたいので、毎日 （　）して います。","opts":["復習","研究","練習","経験"],"ans":2},{"q":"でんしゃが もうすぐ （　）しますから、いそいで ください。","opts":["出発","到着","故障","出席"],"ans":0},{"q":"ちょっと （　）が わるいので、きょうは やすみます。","opts":["天気","きもち","気分","げんき"],"ans":2},{"q":"あの みせは きのう （　）だったので、だれも いませんでした。","opts":["休み","留守","故障","安全"],"ans":0},{"q":"この みちは （　）が おおいですから、気を つけて ください。","opts":["交通","空気","景色","天気"],"ans":0},{"q":"さとうさんは 絵が じょうずで、（　）の しゅみは スケッチです。","opts":["文学","歴史","数学","美術"],"ans":3},{"q":"あしたの かいぎに （　）する 人は、10人です。","opts":["出発","出席","卒業","入院"],"ans":1},{"q":"しけんの （　）は 来週 わかります。","opts":["答え","結果","問題","意見"],"ans":1}]},{"type":"mondai4","instruction":{"ja":"＿＿の ぶんと だいたい おなじ いみの ぶんが あります。","en":"Choose the sentence with approximately the same meaning.","bn":"প্রায় একই অর্থের বাক্য নির্বাচন করুন。"},"questions":[{"q":"あの 人は とても <u>怒って</u> いました。","opts":["あの 人は とても たのしそうでした。","あの 人は とても かなしそうでした。","あの 人は とても おこって いました。","あの 人は とても よろこんで いました。"],"ans":2},{"q":"あしたは <u>試験</u>が あります。","opts":["あしたは テストが あります。","あしたは しあいが あります。","あしたは じゅぎょうが あります。","あしたは かいぎが あります。"],"ans":0},{"q":"この へやは とても <u>広い</u>ですね。","opts":["この へやは とても せまいですね。","この へやは とても 大きいですね。","この へやは とても 新しいですね。","この へやは とても きれいですね。"],"ans":1},{"q":"たなかさんは まいにち <u>運動して</u> います。","opts":["たなかさんは まいにち からだを うごかして います。","たなかさんは まいにち べんきょうして います。","たなかさんは まいにち りょうりして います。","たなかさんは まいにち 読書して います。"],"ans":0},{"q":"この りょうりは とても <u>辛い</u>です。","opts":["この りょうりは とても からいです。","この りょうりは とても あまいです。","この りょうりは とても にがいです。","この りょうりは とても すっぱいです。"],"ans":0}]},{"type":"mondai5","instruction":{"ja":"つぎの ことばの つかいかたで いちばん いい ものを えらんで ください。","en":"Choose the best usage of the word.","bn":"শব্দের সবচেয়ে সঠিক ব্যবহার নির্বাচন করুন。"},"questions":[{"q":"<b>間に合う</b>","opts":["しけんの もんだいに 間に合いませんでした。","9時の でんしゃに 間に合いました。","レストランの りょうりに 間に合いました。","友だちの なまえに 間に合いました。"],"ans":1},{"q":"<b>慣れる</b>","opts":["あたらしい くつに 慣れて、あるきやすく なりました。","まいにち テレビに 慣れて います。","きょうは いい 天気に 慣れましたね。","この りょうりは あじに 慣れて おいしいです。"],"ans":0},{"q":"<b>失敗</b>","opts":["きのうの パーティーは 失敗 たのしかったです。","りょうりを つくりましたが、失敗して しまいました。","天気が いいので、失敗 さんぽしましょう。","友だちに 失敗 あいました。"],"ans":1},{"q":"<b>込む</b>","opts":["この えいがは 込んで いて、とても よかったです。","電車が 込んで いて、すわれませんでした。","きょうは 天気が 込んで います。","じかんが 込んで いて、おそく なりました。"],"ans":1},{"q":"<b>注意</b>","opts":["先生は 注意が じょうずです。","この みちは あぶないので、注意して あるいて ください。","わたしは 注意が すきです。","きのう 注意を たべました。"],"ans":1}]}]};
-const N4_EXAMS=[N4_EXAM_W,N4_EXAM_X,N4_EXAM,N4_EXAM_V];
 const GRAM=[
   {p:"〜は〜です",ex:"わたしは マリアです。",en:"I am Maria.",bn:"আমি মারিয়া।"},
   {p:"〜は〜じゃないです",ex:"わたしは がくせいじゃないです。",en:"I am not a student.",bn:"আমি ছাত্র নই।"},
@@ -1061,7 +997,7 @@ function mkK(c,base,daku,title,em){
   window[sid+'_M']=m=>{mode=m;setD();render()};window[sid+'_F']=f=>{filt=f;setD();render()};render()
 }
 
-// ── FLASHCARD (with JLPT level tabs) ──
+// ── FLASHCARD ──
 // ── Flashcard Module (with TTS, Bookmark, API Examples) ──
 function mkF(c,datasets,title,em,frontFn,backFn,modKey){
   let cur=datasets[0].data,curLbl=datasets[0].label,pos=0,order=shuf(cur.map((_,i)=>i));
@@ -2016,7 +1952,7 @@ function checkAdLimit(type) {
   const today = new Date().toDateString();
   const key = 'nw3_ad_' + type + '_' + today;
   const count = +(localStorage.getItem(key) || 0);
-  const limits = { quiz: 2, review: 1, jlpt: 1, longterm: 1 };
+  const limits = { quiz: 2, review: 1, longterm: 1 };
   const limit = limits[type] || 1;
   localStorage.setItem(key, count + 1);
   if (count >= limit) {
@@ -3753,201 +3689,6 @@ function initM(c,id){
           i=>`<div class="qb"><div class="qT">${T('qPart')}</div><div class="qB" style="font-size:28px;line-height:1.6">${i.q.replace('＿','<span style="border-bottom:3px solid var(--acc);padding:0 8px;color:var(--acc)">＿</span>')}</div></div>`,
           (i,all)=>{const o=shuf([...i.opts]);return{opts:o,ci:o.indexOf(i.opts[i.ans])}},10,'grammar')}
       ]);break;}
-
-    case 'jlpt':{
-      const sid=c.id.replace(/\W/g,'_');
-      let answers={},tmrId=null,tmrLeft=0,reviewing=false,curExam=null;
-      const secLabels=['jlptMondai1','jlptMondai2','jlptMondai3','jlptMondai4','jlptMondai5'];
-      const examIcons=['A','B','C','D'];
-
-      function showExamSelect(){
-        let h='<div class="jlpt-intro">';
-        h+='<h2>🎓 JLPT N4</h2>';
-        h+=`<div class="sub">${T('cdJlpt')}</div>`;
-        h+='<div style="display:grid;gap:10px;max-width:480px;margin:0 auto">';
-        N4_EXAMS.forEach((exam,i)=>{
-          const total=exam.sections.reduce((s,sec)=>s+sec.questions.length,0);
-          const colors=['var(--accY)','var(--accB)','var(--accG)','var(--accP)'];
-          h+=`<div class="cd" style="min-height:auto;cursor:pointer;border-left:3px solid ${colors[i]}" onclick="${sid}_selExam(${i})">`;
-          h+=`<div style="display:flex;align-items:center;gap:12px">`;
-          h+=`<span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:${colors[i]};color:#fff;font-size:18px;font-weight:900;font-family:'DM Mono',monospace;flex-shrink:0">${examIcons[i]}</span>`;
-          h+=`<div><div class="cd-n">${exam.title}</div>`;
-          h+=`<div class="cd-d">${total}問 ・ ${exam.time}分</div></div>`;
-          h+='</div></div>';
-        });
-        h+='</div></div>';
-        c.innerHTML=h;
-      }
-
-      function showIntro(){
-        const total=curExam.sections.reduce((s,sec)=>s+sec.questions.length,0);
-        let h=`<div class="jlpt-intro">`;
-        h+=`<h2>🎓 ${curExam.title}</h2>`;
-        h+=`<div class="sub">${T('cdJlpt')}</div>`;
-        h+=`<div class="jlpt-stats">`;
-        h+=`<div class="jlpt-stat"><div class="num">${total}</div><div class="lbl">${T('jlptQ')}</div></div>`;
-        h+=`<div class="jlpt-stat"><div class="num">${curExam.time}</div><div class="lbl">${T('jlptMin')}</div></div>`;
-        h+=`<div class="jlpt-stat"><div class="num">${curExam.sections.length}</div><div class="lbl">${T('jlptSec')}</div></div>`;
-        h+=`</div>`;
-        h+=`<button class="jlpt-start" onclick="${sid}_start()">${T('jlptStart')}</button>`;
-        h+=`<div style="margin-top:12px"><button style="padding:8px 16px;border:1px solid var(--brd);border-radius:8px;background:var(--s2);color:var(--txM);cursor:pointer;font-size:12px;font-family:inherit" onclick="${sid}_back()">← 試験を選ぶ</button></div>`;
-        h+=`</div>`;
-        c.innerHTML=h;
-      }
-
-      function startTimer(){
-        tmrLeft=curExam.time*60;
-        tmrId=setInterval(()=>{
-          tmrLeft--;
-          const m=Math.floor(tmrLeft/60),s=tmrLeft%60;
-          const el=document.getElementById('jlpt-time');
-          if(el){el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-            if(tmrLeft<=300)el.classList.add('danger')}
-          if(tmrLeft<=0){clearInterval(tmrId);showResult()}
-        },1000);window._nwTmr=tmrId;
-      }
-
-      // ── JLPT: flatten all questions into a single array for 1-question-per-screen ──
-      let jlptFlat=[];// [{si,qi,sec,q}]
-      let jlptPos=0;
-
-      function buildJlptFlat(){
-        jlptFlat=[];
-        curExam.sections.forEach((sec,si)=>{
-          sec.questions.forEach((q,qi)=>{jlptFlat.push({si,qi,sec,q})});
-        });
-      }
-
-      function showTest(){
-        answers={};reviewing=false;
-        buildJlptFlat();
-        jlptPos=0;
-        showJlptQuestion();
-      }
-
-      function showJlptQuestion(){
-        if(jlptPos>=jlptFlat.length){showResult();return;}
-        const total=jlptFlat.length;
-        const{si,qi,sec,q}=jlptFlat[jlptPos];
-        const gid=si+'_'+qi;
-        const isLong=sec.type==='mondai4'||sec.type==='mondai5';
-        const examSlug=curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,'');
-        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/question/'+(jlptPos+1),curExam.title+' Q'+(jlptPos+1));
-        const pct=jlptPos/total*100;
-        const timeRemaining=tmrLeft>0?tmrLeft:curExam.time*60;
-        const tm=Math.floor(timeRemaining/60),ts=timeRemaining%60;
-        const timeStr=String(tm).padStart(2,'0')+':'+String(ts).padStart(2,'0');
-        let h=`<div class="jlpt-timer"><div class="time${timeRemaining<=300?' danger':''}" id="jlpt-time">${timeStr}</div><div class="progress" id="jlpt-prog">${jlptPos+1}/${total}</div></div>`;
-        h+=`<div class="prg" style="margin-bottom:16px"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${jlptPos+1}/${total}</div></div>`;
-        h+=`<div class="jlpt-sec-hdr">${T(secLabels[si])}</div>`;
-        h+=`<div style="font-size:13px;color:var(--txM);margin-bottom:10px;padding:0 4px">${sec.instruction[_lang]||sec.instruction.ja}</div>`;
-        h+=`<div class="jlpt-q" id="jq_${gid}">`;
-        h+=`<div class="qnum">${T(secLabels[si])} — ${qi+1}</div>`;
-        h+=`<div class="qtext">${q.q}</div>`;
-        h+=`<div class="jlpt-opts${isLong?' long-grid':''}">`;
-        q.opts.forEach((opt,oi)=>{
-          const isSel=answers[gid]===oi;
-          h+=`<div class="jlpt-opt${isLong?' long':''}${isSel?' sel':''}" id="jo_${gid}_${oi}" onclick="${sid}_pick('${gid}',${oi})">${'①②③④'[oi]} ${opt}</div>`;
-        });
-        h+=`</div></div>`;
-        h+=`<div class="jlpt-nav">`;
-        if(jlptPos>0){h+=`<button class="nb" onclick="${sid}_jBack()">← ${T('prev')}</button>`;}
-        h+=`<button class="nb" onclick="goHome()">${T('home')}</button>`;
-        if(jlptPos<total-1){h+=`<button class="nb primary" onclick="${sid}_jNext()">${T('nextQ')} →</button>`;}
-        else{h+=`<button class="nb primary" onclick="${sid}_submit()">📝 ${T('jlptResult')}</button>`;}
-        h+=`</div>`;
-        h+=`<div style="height:60px"></div>`;
-        c.innerHTML=h;
-        if(!window._jlptTmrStarted){window._jlptTmrStarted=true;startTimer();}
-      }
-
-      function showResult(){
-        if(tmrId){clearInterval(tmrId);window._nwTmr=null}
-        window._jlptTmrStarted=false;
-        const examSlug=curExam?curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,''):'jlpt';
-        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/result',curExam.title+' Result');
-        let total=0,correct=0;
-        const secScores=[];
-        curExam.sections.forEach((sec,si)=>{
-          let sc=0;
-          sec.questions.forEach((q,qi)=>{
-            total++;
-            const gid=si+'_'+qi;
-            if(answers[gid]===q.ans){correct++;sc++}
-          });
-          secScores.push({name:T(secLabels[si]),score:sc,total:sec.questions.length});
-        });
-        const pct=Math.round(correct/total*100);
-        const pass=pct>=60;
-        let h=`<div class="jlpt-result">`;
-        h+=`<div class="big ${pass?'pass':'fail'}">${pct}%</div>`;
-        h+=`<div class="msg">${pass?T('jlptPass'):T('jlptFail')}</div>`;
-        h+=`<div style="font-size:16px;margin-bottom:20px;color:var(--tx)">${correct} / ${total}</div>`;
-        h+=`<div class="jlpt-breakdown">`;
-        secScores.forEach(s=>{
-          h+=`<div class="jlpt-bd"><span class="name">${s.name}</span><span class="score">${s.score}/${s.total}</span></div>`;
-        });
-        h+=`</div>`;
-        h+=`<div class="jlpt-nav"><button class="nb primary" onclick="${sid}_review()">${T('jlptReview')}</button><button class="nb" onclick="${sid}_start()">${T('again')}</button><button class="nb" onclick="goHome()">${T('home')}</button></div>`;
-        h+=`</div>`;
-        c.innerHTML=h;
-      }
-
-      function showReview(){
-        reviewing=true;
-        const examSlug=curExam?curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,''):'jlpt';
-        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/review',curExam.title+' Review');
-        let h=`<div style="padding:8px">`;
-        curExam.sections.forEach((sec,si)=>{
-          h+=`<div class="jlpt-sec-hdr">${T(secLabels[si])}</div>`;
-          sec.questions.forEach((q,qi)=>{
-            const gid=si+'_'+qi;
-            const userAns=answers[gid];
-            const isCorrect=userAns===q.ans;
-            const isLong=sec.type==='mondai4'||sec.type==='mondai5';
-            h+=`<div class="jlpt-q" style="border-left:3px solid ${isCorrect?'var(--grn)':'var(--red)'}">`;
-            h+=`<div class="qnum">${isCorrect?'✓':'✗'} ${qi+1}</div>`;
-            h+=`<div class="qtext">${q.q}</div>`;
-            h+=`<div class="jlpt-opts${isLong?' long-grid':''}">`;
-            q.opts.forEach((opt,oi)=>{
-              let cls='jlpt-opt'+(isLong?' long':'');
-              if(oi===q.ans)cls+=' ok';
-              else if(oi===userAns&&userAns!==q.ans)cls+=' ng';
-              h+=`<div class="${cls}">${'①②③④'[oi]} ${opt}</div>`;
-            });
-            h+=`</div></div>`;
-          });
-        });
-        h+=`<div class="jlpt-nav"><button class="nb primary" onclick="${sid}_start()">${T('again')}</button><button class="nb" onclick="${sid}_back()">← 試験を選ぶ</button><button class="nb" onclick="goHome()">${T('home')}</button></div></div>
-      `;
-        c.innerHTML=h;
-      }
-
-      window[sid+'_selExam']=(i)=>{curExam=N4_EXAMS[i];window._jlptTmrStarted=false;showIntro()};
-      window[sid+'_back']=()=>{if(tmrId){clearInterval(tmrId);window._nwTmr=null}window._jlptTmrStarted=false;showExamSelect()};
-      window[sid+'_start']=()=>showTest();
-      window[sid+'_jNext']=()=>{jlptPos++;window.scrollTo(0,0);showJlptQuestion()};
-      window[sid+'_jBack']=()=>{jlptPos=Math.max(0,jlptPos-1);window.scrollTo(0,0);showJlptQuestion()};
-      window[sid+'_pick']=(gid,oi)=>{
-        if(reviewing)return;
-        const prev=answers[gid];
-        if(prev!==undefined){
-          const prevEl=document.getElementById('jo_'+gid+'_'+prev);
-          if(prevEl)prevEl.classList.remove('sel');
-        }
-        answers[gid]=oi;
-        const el=document.getElementById('jo_'+gid+'_'+oi);
-        if(el)el.classList.add('sel');
-        const total=jlptFlat.length;
-        const answered=Object.keys(answers).length;
-        const prog=document.getElementById('jlpt-prog');
-        if(prog)prog.textContent=(jlptPos+1)+'/'+total;
-      };
-      window[sid+'_submit']=()=>showResult();
-      window[sid+'_review']=()=>showReview();
-
-      showExamSelect();
-      break;}
 
     case 'biz':{
       mkBizOX(c);
