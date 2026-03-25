@@ -591,6 +591,15 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
 </script>
 </head>
 <body>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
+  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
+  <div style="display:flex;gap:20px;">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
+    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+  </div>
+</nav>
 
 <div class="topbar">
   <div class="logo" onclick="goHome()"><script>document.write(T('logo'))</script> <span class="logo-jp">NIHONGO WORK</span></div>
@@ -1027,8 +1036,9 @@ function mkK(c,base,daku,title,em){
   function filts(){return `<div class="flts"><button class="fb ${filt==='base'?'on':''}" onclick="${sid}_F('base')">基本(${base.length})</button><button class="fb ${filt==='daku'?'on':''}" onclick="${sid}_F('daku')">濁音(${daku.length})</button><button class="fb ${filt==='all'?'on':''}" onclick="${sid}_F('all')">全部(${base.length+daku.length})</button></div>`}
   function render(){
     if(mode==='grid'){let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('grid')+filts()+`<div class="kgrid">`;data.forEach(([ch,r])=>h+=`<div class="kcell"><div class="kch">${ch}</div><div class="kro">${r}</div></div>`);c.innerHTML=h+`</div>`;return}
-    if(pos>=order.length){let t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;c.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;return}
+    if(pos>=order.length){let t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;if(typeof trackPV==='function')trackPV('/quiz/kana/score','Kana Score');c.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;return}
     const [ch,rom]=data[order[pos]],pct=pos/order.length*100;
+    if(typeof trackPV==='function')trackPV('/quiz/kana/'+filt+'/'+(pos+1),'Kana Q'+(pos+1));
     if(mode==='type'){
       let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('type')+filts()+`<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos+1}/${order.length}</div></div><div class="qb"><div class="qB" style="font-size:80px">${ch}</div><div class="qP">${T("kPrompt")}</div></div><input class="kinp" id="ki" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="romaji..."><div class="qfb" id="kfb"></div><div style="text-align:center"><button class="qnx" id="knx">${T("nextQ")}</button></div>`;
       c.innerHTML=h;const inp=document.getElementById('ki');inp.focus();
@@ -1085,13 +1095,14 @@ function mkF(c,datasets,title,em,frontFn,backFn,modKey){
     const target=c.querySelector('.u-content');if(target)target.innerHTML=h;else c.innerHTML=h;
     const fcw=document.getElementById('fcw_'+sid);if(fcw)fcw.onclick=()=>document.getElementById('fc_'+sid).classList.toggle('flip');
   }
+  function pvFlash(){if(typeof trackPV==='function')trackPV('/flash/'+mk+'/'+(pos+1),mk.toUpperCase()+' Card '+(pos+1));}
   window[sid+'_BM']=()=>{const item=cur[order[pos]],k=itemKey(item);if(bm.has(k))bm.delete(k);else bm.add(k);saveBm();render()};
-  window[sid+'_P']=()=>{pos=Math.max(0,pos-1);render()};
-  window[sid+'_N']=()=>{pos++;if(pos>=order.length)pos=0;render()};
-  window[sid+'_S']=()=>{order=shuf(order);pos=0;render()};
-  window[sid+'_R']=()=>{reviewMode=!reviewMode;applyFilter();render()};
-  window[sid+'_L']=lbl=>{const d=datasets.find(x=>x.label===lbl);if(d){cur=d.data;curLbl=lbl;reviewMode=false;applyFilter();render()}};
-  render();
+  window[sid+'_P']=()=>{pos=Math.max(0,pos-1);pvFlash();render()};
+  window[sid+'_N']=()=>{pos++;if(pos>=order.length)pos=0;pvFlash();render()};
+  window[sid+'_S']=()=>{order=shuf(order);pos=0;pvFlash();render()};
+  window[sid+'_R']=()=>{reviewMode=!reviewMode;applyFilter();pvFlash();render()};
+  window[sid+'_L']=lbl=>{const d=datasets.find(x=>x.label===lbl);if(d){cur=d.data;curLbl=lbl;reviewMode=false;applyFilter();pvFlash();render()}};
+  pvFlash();render();
 }
 
 // ── Quiz Module — 1 question = 1 URL, result = separate URL ──
@@ -2057,6 +2068,7 @@ function mkBizOX(c) {
     }
     
     const q = BIZ_OX[order[pos]];
+    if(typeof trackPV==='function')trackPV('/quiz/biz/question/'+(pos+1),'BIZ Q'+(pos+1));
     let h = '<div class="mod-h"><div class="mod-t">'+T('bizTitle')+'</div></div>';
     h += `<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos + 1}/${order.length}</div></div>`;
     h += `<div class="qb" style="padding:24px;min-height:120px;align-items:center"><div style="font-size:15px;color:var(--tx);line-height:1.7;text-align:center">${q.q}</div></div>`;
@@ -2240,12 +2252,14 @@ function mkReview(c) {
     if (pos >= order.length) {
       const t = sc.c + sc.w;
       const p = t ? Math.round(sc.c / t * 100) : 0;
+      if(typeof trackPV==='function')trackPV('/quiz/review/'+currentCat+'/score','Review Score');
       target.innerHTML = `<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${T('wellDone')} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">正解</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">不正解</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="mkReview(document.getElementById('m-review'))" style="background:var(--acc);color:#fff">もう一度</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">ホーム</button></div>`;
       setTimeout(()=>maybeShowReviewPopup(),500);
       return;
     }
     
     const item = order[pos];
+    if(typeof trackPV==='function')trackPV('/quiz/review/'+currentCat+'/'+(pos+1),'Review Q'+(pos+1));
     let h = '<div class="mod-h"><div class="mod-t">'+T('revTitle')+'</div></div>';
     h += `<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos + 1}/${order.length}</div></div>`;
     
@@ -2447,6 +2461,7 @@ function mkLongTerm(c) {
     function render(){
       if(pos>=order.length){
         const t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
+        if(typeof trackPV==='function')trackPV('/quiz/longterm/score','LongTerm Score');
         target.innerHTML=`<div class="scr sh">
           <div class="scr-big">${p}%</div>
           <div class="scr-msg">${[T('score0'),T('score1'),T('score2'),T('score3')][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div>
@@ -2463,6 +2478,7 @@ function mkLongTerm(c) {
       const cur=order[pos];
       const item=cur.item;
       const pct=pos/order.length*100;
+      if(typeof trackPV==='function')trackPV('/quiz/longterm/'+(pos+1),'LongTerm Q'+(pos+1));
       let h=`<div class="mod-h"><div class="mod-t">${T('ltTitle')}</div><div class="mod-d">${cur.label}</div></div>`;
       h+=`<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos+1}/${order.length}</div></div>`;
       
@@ -3035,11 +3051,13 @@ function mkDenkou(c) {
   function renderQuizView(sid){
     const area=document.getElementById('dkCA_'+sid);
     if(quizPos>=quizDeck.length&&quizDeck.length>0){
+      if(typeof trackPV==='function')trackPV('/quiz/denkou-'+mode+'/score','電工 '+mode+' Score');
       const t=quizScore.c+quizScore.w,p=t?Math.round(quizScore.c/t*100):0;
       area.innerHTML=`<div class="dk-scr"><div class="dk-scr-big">${p}%</div><div class="dk-scr-msg">${[T('score0'),T('score1'),T('score2'),T('score3')][p<50?0:p<75?1:p<95?2:3]} (${quizScore.c}/${t})</div><div class="dk-tiles"><div class="dk-tile g"><div class="tl">${T('scoreCo')}</div><div class="tv">${quizScore.c}</div></div><div class="dk-tile r"><div class="tl">${T('scoreWr')}</div><div class="tv">${quizScore.w}</div></div><div class="dk-tile"><div class="tl">Total</div><div class="tv">${t}</div></div></div><button class="dk-nx-btn" onclick="dkRestart_${sid}()" style="margin-right:10px">${T('dkTryAgain')}</button><button class="dk-nx-btn" onclick="dkM_${sid}('flash')" style="background:#1e2028;color:#e8e6df">${T('dkBackCards')}</button></div>`;
       return;
     }
     if(!quizDeck.length){area.innerHTML=`<div style="text-align:center;padding:60px;color:#8a8880">${T('dkNoCards')}</div>`;return;}
+    if(typeof trackPV==='function')trackPV('/quiz/denkou-'+mode+'/question/'+(quizPos+1),'電工 '+mode+' Q'+(quizPos+1));
     const pf=document.getElementById('dkpf_'+sid); if(pf)pf.style.width=(quizDeck.length?quizPos/quizDeck.length*100:0)+'%';
     const ri=quizDeck[quizPos]; const e=ALL_D[ri];
     let badge='',qText='',correct='',field='',qCtx='';
@@ -3075,8 +3093,8 @@ function mkDenkou(c) {
   window['dkT_'+sid]=(t)=>{typeFilter=t;cardPos=0;if(mode==='flash')render();else{buildQuizDeck();render();}};
   window['dkF_'+sid]=(f)=>{filterMode=f;cardPos=0;if(mode==='flash')render();else{buildQuizDeck();render();}};
   window['dkFlip_'+sid]=()=>{isFlipped=!isFlipped;const fc=document.getElementById('dkFC_'+sid);if(fc){fc.classList.toggle('dk-flip',isFlipped);}};
-  window['dkNext_'+sid]=()=>{const a=getActive();isFlipped=false;cardPos=(cardPos+1)%Math.max(a.length,1);renderFlash(sid);};
-  window['dkPrev_'+sid]=()=>{const a=getActive();isFlipped=false;cardPos=(cardPos-1+a.length)%Math.max(a.length,1);renderFlash(sid);};
+  window['dkNext_'+sid]=()=>{const a=getActive();isFlipped=false;cardPos=(cardPos+1)%Math.max(a.length,1);if(typeof trackPV==='function')trackPV('/flash/denkou/'+(cardPos+1),'電工 Card '+(cardPos+1));renderFlash(sid);};
+  window['dkPrev_'+sid]=()=>{const a=getActive();isFlipped=false;cardPos=(cardPos-1+a.length)%Math.max(a.length,1);if(typeof trackPV==='function')trackPV('/flash/denkou/'+(cardPos+1),'電工 Card '+(cardPos+1));renderFlash(sid);};
   window['dkFlag_'+sid]=()=>{const a=getActive();if(!a.length)return;const ri=a[cardPos];if(flagged.has(ri))flagged.delete(ri);else flagged.add(ri);renderFlash(sid);};
   window['dkAns_'+sid]=(el,chosen,ci,cJSON,eJSON)=>{
     if(quizAnswered)return; quizAnswered=true;
@@ -3268,35 +3286,65 @@ function initM(c,id){
         },1000);window._nwTmr=tmrId;
       }
 
+      // ── JLPT: flatten all questions into a single array for 1-question-per-screen ──
+      let jlptFlat=[];// [{si,qi,sec,q}]
+      let jlptPos=0;
+
+      function buildJlptFlat(){
+        jlptFlat=[];
+        curExam.sections.forEach((sec,si)=>{
+          sec.questions.forEach((q,qi)=>{jlptFlat.push({si,qi,sec,q})});
+        });
+      }
+
       function showTest(){
         answers={};reviewing=false;
-        let qIdx=0;
-        let h=`<div class="jlpt-timer"><div class="time" id="jlpt-time">${String(curExam.time).padStart(2,'0')}:00</div><div class="progress" id="jlpt-prog">0/${curExam.sections.reduce((s,sec)=>s+sec.questions.length,0)}</div></div>`;
-        curExam.sections.forEach((sec,si)=>{
-          h+=`<div class="jlpt-sec-hdr">${T(secLabels[si])}</div>`;
-          h+=`<div style="font-size:13px;color:var(--txM);margin-bottom:10px;padding:0 4px">${sec.instruction[_lang]||sec.instruction.ja}</div>`;
-          sec.questions.forEach((q,qi)=>{
-            const gid=si+'_'+qi;
-            const isLong=sec.type==='mondai4'||sec.type==='mondai5';
-            h+=`<div class="jlpt-q" id="jq_${gid}">`;
-            h+=`<div class="qnum">${T(secLabels[si])} — ${qi+1}</div>`;
-            h+=`<div class="qtext">${q.q}</div>`;
-            h+=`<div class="jlpt-opts${isLong?' long-grid':''}">`;
-            q.opts.forEach((opt,oi)=>{
-              h+=`<div class="jlpt-opt${isLong?' long':''}" id="jo_${gid}_${oi}" onclick="${sid}_pick('${gid}',${oi})">${'①②③④'[oi]} ${opt}</div>`;
-            });
-            h+=`</div></div>`;
-            qIdx++;
-          });
+        buildJlptFlat();
+        jlptPos=0;
+        showJlptQuestion();
+      }
+
+      function showJlptQuestion(){
+        if(jlptPos>=jlptFlat.length){showResult();return;}
+        const total=jlptFlat.length;
+        const{si,qi,sec,q}=jlptFlat[jlptPos];
+        const gid=si+'_'+qi;
+        const isLong=sec.type==='mondai4'||sec.type==='mondai5';
+        const examSlug=curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,'');
+        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/question/'+(jlptPos+1),curExam.title+' Q'+(jlptPos+1));
+        const pct=jlptPos/total*100;
+        const timeRemaining=tmrLeft>0?tmrLeft:curExam.time*60;
+        const tm=Math.floor(timeRemaining/60),ts=timeRemaining%60;
+        const timeStr=String(tm).padStart(2,'0')+':'+String(ts).padStart(2,'0');
+        let h=`<div class="jlpt-timer"><div class="time${timeRemaining<=300?' danger':''}" id="jlpt-time">${timeStr}</div><div class="progress" id="jlpt-prog">${jlptPos+1}/${total}</div></div>`;
+        h+=`<div class="prg" style="margin-bottom:16px"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${jlptPos+1}/${total}</div></div>`;
+        h+=`<div class="jlpt-sec-hdr">${T(secLabels[si])}</div>`;
+        h+=`<div style="font-size:13px;color:var(--txM);margin-bottom:10px;padding:0 4px">${sec.instruction[_lang]||sec.instruction.ja}</div>`;
+        h+=`<div class="jlpt-q" id="jq_${gid}">`;
+        h+=`<div class="qnum">${T(secLabels[si])} — ${qi+1}</div>`;
+        h+=`<div class="qtext">${q.q}</div>`;
+        h+=`<div class="jlpt-opts${isLong?' long-grid':''}">`;
+        q.opts.forEach((opt,oi)=>{
+          const isSel=answers[gid]===oi;
+          h+=`<div class="jlpt-opt${isLong?' long':''}${isSel?' sel':''}" id="jo_${gid}_${oi}" onclick="${sid}_pick('${gid}',${oi})">${'①②③④'[oi]} ${opt}</div>`;
         });
-        h+=`<div class="jlpt-nav"><button class="nb" onclick="goHome()">${T('home')}</button><button class="nb primary" onclick="${sid}_submit()">📝 ${T('jlptResult')}</button></div>`;
+        h+=`</div></div>`;
+        h+=`<div class="jlpt-nav">`;
+        if(jlptPos>0){h+=`<button class="nb" onclick="${sid}_jBack()">← ${T('prev')}</button>`;}
+        h+=`<button class="nb" onclick="goHome()">${T('home')}</button>`;
+        if(jlptPos<total-1){h+=`<button class="nb primary" onclick="${sid}_jNext()">${T('nextQ')} →</button>`;}
+        else{h+=`<button class="nb primary" onclick="${sid}_submit()">📝 ${T('jlptResult')}</button>`;}
+        h+=`</div>`;
         h+=`<div style="height:60px"></div>`;
         c.innerHTML=h;
-        startTimer();
+        if(!window._jlptTmrStarted){window._jlptTmrStarted=true;startTimer();}
       }
 
       function showResult(){
         if(tmrId){clearInterval(tmrId);window._nwTmr=null}
+        window._jlptTmrStarted=false;
+        const examSlug=curExam?curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,''):'jlpt';
+        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/result',curExam.title+' Result');
         let total=0,correct=0;
         const secScores=[];
         curExam.sections.forEach((sec,si)=>{
@@ -3326,6 +3374,8 @@ function initM(c,id){
 
       function showReview(){
         reviewing=true;
+        const examSlug=curExam?curExam.title.replace(/\s+/g,'-').replace(/[^\w-]/g,''):'jlpt';
+        if(typeof trackPV==='function')trackPV('/jlpt/'+examSlug+'/review',curExam.title+' Review');
         let h=`<div style="padding:8px">`;
         curExam.sections.forEach((sec,si)=>{
           h+=`<div class="jlpt-sec-hdr">${T(secLabels[si])}</div>`;
@@ -3352,9 +3402,11 @@ function initM(c,id){
         c.innerHTML=h;
       }
 
-      window[sid+'_selExam']=(i)=>{curExam=N4_EXAMS[i];showIntro()};
-      window[sid+'_back']=()=>{if(tmrId){clearInterval(tmrId);window._nwTmr=null}showExamSelect()};
+      window[sid+'_selExam']=(i)=>{curExam=N4_EXAMS[i];window._jlptTmrStarted=false;showIntro()};
+      window[sid+'_back']=()=>{if(tmrId){clearInterval(tmrId);window._nwTmr=null}window._jlptTmrStarted=false;showExamSelect()};
       window[sid+'_start']=()=>showTest();
+      window[sid+'_jNext']=()=>{jlptPos++;window.scrollTo(0,0);showJlptQuestion()};
+      window[sid+'_jBack']=()=>{jlptPos=Math.max(0,jlptPos-1);window.scrollTo(0,0);showJlptQuestion()};
       window[sid+'_pick']=(gid,oi)=>{
         if(reviewing)return;
         const prev=answers[gid];
@@ -3365,10 +3417,10 @@ function initM(c,id){
         answers[gid]=oi;
         const el=document.getElementById('jo_'+gid+'_'+oi);
         if(el)el.classList.add('sel');
-        const total=curExam.sections.reduce((s,sec)=>s+sec.questions.length,0);
+        const total=jlptFlat.length;
         const answered=Object.keys(answers).length;
         const prog=document.getElementById('jlpt-prog');
-        if(prog)prog.textContent=answered+'/'+total;
+        if(prog)prog.textContent=(jlptPos+1)+'/'+total;
       };
       window[sid+'_submit']=()=>showResult();
       window[sid+'_review']=()=>showReview();
@@ -3407,9 +3459,11 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(updateRankWidget,100
 window.addEventListener('popstate',function(e){
   // On back, always go home safely
   const path=e.state&&e.state.path?e.state.path:'/';
-  if(path==='/'||path.indexOf('/quiz/')===-1){
+  const isQuizPath=path.indexOf('/quiz/')!==-1||path.indexOf('/flash/')!==-1||path.indexOf('/jlpt/')!==-1;
+  if(path==='/'||!isQuizPath){
     // Silently restore home without another pushState
     if(window._nwTmr)clearInterval(window._nwTmr);
+    window._jlptTmrStarted=false;
     window.speechSynthesis&&window.speechSynthesis.cancel();
     document.getElementById('homeV').style.display='block';
     document.querySelectorAll('.mod').forEach(m=>{m.style.display='none';m.innerHTML=''});
