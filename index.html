@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WK94Y3TPM0');
+</script>
+<meta name="description" content="Free Japanese lessons from zero to JLPT N4 — flashcards, quizzes, grammar guides in Bengali and English. Built for Bangladeshi learners aiming to work in Japan.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nihongo-work.site/">
+<meta property="og:title" content="NIHONGO WORK | Free Japanese Learning for Bangladeshi Learners">
+<meta property="og:description" content="Free Japanese lessons from zero to JLPT N4 — flashcards, quizzes, grammar guides in Bengali and English. Built for Bangladeshi learners aiming to work in Japan.">
+<meta property="og:url" content="https://nihongo-work.site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NIHONGO WORK">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NIHONGO WORK | にほんごワーク</title>
+<title>NIHONGO WORK | Free Japanese Learning for Bangladeshi Learners</title>
 <!-- Google Analytics (replace G-XXXXXXXXXX with your GA4 Measurement ID) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-XXXXXXXXXX',{send_page_view:false});
-// PV tracker  14 falls back gracefully when pushState is blocked (e.g. iframe/about:srcdoc)
-function trackPV(path,title){
-  var pageTitle=(title||'NIHONGO WORK')+' | NIHONGO WORK';
-  var url='https://nihongowork.app'+path;
-  try{
-    history.pushState({path:path},pageTitle,path);
-    document.title=pageTitle;
-    url=location.origin+path;
-  }catch(e){
-    // SecurityError in about:srcdoc iframes  14 silently ignore
-  }
-  if(typeof gtag==='function'){
-    gtag('event','page_view',{page_location:url,page_title:pageTitle});
-  }
-}
-</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
