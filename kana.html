@@ -44,7 +44,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
 .logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px;text-decoration:none}
 .logo-sub{font-size:11px;color:var(--txD);-webkit-text-fill-color:var(--txD);font-weight:400}
-.pill{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--txM)}
+.home-btn{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--txM);text-decoration:none;display:flex;align-items:center;gap:4px;transition:all .15s}.home-btn:hover{background:var(--s3);color:var(--tx)}.pill{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--txM)}
 
 /* ── HERO ── */
 .hero{max-width:720px;margin:0 auto;padding:52px 24px 44px;position:relative;overflow:hidden}
@@ -189,8 +189,8 @@ section[id]{scroll-margin-top:68px}
 <body>
 
 <header class="topbar">
-  <a class="logo" href="#">NIHONGO WORK <span class="logo-sub">にほんごワーク</span></a>
-  <div class="pill">📝 Kana Guide</div>
+  <a class="logo" href="index.html">NIHONGO WORK <span class="logo-sub">にほんごワーク</span></a>
+  <a class="home-btn" href="index.html">← Home</a><div class="pill">📝 Kana Guide</div>
 </header>
 
 <!-- HERO -->

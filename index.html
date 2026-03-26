@@ -525,7 +525,19 @@ const L={
   adv:{ja:'🔒 上級 (N3)',en:'🔒 Advanced (N3)',bn:'🔒 উন্নত (N3)'}
 };
 function T(k){return (L[k]&&L[k][_lang])||L[k]?.ja||k}
-function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()}
+function setLang(l){
+  _lang=l;localStorage.setItem('nw3_lang',l);
+  // Update lang button states
+  ['ja','en','bn'].forEach(function(lg){const b=document.getElementById('lb-'+lg);if(b){b.classList.toggle('on',lg===l);}});
+  // If inside a module, re-render it without losing position
+  if(curMod){
+    const c=document.getElementById('m-'+curMod);
+    if(c){c.innerHTML='';initM(c,curMod);}
+  } else {
+    // On home page: reload to apply translations to static script tags
+    location.reload();
+  }
+}
 </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874205665564653"
      crossorigin="anonymous"></script>
@@ -674,6 +686,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
   
   </div>
 
+  <div id="home-extras">
   <div class="sec-t"><script>document.write(T('specialSec'))</script></div>
   <div class="cg">
     <div class="cd c1" onclick="openM('biz')" style="background:linear-gradient(135deg,var(--s1),rgba(228,87,46,0.06))"><span class="cd-i">💼</span><div class="cd-n">ビジネスマナー</div><div class="cd-d">○×クイズ 99問</div></div>
@@ -710,6 +723,7 @@ function setLang(l){_lang=l;localStorage.setItem('nw3_lang',l);location.reload()
   </div>
 
   <div style="text-align:center;padding:30px 0 60px;color:var(--txD);font-size:11px">NIHONGO WORK v10 — Built for Bangladeshi workers in Japan</div>
+  </div>
 </div>
 
 <!-- Module containers -->
@@ -995,7 +1009,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 function mkK(c,base,daku,title,em){
   let data=base,pos=0,sc={c:0,w:0},order=shuf(base.map((_,i)=>i)),mode='type',filt='base';
   const sid=c.id.replace(/\W/g,'_');
-  function setD(){data=filt==='base'?base:filt==='daku'?daku:[...base,...daku];order=shuf(data.map((_,i)=>i));pos=0;sc={c:0,w:0}}
+  function setD(){data=filt==='base'?base:filt==='daku'?daku:[...base,...daku];const pool=data.map((_,i)=>i);order=mode==='reverse'?shuf(pool).slice(0,Math.min(10,pool.length)):shuf(pool);pos=0;sc={c:0,w:0}}
   function tabs(cur){return `<div class="stabs"><div class="stab ${cur==='type'?'on':''}" onclick="${sid}_M('type')">${T("kType")}</div><div class="stab ${cur==='grid'?'on':''}" onclick="${sid}_M('grid')">${T("kGrid")}</div><div class="stab ${cur==='reverse'?'on':''}" onclick="${sid}_M('reverse')">4択</div></div>`}
   function filts(){return `<div class="flts"><button class="fb ${filt==='base'?'on':''}" onclick="${sid}_F('base')">基本(${base.length})</button><button class="fb ${filt==='daku'?'on':''}" onclick="${sid}_F('daku')">濁音(${daku.length})</button><button class="fb ${filt==='all'?'on':''}" onclick="${sid}_F('all')">全部(${base.length+daku.length})</button></div>`}
   function render(){
@@ -1012,14 +1026,48 @@ function mkK(c,base,daku,title,em){
         if(ok){sc.c++;addS();fb.className='qfb ok';fb.innerHTML='✓ '+ch+' = '+rom}else{sc.w++;rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+rom+'</b>'}
         inp.disabled=true;const btn=document.getElementById('knx');btn.classList.add('sh');btn.onclick=()=>{pos++;render()}};
     } else {
+      // 4択クイズ: limit to 10 questions
+      const MAX_Q=10;
+      if(pos===0 && order.length>MAX_Q){order=shuf(data.map((_,i)=>i)).slice(0,MAX_Q);}
+      const totalQ=Math.min(order.length,MAX_Q);
+      const pctQ=pos/totalQ*100;
       const wr=pick(data,3,data[order[pos]]),opts=shuf([data[order[pos]],...wr]);
-      let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('reverse')+filts()+`<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos+1}/${order.length}</div></div><div class="qb"><div class="qT">${T("kRev")}</div><div class="qB" style="font-family:'DM Mono';font-size:40px">${rom}</div></div><div class="qfb" id="kfb"></div><div class="qos">`;
-      ['A','B','C','D'].forEach((l,i)=>h+=`<div class="qo" data-v="${opts[i][0]}"><span class="ol">${l}</span><span style="font-family:'Zen Maru Gothic';font-size:24px;font-weight:700">${opts[i][0]}</span></div>`);
-      h+=`</div><div style="text-align:center"><button class="qnx" id="knx">${T("nextQ")}</button></div>`;
+      const qNum=pos+1;
+      let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('reverse')+filts();
+      // Progress bar
+      h+=`<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pctQ}%"></div></div><div class="prg-tx">${qNum}/${totalQ}</div></div>`;
+      // Question card
+      h+=`<div class="qb" style="padding:28px 16px;margin-bottom:12px">`;
+      h+=`<div style="font-size:12px;color:var(--txD);margin-bottom:8px;letter-spacing:.06em">Q${qNum} / ${totalQ}</div>`;
+      h+=`<div style="font-size:13px;font-weight:600;color:var(--txM);margin-bottom:10px">${T("kRev")}</div>`;
+      h+=`<div style="font-family:'DM Mono',monospace;font-size:48px;font-weight:700;color:var(--acc);letter-spacing:.04em">${rom}</div>`;
+      h+=`</div>`;
+      h+=`<div class="qfb" id="kfb"></div>`;
+      // 4 option buttons - cleaner UI
+      h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">`;
+      ['A','B','C','D'].forEach((l,i)=>h+=`<div class="qo" data-v="${opts[i][0]}" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:12px;border:2px solid var(--brd);background:var(--s1);cursor:pointer;transition:all .15s"><span style="font-size:11px;font-weight:700;color:var(--txD);min-width:16px">${l}</span><span style="font-family:'Zen Maru Gothic';font-size:32px;font-weight:900;color:var(--tx)">${opts[i][0]}</span></div>`);
+      h+=`</div>`;
+      h+=`<div style="text-align:center"><button class="qnx" id="knx" style="display:none">${pos+1>=totalQ?({ja:'結果を見る',en:'See Results',bn:'ফলাফল দেখুন'}[_lang]||'結果を見る'):T("nextQ")}</button></div>`;
       c.innerHTML=h;
-      c.querySelectorAll('.qo').forEach(o=>{o.onclick=function(){c.querySelectorAll('.qo').forEach(x=>{x.classList.add('dis');if(x.dataset.v===ch)x.classList.add('ok')});
-        const fb=document.getElementById('kfb');if(o.dataset.v===ch){sc.c++;addS();fb.className='qfb ok';fb.innerHTML=T('ok')}else{o.classList.add('no');sc.w++;rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+ch+'</b>'}
-        const btn=document.getElementById('knx');btn.classList.add('sh');btn.onclick=()=>{pos++;render()}}})
+      // Override score end condition for 10-question mode
+      c.querySelectorAll('.qo').forEach(o=>{o.onclick=function(){
+        c.querySelectorAll('.qo').forEach(x=>{
+          x.style.pointerEvents='none';
+          if(x.dataset.v===ch){x.style.border='2px solid var(--grn)';x.style.background='rgba(107,163,104,0.12)';}
+        });
+        const fb=document.getElementById('kfb');
+        if(o.dataset.v===ch){sc.c++;addS();fb.className='qfb ok';fb.innerHTML=T('ok');o.style.border='2px solid var(--grn)';o.style.background='rgba(107,163,104,0.12)';}
+        else{o.style.border='2px solid var(--red)';o.style.background='rgba(217,107,107,0.12)';sc.w++;rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+ch+'</b>';}
+        const btn=document.getElementById('knx');btn.style.display='inline-block';
+        btn.onclick=()=>{
+          pos++;
+          if(pos>=totalQ){
+            // Show score
+            const t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
+            c.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;
+          } else {render();}
+        };
+      }})
     }
   }
   window[sid+'_M']=m=>{mode=m;setD();render()};window[sid+'_F']=f=>{filt=f;setD();render()};render()
@@ -2538,6 +2586,20 @@ function mkDashboard(c) {
     return { correct, wrong, total, rate, weakCount, mastered, itemCount: allItems.length };
   }
   
+  const _catNames = {
+    'ひらがな': {ja:'ひらがな', en:'Hiragana',    bn:'হিরাগানা'},
+    'カタカナ': {ja:'カタカナ', en:'Katakana',    bn:'কাতাকানা'},
+    '漢字 N5':  {ja:'漢字 N5',  en:'Kanji N5',   bn:'কানজি N5'},
+    '漢字 N4':  {ja:'漢字 N4',  en:'Kanji N4',   bn:'কানজি N4'},
+    '漢字 N3':  {ja:'漢字 N3',  en:'Kanji N3',   bn:'কানজি N3'},
+    '語彙 N5':  {ja:'語彙 N5',  en:'Vocab N5',   bn:'শব্দভাণ্ডার N5'},
+    '語彙 N4':  {ja:'語彙 N4',  en:'Vocab N4',   bn:'শব্দভাণ্ডার N4'},
+    '語彙 N3':  {ja:'語彙 N3',  en:'Vocab N3',   bn:'শব্দভাণ্ডার N3'},
+    '動詞':     {ja:'動詞',     en:'Verbs',      bn:'ক্রিয়া'},
+    '形容詞':   {ja:'形容詞',   en:'Adjectives', bn:'বিশেষণ'},
+    '文法':     {ja:'文法',     en:'Grammar',    bn:'ব্যাকরণ'},
+  };
+  function _cn(k){ return (_catNames[k]||{})[_lang]||k; }
   const cats = [
     { name: 'ひらがな', icon: 'あ', modKey: 'kana', items: [...HB, ...HD], color: '#E4572E', mod: 'kana' },
     { name: 'カタカナ', icon: 'ア', modKey: 'kana', items: [...KB, ...KD], color: '#3A86C9', mod: 'kana' },
@@ -2631,7 +2693,8 @@ function mkDashboard(c) {
   
   [{level:'N5', rate:n5Rate, color:'#4CAF50'}, {level:'N4', rate:n4Rate, color:'#2196F3'}, {level:'N3', rate:n3Rate, color:'#9C27B0'}].forEach(function(item) {
     const statusIcon = item.rate >= 80 ? '✅' : item.rate >= 60 ? '📈' : item.rate >= 30 ? '📚' : '🌱';
-    const statusText = item.rate >= 80 ? '合格圏内！' : item.rate >= 60 ? 'もう少し！' : item.rate >= 30 ? '学習中' : '始めよう';
+    const _st={80:{ja:'合格圏内！',en:'Pass Zone!',bn:'পাস জোন!'},60:{ja:'もう少し！',en:'Almost there!',bn:'আরেকটু!'},30:{ja:'学習中',en:'Learning',bn:'শিখছেন'},0:{ja:'始めよう',en:'Get Started!',bn:'শুরু করুন'}};
+    const statusText = item.rate>=80?_st[80][_lang]||_st[80].ja:item.rate>=60?_st[60][_lang]||_st[60].ja:item.rate>=30?_st[30][_lang]||_st[30].ja:_st[0][_lang]||_st[0].ja;
     const barW = Math.max(2, item.rate);
     h += '<div style="margin-bottom:12px">';
     h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
@@ -2655,7 +2718,7 @@ function mkDashboard(c) {
     h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
     h += '<div style="display:flex;align-items:center;gap:6px">';
     h += '<span style="font-size:16px">' + cat.icon + '</span>';
-    h += '<span style="font-size:13px;font-weight:600;color:var(--tx)">' + cat.name + '</span>';
+    h += '<span style="font-size:13px;font-weight:600;color:var(--tx)">' + _cn(cat.name) + '</span>';
     h += '</div>';
     h += '<div style="display:flex;align-items:center;gap:8px">';
     if (cat.weakCount > 0) h += '<span style="font-size:10px;background:#FFF3E0;color:#E65100;padding:2px 6px;border-radius:8px">苦手' + cat.weakCount + '</span>';
