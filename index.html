@@ -656,34 +656,14 @@ function setLang(l){
     </div>
   </div>
 
-  <div class="sec-t"><script>document.write(T('secKana'))</script></div>
   <div class="cg">
     <div class="cd c1" onclick="openM('kana')"><span class="cd-i">あ</span><div class="cd-n"><script>document.write(T('secKana'))</script></div><div class="cd-d"><script>document.write(T('cdKana'))</script></div></div>
-  </div>
-
-  <div class="sec-t"><script>document.write(T('secVoc'))</script></div>
-  <div class="cg">
     <div class="cd c2" onclick="openM('vocab')"><span class="cd-i">📖</span><div class="cd-n"><script>document.write(T('secVoc'))</script></div><div class="cd-d"><script>document.write(T('cdVoc'))</script></div><div class="cd-count">2,404+1,448</div></div>
     <div class="cd c3" onclick="openM('kanji')"><span class="cd-i">🈶</span><div class="cd-n"><script>document.write(T('secKan'))</script></div><div class="cd-d"><script>document.write(T('cdKan'))</script></div><div class="cd-count">374+367</div></div>
-  </div>
-
-  <div class="sec-t"><script>document.write(T('secVerb'))</script></div>
-  <div class="cg">
     <div class="cd c4" onclick="openM('verb')"><span class="cd-i">🔄</span><div class="cd-n"><script>document.write(T('secVerb'))</script></div><div class="cd-d"><script>document.write(T('cdVerb'))</script></div><div class="cd-count">408</div></div>
     <div class="cd c5" onclick="openM('adj')"><span class="cd-i">📝</span><div class="cd-n"><script>document.write(T('secAdj'))</script></div><div class="cd-d"><script>document.write(T('cdAdj'))</script></div><div class="cd-count">70</div></div>
-  </div>
-
-  <div class="sec-t"><script>document.write(T('secTime'))</script></div>
-  <div class="cg">
     <div class="cd c1" onclick="openM('timenum')"><span class="cd-i">🕐</span><div class="cd-n"><script>document.write(T('secTime'))</script></div><div class="cd-d"><script>document.write(T('cdTime'))</script></div></div>
-  </div>
-
-  <div class="sec-t"><script>document.write(T('secGram'))</script></div>
-  <div class="cg">
     <div class="cd c2" onclick="openM('grammar')"><span class="cd-i">📗</span><div class="cd-n"><script>document.write(T('secGram'))</script></div><div class="cd-d"><script>document.write(T('cdGram'))</script></div><div class="cd-count">26+18</div></div>
-  </div>
-
-  
   </div>
 
   <div id="home-extras">
@@ -724,6 +704,7 @@ function setLang(l){
 
   <div style="text-align:center;padding:30px 0 60px;color:var(--txD);font-size:11px">NIHONGO WORK v10 — Built for Bangladeshi workers in Japan</div>
   </div>
+
 </div>
 
 <!-- Module containers -->
@@ -2150,19 +2131,33 @@ function mkReview(c) {
   let allData = [];
   let currentType = '';
   
+  const _revCatNames = {
+    hira:      {ja:'ひらがな',  en:'Hiragana',    bn:'হিরাগানা'},
+    kata:      {ja:'カタカナ',  en:'Katakana',    bn:'কাতাকানা'},
+    vocab_n5:  {ja:'語彙 N5',   en:'Vocab N5',    bn:'শব্দ N5'},
+    vocab_n4:  {ja:'語彙 N4',   en:'Vocab N4',    bn:'শব্দ N4'},
+    vocab_n3:  {ja:'語彙 N3',   en:'Vocab N3',    bn:'শব্দ N3'},
+    kanji_n5:  {ja:'漢字 N5',   en:'Kanji N5',    bn:'কানজি N5'},
+    kanji_n4:  {ja:'漢字 N4',   en:'Kanji N4',    bn:'কানজি N4'},
+    kanji_n3:  {ja:'漢字 N3',   en:'Kanji N3',    bn:'কানজি N3'},
+    verb:      {ja:'動詞',      en:'Verbs',       bn:'ক্রিয়া'},
+    adj:       {ja:'形容詞',    en:'Adjectives',  bn:'বিশেষণ'},
+    grammar:   {ja:'文法',      en:'Grammar',     bn:'ব্যাকরণ'},
+    biz:       {ja:'ビジネスマナー', en:'Biz Manner', bn:'ব্যবসায়িক শিষ্টাচার'},
+  };
   const categories = [
-    { name: 'ひらがな', value: 'hira', icon: 'あ' },
-    { name: 'カタカナ', value: 'kata', icon: 'ア' },
-    { name: '語彙N5', value: 'vocab_n5', icon: '📖' },
-    { name: '語彙N4', value: 'vocab_n4', icon: '📖' },
-    { name: '語彙N3', value: 'vocab_n3', icon: '📖' },
-    { name: '漢字N5', value: 'kanji_n5', icon: '漢' },
-    { name: '漢字N4', value: 'kanji_n4', icon: '漢' },
-    { name: '漢字N3', value: 'kanji_n3', icon: '漢' },
-    { name: '動詞', value: 'verb', icon: '🔄' },
-    { name: '形容詞', value: 'adj', icon: '📝' },
-    { name: '文法', value: 'grammar', icon: '📗' },
-    { name: 'ビジネスマナー', value: 'biz', icon: '💼' }
+    { value: 'hira',     icon: 'あ' },
+    { value: 'kata',     icon: 'ア' },
+    { value: 'vocab_n5', icon: '📖' },
+    { value: 'vocab_n4', icon: '📖' },
+    { value: 'vocab_n3', icon: '📖' },
+    { value: 'kanji_n5', icon: '漢' },
+    { value: 'kanji_n4', icon: '漢' },
+    { value: 'kanji_n3', icon: '漢' },
+    { value: 'verb',     icon: '🔄' },
+    { value: 'adj',      icon: '📝' },
+    { value: 'grammar',  icon: '📗' },
+    { value: 'biz',      icon: '💼' },
   ];
   
   function showCategoryScreen() {
@@ -2170,7 +2165,8 @@ function mkReview(c) {
     h += '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px 0">';
     
     categories.forEach(cat => {
-      h += `<button class="cat-btn" data-cat="${cat.value}" style="padding:20px;background:var(--s1);border:2px solid var(--brd);border-radius:12px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;text-align:center;transition:all 0.2s">${cat.icon}<br/>${cat.name}</button>`;
+      const _rcn = (_revCatNames[cat.value]||{})[_lang]||(_revCatNames[cat.value]||{}).ja||cat.value;
+      h += `<button class="cat-btn" data-cat="${cat.value}" style="padding:20px;background:var(--s1);border:2px solid var(--brd);border-radius:12px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;text-align:center;transition:all 0.2s">${cat.icon}<br/>${_rcn}</button>`;
     });
     
     h += '</div>';
