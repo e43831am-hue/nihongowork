@@ -570,8 +570,8 @@ function setLang(l){
   </div>
 </div>
 
-<!-- Rank Progress Bar - Always Visible -->
-<div id="rank-widget" style="background:var(--accB);color:#fff;padding:10px 16px;border-bottom:2px solid rgba(0,0,0,0.1);position:sticky;top:52px;z-index:90">
+<!-- Rank Progress Bar -->
+<div id="rank-widget" style="background:var(--accB);color:#fff;padding:8px 16px;border-bottom:2px solid rgba(0,0,0,0.1);position:sticky;top:52px;z-index:90">
   <div style="max-width:840px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
     <div id="rw-badge" style="font-size:11px;font-weight:700;background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:20px;white-space:nowrap"><script>document.write({ja:'🌱 初心者',en:'🌱 Beginner',bn:'🌱 শিক্ষানবিশ'}[_lang]||'🌱 初心者')</script></div>
     <div style="flex:1;min-width:100px">
@@ -583,8 +583,7 @@ function setLang(l){
         <div id="rw-bar" style="background:rgba(255,255,255,0.9);height:100%;border-radius:3px;width:0%;transition:width 0.8s ease"></div>
       </div>
     </div>
-    <button onclick="openM('dashboard')" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);padding:5px 10px;border-radius:16px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap"><script>document.write(T('detail'))</script></button>
-    <button onclick="boostPassRate()" style="background:var(--acc);color:#fff;border:none;padding:6px 12px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap"><script>document.write(T('boostBtn'))</script></button>
+    <button onclick="openM('revenge')" style="background:var(--acc);color:#fff;border:none;padding:6px 12px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">⚔️ リベンジ</button>
   </div>
 </div>
 
@@ -595,68 +594,9 @@ function setLang(l){
     <div class="hero-d"><script>document.write(T('heroT')+' — '+T('heroD')+'<br>'+T('heroD2'))</script></div>
   </div>
 
-  <!-- ★ Dashboard Card - Prominent at Top ★ -->
-  <div style="padding:0 16px 8px">
-    <div onclick="openM('dashboard')" style="background:var(--g2);border-radius:16px;padding:18px 20px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(31,58,95,0.2)">
-      <div style="position:absolute;top:-20px;right:-20px;font-size:80px;opacity:.08">📊</div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div>
-          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:900;color:#fff"><script>document.write(T('dashTitle'))</script></div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px"><script>document.write(T('dashSub'))</script></div>
-        </div>
-        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:8px 12px;text-align:center">
-          <div id="home-rank-badge" style="font-size:11px;font-weight:700;color:#fff"><script>document.write({ja:'🌱 初心者',en:'🌱 Beginner',bn:'🌱 শিক্ষানবিশ'}[_lang]||'🌱 初心者')</script></div>
-          <div id="home-total-correct" style="font-size:20px;font-weight:900;color:#fff;line-height:1.2">0</div>
-          <div style="font-size:9px;color:rgba(255,255,255,0.7)">累計正解</div>
-        </div>
-      </div>
-      <!-- N5/N4/N3 mini progress bars -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-            <span style="font-size:10px;color:rgba(255,255,255,0.8);font-weight:600">N5</span>
-            <span id="home-n5-pct" style="font-size:10px;color:#fff;font-weight:700">0%</span>
-          </div>
-          <div style="background:rgba(255,255,255,0.2);height:5px;border-radius:3px;overflow:hidden">
-            <div id="home-n5-bar" style="height:100%;background:rgba(255,255,255,0.85);border-radius:3px;width:0%;transition:width 0.8s"></div>
-          </div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-            <span style="font-size:10px;color:rgba(255,255,255,0.8);font-weight:600">N4</span>
-            <span id="home-n4-pct" style="font-size:10px;color:#fff;font-weight:700">0%</span>
-          </div>
-          <div style="background:rgba(255,255,255,0.2);height:5px;border-radius:3px;overflow:hidden">
-            <div id="home-n4-bar" style="height:100%;background:rgba(255,255,255,0.85);border-radius:3px;width:0%;transition:width 0.8s"></div>
-          </div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-            <span style="font-size:10px;color:rgba(255,255,255,0.8);font-weight:600">N3</span>
-            <span id="home-n3-pct" style="font-size:10px;color:#fff;font-weight:700">0%</span>
-          </div>
-          <div style="background:rgba(255,255,255,0.2);height:5px;border-radius:3px;overflow:hidden">
-            <div id="home-n3-bar" style="height:100%;background:rgba(255,255,255,0.85);border-radius:3px;width:0%;transition:width 0.8s"></div>
-          </div>
-        </div>
-      </div>
-      <button onclick="event.stopPropagation();boostPassRate()" style="margin-top:12px;width:100%;padding:9px;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit"><script>document.write(T('boostBtn2'))</script></button>
-    </div>
-  </div>
+  <!-- ★ 苦手克服ダッシュボード — Inline ★ -->
+  <div id="nw-dashboard" style="padding:0 16px 8px"></div>
 
-  <!-- 🧠 記憶強化ショートカット -->
-  <div style="padding:8px 16px 0">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <div onclick="openM('review')" style="background:var(--s1);border:1.5px solid var(--brd);border-radius:12px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--brd)'">
-        <span style="font-size:22px">📋</span>
-        <div><div style="font-size:12px;font-weight:700;color:var(--tx)" id="rev-shortcut-t"></div><div style="font-size:10px;color:var(--txM)" id="rev-shortcut-d"></div></div>
-      </div>
-      <div onclick="openM('longterm')" style="background:var(--s1);border:1.5px solid var(--brd);border-radius:12px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseover="this.style.borderColor='var(--accB)'" onmouseout="this.style.borderColor='var(--brd)'">
-        <span style="font-size:22px">🧠</span>
-        <div><div style="font-size:12px;font-weight:700;color:var(--tx)" id="lt-shortcut-t"></div><div style="font-size:10px;color:var(--txM)" id="lt-shortcut-d"></div></div>
-      </div>
-    </div>
-  </div>
 
   <div class="cg">
     <a class="cd c1" href="kana-practice.html" style="text-decoration:none;color:inherit"><span class="cd-i">あ</span><div class="cd-n"><script>document.write(T('secKana'))</script></div><div class="cd-d"><script>document.write(T('cdKana'))</script></div></a>
@@ -697,12 +637,11 @@ function setLang(l){
 
 </div>
 
-<!-- SPA-only module containers (no individual pages) -->
-<div class="mod" id="m-dashboard"></div>
-<div class="mod" id="m-review"></div>
-<div class="mod" id="m-longterm"></div>
+<!-- SPA-only module containers -->
+<div class="mod" id="m-revenge"></div>
 <div class="mod" id="m-articles"></div>
 <script src="./data.js"></script>
 <script src="./core.js"></script>
+<script src="./enhanced.js"></script>
 </body>
 </html>

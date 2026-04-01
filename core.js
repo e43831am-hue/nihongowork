@@ -292,7 +292,8 @@ function mkQ(c,datasets,title,em,qFn,optFn,max,modKey){
   function reset(){
     let pool=cur.map((_,i)=>i);
     if(weakMode){const wk=cur.filter(i=>SRS.isWeak(mk,i)).map(i=>cur.indexOf(i));if(wk.length)pool=wk;else weakMode=false}
-    order=shuf(pool).slice(0,max||10);pos=0;sc={c:0,w:0}
+    order=shuf(pool).slice(0,max||10);pos=0;sc={c:0,w:0};
+    if(typeof window!=='undefined'){window._quizLog=[];window._quizQStart=Date.now();}
   }
   reset();
 
@@ -377,6 +378,7 @@ function mkQ(c,datasets,title,em,qFn,optFn,max,modKey){
       pvPush('/quiz/'+mk+'/score','Score: '+mk.toUpperCase());
       let t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
       target.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${[T('score0'),T('score1'),T('score2'),T('score3')][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T('scoreCo')}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T('scoreWr')}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T('again')}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T('home')}</button></div>`;
+      if(typeof renderQuizResultDetails==='function'&&window._quizLog&&window._quizLog.length>0){const s=target.querySelector('.scr');if(s)renderQuizResultDetails(s,window._quizLog);}
       setTimeout(()=>maybeShowReviewPopup(),500);
       return;
     }
@@ -406,6 +408,7 @@ function mkQ(c,datasets,title,em,qFn,optFn,max,modKey){
     target.innerHTML=h;
 
     // Attach click handlers — opts/ci captured in closure, no DOM parsing
+    if(typeof startQuizTimer==='function')startQuizTimer();
     target.querySelectorAll('.qo').forEach(o=>{
       o.onclick=function(){
         if(o.classList.contains('dis'))return;
@@ -414,6 +417,7 @@ function mkQ(c,datasets,title,em,qFn,optFn,max,modKey){
         const isOk=(chosen===_curCi);
         if(isOk){sc.c++;SRS.correct(mk,item);addS();}
         else{sc.w++;SRS.wrong(mk,item);rstS();}
+        if(typeof logQuizAnswer==='function')logQuizAnswer(item,_curOpts,_curCi,chosen,isOk);
         showResult(item,_curOpts,_curCi,chosen,isOk);
       };
     });
@@ -424,6 +428,7 @@ function mkQ(c,datasets,title,em,qFn,optFn,max,modKey){
   function timeUp(){
     const item=cur[order[pos]];
     sc.w++;SRS.wrong(mk,item);rstS();
+    if(typeof logQuizAnswer==='function')logQuizAnswer(item,_curOpts,_curCi,-1,false);
     showResult(item,_curOpts,_curCi,-1,false);
   }
 
@@ -2027,415 +2032,415 @@ function mkDenkou(c) {
   const target = c;
 
   const DK_KANJI = [
-  {k:`子`,on:`シ`,kun:`こ`,en:`Child / Small object`,ex:`電子 (Electron)`},
-  {k:`安`,on:`アン`,kun:`やす(い)`,en:`Safe / Cheap`,ex:`安全器 (Protective device)`},
-  {k:`時`,on:`ジ`,kun:`とき`,en:`Time`,ex:`時限組合せ (Time limit combination)`},
-  {k:`一`,on:`イチ`,kun:`ひと(つ)`,en:`One`,ex:`一次側 (Primary side)`},
-  {k:`金`,on:`キン`,kun:`かね`,en:`Metal / Gold`,ex:`金属管 (Metal conduit)`},
-  {k:`電`,on:`デン`,kun:`—`,en:`Electricity`,ex:`電圧 (Voltage)`},
-  {k:`気`,on:`キ`,kun:`—`,en:`Spirit / Air / Energy`,ex:`気中遮断器 (Air circuit breaker)`},
-  {k:`外`,on:`ガイ`,kun:`そと`,en:`Outside`,ex:`外線 (Outer line)`},
-  {k:`空`,on:`クウ`,kun:`そら`,en:`Empty / Sky / Air`,ex:`空調設備 (Air conditioning equipment)`},
-  {k:`間`,on:`カン`,kun:`あいだ`,en:`Interval / Between`,ex:`離隔距間 (Separation distance)`},
-  {k:`高`,on:`コウ`,kun:`たか(い)`,en:`High`,ex:`高圧 (High voltage)`},
-  {k:`水`,on:`スイ`,kun:`みず`,en:`Water`,ex:`水平 (Horizontal)`},
-  {k:`黒`,on:`コク`,kun:`くろ`,en:`Black`,ex:`黒色電線 (Black wire)`},
-  {k:`大`,on:`ダイ`,kun:`おお(きい)`,en:`Large`,ex:`最大電力 (Maximum power)`},
-  {k:`三`,on:`サン`,kun:`み`,en:`Three`,ex:`三相 (Three-phase)`},
-  {k:`火`,on:`カ`,kun:`ひ`,en:`Fire`,ex:`引火 (Ignition)`},
-  {k:`手`,on:`シュ`,kun:`て`,en:`Hand`,ex:`手動 (Manual)`},
-  {k:`小`,on:`ショウ`,kun:`ちい(さい)`,en:`Small`,ex:`小勢力回路 (Small power circuit)`},
-  {k:`出`,on:`シュツ`,kun:`で(る)`,en:`Exit / Output`,ex:`出力 (Output)`},
-  {k:`力`,on:`リョク`,kun:`ちから`,en:`Power / Force`,ex:`電力 (Electric power)`},
-  {k:`立`,on:`リツ`,kun:`た(てる)`,en:`Stand / Build`,ex:`自立形 (Self-supporting type)`},
-  {k:`上`,on:`ジョウ`,kun:`うえ`,en:`Above / Up`,ex:`上限 (Upper limit)`},
-  {k:`中`,on:`チュウ`,kun:`なか`,en:`Middle / Inside`,ex:`中性線 (Neutral wire)`},
-  {k:`下`,on:`カ`,kun:`した`,en:`Below / Down`,ex:`下限 (Lower limit)`},
-  {k:`天`,on:`テン`,kun:`あめ`,en:`Heaven / Ceiling`,ex:`天井隠ぺい配線 (Ceiling concealed wiring)`},
-  {k:`少`,on:`ショウ`,kun:`すく(ない)`,en:`Few / Little`,ex:`少量 (Small quantity)`},
-  {k:`二`,on:`ニ`,kun:`ふた(つ)`,en:`Two`,ex:`二次側 (Secondary side)`},
-  {k:`白`,on:`ハク`,kun:`しろ`,en:`White`,ex:`白色電線 (White wire)`},
-  {k:`半`,on:`ハン`,kun:`なか(ば)`,en:`Half`,ex:`半導体 (Semiconductor)`},
-  {k:`口`,on:`コウ`,kun:`くち`,en:`Mouth / Opening`,ex:`取付口 (Mounting hole)`},
-  {k:`風`,on:`フウ`,kun:`かぜ`,en:`Wind`,ex:`風圧荷重 (Wind pressure load)`},
-  {k:`左`,on:`サ`,kun:`ひだり`,en:`Left`,ex:`左回り (Counter-clockwise)`},
-  {k:`右`,on:`ウ`,kun:`みぎ`,en:`Right`,ex:`右回り (Clockwise)`},
-  {k:`分`,on:`ブン`,kun:`わ(ける)`,en:`Part / Minute / Divide`,ex:`分電盤 (Distribution board)`},
-  {k:`行`,on:`コウ`,kun:`い(く)`,en:`Go / Conduct`,ex:`施行 (Enforcement)`},
-  {k:`目`,on:`モク`,kun:`め`,en:`Eye / Item`,ex:`項目 (Item)`},
-  {k:`木`,on:`モク`,kun:`き`,en:`Wood`,ex:`木台 (Wooden base)`},
-  {k:`入`,on:`ニュウ`,kun:`い(れる)`,en:`Enter / Input`,ex:`投入 (Closing / Input)`},
-  {k:`地`,on:`チ`,kun:`つち`,en:`Ground / Earth`,ex:`接地 (Earthing / Grounding)`},
-  {k:`工`,on:`コウ`,kun:`—`,en:`Construction / Work`,ex:`電気工事 (Electrical work)`},
-  {k:`事`,on:`ジ`,kun:`こと`,en:`Thing / Business`,ex:`電気事業法 (Electricity Business Act)`},
-  {k:`用`,on:`ヨウ`,kun:`もち(いる)`,en:`Use / Purpose`,ex:`業務用 (Commercial use)`},
-  {k:`明`,on:`メイ`,kun:`あか(るい)`,en:`Bright / Light`,ex:`照明 (Lighting)`},
-  {k:`着`,on:`チャク`,kun:`き(る)`,en:`Wear / Arrive / Attach`,ex:`密着 (Close contact)`},
-  {k:`定`,on:`テイ`,kun:`さだ(める)`,en:`Fixed / Determine`,ex:`定格電圧 (Rated voltage)`},
-  {k:`相`,on:`ソウ`,kun:`あい`,en:`Phase / Mutual`,ex:`相回転 (Phase rotation)`},
-  {k:`内`,on:`ナイ`,kun:`うち`,en:`Inside / Within`,ex:`屋内配線 (Indoor wiring)`},
-  {k:`作`,on:`サク`,kun:`つく(る)`,en:`Make / Operate`,ex:`動作 (Operation)`},
-  {k:`物`,on:`ブツ`,kun:`もの`,en:`Thing / Object`,ex:`障害物 (Obstacle)`},
-  {k:`屋`,on:`オク`,kun:`や`,en:`House / Roof`,ex:`屋外用 (Outdoor use)`},
-  {k:`引`,on:`イン`,kun:`ひ(く)`,en:`Pull / Draw`,ex:`引込線 (Service wire)`},
-  {k:`回`,on:`カイ`,kun:`まわ(る)`,en:`Turn / Times / Circuit`,ex:`回路 (Circuit)`},
-  {k:`転`,on:`テン`,kun:`ころ(がる)`,en:`Roll / Change`,ex:`回転磁界 (Rotating magnetic field)`},
-  {k:`計`,on:`ケイ`,kun:`はか(る)`,en:`Measure / Plan`,ex:`電力量計 (Watt-hour meter)`},
-  {k:`界`,on:`カイ`,kun:`—`,en:`World / Boundary / Field`,ex:`磁界 (Magnetic field)`},
-  {k:`度`,on:`ド`,kun:`たび`,en:`Degree / Limit`,ex:`温度 (Temperature)`},
-  {k:`開`,on:`カイ`,kun:`あ(ける)`,en:`Open`,ex:`開閉器 (Switch)`},
-  {k:`閉`,on:`ヘイ`,kun:`と(じる)`,en:`Close`,ex:`開閉器 (Switch)`},
-  {k:`切`,on:`セツ`,kun:`き(る)`,en:`Cut / Disconnect`,ex:`切断 (Cutting)`},
-  {k:`起`,on:`キ`,kun:`お(きる)`,en:`Rise / Generate`,ex:`起電力 (Electromotive force)`},
-  {k:`形`,on:`ケイ`,kun:`かたち`,en:`Shape / Form`,ex:`扇形 (Fan-shaped)`},
-  {k:`光`,on:`コウ`,kun:`ひかり`,en:`Light`,ex:`光束 (Luminous flux)`},
-  {k:`軽`,on:`ケイ`,kun:`かる(い)`,en:`Light (weight)`,ex:`軽合金 (Light alloy)`},
-  {k:`銀`,on:`ギン`,kun:`—`,en:`Silver`,ex:`銀 (Silver - used in contacts)`},
-  {k:`放`,on:`ホウ`,kun:`はな(す)`,en:`Release / Emit`,ex:`放電 (Discharge)`},
-  {k:`質`,on:`シツ`,kun:`—`,en:`Quality / Matter`,ex:`材質 (Material quality)`},
-  {k:`化`,on:`カ`,kun:`ば(ける)`,en:`Change / -ization`,ex:`軟化 (Softening)`},
-  {k:`合`,on:`ゴウ`,kun:`あ(う)`,en:`Combine / Fit`,ex:`接合 (Joining)`},
-  {k:`色`,on:`シキ`,kun:`いろ`,en:`Color`,ex:`識色 (Color coding)`},
-  {k:`動`,on:`ドウ`,kun:`うご(く)`,en:`Move / Operate`,ex:`電動機 (Motor)`},
-  {k:`方`,on:`ホウ`,kun:`かた`,en:`Direction / Method`,ex:`方向性 (Directionality)`},
-  {k:`理`,on:`リ`,kun:`—`,en:`Logic / Reason`,ex:`物理 (Physics)`},
-  {k:`自`,on:`ジ`,kun:`みずか(ら)`,en:`Self`,ex:`自動遮断 (Automatic cutoff)`},
-  {k:`家`,on:`カ`,kun:`いえ`,en:`House / Home`,ex:`一般用電気工作物 (General use)`},
-  {k:`業`,on:`ギョウ`,kun:`わざ`,en:`Business / Work`,ex:`電気工業 (Electrical industry)`},
-  {k:`実`,on:`ジツ`,kun:`み`,en:`Reality / Fruit`,ex:`実効値 (RMS value)`},
-  {k:`弱`,on:`ジャク`,kun:`よわ(い)`,en:`Weak`,ex:`弱電流回路 (Weak current circuit)`},
-  {k:`心`,on:`シン`,kun:`こころ`,en:`Heart / Core`,ex:`電線心線 (Core wire)`},
-  {k:`進`,on:`シン`,kun:`すす(む)`,en:`Advance / Lead`,ex:`進相コンデンサ (Static capacitor)`},
-  {k:`始`,on:`シ`,kun:`はじ(める)`,en:`Start`,ex:`開始 (Start)`},
-  {k:`通`,on:`ツウ`,kun:`とお(る)`,en:`Pass / Commute`,ex:`導通 (Continuity)`},
-  {k:`体`,on:`タイ`,kun:`からだ`,en:`Body / Object`,ex:`導体 (Conductor)`},
-  {k:`変`,on:`ヘン`,kun:`か(わる)`,en:`Change / Strange`,ex:`変圧器 (Transformer)`},
-  {k:`箱`,on:`ソウ`,kun:`はこ`,en:`Box`,ex:`アウトレットボックス`},
-  {k:`材`,on:`ザイ`,kun:`—`,en:`Material`,ex:`絶縁材 (Insulating material)`},
-  {k:`太`,on:`タイ`,kun:`ふと(い)`,en:`Thick / Fat`,ex:`太さ (Thickness / Gauge)`},
-  {k:`池`,on:`チ`,kun:`いけ`,en:`Pond / Battery`,ex:`電池 (Battery)`},
-  {k:`短`,on:`タン`,kun:`みじか(い)`,en:`Short`,ex:`短絡 (Short circuit)`},
-  {k:`低`,on:`テイ`,kun:`ひく(い)`,en:`Low`,ex:`低圧 (Low voltage)`},
-  {k:`降`,on:`コウ`,kun:`お(りる)`,en:`Descend / Fall`,ex:`電圧降下 (Voltage drop)`},
-  {k:`者`,on:`シャ`,kun:`もの`,en:`Person`,ex:`電気工事者 (Electrician)`},
-  {k:`同`,on:`ドウ`,kun:`おな(じ)`,en:`Same`,ex:`同期 (Synchronous)`},
-  {k:`試`,on:`シ`,kun:`ため(す)`,en:`Test / Try`,ex:`試験 (Examination)`},
-  {k:`験`,on:`ケン`,kun:`—`,en:`Test / Verify`,ex:`試験 (Examination)`},
-  {k:`特`,on:`トク`,kun:`—`,en:`Special`,ex:`特別高圧 (Extra-high voltage)`},
-  {k:`別`,on:`ベツ`,kun:`わか(れる)`,en:`Separate / Different`,ex:`種別 (Category)`},
-  {k:`重`,on:`ジュウ`,kun:`おも(い)`,en:`Heavy / Weight`,ex:`荷重 (Load)`},
-  {k:`料`,on:`リョウ`,kun:`—`,en:`Fee / Material`,ex:`材料 (Material)`},
-  {k:`図`,on:`ズ`,kun:`—`,en:`Diagram / Map`,ex:`配線図 (Wiring diagram)`},
-  {k:`強`,on:`キョウ`,kun:`つよ(い)`,en:`Strong`,ex:`引張強さ (Tensile strength)`},
-  {k:`無`,on:`ム`,kun:`な(い)`,en:`None / Nothing`,ex:`無負荷 (No load)`},
-  {k:`有`,on:`ユウ`,kun:`あ(る)`,en:`Have / Exist`,ex:`有効電力 (Active power)`},
-  {k:`極`,on:`キョク`,kun:`きわ(める)`,en:`Pole / Extreme`,ex:`接地極 (Grounding electrode)`},
-  {k:`路`,on:`ロ`,kun:`みち`,en:`Path / Road`,ex:`回路 (Circuit)`},
-  {k:`種`,on:`シュ`,kun:`たね`,en:`Type / Species`,ex:`Ａ種接地工事 (Type A grounding)`},
-  {k:`接`,on:`セツ`,kun:`つ(ぐ)`,en:`Connect / Touch`,ex:`接地 (Earthing)`},
-  {k:`管`,on:`カン`,kun:`くだ`,en:`Pipe / Tube`,ex:`電線管 (Conduit)`},
-  {k:`灯`,on:`トウ`,kun:`ひ`,en:`Light / Lamp`,ex:`蛍光灯 (Fluorescent lamp)`},
-  {k:`厚`,on:`コウ`,kun:`あつ(い)`,en:`Thick`,ex:`厚鋼電線管 (Thick steel conduit)`},
-  {k:`油`,on:`ユ`,kun:`あぶら`,en:`Oil`,ex:`油入変圧器 (Oil-immersed transformer)`},
-  {k:`差`,on:`サ`,kun:`さ(す)`,en:`Difference / Insert`,ex:`差込形コネクタ (Push-in connector)`},
-  {k:`点`,on:`テン`,kun:`—`,en:`Point / Dot`,ex:`接続点 (Connection point)`},
-  {k:`位`,on:`イ`,kun:`くらい`,en:`Position / Unit`,ex:`位相 (Phase)`},
-  {k:`表`,on:`ヒョウ`,kun:`おもて`,en:`Table / Surface`,ex:`第一表 (Table 1)`},
-  {k:`示`,on:`ジ`,kun:`しめ(す)`,en:`Show / Indicate`,ex:`指示計器 (Indicating instrument)`},
-  {k:`蔵`,on:`ゾウ`,kun:`くら`,en:`Store / Internal`,ex:`内蔵 (Built-in)`},
-  {k:`線`,on:`セン`,kun:`—`,en:`Line / Wire`,ex:`電線 (Electric wire)`},
-  {k:`般`,on:`ハン`,kun:`—`,en:`General`,ex:`一般用電気工作物 (General use)`},
-  {k:`薄`,on:`ハク`,kun:`うす(い)`,en:`Thin`,ex:`薄鋼電線管 (Thin steel conduit)`},
-  {k:`具`,on:`グ`,kun:`—`,en:`Tool / Equipment`,ex:`接続器具 (Connecting device)`},
-  {k:`法`,on:`ホウ`,kun:`—`,en:`Law / Method`,ex:`電気工事士法 (Electricians Act)`},
-  {k:`側`,on:`ソク`,kun:`がわ`,en:`Side`,ex:`負荷側 (Load side)`},
-  {k:`遅`,on:`チ`,kun:`おそ(い)`,en:`Late / Delay`,ex:`遅れ位相 (Lagging phase)`},
-  {k:`押`,on:`オウ`,kun:`お(す)`,en:`Push`,ex:`押ボタン (Push button)`},
-  {k:`速`,on:`ソク`,kun:`はや(い)`,en:`Speed / Fast`,ex:`変速 (Speed change)`},
-  {k:`確`,on:`カク`,kun:`たしか`,en:`Certain / Confirm`,ex:`確認 (Confirmation)`},
-  {k:`認`,on:`ニン`,kun:`みと(める)`,en:`Recognize / Approve`,ex:`認可 (Approval)`},
-  {k:`過`,on:`カ`,kun:`す(ぎる)`,en:`Over / Excess`,ex:`過電流 (Overcurrent)`},
-  {k:`流`,on:`リュウ`,kun:`なが(れる)`,en:`Flow / Current`,ex:`電流 (Electric current)`},
-  {k:`断`,on:`ダン`,kun:`ことわ(る)`,en:`Cut / Disconnect`,ex:`遮断器 (Circuit breaker)`},
-  {k:`機`,on:`キ`,kun:`はた`,en:`Machine`,ex:`発電機 (Generator)`},
-  {k:`性`,on:`セイ`,kun:`—`,en:`Nature / Property`,ex:`絶縁性 (Insulating property)`},
-  {k:`粉`,on:`フン`,kun:`こな`,en:`Powder`,ex:`粉じん (Dust)`},
-  {k:`付`,on:`フ`,kun:`つ(ける)`,en:`Attach`,ex:`取付 (Mounting)`},
-  {k:`負`,on:`フ`,kun:`ま(ける)`,en:`Negative / Load`,ex:`負荷 (Load)`},
-  {k:`荷`,on:`カ`,kun:`に`,en:`Load / Cargo`,ex:`負荷 (Load)`},
-  {k:`防`,on:`ボウ`,kun:`ふせ(ぐ)`,en:`Prevent / Protect`,ex:`防護 (Protection)`},
-  {k:`置`,on:`チ`,kun:`お(く)`,en:`Place / Put / Set`,ex:`設置 (Installation)`},
-  {k:`換`,on:`カン`,kun:`か(える)`,en:`Exchange / Replace`,ex:`換気扇 (Ventilation fan)`},
-  {k:`数`,on:`スウ`,kun:`かず`,en:`Number`,ex:`周波数 (Frequency)`},
-  {k:`許`,on:`キョ`,kun:`ゆる(す)`,en:`Permit / Allow`,ex:`許容電流 (Allowable current)`},
-  {k:`容`,on:`ヨウ`,kun:`—`,en:`Capacity / Container`,ex:`容量 (Capacity)`},
-  {k:`配`,on:`ハイ`,kun:`くば(る)`,en:`Distribute / Wiring`,ex:`配線 (Wiring)`},
-  {k:`塩`,on:`エン`,kun:`しお`,en:`Salt / Vinyl`,ex:`硬質塩化ビニル管 (Rigid PVC conduit)`},
-  {k:`公`,on:`コウ`,kun:`おおやけ`,en:`Public`,ex:`公称断面積 (Nominal cross-section)`},
-  {k:`面`,on:`メン`,kun:`つら`,en:`Surface / Face`,ex:`断面積 (Cross-sectional area)`},
-  {k:`積`,on:`セキ`,kun:`つ(む)`,en:`Accumulate / Area`,ex:`面積 (Area)`},
-  {k:`成`,on:`セイ`,kun:`な(る)`,en:`Become / Form`,ex:`合成樹脂管 (Synthetic resin conduit)`},
-  {k:`束`,on:`ソク`,kun:`たば`,en:`Bundle`,ex:`束線 (Bundling wires)`},
-  {k:`交`,on:`コウ`,kun:`まじ(わる)`,en:`Exchange / Alternate`,ex:`交流 (Alternating current)`},
-  {k:`続`,on:`ゾク`,kun:`つづ(く)`,en:`Continue / Connect`,ex:`接続 (Connection)`},
-  {k:`絶`,on:`ゼツ`,kun:`た(つ)`,en:`Absolute / Insulate`,ex:`絶縁 (Insulation)`},
-  {k:`最`,on:`サイ`,kun:`もっと(も)`,en:`Most / Max`,ex:`最大 (Maximum)`},
-  {k:`値`,on:`チ`,kun:`あたい`,en:`Value`,ex:`測定値 (Measured value)`},
-  {k:`平`,on:`ヘイ`,kun:`たいら`,en:`Flat / Level`,ex:`平行 (Parallel)`},
-  {k:`消`,on:`ショウ`,kun:`き(える)`,en:`Extinguish / Consume`,ex:`消費電力 (Power consumption)`},
-  {k:`期`,on:`キ`,kun:`—`,en:`Period / Term`,ex:`周期 (Period / Cycle)`},
-  {k:`波`,on:`ハ`,kun:`なみ`,en:`Wave`,ex:`周波数 (Frequency)`},
-  {k:`熱`,on:`ネツ`,kun:`あつ(い)`,en:`Heat`,ex:`電熱器 (Electric heater)`},
-  {k:`受`,on:`ジュ`,kun:`う(ける)`,en:`Receive`,ex:`受電 (Power reception)`},
-  {k:`要`,on:`ヨウ`,kun:`い(る)`,en:`Require / Essential`,ex:`要件 (Requirement)`},
-  {k:`査`,on:`サ`,kun:`—`,en:`Inspect`,ex:`検査 (Inspection)`},
-  {k:`常`,on:`ジョウ`,kun:`つね`,en:`Normal / Regular`,ex:`非常用 (Emergency use)`},
-  {k:`発`,on:`ハツ`,kun:`た(つ)`,en:`Generate / Start`,ex:`発電 (Power generation)`},
-  {k:`設`,on:`セツ`,kun:`もう(ける)`,en:`Establish / Install`,ex:`設備 (Equipment)`},
-  {k:`備`,on:`ビ`,kun:`そな(える)`,en:`Equipment / Provide`,ex:`予備 (Spare)`},
-  {k:`振`,on:`シン`,kun:`ふ(る)`,en:`Shake / Vibration`,ex:`振動 (Vibration)`},
-  {k:`結`,on:`ケツ`,kun:`むす(ぶ)`,en:`Connect / Result`,ex:`結線 (Wiring / Connection)`},
-  {k:`制`,on:`セイ`,kun:`—`,en:`Control / Limit`,ex:`制御 (Control)`},
-  {k:`御`,on:`ギョ`,kun:`おん`,en:`Control / Honorific`,ex:`制御 (Control)`},
-  {k:`限`,on:`ゲン`,kun:`かぎ(る)`,en:`Limit`,ex:`制限 (Limitation)`},
-  {k:`静`,on:`セイ`,kun:`しず(か)`,en:`Quiet / Static`,ex:`静電容量 (Capacitance)`},
-  {k:`量`,on:`リョウ`,kun:`はか(る)`,en:`Quantity / Capacity`,ex:`電量 (Amount of electricity)`},
-  {k:`全`,on:`ゼン`,kun:`まった(く)`,en:`All / Whole`,ex:`全負荷 (Full load)`},
-  {k:`造`,on:`ゾウ`,kun:`つく(る)`,en:`Create / Structure`,ex:`構造 (Structure)`},
-  {k:`対`,on:`タイ`,kun:`—`,en:`Against / Opposite / Pair`,ex:`接地対地電圧 (Voltage to ground)`},
-  {k:`陽`,on:`ヨウ`,kun:`ひ`,en:`Positive / Sun`,ex:`陽極 (Anode)`},
-  {k:`単`,on:`タン`,kun:`—`,en:`Single`,ex:`単相 (Single-phase)`},
-  {k:`欠`,on:`ケツ`,kun:`か(ける)`,en:`Missing / Lack`,ex:`欠相 (Phase loss)`},
-  {k:`保`,on:`ホ`,kun:`たも(つ)`,en:`Keep / Protect`,ex:`保護 (Protection)`},
-  {k:`絡`,on:`ラク`,kun:`から(まる)`,en:`Entangle / Link`,ex:`短絡 (Short circuit)`},
-  {k:`調`,on:`チョウ`,kun:`しら(べる)`,en:`Adjust / Investigate`,ex:`調光 (Dimming)`},
-  {k:`直`,on:`チョク`,kun:`ただ(ちに)`,en:`Straight / Direct`,ex:`直流 (Direct current)`},
-  {k:`列`,on:`レツ`,kun:`—`,en:`Row / Series`,ex:`直列 (Series)`},
-  {k:`格`,on:`カク`,kun:`—`,en:`Standard / Rank`,ex:`定格 (Rating)`},
-  {k:`供`,on:`キョウ`,kun:`そな(える)`,en:`Provide / Offer`,ex:`供給 (Supply)`},
-  {k:`給`,on:`キュウ`,kun:`た(まう)`,en:`Supply / Salary`,ex:`電力供給 (Electricity supply)`},
-  {k:`技`,on:`ギ`,kun:`わざ`,en:`Technique / Skill`,ex:`技術基準 (Technical standards)`},
-  {k:`術`,on:`ジュツ`,kun:`すべ`,en:`Art / Skill / Method`,ex:`技術 (Technology)`},
-  {k:`準`,on:`ジュン`,kun:`—`,en:`Standard / Level`,ex:`標準 (Standard)`},
-  {k:`球`,on:`キュウ`,kun:`たま`,en:`Ball / Bulb`,ex:`電球 (Light bulb)`},
-  {k:`減`,on:`ゲン`,kun:`へ(る)`,en:`Decrease / Reduce`,ex:`軽減 (Reduction)`},
-  {k:`係`,on:`ケイ`,kun:`かか(わる)`,en:`Relation / Coefficient`,ex:`係数 (Coefficient)`},
-  {k:`失`,on:`シツ`,kun:`うしな(う)`,en:`Lose`,ex:`損失 (Loss)`},
-  {k:`資`,on:`シ`,kun:`—`,en:`Resource / Qualification`,ex:`資格 (Qualification)`},
-  {k:`構`,on:`コウ`,kun:`かま(える)`,en:`Structure / Compose`,ex:`構内 (Premises)`},
-  {k:`取`,on:`シュ`,kun:`と(る)`,en:`Take / Fetch`,ex:`取付 (Mounting)`},
-  {k:`留`,on:`リュウ`,kun:`と(める)`,en:`Fasten / Stay`,ex:`留めネジ (Set screw)`},
-  {k:`非`,on:`ヒ`,kun:`—`,en:`Non- / Emergency`,ex:`非常灯 (Emergency light)`},
-  {k:`予`,on:`ヨ`,kun:`あらかじ(め)`,en:`Advance / Spare`,ex:`予備電源 (Backup power)`},
-  {k:`件`,on:`ケン`,kun:`—`,en:`Case / Condition`,ex:`要件 (Requirement)`},
-  {k:`並`,on:`ヘイ`,kun:`なら(べる)`,en:`Line up / Parallel`,ex:`並列 (Parallel)`},
-  {k:`比`,on:`ヒ`,kun:`くら(べる)`,en:`Ratio / Compare`,ex:`圧比 (Pressure ratio)`},
-  {k:`助`,on:`ジョ`,kun:`たす(ける)`,en:`Help / Assistant`,ex:`補助 (Auxiliary)`},
-  {k:`識`,on:`シキ`,kun:`し(る)`,en:`Discriminate / Know`,ex:`識別 (Identification)`},
-  {k:`打`,on:`ダ`,kun:`う(つ)`,en:`Strike / Hit`,ex:`打ち込み (Embedding)`},
-  {k:`連`,on:`レン`,kun:`つら(なる)`,en:`Lead / Connect`,ex:`連動 (Interlocking)`},
-  {k:`警`,on:`ケイ`,kun:`—`,en:`Warn / Police`,ex:`警報器 (Alarm)`},
-  {k:`報`,on:`ホウ`,kun:`しら(せる)`,en:`Report / Info`,ex:`火災報知機 (Fire alarm)`},
-  {k:`端`,on:`タン`,kun:`はし`,en:`Edge / Terminal`,ex:`端子 (Terminal)`},
-  {k:`照`,on:`ショウ`,kun:`て(らす)`,en:`Illuminate / Check`,ex:`照度 (Illuminance)`},
-  {k:`器`,on:`キ`,kun:`うつわ`,en:`Device / Vessel`,ex:`遮断器 (Circuit breaker)`},
-  {k:`異`,on:`イ`,kun:`こと(なる)`,en:`Different / Abnormal`,ex:`異常 (Abnormality)`},
-  {k:`埋`,on:`マイ`,kun:`う(める)`,en:`Bury`,ex:`埋込形 (Flush-mounted)`},
-  {k:`則`,on:`ソク`,kun:`のっと(る)`,en:`Rule / Law`,ex:`規則 (Rule)`},
-  {k:`装`,on:`ソウ`,kun:`よそお(う)`,en:`Equipment / Wear`,ex:`外装 (Sheath / Jacket)`},
-  {k:`可`,on:`カ`,kun:`—`,en:`Possible / Allow`,ex:`可とう電線管 (Flexible conduit)`},
-  {k:`燃`,on:`ネン`,kun:`も(える)`,en:`Burn`,ex:`燃焼 (Combustion)`},
-  {k:`触`,on:`ショク`,kun:`ふ(れる)`,en:`Touch`,ex:`接触 (Contact)`},
-  {k:`測`,on:`ソク`,kun:`はか(る)`,en:`Measure`,ex:`測定 (Measurement)`},
-  {k:`扇`,on:`セン`,kun:`おうぎ`,en:`Fan`,ex:`換気扇 (Ventilation fan)`},
-  {k:`幹`,on:`カン`,kun:`みき`,en:`Main / Trunk`,ex:`幹線 (Main line)`},
-  {k:`板`,on:`バン`,kun:`いた`,en:`Board / Plate`,ex:`配電板 (Switchboard)`},
-  {k:`張`,on:`チョウ`,kun:`は(る)`,en:`Tension / Stretch`,ex:`引張荷重 (Tensile load)`},
-  {k:`径`,on:`ケイ`,kun:`—`,en:`Diameter`,ex:`直径 (Diameter)`},
-  {k:`検`,on:`ケン`,kun:`しら(べる)`,en:`Inspect / Detect`,ex:`検電器 (Voltage detector)`},
-  {k:`圧`,on:`アツ`,kun:`お(す)`,en:`Pressure / Voltage`,ex:`電圧 (Voltage)`},
-  {k:`硬`,on:`コウ`,kun:`かた(い)`,en:`Hard`,ex:`硬質塩化ビニル管 (Rigid PVC conduit)`},
-  {k:`脂`,on:`シ`,kun:`あぶら`,en:`Resin / Fat`,ex:`合成樹脂 (Synthetic resin)`},
-  {k:`銅`,on:`ドウ`,kun:`あかがね`,en:`Copper`,ex:`軟銅線 (Annealed copper wire)`},
-  {k:`導`,on:`ドウ`,kun:`みちび(く)`,en:`Lead / Conduct`,ex:`導体 (Conductor)`},
-  {k:`効`,on:`コウ`,kun:`き(く)`,en:`Effect / Efficient`,ex:`有効電力 (Active power)`},
-  {k:`周`,on:`シュウ`,kun:`まわ(り)`,en:`Cycle / Around`,ex:`周波数 (Frequency)`},
-  {k:`勢`,on:`セイ`,kun:`いきお(い)`,en:`Force / Energy`,ex:`小勢力回路 (Small power circuit)`},
-  {k:`被`,on:`ヒ`,kun:`こうむ(る)`,en:`Coat / Covered`,ex:`被覆 (Insulation / Covering)`},
-  {k:`棒`,on:`ボウ`,kun:`—`,en:`Rod / Stick`,ex:`接地棒 (Grounding rod)`},
-  {k:`柱`,on:`チュウ`,kun:`はしら`,en:`Pillar / Pole`,ex:`電柱 (Utility pole)`},
-  {k:`基`,on:`キ`,kun:`もと`,en:`Base / Standard`,ex:`基準 (Standard)`},
-  {k:`損`,on:`ソン`,kun:`そこ(なう)`,en:`Loss / Damage`,ex:`鉄損 (Iron loss)`},
-  {k:`軟`,on:`ナン`,kun:`やわ(らかい)`,en:`Soft / Annealed`,ex:`軟銅線 (Annealed copper wire)`},
-  {k:`爆`,on:`バク`,kun:`—`,en:`Explosion`,ex:`爆発 (Explosion)`},
-  {k:`皮`,on:`ヒ`,kun:`かわ`,en:`Skin / Sheath`,ex:`皮剥き (Stripping insulation)`},
-  {k:`層`,on:`ソウ`,kun:`—`,en:`Layer`,ex:`絶縁層 (Insulation layer)`},
-  {k:`均`,on:`キン`,kun:`—`,en:`Uniform / Average`,ex:`平均 (Average)`},
-  {k:`補`,on:`ホ`,kun:`おぎな(う)`,en:`Supplement / Assist`,ex:`補助 (Auxiliary)`},
-  {k:`床`,on:`ショウ`,kun:`ゆか`,en:`Floor`,ex:`床下 (Underfloor)`},
-  {k:`滅`,on:`メツ`,kun:`ほろ(びる)`,en:`Extinguish / Off`,ex:`点滅器 (Switch)`},
-  {k:`属`,on:`ゾク`,kun:`—`,en:`Belong / Metal`,ex:`金属 (Metal)`},
-  {k:`鋼`,on:`コウ`,kun:`はがね`,en:`Steel`,ex:`鋼管 (Steel pipe)`},
-  {k:`磁`,on:`ジ`,kun:`—`,en:`Magnetic`,ex:`磁石 (Magnet)`},
-  {k:`架`,on:`カ`,kun:`か(ける)`,en:`Rack / Overhead`,ex:`架空配線 (Overhead wiring)`},
-  {k:`遮`,on:`シャ`,kun:`さえぎ(る)`,en:`Block / Interrupt`,ex:`遮断器 (Circuit breaker)`},
-  {k:`素`,on:`ソ`,kun:`—`,en:`Element / Raw`,ex:`炭素 (Carbon)`},
-  {k:`護`,on:`ゴ`,kun:`まも(る)`,en:`Protect`,ex:`防護 (Protection)`},
-  {k:`漏`,on:`ロウ`,kun:`も(れる)`,en:`Leak`,ex:`漏電 (Electric leakage)`},
-  {k:`蛍`,on:`ケイ`,kun:`ほたる`,en:`Fluorescent`,ex:`蛍光灯 (Fluorescent lamp)`},
-  {k:`微`,on:`ビ`,kun:`—`,en:`Micro / Minute`,ex:`微弱 (Faint / Weak)`},
-  {k:`称`,on:`ショウ`,kun:`とな(える)`,en:`Name / Nominal`,ex:`公称電圧 (Nominal voltage)`},
-  {k:`樹`,on:`ジュ`,kun:`き`,en:`Resin / Tree`,ex:`合成樹脂 (Synthetic resin)`},
-  {k:`抵`,on:`テイ`,kun:`—`,en:`Resist`,ex:`抵抗 (Resistance)`},
-  {k:`抗`,on:`コウ`,kun:`—`,en:`Resist / Anti-`,ex:`抵抗 (Resistance)`},
-  {k:`縁`,on:`エン`,kun:`ふち`,en:`Edge / Insulation`,ex:`絶縁 (Insulation)`},
-  {k:`誘`,on:`ユウ`,kun:`さそ(う)`,en:`Induce`,ex:`誘導雷 (Induced lightning)`},
-  {k:`己`,on:`コ`,kun:`おのれ`,en:`Self`,ex:`自己融着テープ (Self-amalgamating tape)`},
-  {k:`融`,on:`ユウ`,kun:`と(ける)`,en:`Melt / Fusion`,ex:`自己融着テープ`},
-  {k:`縮`,on:`シュク`,kun:`ちぢ(む)`,en:`Shrink`,ex:`熱収縮チューブ (Heat-shrink tube)`},
-  {k:`需`,on:`ジュ`,kun:`—`,en:`Demand`,ex:`需用家 (Consumer)`},
-  {k:`率`,on:`リツ`,kun:`—`,en:`Rate / Factor`,ex:`効率 (Efficiency)`},
-  {k:`盤`,on:`バン`,kun:`—`,en:`Board / Panel`,ex:`配電盤 (Switchboard)`},
-  {k:`覆`,on:`フク`,kun:`おお(う)`,en:`Cover / Coat`,ex:`被覆 (Covering)`},
-  {k:`耐`,on:`タイ`,kun:`た(える)`,en:`Endure / Resistant`,ex:`耐圧 (Withstanding voltage)`},
-  {k:`士`,on:`シ`,kun:`—`,en:`Specialist / Man`,ex:`電気工事士 (Electrician)`},
-  {k:`隠`,on:`イン`,kun:`かく(す)`,en:`Conceal / Hidden`,ex:`隠ぺい配線 (Concealed wiring)`},
-  {k:`露`,on:`ロ`,kun:`つゆ`,en:`Exposed / Dew`,ex:`露出配線 (Exposed wiring)`},
-  {k:`岐`,on:`キ`,kun:`—`,en:`Branch / Fork`,ex:`分岐回路 (Branch circuit)`},
-  {k:`条`,on:`ジョウ`,kun:`—`,en:`Clause / Line`,ex:`12条 (Article 12)`},
-  {k:`標`,on:`ヒョウ`,kun:`しるし`,en:`Mark / Standard`,ex:`標識 (Sign / Mark)`},
-  {k:`視`,on:`シ`,kun:`み(る)`,en:`Visual / Sight`,ex:`目視点検 (Visual inspection)`},
-  {k:`挿`,on:`ソウ`,kun:`さ(す)`,en:`Insert`,ex:`挿入 (Insertion)`},
-  {k:`災`,on:`サイ`,kun:`わざわい`,en:`Disaster`,ex:`防災設備 (Disaster prevention equipment)`},
-  {k:`温`,on:`オン`,kun:`あたた(かい)`,en:`Warm / Temperature`,ex:`周囲温度 (Ambient temperature)`},
-  {k:`源`,on:`ゲン`,kun:`みなもと`,en:`Source / Origin`,ex:`電源 (Power source)`},
-  {k:`囲`,on:`イ`,kun:`かこ(む)`,en:`Surround / Enclose`,ex:`周囲温度 (Ambient temperature)`},
-  {k:`橋`,on:`キョウ`,kun:`はし`,en:`Bridge / Crosslink`,ex:`架橋ポリエチレン絶縁 (XLPE insulation)`},
-  {k:`順`,on:`ジュン`,kun:`—`,en:`Order / Sequence`,ex:`相順 (Phase sequence / rotation)`},
-  {k:`軸`,on:`ジク`,kun:`—`,en:`Axis / Shaft`,ex:`軸受け (Bearing)`},
-  {k:`製`,on:`セイ`,kun:`—`,en:`Manufactured / Made of`,ex:`合成樹脂製 (Synthetic resin type)`},
-  {k:`品`,on:`ヒン`,kun:`しな`,en:`Article / Goods`,ex:`電気用品 (Electrical appliance)`},
-  {k:`湯`,on:`トウ`,kun:`ゆ`,en:`Hot water`,ex:`給湯器 (Water heater)`},
-  {k:`施`,on:`シ`,kun:`ほどこ(す)`,en:`Apply / Execute / Install`,ex:`施工 (Construction work)`},
-  {k:`危`,on:`キ`,kun:`あぶ(ない)`,en:`Dangerous / Hazardous`,ex:`危険物 (Hazardous material)`},
-  {k:`険`,on:`ケン`,kun:`—`,en:`Steep / Dangerous`,ex:`危険 (Danger / Hazard)`},
-  {k:`害`,on:`ガイ`,kun:`—`,en:`Harm / Damage`,ex:`障害物 (Obstacle)`},
-  {k:`義`,on:`ギ`,kun:`—`,en:`Duty / Justice / Meaning`,ex:`義務 (Obligation)`},
-  {k:`務`,on:`ム`,kun:`つと(める)`,en:`Duty / Serve / Work`,ex:`義務 (Obligation)`},
-  {k:`規`,on:`キ`,kun:`—`,en:`Rule / Standard / Regulation`,ex:`規制 (Regulation)`},
-  {k:`省`,on:`ショウ`,kun:`はぶ(く)`,en:`Ministry / Save / Omit`,ex:`省令 (Ministerial ordinance)`},
-  {k:`令`,on:`レイ`,kun:`—`,en:`Order / Ordinance / Command`,ex:`省令 (Ministerial ordinance)`},
-  {k:`産`,on:`サン`,kun:`う(む)`,en:`Produce / Industry / Birth`,ex:`産業 (Industry)`},
-  {k:`経`,on:`ケイ`,kun:`へ(る)`,en:`Pass / Manage / Economy`,ex:`経済産業省 (Ministry of Economy)`},
-  {k:`済`,on:`サイ`,kun:`す(む)`,en:`Finish / Settle / Economy`,ex:`経済 (Economy)`},
-  {k:`販`,on:`ハン`,kun:`—`,en:`Sell / Distribute`,ex:`販売 (Sale / Distribution)`},
-  {k:`売`,on:`バイ`,kun:`う(る)`,en:`Sell`,ex:`販売 (Sale)`},
-  {k:`輸`,on:`ユ`,kun:`—`,en:`Transport / Import / Export`,ex:`輸入 (Import)`},
-  {k:`区`,on:`ク`,kun:`—`,en:`Ward / Section / Classify`,ex:`区分 (Classification / Category)`},
-  {k:`正`,on:`セイ`,kun:`ただ(しい)`,en:`Correct / Proper / Right`,ex:`正弦波 (Sine wave)`},
-  {k:`政`,on:`セイ`,kun:`まつりごと`,en:`Government / Politics`,ex:`政令 (Cabinet order)`},
-  {k:`民`,on:`ミン`,kun:`たみ`,en:`People / Civil / Private`,ex:`民間事業者 (Private enterprise)`},
-  {k:`的`,on:`テキ`,kun:`まと`,en:`Target / -ive / Of`,ex:`目的 (Purpose / Goal)`},
-  {k:`場`,on:`ジョウ`,kun:`ば`,en:`Place / Location / Scene`,ex:`特殊場所 (Special location)`},
-  {k:`所`,on:`ショ`,kun:`ところ`,en:`Place / Location`,ex:`変電所 (Substation)`},
-  {k:`石`,on:`セキ`,kun:`いし`,en:`Stone / Rock`,ex:`石油 (Petroleum / Oil)`},
-  {k:`貯`,on:`チョ`,kun:`た(める)`,en:`Store / Accumulate / Save`,ex:`貯蔵 (Storage)`},
-  {k:`修`,on:`シュウ`,kun:`おさ(める)`,en:`Repair / Study / Master`,ex:`修理 (Repair)`},
-  {k:`塗`,on:`ト`,kun:`ぬ(る)`,en:`Paint / Coat / Apply`,ex:`塗装 (Coating / Painting)`},
-  {k:`吹`,on:`スイ`,kun:`ふ(く)`,en:`Blow / Spray`,ex:`吹き付け塗装 (Spray coating)`},
-  {k:`住`,on:`ジュウ`,kun:`す(む)`,en:`Reside / Live / Dwell`,ex:`住宅 (Residential building)`},
-  {k:`宅`,on:`タク`,kun:`—`,en:`Home / Residence`,ex:`住宅 (Residence)`},
-  {k:`室`,on:`シツ`,kun:`—`,en:`Room / Chamber`,ex:`和室 (Japanese-style room)`},
-  {k:`壁`,on:`ヘキ`,kun:`かべ`,en:`Wall`,ex:`壁の内部配管 (In-wall conduit)`},
-  {k:`洗`,on:`セン`,kun:`あら(う)`,en:`Wash / Clean`,ex:`洗面所 (Washroom / Sink area)`},
-  {k:`台`,on:`ダイ`,kun:`—`,en:`Stand / Counter / Platform`,ex:`台所 (Kitchen)`},
-  {k:`車`,on:`シャ`,kun:`くるま`,en:`Vehicle / Car / Wheel`,ex:`車庫 (Garage)`},
-  {k:`庫`,on:`コ`,kun:`—`,en:`Warehouse / Storage / Garage`,ex:`車庫 (Garage)`},
-  {k:`和`,on:`ワ`,kun:`やわ(らぐ)`,en:`Harmony / Japanese-style`,ex:`和室 (Japanese-style room)`},
-  {k:`洋`,on:`ヨウ`,kun:`—`,en:`Western / Ocean`,ex:`洋室 (Western-style room)`},
-  {k:`居`,on:`キョ`,kun:`い(る)`,en:`Reside / Be present / Stay`,ex:`居間 (Living room)`},
-  {k:`玄`,on:`ゲン`,kun:`—`,en:`Mysterious / Dark / Entrance`,ex:`玄関 (Entrance / Foyer)`},
-  {k:`関`,on:`カン`,kun:`せき`,en:`Gate / Connection / Involve`,ex:`玄関 (Entrance / Foyer)`},
-  {k:`庭`,on:`テイ`,kun:`にわ`,en:`Garden / Yard`,ex:`庭園灯 (Garden light)`},
-  {k:`寝`,on:`シン`,kun:`ね(る)`,en:`Sleep / Lie down`,ex:`寝室 (Bedroom)`},
-  {k:`便`,on:`ベン`,kun:`たよ(り)`,en:`Convenient / Toilet / News`,ex:`便所 (Restroom / Toilet)`},
-  {k:`道`,on:`ドウ`,kun:`みち`,en:`Road / Path / Way`,ex:`公道 (Public road)`},
-  {k:`丸`,on:`ガン`,kun:`まる`,en:`Round / Circle`,ex:`丸形ケーブル (Round-type cable)`},
-  {k:`主`,on:`シュ`,kun:`ぬし`,en:`Main / Host / Owner`,ex:`施主 (Building owner / Client)`},
-  {k:`乾`,on:`カン`,kun:`かわ(く)`,en:`Dry`,ex:`乾式変圧器 (Dry-type transformer)`},
-  {k:`互`,on:`ゴ`,kun:`たが(い)`,en:`Mutual / Reciprocal`,ex:`相互式インターホン (Interphone system)`},
-  {k:`井`,on:`セイ`,kun:`い`,en:`Well / Ceiling`,ex:`天井 (Ceiling)`},
-  {k:`亜`,on:`ア`,kun:`—`,en:`Sub- / Zinc (亜鉛)`,ex:`亜鉛めっき鉄線 (Galvanized iron wire)`},
-  {k:`人`,on:`ジン`,kun:`ひと`,en:`Person / Human`,ex:`現場代理人 (Site representative)`},
-  {k:`仕`,on:`シ`,kun:`つか(える)`,en:`Serve / Work`,ex:`仕様書 (Specification document)`},
-  {k:`代`,on:`ダイ`,kun:`か(わる)`,en:`Replace / Generation / Fee`,ex:`現場代理人 (Field representative)`},
-  {k:`任`,on:`ニン`,kun:`まか(せる)`,en:`Responsibility / Trust`,ex:`責任分界点 (Demarcation point)`},
-  {k:`使`,on:`シ`,kun:`つか(う)`,en:`Use / Employ`,ex:`最大使用電流 (Maximum usable current)`},
-  {k:`倍`,on:`バイ`,kun:`—`,en:`Double / Times / Multiple`,ex:`倍率器 (Multiplier / Voltage divider)`},
-  {k:`共`,on:`キョウ`,kun:`とも`,en:`Together / Public / Shared`,ex:`公共事業 (Public utility work)`},
-  {k:`反`,on:`ハン`,kun:`そ(る)`,en:`Oppose / Reflect / Anti-`,ex:`反射笠 (Reflector shade)`},
-  {k:`号`,on:`ゴウ`,kun:`—`,en:`Number / Type No. / Signal`,ex:`2号ボックスコネクタ (No.2 box connector)`},
-  {k:`呼`,on:`コ`,kun:`よ(ぶ)`,en:`Call / Nominal / Summon`,ex:`呼び線挿入器 (Fish tape / Wire guide)`},
-  {k:`営`,on:`エイ`,kun:`いとな(む)`,en:`Manage / Build / Operate`,ex:`造営材 (Building structural material)`},
-  {k:`型`,on:`ケイ`,kun:`かた`,en:`Type / Model / Mold`,ex:`型枠 (Formwork / Mold frame)`},
-  {k:`増`,on:`ゾウ`,kun:`ふ(える)`,en:`Increase / Amplify`,ex:`増幅器 (Amplifier)`},
-  {k:`多`,on:`タ`,kun:`おお(い)`,en:`Many / Much / Multi-`,ex:`湿気の多い場所 (Damp location)`},
-  {k:`密`,on:`ミツ`,kun:`—`,en:`Dense / Close / Secret`,ex:`磁束密度 (Magnetic flux density)`},
-  {k:`射`,on:`シャ`,kun:`い(る)`,en:`Shoot / Emit / Reflect`,ex:`反射 (Reflection)`},
-  {k:`幅`,on:`フク`,kun:`はば`,en:`Width / Range / Amplitude`,ex:`増幅 (Amplification)`},
-  {k:`式`,on:`シキ`,kun:`—`,en:`Type / Formula / System`,ex:`三相3線式 (3-phase 3-wire system)`},
-  {k:`弦`,on:`ゲン`,kun:`つる`,en:`String / Chord / Sine`,ex:`正弦波 (Sine wave)`},
-  {k:`従`,on:`ジュウ`,kun:`したが(う)`,en:`Follow / Comply / From`,ex:`電気工事従事者 (Electrical construction worker)`},
-  {k:`抜`,on:`バツ`,kun:`ぬ(く)`,en:`Pull out / Extract / Remove`,ex:`抜け止め形コンセント (Locking outlet)`},
-  {k:`掛`,on:`カ`,kun:`か(ける)`,en:`Hang / Hook / Apply`,ex:`引掛けシーリング (Locking ceiling outlet)`},
-  {k:`措`,on:`ソ`,kun:`—`,en:`Manage / Measure / Step`,ex:`接触防護措置 (Contact protection measures)`},
-  {k:`撃`,on:`ゲキ`,kun:`う(つ)`,en:`Strike / Attack / Impact`,ex:`耐衝撃性 (Impact resistance)`},
-  {k:`整`,on:`セイ`,kun:`ととの(える)`,en:`Arrange / Rectify / Adjust`,ex:`整流器 (Rectifier)`},
-  {k:`斉`,on:`セイ`,kun:`—`,en:`Even / Uniform / Simultaneous`,ex:`一斉鳴動 (Simultaneous alarm activation)`},
-  {k:`斫`,on:`シャク`,kun:`は(つる)`,en:`Chisel / Hack / Cut concrete`,ex:`斫り工事 (Concrete cutting/chiseling work)`},
-  {k:`易`,on:`イ`,kun:`やさ(しい)`,en:`Easy / Simple`,ex:`簡易電気工事 (Simple/minor electrical work)`},
-  {k:`書`,on:`ショ`,kun:`か(く)`,en:`Write / Document`,ex:`仕様書 (Specification document)`},
-  {k:`枠`,on:`—`,kun:`わく`,en:`Frame / Border / Mount`,ex:`連用取付枠 (Multi-gang mounting frame)`},
-  {k:`根`,on:`コン`,kun:`ね`,en:`Root / Base / Origin`,ex:`羽根ぎり (Spade drill bit)`},
-  {k:`械`,on:`カイ`,kun:`—`,en:`Machine / Mechanism`,ex:`機械的強度 (Mechanical strength)`},
-  {k:`様`,on:`ヨウ`,kun:`さま`,en:`Style / Manner / Specification`,ex:`仕様書 (Specification document)`},
-  {k:`止`,on:`シ`,kun:`と(まる)`,en:`Stop / Fix / Prevent`,ex:`抜け止め形コンセント (Locking outlet)`},
-  {k:`殊`,on:`シュ`,kun:`こと`,en:`Special / Particular`,ex:`特殊電気工事 (Special electrical work)`},
-  {k:`殺`,on:`サツ`,kun:`ころ(す)`,en:`Kill / Sterilize`,ex:`殺菌灯 (Germicidal lamp)`},
-  {k:`液`,on:`エキ`,kun:`—`,en:`Liquid / Fluid`,ex:`液面制御 (Liquid level control)`},
-  {k:`湿`,on:`シツ`,kun:`しめ(る)`,en:`Damp / Humid / Wet`,ex:`湿気の多い場所 (Damp/humid location)`},
-  {k:`燥`,on:`ソウ`,kun:`—`,en:`Dry out / Arid`,ex:`乾燥した場所 (Dry/arid location)`},
-  {k:`片`,on:`ヘン`,kun:`かた`,en:`One-sided / Fragment / Piece`,ex:`可動鉄片形計器 (Moving-iron instrument)`},
-  {k:`現`,on:`ゲン`,kun:`あらわ(れる)`,en:`Present / Appear / Current`,ex:`現場 (Construction site / Field)`},
-  {k:`画`,on:`カク`,kun:`かく`,en:`Partition / Plan / Section`,ex:`防火区画 (Fire-resistant compartment)`},
-  {k:`瞬`,on:`シュン`,kun:`またた(く)`,en:`Instant / Blink / Momentary`,ex:`瞬時値 (Instantaneous value)`},
-  {k:`破`,on:`ハ`,kun:`やぶ(る)`,en:`Break / Rupture / Dash`,ex:`破線 (Dashed line on wiring diagram)`},
-  {k:`程`,on:`テイ`,kun:`ほど`,en:`Degree / Extent / Code`,ex:`内線規程 (Interior wiring code)`},
-  {k:`竣`,on:`シュン`,kun:`—`,en:`Complete / Finish (construction)`,ex:`竣工検査 (Completion inspection)`},
-  {k:`笠`,on:`リュウ`,kun:`かさ`,en:`Hat / Shade / Reflector cap`,ex:`反射笠照明 (Reflector shade lighting)`},
-  {k:`第`,on:`ダイ`,kun:`—`,en:`Ordinal / No. / Grade`,ex:`第3種接地工事 (Class-3 grounding work)`},
-  {k:`算`,on:`サン`,kun:`かぞ(える)`,en:`Calculate / Count / Estimate`,ex:`積算 (Cost estimation / Quantity survey)`},
-  {k:`簡`,on:`カン`,kun:`—`,en:`Simple / Brief / Easy`,ex:`簡易接触防護措置 (Simple contact protection)`},
-  {k:`粘`,on:`ネン`,kun:`ねば(る)`,en:`Sticky / Adhesive / Viscous`,ex:`粘着テープ (Adhesive tape)`},
-  {k:`羽`,on:`ウ`,kun:`はね`,en:`Wing / Feather / Fan blade`,ex:`換気扇の羽根 (Ventilation fan blade)`},
-  {k:`菌`,on:`キン`,kun:`—`,en:`Germ / Bacteria / Fungus`,ex:`殺菌灯 (Germicidal UV lamp)`},
-  {k:`蓄`,on:`チク`,kun:`たくわ(える)`,en:`Store / Accumulate / Stock`,ex:`蓄電池 (Storage battery)`},
-  {k:`衝`,on:`ショウ`,kun:`つ(く)`,en:`Collide / Impact / Shock`,ex:`耐衝撃性 (Impact resistance)`},
-  {k:`衡`,on:`コウ`,kun:`—`,en:`Balance / Equilibrium`,ex:`平衡 (Balance / Equilibrium)`},
-  {k:`責`,on:`セキ`,kun:`せ(める)`,en:`Responsibility / Blame`,ex:`責任分界点 (Demarcation point of responsibility)`},
-  {k:`費`,on:`ヒ`,kun:`つい(やす)`,en:`Expense / Consume / Cost`,ex:`消費電力 (Power consumption)`},
-  {k:`赤`,on:`セキ`,kun:`あか`,en:`Red`,ex:`赤色表示灯 (Red indicator lamp)`},
-  {k:`足`,on:`ソク`,kun:`あし`,en:`Foot / Leg / Sufficient / Scaffold`,ex:`足場 (Scaffolding)`},
-  {k:`輝`,on:`キ`,kun:`かがや(く)`,en:`Shine / Brilliance / Luminance`,ex:`高輝度放電灯 (High-intensity discharge lamp)`},
-  {k:`込`,on:`—`,kun:`こ(む)`,en:`Embed / Fill in / Into`,ex:`埋込形 (Flush-mounted / Recessed type)`},
-  {k:`避`,on:`ヒ`,kun:`さ(ける)`,en:`Avoid / Deflect / Protect from`,ex:`避雷器 (Lightning arrester)`},
-  {k:`針`,on:`シン`,kun:`はり`,en:`Needle / Pin / Rod / Pointer`,ex:`避雷針 (Lightning rod)`},
-  {k:`鉄`,on:`テツ`,kun:`—`,en:`Iron / Steel`,ex:`亜鉛めっき鉄線 (Galvanized iron wire)`},
-  {k:`鉛`,on:`エン`,kun:`なまり`,en:`Lead (Pb) / Zinc compound`,ex:`亜鉛 (Zinc) / 鉛管 (Lead pipe)`},
-  {k:`雨`,on:`ウ`,kun:`あめ`,en:`Rain`,ex:`防雨形コンセント (Rainproof outlet)`},
-  {k:`零`,on:`レイ`,kun:`—`,en:`Zero`,ex:`零相変流器 (Zero-phase current transformer)`},
-  {k:`雷`,on:`ライ`,kun:`かみなり`,en:`Thunder / Lightning`,ex:`避雷器 (Lightning arrester)`},
-  {k:`鳴`,on:`メイ`,kun:`な(く)`,en:`Sound / Ring / Alarm`,ex:`一斉鳴動 (Simultaneous alarm activation)`}
+  {k:`子`,on:`シ`,kun:`こ`,en:`Child / Small object`,ex:`電子（でんし）Electron`},
+  {k:`安`,on:`アン`,kun:`やす(い)`,en:`Safe / Cheap`,ex:`安全器（あんぜんき）Protective device`},
+  {k:`時`,on:`ジ`,kun:`とき`,en:`Time`,ex:`時限組合せ（じげんくみあわせ）Time limit combination`},
+  {k:`一`,on:`イチ`,kun:`ひと(つ)`,en:`One`,ex:`一次側（いちじがわ）Primary side`},
+  {k:`金`,on:`キン`,kun:`かね`,en:`Metal / Gold`,ex:`金属管（きんぞくかん）Metal conduit`},
+  {k:`電`,on:`デン`,kun:`—`,en:`Electricity`,ex:`電圧（でんあつ）Voltage`},
+  {k:`気`,on:`キ`,kun:`—`,en:`Spirit / Air / Energy`,ex:`気中遮断器（きちゅうしゃだんき）Air circuit breaker`},
+  {k:`外`,on:`ガイ`,kun:`そと`,en:`Outside`,ex:`外線（がいせん）Outer line`},
+  {k:`空`,on:`クウ`,kun:`そら`,en:`Empty / Sky / Air`,ex:`空調設備（くうちょうせつび）Air conditioning equipment`},
+  {k:`間`,on:`カン`,kun:`あいだ`,en:`Interval / Between`,ex:`離隔距間（りかくきょかん）Separation distance`},
+  {k:`高`,on:`コウ`,kun:`たか(い)`,en:`High`,ex:`高圧（こうあつ）High voltage`},
+  {k:`水`,on:`スイ`,kun:`みず`,en:`Water`,ex:`水平（すいへい）Horizontal`},
+  {k:`黒`,on:`コク`,kun:`くろ`,en:`Black`,ex:`黒色電線（こくしょくでんせん）Black wire`},
+  {k:`大`,on:`ダイ`,kun:`おお(きい)`,en:`Large`,ex:`最大電力（さいだいでんりょく）Maximum power`},
+  {k:`三`,on:`サン`,kun:`み`,en:`Three`,ex:`三相（さんそう）Three-phase`},
+  {k:`火`,on:`カ`,kun:`ひ`,en:`Fire`,ex:`引火（いんか）Ignition`},
+  {k:`手`,on:`シュ`,kun:`て`,en:`Hand`,ex:`手動（しゅどう）Manual`},
+  {k:`小`,on:`ショウ`,kun:`ちい(さい)`,en:`Small`,ex:`小勢力回路（しょうせいりょくかいろ）Small power circuit`},
+  {k:`出`,on:`シュツ`,kun:`で(る)`,en:`Exit / Output`,ex:`出力（しゅつりょく）Output`},
+  {k:`力`,on:`リョク`,kun:`ちから`,en:`Power / Force`,ex:`電力（でんりょく）Electric power`},
+  {k:`立`,on:`リツ`,kun:`た(てる)`,en:`Stand / Build`,ex:`自立形（じりつがた）Self-supporting type`},
+  {k:`上`,on:`ジョウ`,kun:`うえ`,en:`Above / Up`,ex:`上限（じょうげん）Upper limit`},
+  {k:`中`,on:`チュウ`,kun:`なか`,en:`Middle / Inside`,ex:`中性線（ちゅうせいせん）Neutral wire`},
+  {k:`下`,on:`カ`,kun:`した`,en:`Below / Down`,ex:`下限（かげん）Lower limit`},
+  {k:`天`,on:`テン`,kun:`あめ`,en:`Heaven / Ceiling`,ex:`天井隠ぺい配線（てんじょういんぺいはいせん）Ceiling concealed wiring`},
+  {k:`少`,on:`ショウ`,kun:`すく(ない)`,en:`Few / Little`,ex:`少量（しょうりょう）Small quantity`},
+  {k:`二`,on:`ニ`,kun:`ふた(つ)`,en:`Two`,ex:`二次側（にじがわ）Secondary side`},
+  {k:`白`,on:`ハク`,kun:`しろ`,en:`White`,ex:`白色電線（はくしょくでんせん）White wire`},
+  {k:`半`,on:`ハン`,kun:`なか(ば)`,en:`Half`,ex:`半導体（はんどうたい）Semiconductor`},
+  {k:`口`,on:`コウ`,kun:`くち`,en:`Mouth / Opening`,ex:`取付口（とりつけぐち）Mounting hole`},
+  {k:`風`,on:`フウ`,kun:`かぜ`,en:`Wind`,ex:`風圧荷重（ふうあつかじゅう）Wind pressure load`},
+  {k:`左`,on:`サ`,kun:`ひだり`,en:`Left`,ex:`左回り（ひだりまわり）Counter-clockwise`},
+  {k:`右`,on:`ウ`,kun:`みぎ`,en:`Right`,ex:`右回り（みぎまわり）Clockwise`},
+  {k:`分`,on:`ブン`,kun:`わ(ける)`,en:`Part / Minute / Divide`,ex:`分電盤（ぶんでんばん）Distribution board`},
+  {k:`行`,on:`コウ`,kun:`い(く)`,en:`Go / Conduct`,ex:`施行（しこう）Enforcement`},
+  {k:`目`,on:`モク`,kun:`め`,en:`Eye / Item`,ex:`項目（こうもく）Item`},
+  {k:`木`,on:`モク`,kun:`き`,en:`Wood`,ex:`木台（きだい）Wooden base`},
+  {k:`入`,on:`ニュウ`,kun:`い(れる)`,en:`Enter / Input`,ex:`投入（とうにゅう）Closing / Input`},
+  {k:`地`,on:`チ`,kun:`つち`,en:`Ground / Earth`,ex:`接地（せっち）Earthing / Grounding`},
+  {k:`工`,on:`コウ`,kun:`—`,en:`Construction / Work`,ex:`電気工事（でんきこうじ）Electrical work`},
+  {k:`事`,on:`ジ`,kun:`こと`,en:`Thing / Business`,ex:`電気事業法（でんきじぎょうほう）Electricity Business Act`},
+  {k:`用`,on:`ヨウ`,kun:`もち(いる)`,en:`Use / Purpose`,ex:`業務用（ぎょうむよう）Commercial use`},
+  {k:`明`,on:`メイ`,kun:`あか(るい)`,en:`Bright / Light`,ex:`照明（しょうめい）Lighting`},
+  {k:`着`,on:`チャク`,kun:`き(る)`,en:`Wear / Arrive / Attach`,ex:`密着（みっちゃく）Close contact`},
+  {k:`定`,on:`テイ`,kun:`さだ(める)`,en:`Fixed / Determine`,ex:`定格電圧（ていかくでんあつ）Rated voltage`},
+  {k:`相`,on:`ソウ`,kun:`あい`,en:`Phase / Mutual`,ex:`相回転（そうかいてん）Phase rotation`},
+  {k:`内`,on:`ナイ`,kun:`うち`,en:`Inside / Within`,ex:`屋内配線（おくないはいせん）Indoor wiring`},
+  {k:`作`,on:`サク`,kun:`つく(る)`,en:`Make / Operate`,ex:`動作（どうさ）Operation`},
+  {k:`物`,on:`ブツ`,kun:`もの`,en:`Thing / Object`,ex:`障害物（しょうがいぶつ）Obstacle`},
+  {k:`屋`,on:`オク`,kun:`や`,en:`House / Roof`,ex:`屋外用（おくがいよう）Outdoor use`},
+  {k:`引`,on:`イン`,kun:`ひ(く)`,en:`Pull / Draw`,ex:`引込線（ひきこみせん）Service wire`},
+  {k:`回`,on:`カイ`,kun:`まわ(る)`,en:`Turn / Times / Circuit`,ex:`回路（かいろ）Circuit`},
+  {k:`転`,on:`テン`,kun:`ころ(がる)`,en:`Roll / Change`,ex:`回転磁界（かいてんじかい）Rotating magnetic field`},
+  {k:`計`,on:`ケイ`,kun:`はか(る)`,en:`Measure / Plan`,ex:`電力量計（でんりょくりょうけい）Watt-hour meter`},
+  {k:`界`,on:`カイ`,kun:`—`,en:`World / Boundary / Field`,ex:`磁界（じかい）Magnetic field`},
+  {k:`度`,on:`ド`,kun:`たび`,en:`Degree / Limit`,ex:`温度（おんど）Temperature`},
+  {k:`開`,on:`カイ`,kun:`あ(ける)`,en:`Open`,ex:`開閉器（かいへいき）Switch`},
+  {k:`閉`,on:`ヘイ`,kun:`と(じる)`,en:`Close`,ex:`開閉器（かいへいき）Switch`},
+  {k:`切`,on:`セツ`,kun:`き(る)`,en:`Cut / Disconnect`,ex:`切断（せつだん）Cutting`},
+  {k:`起`,on:`キ`,kun:`お(きる)`,en:`Rise / Generate`,ex:`起電力（きでんりょく）Electromotive force`},
+  {k:`形`,on:`ケイ`,kun:`かたち`,en:`Shape / Form`,ex:`扇形（おうぎがた）Fan-shaped`},
+  {k:`光`,on:`コウ`,kun:`ひかり`,en:`Light`,ex:`光束（こうそく）Luminous flux`},
+  {k:`軽`,on:`ケイ`,kun:`かる(い)`,en:`Light (weight)`,ex:`軽合金（けいごうきん）Light alloy`},
+  {k:`銀`,on:`ギン`,kun:`—`,en:`Silver`,ex:`銀（ぎん）Silver - used in contacts`},
+  {k:`放`,on:`ホウ`,kun:`はな(す)`,en:`Release / Emit`,ex:`放電（ほうでん）Discharge`},
+  {k:`質`,on:`シツ`,kun:`—`,en:`Quality / Matter`,ex:`材質（ざいしつ）Material quality`},
+  {k:`化`,on:`カ`,kun:`ば(ける)`,en:`Change / -ization`,ex:`軟化（なんか）Softening`},
+  {k:`合`,on:`ゴウ`,kun:`あ(う)`,en:`Combine / Fit`,ex:`接合（せつごう）Joining`},
+  {k:`色`,on:`シキ`,kun:`いろ`,en:`Color`,ex:`識色（しきしょく）Color coding`},
+  {k:`動`,on:`ドウ`,kun:`うご(く)`,en:`Move / Operate`,ex:`電動機（でんどうき）Motor`},
+  {k:`方`,on:`ホウ`,kun:`かた`,en:`Direction / Method`,ex:`方向性（ほうこうせい）Directionality`},
+  {k:`理`,on:`リ`,kun:`—`,en:`Logic / Reason`,ex:`物理（ぶつり）Physics`},
+  {k:`自`,on:`ジ`,kun:`みずか(ら)`,en:`Self`,ex:`自動遮断（じどうしゃだん）Automatic cutoff`},
+  {k:`家`,on:`カ`,kun:`いえ`,en:`House / Home`,ex:`一般用電気工作物（いっぱんようでんきこうさくぶつ）General use`},
+  {k:`業`,on:`ギョウ`,kun:`わざ`,en:`Business / Work`,ex:`電気工業（でんきこうぎょう）Electrical industry`},
+  {k:`実`,on:`ジツ`,kun:`み`,en:`Reality / Fruit`,ex:`実効値（じっこうち）RMS value`},
+  {k:`弱`,on:`ジャク`,kun:`よわ(い)`,en:`Weak`,ex:`弱電流回路（じゃくでんりゅうかいろ）Weak current circuit`},
+  {k:`心`,on:`シン`,kun:`こころ`,en:`Heart / Core`,ex:`電線心線（でんせんしんせん）Core wire`},
+  {k:`進`,on:`シン`,kun:`すす(む)`,en:`Advance / Lead`,ex:`進相コンデンサ（しんそうコンデンサ）Static capacitor`},
+  {k:`始`,on:`シ`,kun:`はじ(める)`,en:`Start`,ex:`開始（かいし）Start`},
+  {k:`通`,on:`ツウ`,kun:`とお(る)`,en:`Pass / Commute`,ex:`導通（どうつう）Continuity`},
+  {k:`体`,on:`タイ`,kun:`からだ`,en:`Body / Object`,ex:`導体（どうたい）Conductor`},
+  {k:`変`,on:`ヘン`,kun:`か(わる)`,en:`Change / Strange`,ex:`変圧器（へんあつき）Transformer`},
+  {k:`箱`,on:`ソウ`,kun:`はこ`,en:`Box`,ex:`アウトレットボックス（あうとれっとぼっくす）Outlet box`},
+  {k:`材`,on:`ザイ`,kun:`—`,en:`Material`,ex:`絶縁材（ぜつえんざい）Insulating material`},
+  {k:`太`,on:`タイ`,kun:`ふと(い)`,en:`Thick / Fat`,ex:`太さ（ふとさ）Thickness / Gauge`},
+  {k:`池`,on:`チ`,kun:`いけ`,en:`Pond / Battery`,ex:`電池（でんち）Battery`},
+  {k:`短`,on:`タン`,kun:`みじか(い)`,en:`Short`,ex:`短絡（たんらく）Short circuit`},
+  {k:`低`,on:`テイ`,kun:`ひく(い)`,en:`Low`,ex:`低圧（ていあつ）Low voltage`},
+  {k:`降`,on:`コウ`,kun:`お(りる)`,en:`Descend / Fall`,ex:`電圧降下（でんあつこうか）Voltage drop`},
+  {k:`者`,on:`シャ`,kun:`もの`,en:`Person`,ex:`電気工事者（でんきこうじしゃ）Electrician`},
+  {k:`同`,on:`ドウ`,kun:`おな(じ)`,en:`Same`,ex:`同期（どうき）Synchronous`},
+  {k:`試`,on:`シ`,kun:`ため(す)`,en:`Test / Try`,ex:`試験（しけん）Examination`},
+  {k:`験`,on:`ケン`,kun:`—`,en:`Test / Verify`,ex:`試験（しけん）Examination`},
+  {k:`特`,on:`トク`,kun:`—`,en:`Special`,ex:`特別高圧（とくべつこうあつ）Extra-high voltage`},
+  {k:`別`,on:`ベツ`,kun:`わか(れる)`,en:`Separate / Different`,ex:`種別（しゅべつ）Category`},
+  {k:`重`,on:`ジュウ`,kun:`おも(い)`,en:`Heavy / Weight`,ex:`荷重（かじゅう）Load`},
+  {k:`料`,on:`リョウ`,kun:`—`,en:`Fee / Material`,ex:`材料（ざいりょう）Material`},
+  {k:`図`,on:`ズ`,kun:`—`,en:`Diagram / Map`,ex:`配線図（はいせんず）Wiring diagram`},
+  {k:`強`,on:`キョウ`,kun:`つよ(い)`,en:`Strong`,ex:`引張強さ（ひっぱりつよさ）Tensile strength`},
+  {k:`無`,on:`ム`,kun:`な(い)`,en:`None / Nothing`,ex:`無負荷（むふか）No load`},
+  {k:`有`,on:`ユウ`,kun:`あ(る)`,en:`Have / Exist`,ex:`有効電力（ゆうこうでんりょく）Active power`},
+  {k:`極`,on:`キョク`,kun:`きわ(める)`,en:`Pole / Extreme`,ex:`接地極（せっちきょく）Grounding electrode`},
+  {k:`路`,on:`ロ`,kun:`みち`,en:`Path / Road`,ex:`回路（かいろ）Circuit`},
+  {k:`種`,on:`シュ`,kun:`たね`,en:`Type / Species`,ex:`Ａ種接地工事（えーしゅせっちこうじ）Type A grounding`},
+  {k:`接`,on:`セツ`,kun:`つ(ぐ)`,en:`Connect / Touch`,ex:`接地（せっち）Earthing`},
+  {k:`管`,on:`カン`,kun:`くだ`,en:`Pipe / Tube`,ex:`電線管（でんせんかん）Conduit`},
+  {k:`灯`,on:`トウ`,kun:`ひ`,en:`Light / Lamp`,ex:`蛍光灯（けいこうとう）Fluorescent lamp`},
+  {k:`厚`,on:`コウ`,kun:`あつ(い)`,en:`Thick`,ex:`厚鋼電線管（こうこうでんせんかん）Thick steel conduit`},
+  {k:`油`,on:`ユ`,kun:`あぶら`,en:`Oil`,ex:`油入変圧器（あぶらいりへんあつき）Oil-immersed transformer`},
+  {k:`差`,on:`サ`,kun:`さ(す)`,en:`Difference / Insert`,ex:`差込形コネクタ（さしこみがたコネクタ）Push-in connector`},
+  {k:`点`,on:`テン`,kun:`—`,en:`Point / Dot`,ex:`接続点（せつぞくてん）Connection point`},
+  {k:`位`,on:`イ`,kun:`くらい`,en:`Position / Unit`,ex:`位相（いそう）Phase`},
+  {k:`表`,on:`ヒョウ`,kun:`おもて`,en:`Table / Surface`,ex:`第一表（だいいちひょう）Table 1`},
+  {k:`示`,on:`ジ`,kun:`しめ(す)`,en:`Show / Indicate`,ex:`指示計器（しじけいき）Indicating instrument`},
+  {k:`蔵`,on:`ゾウ`,kun:`くら`,en:`Store / Internal`,ex:`内蔵（ないぞう）Built-in`},
+  {k:`線`,on:`セン`,kun:`—`,en:`Line / Wire`,ex:`電線（でんせん）Electric wire`},
+  {k:`般`,on:`ハン`,kun:`—`,en:`General`,ex:`一般用電気工作物（いっぱんようでんきこうさくぶつ）General use`},
+  {k:`薄`,on:`ハク`,kun:`うす(い)`,en:`Thin`,ex:`薄鋼電線管（はくこうでんせんかん）Thin steel conduit`},
+  {k:`具`,on:`グ`,kun:`—`,en:`Tool / Equipment`,ex:`接続器具（せつぞくきぐ）Connecting device`},
+  {k:`法`,on:`ホウ`,kun:`—`,en:`Law / Method`,ex:`電気工事士法（でんきこうじしほう）Electricians Act`},
+  {k:`側`,on:`ソク`,kun:`がわ`,en:`Side`,ex:`負荷側（ふかがわ）Load side`},
+  {k:`遅`,on:`チ`,kun:`おそ(い)`,en:`Late / Delay`,ex:`遅れ位相（おくれいそう）Lagging phase`},
+  {k:`押`,on:`オウ`,kun:`お(す)`,en:`Push`,ex:`押ボタン（おしボタン）Push button`},
+  {k:`速`,on:`ソク`,kun:`はや(い)`,en:`Speed / Fast`,ex:`変速（へんそく）Speed change`},
+  {k:`確`,on:`カク`,kun:`たしか`,en:`Certain / Confirm`,ex:`確認（かくにん）Confirmation`},
+  {k:`認`,on:`ニン`,kun:`みと(める)`,en:`Recognize / Approve`,ex:`認可（にんか）Approval`},
+  {k:`過`,on:`カ`,kun:`す(ぎる)`,en:`Over / Excess`,ex:`過電流（かでんりゅう）Overcurrent`},
+  {k:`流`,on:`リュウ`,kun:`なが(れる)`,en:`Flow / Current`,ex:`電流（でんりゅう）Electric current`},
+  {k:`断`,on:`ダン`,kun:`ことわ(る)`,en:`Cut / Disconnect`,ex:`遮断器（しゃだんき）Circuit breaker`},
+  {k:`機`,on:`キ`,kun:`はた`,en:`Machine`,ex:`発電機（はつでんき）Generator`},
+  {k:`性`,on:`セイ`,kun:`—`,en:`Nature / Property`,ex:`絶縁性（ぜつえんせい）Insulating property`},
+  {k:`粉`,on:`フン`,kun:`こな`,en:`Powder`,ex:`粉じん（こなじん）Dust`},
+  {k:`付`,on:`フ`,kun:`つ(ける)`,en:`Attach`,ex:`取付（とりつけ）Mounting`},
+  {k:`負`,on:`フ`,kun:`ま(ける)`,en:`Negative / Load`,ex:`負荷（ふか）Load`},
+  {k:`荷`,on:`カ`,kun:`に`,en:`Load / Cargo`,ex:`負荷（ふか）Load`},
+  {k:`防`,on:`ボウ`,kun:`ふせ(ぐ)`,en:`Prevent / Protect`,ex:`防護（ぼうご）Protection`},
+  {k:`置`,on:`チ`,kun:`お(く)`,en:`Place / Put / Set`,ex:`設置（せっち）Installation`},
+  {k:`換`,on:`カン`,kun:`か(える)`,en:`Exchange / Replace`,ex:`換気扇（かんきせん）Ventilation fan`},
+  {k:`数`,on:`スウ`,kun:`かず`,en:`Number`,ex:`周波数（しゅうはすう）Frequency`},
+  {k:`許`,on:`キョ`,kun:`ゆる(す)`,en:`Permit / Allow`,ex:`許容電流（きょようでんりゅう）Allowable current`},
+  {k:`容`,on:`ヨウ`,kun:`—`,en:`Capacity / Container`,ex:`容量（ようりょう）Capacity`},
+  {k:`配`,on:`ハイ`,kun:`くば(る)`,en:`Distribute / Wiring`,ex:`配線（はいせん）Wiring`},
+  {k:`塩`,on:`エン`,kun:`しお`,en:`Salt / Vinyl`,ex:`硬質塩化ビニル管（こうしつえんかビニルかん）Rigid PVC conduit`},
+  {k:`公`,on:`コウ`,kun:`おおやけ`,en:`Public`,ex:`公称断面積（こうしょうだんめんせき）Nominal cross-section`},
+  {k:`面`,on:`メン`,kun:`つら`,en:`Surface / Face`,ex:`断面積（だんめんせき）Cross-sectional area`},
+  {k:`積`,on:`セキ`,kun:`つ(む)`,en:`Accumulate / Area`,ex:`面積（めんせき）Area`},
+  {k:`成`,on:`セイ`,kun:`な(る)`,en:`Become / Form`,ex:`合成樹脂管（ごうせいじゅしかん）Synthetic resin conduit`},
+  {k:`束`,on:`ソク`,kun:`たば`,en:`Bundle`,ex:`束線（そくせん）Bundling wires`},
+  {k:`交`,on:`コウ`,kun:`まじ(わる)`,en:`Exchange / Alternate`,ex:`交流（こうりゅう）Alternating current`},
+  {k:`続`,on:`ゾク`,kun:`つづ(く)`,en:`Continue / Connect`,ex:`接続（せつぞく）Connection`},
+  {k:`絶`,on:`ゼツ`,kun:`た(つ)`,en:`Absolute / Insulate`,ex:`絶縁（ぜつえん）Insulation`},
+  {k:`最`,on:`サイ`,kun:`もっと(も)`,en:`Most / Max`,ex:`最大（さいだい）Maximum`},
+  {k:`値`,on:`チ`,kun:`あたい`,en:`Value`,ex:`測定値（そくていち）Measured value`},
+  {k:`平`,on:`ヘイ`,kun:`たいら`,en:`Flat / Level`,ex:`平行（へいこう）Parallel`},
+  {k:`消`,on:`ショウ`,kun:`き(える)`,en:`Extinguish / Consume`,ex:`消費電力（しょうひでんりょく）Power consumption`},
+  {k:`期`,on:`キ`,kun:`—`,en:`Period / Term`,ex:`周期（しゅうき）Period / Cycle`},
+  {k:`波`,on:`ハ`,kun:`なみ`,en:`Wave`,ex:`周波数（しゅうはすう）Frequency`},
+  {k:`熱`,on:`ネツ`,kun:`あつ(い)`,en:`Heat`,ex:`電熱器（でんねつき）Electric heater`},
+  {k:`受`,on:`ジュ`,kun:`う(ける)`,en:`Receive`,ex:`受電（じゅでん）Power reception`},
+  {k:`要`,on:`ヨウ`,kun:`い(る)`,en:`Require / Essential`,ex:`要件（ようけん）Requirement`},
+  {k:`査`,on:`サ`,kun:`—`,en:`Inspect`,ex:`検査（けんさ）Inspection`},
+  {k:`常`,on:`ジョウ`,kun:`つね`,en:`Normal / Regular`,ex:`非常用（ひじょうよう）Emergency use`},
+  {k:`発`,on:`ハツ`,kun:`た(つ)`,en:`Generate / Start`,ex:`発電（はつでん）Power generation`},
+  {k:`設`,on:`セツ`,kun:`もう(ける)`,en:`Establish / Install`,ex:`設備（せつび）Equipment`},
+  {k:`備`,on:`ビ`,kun:`そな(える)`,en:`Equipment / Provide`,ex:`予備（よび）Spare`},
+  {k:`振`,on:`シン`,kun:`ふ(る)`,en:`Shake / Vibration`,ex:`振動（しんどう）Vibration`},
+  {k:`結`,on:`ケツ`,kun:`むす(ぶ)`,en:`Connect / Result`,ex:`結線（けっせん）Wiring / Connection`},
+  {k:`制`,on:`セイ`,kun:`—`,en:`Control / Limit`,ex:`制御（せいぎょ）Control`},
+  {k:`御`,on:`ギョ`,kun:`おん`,en:`Control / Honorific`,ex:`制御（せいぎょ）Control`},
+  {k:`限`,on:`ゲン`,kun:`かぎ(る)`,en:`Limit`,ex:`制限（せいげん）Limitation`},
+  {k:`静`,on:`セイ`,kun:`しず(か)`,en:`Quiet / Static`,ex:`静電容量（せいでんようりょう）Capacitance`},
+  {k:`量`,on:`リョウ`,kun:`はか(る)`,en:`Quantity / Capacity`,ex:`電量（でんりょう）Amount of electricity`},
+  {k:`全`,on:`ゼン`,kun:`まった(く)`,en:`All / Whole`,ex:`全負荷（ぜんふか）Full load`},
+  {k:`造`,on:`ゾウ`,kun:`つく(る)`,en:`Create / Structure`,ex:`構造（こうぞう）Structure`},
+  {k:`対`,on:`タイ`,kun:`—`,en:`Against / Opposite / Pair`,ex:`接地対地電圧（せっちたいちでんあつ）Voltage to ground`},
+  {k:`陽`,on:`ヨウ`,kun:`ひ`,en:`Positive / Sun`,ex:`陽極（ようきょく）Anode`},
+  {k:`単`,on:`タン`,kun:`—`,en:`Single`,ex:`単相（たんそう）Single-phase`},
+  {k:`欠`,on:`ケツ`,kun:`か(ける)`,en:`Missing / Lack`,ex:`欠相（けっそう）Phase loss`},
+  {k:`保`,on:`ホ`,kun:`たも(つ)`,en:`Keep / Protect`,ex:`保護（ほご）Protection`},
+  {k:`絡`,on:`ラク`,kun:`から(まる)`,en:`Entangle / Link`,ex:`短絡（たんらく）Short circuit`},
+  {k:`調`,on:`チョウ`,kun:`しら(べる)`,en:`Adjust / Investigate`,ex:`調光（ちょうこう）Dimming`},
+  {k:`直`,on:`チョク`,kun:`ただ(ちに)`,en:`Straight / Direct`,ex:`直流（ちょくりゅう）Direct current`},
+  {k:`列`,on:`レツ`,kun:`—`,en:`Row / Series`,ex:`直列（ちょくれつ）Series`},
+  {k:`格`,on:`カク`,kun:`—`,en:`Standard / Rank`,ex:`定格（ていかく）Rating`},
+  {k:`供`,on:`キョウ`,kun:`そな(える)`,en:`Provide / Offer`,ex:`供給（きょうきゅう）Supply`},
+  {k:`給`,on:`キュウ`,kun:`た(まう)`,en:`Supply / Salary`,ex:`電力供給（でんりょくきょうきゅう）Electricity supply`},
+  {k:`技`,on:`ギ`,kun:`わざ`,en:`Technique / Skill`,ex:`技術基準（ぎじゅつきじゅん）Technical standards`},
+  {k:`術`,on:`ジュツ`,kun:`すべ`,en:`Art / Skill / Method`,ex:`技術（ぎじゅつ）Technology`},
+  {k:`準`,on:`ジュン`,kun:`—`,en:`Standard / Level`,ex:`標準（ひょうじゅん）Standard`},
+  {k:`球`,on:`キュウ`,kun:`たま`,en:`Ball / Bulb`,ex:`電球（でんきゅう）Light bulb`},
+  {k:`減`,on:`ゲン`,kun:`へ(る)`,en:`Decrease / Reduce`,ex:`軽減（けいげん）Reduction`},
+  {k:`係`,on:`ケイ`,kun:`かか(わる)`,en:`Relation / Coefficient`,ex:`係数（けいすう）Coefficient`},
+  {k:`失`,on:`シツ`,kun:`うしな(う)`,en:`Lose`,ex:`損失（そんしつ）Loss`},
+  {k:`資`,on:`シ`,kun:`—`,en:`Resource / Qualification`,ex:`資格（しかく）Qualification`},
+  {k:`構`,on:`コウ`,kun:`かま(える)`,en:`Structure / Compose`,ex:`構内（こうない）Premises`},
+  {k:`取`,on:`シュ`,kun:`と(る)`,en:`Take / Fetch`,ex:`取付（とりつけ）Mounting`},
+  {k:`留`,on:`リュウ`,kun:`と(める)`,en:`Fasten / Stay`,ex:`留めネジ（とめネジ）Set screw`},
+  {k:`非`,on:`ヒ`,kun:`—`,en:`Non- / Emergency`,ex:`非常灯（ひじょうとう）Emergency light`},
+  {k:`予`,on:`ヨ`,kun:`あらかじ(め)`,en:`Advance / Spare`,ex:`予備電源（よびでんげん）Backup power`},
+  {k:`件`,on:`ケン`,kun:`—`,en:`Case / Condition`,ex:`要件（ようけん）Requirement`},
+  {k:`並`,on:`ヘイ`,kun:`なら(べる)`,en:`Line up / Parallel`,ex:`並列（へいれつ）Parallel`},
+  {k:`比`,on:`ヒ`,kun:`くら(べる)`,en:`Ratio / Compare`,ex:`圧比（あつひ）Pressure ratio`},
+  {k:`助`,on:`ジョ`,kun:`たす(ける)`,en:`Help / Assistant`,ex:`補助（ほじょ）Auxiliary`},
+  {k:`識`,on:`シキ`,kun:`し(る)`,en:`Discriminate / Know`,ex:`識別（しきべつ）Identification`},
+  {k:`打`,on:`ダ`,kun:`う(つ)`,en:`Strike / Hit`,ex:`打ち込み（うちこみ）Embedding`},
+  {k:`連`,on:`レン`,kun:`つら(なる)`,en:`Lead / Connect`,ex:`連動（れんどう）Interlocking`},
+  {k:`警`,on:`ケイ`,kun:`—`,en:`Warn / Police`,ex:`警報器（けいほうき）Alarm`},
+  {k:`報`,on:`ホウ`,kun:`しら(せる)`,en:`Report / Info`,ex:`火災報知機（かさいほうちき）Fire alarm`},
+  {k:`端`,on:`タン`,kun:`はし`,en:`Edge / Terminal`,ex:`端子（たんし）Terminal`},
+  {k:`照`,on:`ショウ`,kun:`て(らす)`,en:`Illuminate / Check`,ex:`照度（しょうど）Illuminance`},
+  {k:`器`,on:`キ`,kun:`うつわ`,en:`Device / Vessel`,ex:`遮断器（しゃだんき）Circuit breaker`},
+  {k:`異`,on:`イ`,kun:`こと(なる)`,en:`Different / Abnormal`,ex:`異常（いじょう）Abnormality`},
+  {k:`埋`,on:`マイ`,kun:`う(める)`,en:`Bury`,ex:`埋込形（うめこみがた）Flush-mounted`},
+  {k:`則`,on:`ソク`,kun:`のっと(る)`,en:`Rule / Law`,ex:`規則（きそく）Rule`},
+  {k:`装`,on:`ソウ`,kun:`よそお(う)`,en:`Equipment / Wear`,ex:`外装（がいそう）Sheath / Jacket`},
+  {k:`可`,on:`カ`,kun:`—`,en:`Possible / Allow`,ex:`可とう電線管（かとうでんせんかん）Flexible conduit`},
+  {k:`燃`,on:`ネン`,kun:`も(える)`,en:`Burn`,ex:`燃焼（ねんしょう）Combustion`},
+  {k:`触`,on:`ショク`,kun:`ふ(れる)`,en:`Touch`,ex:`接触（せっしょく）Contact`},
+  {k:`測`,on:`ソク`,kun:`はか(る)`,en:`Measure`,ex:`測定（そくてい）Measurement`},
+  {k:`扇`,on:`セン`,kun:`おうぎ`,en:`Fan`,ex:`換気扇（かんきせん）Ventilation fan`},
+  {k:`幹`,on:`カン`,kun:`みき`,en:`Main / Trunk`,ex:`幹線（かんせん）Main line`},
+  {k:`板`,on:`バン`,kun:`いた`,en:`Board / Plate`,ex:`配電板（はいでんばん）Switchboard`},
+  {k:`張`,on:`チョウ`,kun:`は(る)`,en:`Tension / Stretch`,ex:`引張荷重（ひっぱりかじゅう）Tensile load`},
+  {k:`径`,on:`ケイ`,kun:`—`,en:`Diameter`,ex:`直径（ちょっけい）Diameter`},
+  {k:`検`,on:`ケン`,kun:`しら(べる)`,en:`Inspect / Detect`,ex:`検電器（けんでんき）Voltage detector`},
+  {k:`圧`,on:`アツ`,kun:`お(す)`,en:`Pressure / Voltage`,ex:`電圧（でんあつ）Voltage`},
+  {k:`硬`,on:`コウ`,kun:`かた(い)`,en:`Hard`,ex:`硬質塩化ビニル管（こうしつえんかビニルかん）Rigid PVC conduit`},
+  {k:`脂`,on:`シ`,kun:`あぶら`,en:`Resin / Fat`,ex:`合成樹脂（ごうせいじゅし）Synthetic resin`},
+  {k:`銅`,on:`ドウ`,kun:`あかがね`,en:`Copper`,ex:`軟銅線（なんどうせん）Annealed copper wire`},
+  {k:`導`,on:`ドウ`,kun:`みちび(く)`,en:`Lead / Conduct`,ex:`導体（どうたい）Conductor`},
+  {k:`効`,on:`コウ`,kun:`き(く)`,en:`Effect / Efficient`,ex:`有効電力（ゆうこうでんりょく）Active power`},
+  {k:`周`,on:`シュウ`,kun:`まわ(り)`,en:`Cycle / Around`,ex:`周波数（しゅうはすう）Frequency`},
+  {k:`勢`,on:`セイ`,kun:`いきお(い)`,en:`Force / Energy`,ex:`小勢力回路（しょうせいりょくかいろ）Small power circuit`},
+  {k:`被`,on:`ヒ`,kun:`こうむ(る)`,en:`Coat / Covered`,ex:`被覆（ひふく）Insulation / Covering`},
+  {k:`棒`,on:`ボウ`,kun:`—`,en:`Rod / Stick`,ex:`接地棒（せっちぼう）Grounding rod`},
+  {k:`柱`,on:`チュウ`,kun:`はしら`,en:`Pillar / Pole`,ex:`電柱（でんちゅう）Utility pole`},
+  {k:`基`,on:`キ`,kun:`もと`,en:`Base / Standard`,ex:`基準（きじゅん）Standard`},
+  {k:`損`,on:`ソン`,kun:`そこ(なう)`,en:`Loss / Damage`,ex:`鉄損（てつそん）Iron loss`},
+  {k:`軟`,on:`ナン`,kun:`やわ(らかい)`,en:`Soft / Annealed`,ex:`軟銅線（なんどうせん）Annealed copper wire`},
+  {k:`爆`,on:`バク`,kun:`—`,en:`Explosion`,ex:`爆発（ばくはつ）Explosion`},
+  {k:`皮`,on:`ヒ`,kun:`かわ`,en:`Skin / Sheath`,ex:`皮剥き（かわむき）Stripping insulation`},
+  {k:`層`,on:`ソウ`,kun:`—`,en:`Layer`,ex:`絶縁層（ぜつえんそう）Insulation layer`},
+  {k:`均`,on:`キン`,kun:`—`,en:`Uniform / Average`,ex:`平均（へいきん）Average`},
+  {k:`補`,on:`ホ`,kun:`おぎな(う)`,en:`Supplement / Assist`,ex:`補助（ほじょ）Auxiliary`},
+  {k:`床`,on:`ショウ`,kun:`ゆか`,en:`Floor`,ex:`床下（ゆかした）Underfloor`},
+  {k:`滅`,on:`メツ`,kun:`ほろ(びる)`,en:`Extinguish / Off`,ex:`点滅器（てんめつき）Switch`},
+  {k:`属`,on:`ゾク`,kun:`—`,en:`Belong / Metal`,ex:`金属（きんぞく）Metal`},
+  {k:`鋼`,on:`コウ`,kun:`はがね`,en:`Steel`,ex:`鋼管（こうかん）Steel pipe`},
+  {k:`磁`,on:`ジ`,kun:`—`,en:`Magnetic`,ex:`磁石（じしゃく）Magnet`},
+  {k:`架`,on:`カ`,kun:`か(ける)`,en:`Rack / Overhead`,ex:`架空配線（かくうはいせん）Overhead wiring`},
+  {k:`遮`,on:`シャ`,kun:`さえぎ(る)`,en:`Block / Interrupt`,ex:`遮断器（しゃだんき）Circuit breaker`},
+  {k:`素`,on:`ソ`,kun:`—`,en:`Element / Raw`,ex:`炭素（たんそ）Carbon`},
+  {k:`護`,on:`ゴ`,kun:`まも(る)`,en:`Protect`,ex:`防護（ぼうご）Protection`},
+  {k:`漏`,on:`ロウ`,kun:`も(れる)`,en:`Leak`,ex:`漏電（ろうでん）Electric leakage`},
+  {k:`蛍`,on:`ケイ`,kun:`ほたる`,en:`Fluorescent`,ex:`蛍光灯（けいこうとう）Fluorescent lamp`},
+  {k:`微`,on:`ビ`,kun:`—`,en:`Micro / Minute`,ex:`微弱（びじゃく）Faint / Weak`},
+  {k:`称`,on:`ショウ`,kun:`とな(える)`,en:`Name / Nominal`,ex:`公称電圧（こうしょうでんあつ）Nominal voltage`},
+  {k:`樹`,on:`ジュ`,kun:`き`,en:`Resin / Tree`,ex:`合成樹脂（ごうせいじゅし）Synthetic resin`},
+  {k:`抵`,on:`テイ`,kun:`—`,en:`Resist`,ex:`抵抗（ていこう）Resistance`},
+  {k:`抗`,on:`コウ`,kun:`—`,en:`Resist / Anti-`,ex:`抵抗（ていこう）Resistance`},
+  {k:`縁`,on:`エン`,kun:`ふち`,en:`Edge / Insulation`,ex:`絶縁（ぜつえん）Insulation`},
+  {k:`誘`,on:`ユウ`,kun:`さそ(う)`,en:`Induce`,ex:`誘導雷（ゆうどうらい）Induced lightning`},
+  {k:`己`,on:`コ`,kun:`おのれ`,en:`Self`,ex:`自己融着テープ（じこゆうちゃくテープ）Self-amalgamating tape`},
+  {k:`融`,on:`ユウ`,kun:`と(ける)`,en:`Melt / Fusion`,ex:`自己融着テープ（じこゆうちゃくテープ）Self-amalgamating tape`},
+  {k:`縮`,on:`シュク`,kun:`ちぢ(む)`,en:`Shrink`,ex:`熱収縮チューブ（ねつしゅうしゅくチューブ）Heat-shrink tube`},
+  {k:`需`,on:`ジュ`,kun:`—`,en:`Demand`,ex:`需用家（じゅようか）Consumer`},
+  {k:`率`,on:`リツ`,kun:`—`,en:`Rate / Factor`,ex:`効率（こうりつ）Efficiency`},
+  {k:`盤`,on:`バン`,kun:`—`,en:`Board / Panel`,ex:`配電盤（はいでんばん）Switchboard`},
+  {k:`覆`,on:`フク`,kun:`おお(う)`,en:`Cover / Coat`,ex:`被覆（ひふく）Covering`},
+  {k:`耐`,on:`タイ`,kun:`た(える)`,en:`Endure / Resistant`,ex:`耐圧（たいあつ）Withstanding voltage`},
+  {k:`士`,on:`シ`,kun:`—`,en:`Specialist / Man`,ex:`電気工事士（でんきこうじし）Electrician`},
+  {k:`隠`,on:`イン`,kun:`かく(す)`,en:`Conceal / Hidden`,ex:`隠ぺい配線（いんぺいはいせん）Concealed wiring`},
+  {k:`露`,on:`ロ`,kun:`つゆ`,en:`Exposed / Dew`,ex:`露出配線（ろしゅつはいせん）Exposed wiring`},
+  {k:`岐`,on:`キ`,kun:`—`,en:`Branch / Fork`,ex:`分岐回路（ぶんきかいろ）Branch circuit`},
+  {k:`条`,on:`ジョウ`,kun:`—`,en:`Clause / Line`,ex:`12条（じゅうにじょう）Article 12`},
+  {k:`標`,on:`ヒョウ`,kun:`しるし`,en:`Mark / Standard`,ex:`標識（ひょうしき）Sign / Mark`},
+  {k:`視`,on:`シ`,kun:`み(る)`,en:`Visual / Sight`,ex:`目視点検（もくしてんけん）Visual inspection`},
+  {k:`挿`,on:`ソウ`,kun:`さ(す)`,en:`Insert`,ex:`挿入（そうにゅう）Insertion`},
+  {k:`災`,on:`サイ`,kun:`わざわい`,en:`Disaster`,ex:`防災設備（ぼうさいせつび）Disaster prevention equipment`},
+  {k:`温`,on:`オン`,kun:`あたた(かい)`,en:`Warm / Temperature`,ex:`周囲温度（しゅういおんど）Ambient temperature`},
+  {k:`源`,on:`ゲン`,kun:`みなもと`,en:`Source / Origin`,ex:`電源（でんげん）Power source`},
+  {k:`囲`,on:`イ`,kun:`かこ(む)`,en:`Surround / Enclose`,ex:`周囲温度（しゅういおんど）Ambient temperature`},
+  {k:`橋`,on:`キョウ`,kun:`はし`,en:`Bridge / Crosslink`,ex:`架橋ポリエチレン絶縁（かきょうポリエチレンぜつえん）XLPE insulation`},
+  {k:`順`,on:`ジュン`,kun:`—`,en:`Order / Sequence`,ex:`相順（そうじゅん）Phase sequence / rotation`},
+  {k:`軸`,on:`ジク`,kun:`—`,en:`Axis / Shaft`,ex:`軸受け（じくうけ）Bearing`},
+  {k:`製`,on:`セイ`,kun:`—`,en:`Manufactured / Made of`,ex:`合成樹脂製（ごうせいじゅしせい）Synthetic resin type`},
+  {k:`品`,on:`ヒン`,kun:`しな`,en:`Article / Goods`,ex:`電気用品（でんきようひん）Electrical appliance`},
+  {k:`湯`,on:`トウ`,kun:`ゆ`,en:`Hot water`,ex:`給湯器（きゅうとうき）Water heater`},
+  {k:`施`,on:`シ`,kun:`ほどこ(す)`,en:`Apply / Execute / Install`,ex:`施工（せこう）Construction work`},
+  {k:`危`,on:`キ`,kun:`あぶ(ない)`,en:`Dangerous / Hazardous`,ex:`危険物（きけんぶつ）Hazardous material`},
+  {k:`険`,on:`ケン`,kun:`—`,en:`Steep / Dangerous`,ex:`危険（きけん）Danger / Hazard`},
+  {k:`害`,on:`ガイ`,kun:`—`,en:`Harm / Damage`,ex:`障害物（しょうがいぶつ）Obstacle`},
+  {k:`義`,on:`ギ`,kun:`—`,en:`Duty / Justice / Meaning`,ex:`義務（ぎむ）Obligation`},
+  {k:`務`,on:`ム`,kun:`つと(める)`,en:`Duty / Serve / Work`,ex:`義務（ぎむ）Obligation`},
+  {k:`規`,on:`キ`,kun:`—`,en:`Rule / Standard / Regulation`,ex:`規制（きせい）Regulation`},
+  {k:`省`,on:`ショウ`,kun:`はぶ(く)`,en:`Ministry / Save / Omit`,ex:`省令（しょうれい）Ministerial ordinance`},
+  {k:`令`,on:`レイ`,kun:`—`,en:`Order / Ordinance / Command`,ex:`省令（しょうれい）Ministerial ordinance`},
+  {k:`産`,on:`サン`,kun:`う(む)`,en:`Produce / Industry / Birth`,ex:`産業（さんぎょう）Industry`},
+  {k:`経`,on:`ケイ`,kun:`へ(る)`,en:`Pass / Manage / Economy`,ex:`経済産業省（けいざいさんぎょうしょう）Ministry of Economy`},
+  {k:`済`,on:`サイ`,kun:`す(む)`,en:`Finish / Settle / Economy`,ex:`経済（けいざい）Economy`},
+  {k:`販`,on:`ハン`,kun:`—`,en:`Sell / Distribute`,ex:`販売（はんばい）Sale / Distribution`},
+  {k:`売`,on:`バイ`,kun:`う(る)`,en:`Sell`,ex:`販売（はんばい）Sale`},
+  {k:`輸`,on:`ユ`,kun:`—`,en:`Transport / Import / Export`,ex:`輸入（ゆにゅう）Import`},
+  {k:`区`,on:`ク`,kun:`—`,en:`Ward / Section / Classify`,ex:`区分（くぶん）Classification / Category`},
+  {k:`正`,on:`セイ`,kun:`ただ(しい)`,en:`Correct / Proper / Right`,ex:`正弦波（せいげんは）Sine wave`},
+  {k:`政`,on:`セイ`,kun:`まつりごと`,en:`Government / Politics`,ex:`政令（せいれい）Cabinet order`},
+  {k:`民`,on:`ミン`,kun:`たみ`,en:`People / Civil / Private`,ex:`民間事業者（みんかんじぎょうしゃ）Private enterprise`},
+  {k:`的`,on:`テキ`,kun:`まと`,en:`Target / -ive / Of`,ex:`目的（もくてき）Purpose / Goal`},
+  {k:`場`,on:`ジョウ`,kun:`ば`,en:`Place / Location / Scene`,ex:`特殊場所（とくしゅばしょ）Special location`},
+  {k:`所`,on:`ショ`,kun:`ところ`,en:`Place / Location`,ex:`変電所（へんでんしょ）Substation`},
+  {k:`石`,on:`セキ`,kun:`いし`,en:`Stone / Rock`,ex:`石油（せきゆ）Petroleum / Oil`},
+  {k:`貯`,on:`チョ`,kun:`た(める)`,en:`Store / Accumulate / Save`,ex:`貯蔵（ちょぞう）Storage`},
+  {k:`修`,on:`シュウ`,kun:`おさ(める)`,en:`Repair / Study / Master`,ex:`修理（しゅうり）Repair`},
+  {k:`塗`,on:`ト`,kun:`ぬ(る)`,en:`Paint / Coat / Apply`,ex:`塗装（とそう）Coating / Painting`},
+  {k:`吹`,on:`スイ`,kun:`ふ(く)`,en:`Blow / Spray`,ex:`吹き付け塗装（ふきつけとそう）Spray coating`},
+  {k:`住`,on:`ジュウ`,kun:`す(む)`,en:`Reside / Live / Dwell`,ex:`住宅（じゅうたく）Residential building`},
+  {k:`宅`,on:`タク`,kun:`—`,en:`Home / Residence`,ex:`住宅（じゅうたく）Residence`},
+  {k:`室`,on:`シツ`,kun:`—`,en:`Room / Chamber`,ex:`和室（わしつ）Japanese-style room`},
+  {k:`壁`,on:`ヘキ`,kun:`かべ`,en:`Wall`,ex:`壁の内部配管（かべのないぶはいかん）In-wall conduit`},
+  {k:`洗`,on:`セン`,kun:`あら(う)`,en:`Wash / Clean`,ex:`洗面所（せんめんじょ）Washroom / Sink area`},
+  {k:`台`,on:`ダイ`,kun:`—`,en:`Stand / Counter / Platform`,ex:`台所（だいどころ）Kitchen`},
+  {k:`車`,on:`シャ`,kun:`くるま`,en:`Vehicle / Car / Wheel`,ex:`車庫（しゃこ）Garage`},
+  {k:`庫`,on:`コ`,kun:`—`,en:`Warehouse / Storage / Garage`,ex:`車庫（しゃこ）Garage`},
+  {k:`和`,on:`ワ`,kun:`やわ(らぐ)`,en:`Harmony / Japanese-style`,ex:`和室（わしつ）Japanese-style room`},
+  {k:`洋`,on:`ヨウ`,kun:`—`,en:`Western / Ocean`,ex:`洋室（ようしつ）Western-style room`},
+  {k:`居`,on:`キョ`,kun:`い(る)`,en:`Reside / Be present / Stay`,ex:`居間（いま）Living room`},
+  {k:`玄`,on:`ゲン`,kun:`—`,en:`Mysterious / Dark / Entrance`,ex:`玄関（げんかん）Entrance / Foyer`},
+  {k:`関`,on:`カン`,kun:`せき`,en:`Gate / Connection / Involve`,ex:`玄関（げんかん）Entrance / Foyer`},
+  {k:`庭`,on:`テイ`,kun:`にわ`,en:`Garden / Yard`,ex:`庭園灯（ていえんとう）Garden light`},
+  {k:`寝`,on:`シン`,kun:`ね(る)`,en:`Sleep / Lie down`,ex:`寝室（しんしつ）Bedroom`},
+  {k:`便`,on:`ベン`,kun:`たよ(り)`,en:`Convenient / Toilet / News`,ex:`便所（べんじょ）Restroom / Toilet`},
+  {k:`道`,on:`ドウ`,kun:`みち`,en:`Road / Path / Way`,ex:`公道（こうどう）Public road`},
+  {k:`丸`,on:`ガン`,kun:`まる`,en:`Round / Circle`,ex:`丸形ケーブル（まるがたケーブル）Round-type cable`},
+  {k:`主`,on:`シュ`,kun:`ぬし`,en:`Main / Host / Owner`,ex:`施主（せしゅ）Building owner / Client`},
+  {k:`乾`,on:`カン`,kun:`かわ(く)`,en:`Dry`,ex:`乾式変圧器（かんしきへんあつき）Dry-type transformer`},
+  {k:`互`,on:`ゴ`,kun:`たが(い)`,en:`Mutual / Reciprocal`,ex:`相互式インターホン（そうごしきインターホン）Interphone system`},
+  {k:`井`,on:`セイ`,kun:`い`,en:`Well / Ceiling`,ex:`天井（てんじょう）Ceiling`},
+  {k:`亜`,on:`ア`,kun:`—`,en:`Sub- / Zinc (亜鉛)`,ex:`亜鉛めっき鉄線（あえんめっきてっせん）Galvanized iron wire`},
+  {k:`人`,on:`ジン`,kun:`ひと`,en:`Person / Human`,ex:`現場代理人（げんばだいりにん）Site representative`},
+  {k:`仕`,on:`シ`,kun:`つか(える)`,en:`Serve / Work`,ex:`仕様書（しようしょ）Specification document`},
+  {k:`代`,on:`ダイ`,kun:`か(わる)`,en:`Replace / Generation / Fee`,ex:`現場代理人（げんばだいりにん）Field representative`},
+  {k:`任`,on:`ニン`,kun:`まか(せる)`,en:`Responsibility / Trust`,ex:`責任分界点（せきにんぶんかいてん）Demarcation point`},
+  {k:`使`,on:`シ`,kun:`つか(う)`,en:`Use / Employ`,ex:`最大使用電流（さいだいしようでんりゅう）Maximum usable current`},
+  {k:`倍`,on:`バイ`,kun:`—`,en:`Double / Times / Multiple`,ex:`倍率器（ばいりつき）Multiplier / Voltage divider`},
+  {k:`共`,on:`キョウ`,kun:`とも`,en:`Together / Public / Shared`,ex:`公共事業（こうきょうじぎょう）Public utility work`},
+  {k:`反`,on:`ハン`,kun:`そ(る)`,en:`Oppose / Reflect / Anti-`,ex:`反射笠（はんしゃがさ）Reflector shade`},
+  {k:`号`,on:`ゴウ`,kun:`—`,en:`Number / Type No. / Signal`,ex:`2号ボックスコネクタ（にごうボックスコネクタ）No.2 box connector`},
+  {k:`呼`,on:`コ`,kun:`よ(ぶ)`,en:`Call / Nominal / Summon`,ex:`呼び線挿入器（よびせんそうにゅうき）Fish tape / Wire guide`},
+  {k:`営`,on:`エイ`,kun:`いとな(む)`,en:`Manage / Build / Operate`,ex:`造営材（ぞうえいざい）Building structural material`},
+  {k:`型`,on:`ケイ`,kun:`かた`,en:`Type / Model / Mold`,ex:`型枠（かたわく）Formwork / Mold frame`},
+  {k:`増`,on:`ゾウ`,kun:`ふ(える)`,en:`Increase / Amplify`,ex:`増幅器（ぞうふくき）Amplifier`},
+  {k:`多`,on:`タ`,kun:`おお(い)`,en:`Many / Much / Multi-`,ex:`湿気の多い場所（しっけのおおいばしょ）Damp location`},
+  {k:`密`,on:`ミツ`,kun:`—`,en:`Dense / Close / Secret`,ex:`磁束密度（じそくみつど）Magnetic flux density`},
+  {k:`射`,on:`シャ`,kun:`い(る)`,en:`Shoot / Emit / Reflect`,ex:`反射（はんしゃ）Reflection`},
+  {k:`幅`,on:`フク`,kun:`はば`,en:`Width / Range / Amplitude`,ex:`増幅（ぞうふく）Amplification`},
+  {k:`式`,on:`シキ`,kun:`—`,en:`Type / Formula / System`,ex:`三相3線式（さんそうさんせんしき）3-phase 3-wire system`},
+  {k:`弦`,on:`ゲン`,kun:`つる`,en:`String / Chord / Sine`,ex:`正弦波（せいげんは）Sine wave`},
+  {k:`従`,on:`ジュウ`,kun:`したが(う)`,en:`Follow / Comply / From`,ex:`電気工事従事者（でんきこうじじゅうじしゃ）Electrical construction worker`},
+  {k:`抜`,on:`バツ`,kun:`ぬ(く)`,en:`Pull out / Extract / Remove`,ex:`抜け止め形コンセント（ぬけどめがたコンセント）Locking outlet`},
+  {k:`掛`,on:`カ`,kun:`か(ける)`,en:`Hang / Hook / Apply`,ex:`引掛けシーリング（ひっかけシーリング）Locking ceiling outlet`},
+  {k:`措`,on:`ソ`,kun:`—`,en:`Manage / Measure / Step`,ex:`接触防護措置（せっしょくぼうごそち）Contact protection measures`},
+  {k:`撃`,on:`ゲキ`,kun:`う(つ)`,en:`Strike / Attack / Impact`,ex:`耐衝撃性（たいしょうげきせい）Impact resistance`},
+  {k:`整`,on:`セイ`,kun:`ととの(える)`,en:`Arrange / Rectify / Adjust`,ex:`整流器（せいりゅうき）Rectifier`},
+  {k:`斉`,on:`セイ`,kun:`—`,en:`Even / Uniform / Simultaneous`,ex:`一斉鳴動（いっせいめいどう）Simultaneous alarm activation`},
+  {k:`斫`,on:`シャク`,kun:`は(つる)`,en:`Chisel / Hack / Cut concrete`,ex:`斫り工事（はつりこうじ）Concrete cutting/chiseling work`},
+  {k:`易`,on:`イ`,kun:`やさ(しい)`,en:`Easy / Simple`,ex:`簡易電気工事（かんいでんきこうじ）Simple/minor electrical work`},
+  {k:`書`,on:`ショ`,kun:`か(く)`,en:`Write / Document`,ex:`仕様書（しようしょ）Specification document`},
+  {k:`枠`,on:`—`,kun:`わく`,en:`Frame / Border / Mount`,ex:`連用取付枠（れんようとりつけわく）Multi-gang mounting frame`},
+  {k:`根`,on:`コン`,kun:`ね`,en:`Root / Base / Origin`,ex:`羽根ぎり（はねぎり）Spade drill bit`},
+  {k:`械`,on:`カイ`,kun:`—`,en:`Machine / Mechanism`,ex:`機械的強度（きかいてききょうど）Mechanical strength`},
+  {k:`様`,on:`ヨウ`,kun:`さま`,en:`Style / Manner / Specification`,ex:`仕様書（しようしょ）Specification document`},
+  {k:`止`,on:`シ`,kun:`と(まる)`,en:`Stop / Fix / Prevent`,ex:`抜け止め形コンセント（ぬけどめがたコンセント）Locking outlet`},
+  {k:`殊`,on:`シュ`,kun:`こと`,en:`Special / Particular`,ex:`特殊電気工事（とくしゅでんきこうじ）Special electrical work`},
+  {k:`殺`,on:`サツ`,kun:`ころ(す)`,en:`Kill / Sterilize`,ex:`殺菌灯（さっきんとう）Germicidal lamp`},
+  {k:`液`,on:`エキ`,kun:`—`,en:`Liquid / Fluid`,ex:`液面制御（えきめんせいぎょ）Liquid level control`},
+  {k:`湿`,on:`シツ`,kun:`しめ(る)`,en:`Damp / Humid / Wet`,ex:`湿気の多い場所（しっけのおおいばしょ）Damp/humid location`},
+  {k:`燥`,on:`ソウ`,kun:`—`,en:`Dry out / Arid`,ex:`乾燥した場所（かんそうしたばしょ）Dry/arid location`},
+  {k:`片`,on:`ヘン`,kun:`かた`,en:`One-sided / Fragment / Piece`,ex:`可動鉄片形計器（かどうてっぺんがたけいき）Moving-iron instrument`},
+  {k:`現`,on:`ゲン`,kun:`あらわ(れる)`,en:`Present / Appear / Current`,ex:`現場（げんば）Construction site / Field`},
+  {k:`画`,on:`カク`,kun:`かく`,en:`Partition / Plan / Section`,ex:`防火区画（ぼうかくかく）Fire-resistant compartment`},
+  {k:`瞬`,on:`シュン`,kun:`またた(く)`,en:`Instant / Blink / Momentary`,ex:`瞬時値（しゅんじち）Instantaneous value`},
+  {k:`破`,on:`ハ`,kun:`やぶ(る)`,en:`Break / Rupture / Dash`,ex:`破線（はせん）Dashed line on wiring diagram`},
+  {k:`程`,on:`テイ`,kun:`ほど`,en:`Degree / Extent / Code`,ex:`内線規程（ないせんきてい）Interior wiring code`},
+  {k:`竣`,on:`シュン`,kun:`—`,en:`Complete / Finish (construction)`,ex:`竣工検査（しゅんこうけんさ）Completion inspection`},
+  {k:`笠`,on:`リュウ`,kun:`かさ`,en:`Hat / Shade / Reflector cap`,ex:`反射笠照明（はんしゃがさしょうめい）Reflector shade lighting`},
+  {k:`第`,on:`ダイ`,kun:`—`,en:`Ordinal / No. / Grade`,ex:`第3種接地工事（だいさんしゅせっちこうじ）Class-3 grounding work`},
+  {k:`算`,on:`サン`,kun:`かぞ(える)`,en:`Calculate / Count / Estimate`,ex:`積算（せきさん）Cost estimation / Quantity survey`},
+  {k:`簡`,on:`カン`,kun:`—`,en:`Simple / Brief / Easy`,ex:`簡易接触防護措置（かんいせっしょくぼうごそち）Simple contact protection`},
+  {k:`粘`,on:`ネン`,kun:`ねば(る)`,en:`Sticky / Adhesive / Viscous`,ex:`粘着テープ（ねんちゃくテープ）Adhesive tape`},
+  {k:`羽`,on:`ウ`,kun:`はね`,en:`Wing / Feather / Fan blade`,ex:`換気扇の羽根（かんきせんのはね）Ventilation fan blade`},
+  {k:`菌`,on:`キン`,kun:`—`,en:`Germ / Bacteria / Fungus`,ex:`殺菌灯（さっきんとう）Germicidal UV lamp`},
+  {k:`蓄`,on:`チク`,kun:`たくわ(える)`,en:`Store / Accumulate / Stock`,ex:`蓄電池（ちくでんち）Storage battery`},
+  {k:`衝`,on:`ショウ`,kun:`つ(く)`,en:`Collide / Impact / Shock`,ex:`耐衝撃性（たいしょうげきせい）Impact resistance`},
+  {k:`衡`,on:`コウ`,kun:`—`,en:`Balance / Equilibrium`,ex:`平衡（へいこう）Balance / Equilibrium`},
+  {k:`責`,on:`セキ`,kun:`せ(める)`,en:`Responsibility / Blame`,ex:`責任分界点（せきにんぶんかいてん）Demarcation point of responsibility`},
+  {k:`費`,on:`ヒ`,kun:`つい(やす)`,en:`Expense / Consume / Cost`,ex:`消費電力（しょうひでんりょく）Power consumption`},
+  {k:`赤`,on:`セキ`,kun:`あか`,en:`Red`,ex:`赤色表示灯（あかいろひょうじとう）Red indicator lamp`},
+  {k:`足`,on:`ソク`,kun:`あし`,en:`Foot / Leg / Sufficient / Scaffold`,ex:`足場（あしば）Scaffolding`},
+  {k:`輝`,on:`キ`,kun:`かがや(く)`,en:`Shine / Brilliance / Luminance`,ex:`高輝度放電灯（こうきどほうでんとう）High-intensity discharge lamp`},
+  {k:`込`,on:`—`,kun:`こ(む)`,en:`Embed / Fill in / Into`,ex:`埋込形（うめこみがた）Flush-mounted / Recessed type`},
+  {k:`避`,on:`ヒ`,kun:`さ(ける)`,en:`Avoid / Deflect / Protect from`,ex:`避雷器（ひらいき）Lightning arrester`},
+  {k:`針`,on:`シン`,kun:`はり`,en:`Needle / Pin / Rod / Pointer`,ex:`避雷針（ひらいしん）Lightning rod`},
+  {k:`鉄`,on:`テツ`,kun:`—`,en:`Iron / Steel`,ex:`亜鉛めっき鉄線（あえんめっきてっせん）Galvanized iron wire`},
+  {k:`鉛`,on:`エン`,kun:`なまり`,en:`Lead (Pb) / Zinc compound`,ex:`亜鉛（あえん）Zinc / 鉛管（なまりかん）Lead pipe`},
+  {k:`雨`,on:`ウ`,kun:`あめ`,en:`Rain`,ex:`防雨形コンセント（ぼううがたコンセント）Rainproof outlet`},
+  {k:`零`,on:`レイ`,kun:`—`,en:`Zero`,ex:`零相変流器（れいそうへんりゅうき）Zero-phase current transformer`},
+  {k:`雷`,on:`ライ`,kun:`かみなり`,en:`Thunder / Lightning`,ex:`避雷器（ひらいき）Lightning arrester`},
+  {k:`鳴`,on:`メイ`,kun:`な(く)`,en:`Sound / Ring / Alarm`,ex:`一斉鳴動（いっせいめいどう）Simultaneous alarm activation`}
   ];
 
   const DK_KATA = [
@@ -2640,6 +2645,28 @@ function mkDenkou(c) {
     ...DK_TERMS.map(e=>({...e,type:'t'}))
   ];
 
+  const DK_BATCH = 10;
+  const BATCH_TYPES = [
+    {key:'kanji', label:'漢字', items:DK_KANJI.map(e=>({...e,type:'k'})), cls:'#e8a84c'},
+    {key:'kata',  label:'カタカナ語', items:DK_KATA.map(e=>({...e,type:'kana'})), cls:'#6bbf8a'},
+    {key:'terms', label:'専門用語', items:DK_TERMS.map(e=>({...e,type:'t'})), cls:'#6b9fd4'}
+  ];
+  function dkBatchKey(typeKey, bi, kind) { return 'nw3_dk_'+typeKey+'_'+bi+'_'+kind; }
+  function dkIsDone(typeKey, bi) { return !!localStorage.getItem(dkBatchKey(typeKey,bi,'done')); }
+  function dkIsUnlocked(typeKey, bi) { return !!localStorage.getItem(dkBatchKey(typeKey,bi,'unlock')); }
+  function dkSetDone(typeKey, bi) { localStorage.setItem(dkBatchKey(typeKey,bi,'done'),'1'); localStorage.setItem(dkBatchKey(typeKey,bi,'unlock'),'1'); }
+  function dkGetBatches(items) {
+    const out=[];
+    for(let i=0;i<items.length;i+=DK_BATCH) out.push(items.slice(i,i+DK_BATCH));
+    return out;
+  }
+
+  // Batch state
+  let dkView='select'; // 'select'|'batchmenu'|'flash'|'quiz'
+  let dkCurType=BATCH_TYPES[0];
+  let dkCurBatch=0;
+  let dkBatchItems=[];
+
   let mode='flash', typeFilter='all', filterMode='all';
   let deckIdx=ALL_D.map((_,i)=>i), cardPos=0, flagged=new Set(), isFlipped=false;
   let quizDeck=[], quizPos=0, quizScore={c:0,w:0}, quizAnswered=false;
@@ -2669,10 +2696,7 @@ function mkDenkou(c) {
     const pct=mode==='flash'?(active.length?(cardPos+1)/active.length*100:0):(quizDeck.length?quizPos/quizDeck.length*100:0);
     const prog=mode==='flash'?`${Math.min(cardPos+1,active.length)}/${active.length}`:`${quizPos}/${quizDeck.length}`;
     let h=`<div class="dk-wrap">`;
-    h+=`<div class="dk-mode-tabs">`;
-    [['flash',T('dkFlash')],['meaning',T('dkMeaning')],['reading',T('dkReading')],['example',T('dkExample')],['vocab',T('dkVocab')]]
-      .forEach(([m,lbl])=>{h+=`<div class="dk-tab ${mode===m?'dk-on':''}" onclick="dkM_${sid}('${m}')">${lbl}</div>`;});
-    h+=`</div>`;
+    // タブバー非表示
     h+=`<div class="dk-ctrl">`;
     h+=`<button class="dk-btn" onclick="dkShuffle_${sid}()">${T('dkShuffle')}</button>`;
     h+=`<button class="dk-btn" onclick="dkReset_${sid}()">${T('dkReset')}</button>`;
@@ -2723,7 +2747,11 @@ function mkDenkou(c) {
     h+=`<div class="dk-acts">`;
     h+=`<button class="dk-act prev" onclick="dkPrev_${sid}()">${T('dkPrev')}</button>`;
     h+=`<button class="dk-act flag ${isFl?'dk-flagged':''}" onclick="dkFlag_${sid}()">${isFl?T('dkReviewing'):T('dkMarkReview')}</button>`;
-    h+=`<button class="dk-act nxt" onclick="dkNext_${sid}()">${T('dkNext')}</button>`;
+    if(dkView==='flash' && dkBatchItems.length>0 && cardPos>=dkBatchItems.length-1){
+      h+=`<button class="dk-act nxt" style="background:#6bbf8a;color:#000" onclick="dkBatchDone_${sid}()">✓ 完了！</button>`;
+    } else {
+      h+=`<button class="dk-act nxt" onclick="dkNext_${sid}()">${T('dkNext')}</button>`;
+    }
     h+=`</div>`;
     area.innerHTML=h;
   }
@@ -2733,7 +2761,8 @@ function mkDenkou(c) {
     if(quizPos>=quizDeck.length&&quizDeck.length>0){
       if(typeof trackPV==='function')trackPV('/quiz/denkou-'+mode+'/score','電工 '+mode+' Score');
       const t=quizScore.c+quizScore.w,p=t?Math.round(quizScore.c/t*100):0;
-      area.innerHTML=`<div class="dk-scr"><div class="dk-scr-big">${p}%</div><div class="dk-scr-msg">${[T('score0'),T('score1'),T('score2'),T('score3')][p<50?0:p<75?1:p<95?2:3]} (${quizScore.c}/${t})</div><div class="dk-tiles"><div class="dk-tile g"><div class="tl">${T('scoreCo')}</div><div class="tv">${quizScore.c}</div></div><div class="dk-tile r"><div class="tl">${T('scoreWr')}</div><div class="tv">${quizScore.w}</div></div><div class="dk-tile"><div class="tl">Total</div><div class="tv">${t}</div></div></div><button class="dk-nx-btn" onclick="dkRestart_${sid}()" style="margin-right:10px">${T('dkTryAgain')}</button><button class="dk-nx-btn" onclick="dkM_${sid}('flash')" style="background:#1e2028;color:#e8e6df">${T('dkBackCards')}</button></div>`;
+      const nextBi=dkCurBatch+1;const bt2=dkCurType;const hasNext=dkView==='quiz'&&bt2&&nextBi<dkGetBatches(bt2.items).length;
+    area.innerHTML=`<div class="dk-scr"><div class="dk-scr-big">${p}%</div><div class="dk-scr-msg">${[T('score0'),T('score1'),T('score2'),T('score3')][p<50?0:p<75?1:p<95?2:3]} (${quizScore.c}/${t})</div><div class="dk-tiles"><div class="dk-tile g"><div class="tl">${T('scoreCo')}</div><div class="tv">${quizScore.c}</div></div><div class="dk-tile r"><div class="tl">${T('scoreWr')}</div><div class="tv">${quizScore.w}</div></div><div class="dk-tile"><div class="tl">Total</div><div class="tv">${t}</div></div></div><button class="dk-nx-btn" onclick="dkRestart_${sid}()" style="margin-right:10px">${T('dkTryAgain')}</button>${hasNext?`<button class="dk-nx-btn" onclick="dkOpenBatch_${sid}(${nextBi})" style="background:#6bbf8a;color:#000;margin-right:10px">次のセット →</button>`:''}<button class="dk-nx-btn" onclick="${sid}_bsR()" style="background:#1e2028;color:#e8e6df">← セット一覧</button></div>`;
       return;
     }
     if(!quizDeck.length){area.innerHTML=`<div style="text-align:center;padding:60px;color:#8a8880">${T('dkNoCards')}</div>`;return;}
@@ -2771,6 +2800,12 @@ function mkDenkou(c) {
   window['dkShuffle_'+sid]=()=>{deckIdx=shufArr(deckIdx);cardPos=0;if(mode==='flash')render();else{buildQuizDeck();render();}};
   window['dkReset_'+sid]=()=>{deckIdx=ALL_D.map((_,i)=>i);cardPos=0;flagged.clear();typeFilter='all';filterMode='all';isFlipped=false;if(mode==='flash')render();else{buildQuizDeck();render();}};
   window['dkT_'+sid]=(t)=>{typeFilter=t;cardPos=0;if(mode==='flash')render();else{buildQuizDeck();render();}};
+  window['dkSelType_'+sid]=(key)=>{const bt=BATCH_TYPES.find(x=>x.key===key);if(bt){dkCurType=bt;}batchSelectRender();};
+  window[sid+'_bsR']=()=>batchSelectRender();
+  window['dkOpenBatch_'+sid]=(bi)=>dkBatchMenuRender(bi);
+  window['dkStartFlash_'+sid]=(bi)=>dkBatchFlashRender(bi);
+  window['dkStartQuiz_'+sid]=(bi)=>{dkCurBatch=bi;const bt=dkCurType;const batches=dkGetBatches(bt.items);dkBatchItems=[...batches[bi]];dkBatchQuizRender(sid);};
+  window['dkResetAll_'+sid]=()=>{if(!confirm('このタイプの進捗をリセットしますか？'))return;const bt=dkCurType;const batches=dkGetBatches(bt.items);batches.forEach((_,bi)=>{localStorage.removeItem(dkBatchKey(bt.key,bi,'done'));localStorage.removeItem(dkBatchKey(bt.key,bi,'unlock'));});batchSelectRender();};
   window['dkF_'+sid]=(f)=>{filterMode=f;cardPos=0;if(mode==='flash')render();else{buildQuizDeck();render();}};
   window['dkFlip_'+sid]=()=>{isFlipped=!isFlipped;const fc=document.getElementById('dkFC_'+sid);if(fc){fc.classList.toggle('dk-flip',isFlipped);}};
   window['dkNext_'+sid]=()=>{const a=getActive();isFlipped=false;cardPos=(cardPos+1)%Math.max(a.length,1);if(typeof trackPV==='function')trackPV('/flash/denkou/'+(cardPos+1),'電工 Card '+(cardPos+1));renderFlash(sid);};
@@ -2794,10 +2829,529 @@ function mkDenkou(c) {
   };
   window['dkQN_'+sid]=()=>{quizPos++;renderQuizView(sid);};
   window['dkRestart_'+sid]=()=>{buildQuizDeck();render();};
+  window['dkBatchDone_'+sid]=()=>{
+    dkSetDone(dkCurType.key, dkCurBatch);
+    dkBatchCompleteScreen(sid);
+  };
+  window['dkBatchQuiz_'+sid]=()=>{
+    dkView='quiz';
+    // バッチのアイテムをquizDeckに設定
+    quizDeck=shufArr(dkBatchItems.map((_,i)=>ALL_D.indexOf(_)>=0?ALL_D.indexOf(_):i)).slice(0,dkBatchItems.length);
+    // quizDeckを直接アイテムインデックスで持つ
+    quizDeck=shufArr([...Array(dkBatchItems.length).keys()]);
+    quizPos=0; quizScore={c:0,w:0}; quizAnswered=false;
+    dkBatchQuizRender(sid);
+  };
 
-  render();
+  // ─────────────────────────────────────────────
+  // バッチ選択・フラッシュ・クイズ UI
+  // ─────────────────────────────────────────────
+  function batchSelectRender() {
+    dkView='select';
+    dkBatchItems=[];
+    const sid=c.id.replace(/\W/g,'_');
+    let h=`<div class="dk-wrap">`;
+    // タイプタブ
+    h+=`<div class="dk-mode-tabs">`;
+    BATCH_TYPES.forEach(bt=>{
+      h+=`<div class="dk-tab ${dkCurType.key===bt.key?'dk-on':''}" onclick="dkSelType_${sid}('${bt.key}')">${bt.label}</div>`;
+    });
+    h+=`</div>`;
+
+    const bt=dkCurType;
+    const batches=dkGetBatches(bt.items);
+    const doneCount=batches.filter((_,bi)=>dkIsDone(bt.key,bi)).length;
+    const pct=batches.length?Math.round(doneCount/batches.length*100):0;
+
+    // 進捗バー
+    h+=`<div style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;margin-bottom:16px">`;
+    h+=`<div style="display:flex;justify-content:space-between;margin-bottom:8px">`;
+    h+=`<span style="font-size:13px;font-weight:700;color:#e8e6df">${bt.label} 進捗</span>`;
+    h+=`<span style="font-size:12px;color:#8a8880">${doneCount}/${batches.length} セット完了</span>`;
+    h+=`</div>`;
+    h+=`<div style="background:#252730;border-radius:20px;height:6px;overflow:hidden">`;
+    h+=`<div style="height:100%;width:${pct}%;background:${bt.cls};border-radius:20px;transition:width .4s"></div>`;
+    h+=`</div>`;
+    h+=`<div style="margin-top:8px;display:flex;justify-content:space-between">`;
+    h+=`<span style="font-size:11px;color:#5a5856">${bt.items.length}語 / ${batches.length}セット × 10語</span>`;
+    if(doneCount>0){h+=`<button onclick="dkResetAll_${sid}()" style="font-size:11px;color:#5a5856;background:none;border:none;cursor:pointer;font-family:inherit">↺ リセット</button>`;}
+    h+=`</div></div>`;
+
+    // バッチグリッド
+    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">`;
+    batches.forEach((batch,bi)=>{
+      const done=dkIsDone(bt.key,bi);
+      const accessible=bi===0||dkIsDone(bt.key,bi-1);
+      const startWord=batch[0]?batch[0].k:'';
+      const endWord=batch[batch.length-1]?batch[batch.length-1].k:'';
+      let cardStyle=`background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;position:relative;overflow:hidden;`;
+      if(!accessible) cardStyle+=`opacity:0.5;cursor:default;`;
+      else if(done) cardStyle+=`border-color:${bt.cls}55;cursor:pointer;`;
+      else cardStyle+=`cursor:pointer;`;
+      h+=`<div style="${cardStyle}" ${accessible?`onclick="dkOpenBatch_${sid}(${bi})"`:''}>`;
+      if(done){h+=`<div style="position:absolute;top:8px;right:8px;background:#6bbf8a;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">✓ 完了</div>`;}
+      else if(!accessible){h+=`<div style="position:absolute;top:8px;right:8px;font-size:14px">🔒</div>`;}
+      else{h+=`<div style="position:absolute;top:8px;right:8px;background:#e8a84c;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">▶ 開始</div>`;}
+      h+=`<div style="font-size:10px;color:#5a5856;margin-bottom:6px">セット ${bi+1}</div>`;
+      h+=`<div style="font-size:${startWord.length>4?'18':'26'}px;font-family:'Noto Serif JP',serif;font-weight:700;color:#e8e6df;margin-bottom:3px">${startWord}</div>`;
+      h+=`<div style="font-size:10px;color:#8a8880">〜 ${endWord}</div>`;
+      h+=`<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">`;
+      if(accessible){
+        h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(107,191,138,.15);color:#6bbf8a':'background:#252730;color:#8a8880'}">📇${done?'✓':''}</span>`;
+        h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(232,168,76,.15);color:#e8a84c':'background:#252730;color:#5a5856'}">${done?'🎯':'🔒'}</span>`;
+      }
+      h+=`</div></div>`;
+    });
+    h+=`</div></div>`;
+    target.innerHTML=h;
+  }
+
+  function dkBatchMenuRender(bi) {
+    dkCurBatch=bi;
+    const sid=c.id.replace(/\W/g,'_');
+    const bt=dkCurType;
+    const batches=dkGetBatches(bt.items);
+    const batch=batches[bi];
+    const done=dkIsDone(bt.key,bi);
+    let h=`<div class="dk-wrap">`;
+    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">`;
+    h+=`<button onclick="${sid}_bsR()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 12px;font-size:12px;color:#8a8880;cursor:pointer;font-family:inherit">← 一覧</button>`;
+    h+=`<div style="font-size:15px;font-weight:700;color:#e8e6df">セット${bi+1} — ${bt.label}</div>`;
+    h+=`</div>`;
+    // 単語プレビュー
+    h+=`<div style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 16px;margin-bottom:20px">`;
+    h+=`<div style="font-size:10px;color:#5a5856;margin-bottom:8px;letter-spacing:.1em">このセットの語</div>`;
+    h+=`<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    batch.forEach(item=>{h+=`<span style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:3px 10px;font-size:13px;color:#e8e6df">${item.k}</span>`;});
+    h+=`</div></div>`;
+    // ボタン
+    h+=`<div style="display:flex;flex-direction:column;gap:12px">`;
+    h+=`<button onclick="dkStartFlash_${sid}(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
+    h+=`<div style="width:48px;height:48px;border-radius:12px;background:#1e2028;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📇</div>`;
+    h+=`<div><div style="font-size:15px;font-weight:700;color:#e8e6df;margin-bottom:3px">フラッシュカード${done?' ✓':''}</div><div style="font-size:12px;color:#8a8880">${batch.length}枚のカードで学習</div></div></button>`;
+    if(done){
+      h+=`<button onclick="dkStartQuiz_${sid}(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(232,168,76,.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
+      h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+      h+=`<div><div style="font-size:15px;font-weight:700;color:#e8a84c;margin-bottom:3px">クイズ 🔓</div><div style="font-size:12px;color:#8a8880">意味・読み・用例クイズ</div></div></button>`;
+    } else {
+      h+=`<div style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;opacity:0.5">`;
+      h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔒</div>`;
+      h+=`<div><div style="font-size:15px;font-weight:700;color:#8a8880;margin-bottom:3px">クイズ（ロック中）</div><div style="font-size:12px;color:#5a5856">フラッシュカードを完了するとアンロック</div></div></div>`;
+    }
+    h+=`</div></div>`;
+    target.innerHTML=h;
+  }
+
+  function dkBatchCompleteScreen(sid) {
+    const bi=dkCurBatch;
+    const bt=dkCurType;
+    let h=`<div class="dk-wrap"><div style="text-align:center;padding:40px 20px">`;
+    h+=`<div style="font-size:48px;margin-bottom:12px">🎉</div>`;
+    h+=`<div style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;color:#e8e6df;margin-bottom:8px">セット${bi+1}のカード完了！</div>`;
+    h+=`<div style="font-size:14px;color:#8a8880;margin-bottom:24px;line-height:1.8">クイズがアンロックされました！<br>同じ語でクイズを試しましょう。</div>`;
+    h+=`<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">`;
+    h+=`<button onclick="dkStartQuiz_${sid}(${bi})" style="background:#e8a84c;color:#000;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">🎯 クイズを開始</button>`;
+    h+=`<button onclick="${sid}_bsR()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 24px;font-size:14px;color:#8a8880;cursor:pointer;font-family:inherit">← 戻る</button>`;
+    h+=`</div></div></div>`;
+    target.innerHTML=h;
+  }
+
+  function dkBatchFlashRender(bi) {
+    dkView='flash';
+    dkCurBatch=bi;
+    const bt=dkCurType;
+    const batches=dkGetBatches(bt.items);
+    const batch=batches[bi];
+    dkBatchItems=[...batch];
+    cardPos=0; isFlipped=false;
+    deckIdx=batch.map((_,i)=>i);
+    // ALL_Dインデックスにマッピング
+    const batchAllDIdx=batch.map(e=>ALL_D.findIndex(d=>d.k===e.k&&d.type===e.type));
+    deckIdx=batchAllDIdx.filter(i=>i>=0);
+    if(!deckIdx.length) deckIdx=batch.map((_,i)=>i);
+    render();
+  }
+
+  function dkBatchQuizRender(sid) {
+    dkView='quiz';
+    const bt=dkCurType;
+    const batches=dkGetBatches(bt.items);
+    const batch=batches[dkCurBatch];
+    // バッチのALL_Dインデックス
+    const batchIdx=batch.map(e=>ALL_D.findIndex(d=>d.k===e.k&&d.type===e.type)).filter(i=>i>=0);
+    quizDeck=shufArr([...batchIdx]);
+    quizPos=0; quizScore={c:0,w:0}; quizAnswered=false;
+    // modeを'meaning'に設定
+    mode='meaning';
+    render();
+  }
+
+  window[sid+'_bsR']();
 }
 
+
+// ── Batch Learning System ──
+// 10-card flashcard → quiz unlock flow
+// localStorage keys:
+//   nw3_batch_done_{modKey}_{levelLabel}_{batchIdx} = '1' (flashcard completed)
+//   nw3_batch_unlock_{modKey}_{levelLabel}_{batchIdx} = '1' (quiz unlocked)
+function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
+  const BATCH = 10;
+  const sid = c.id.replace(/\W/g,'_');
+  let curLevel = levels[0];
+  let view = 'select'; // 'select' | 'flash' | 'quiz'
+  let curBatch = 0;
+
+  function storeDoneKey(lvl, bi) { return 'nw3_batch_done_'+modKey+'_'+lvl.label+'_'+bi; }
+  function storeUnlockKey(lvl, bi) { return 'nw3_batch_unlock_'+modKey+'_'+lvl.label+'_'+bi; }
+  function isDone(lvl, bi) { return !!localStorage.getItem(storeDoneKey(lvl, bi)); }
+  function isUnlocked(lvl, bi) { return !!localStorage.getItem(storeUnlockKey(lvl, bi)); }
+  function setDone(lvl, bi) { localStorage.setItem(storeDoneKey(lvl, bi),'1'); }
+  function setUnlocked(lvl, bi) { localStorage.setItem(storeUnlockKey(lvl, bi),'1'); }
+
+  function getBatches(lvl) {
+    const d = lvl.data;
+    const out = [];
+    for (let i = 0; i < d.length; i += BATCH) out.push(d.slice(i, i+BATCH));
+    return out;
+  }
+
+  function resetProgress(lvl) {
+    const batches = getBatches(lvl);
+    batches.forEach((_, bi) => {
+      localStorage.removeItem(storeDoneKey(lvl, bi));
+      localStorage.removeItem(storeUnlockKey(lvl, bi));
+    });
+  }
+
+  // ── SELECT SCREEN ──
+  function renderSelect() {
+    view = 'select';
+    const lvl = curLevel;
+    const batches = getBatches(lvl);
+    const doneCount = batches.filter((_, bi) => isDone(lvl, bi)).length;
+    const unlockedCount = batches.filter((_, bi) => isUnlocked(lvl, bi)).length;
+
+    let h = '';
+    // Level tabs
+    h += `<div style="margin-bottom:16px">`;
+    h += `<div class="lvl-tabs" style="flex-wrap:wrap">`;
+    levels.forEach(lv => {
+      const cls = lv.cls || '';
+      const done = getBatches(lv).filter((_,bi)=>isDone(lv,bi)).length;
+      const total = getBatches(lv).length;
+      h += `<button class="lvl-b ${cls} ${curLevel.label===lv.label?'on':''}" onclick="${sid}_setLvl('${lv.label}')">${lv.label} <span style="font-size:10px;opacity:.7">${done}/${total}</span></button>`;
+    });
+    h += `</div></div>`;
+
+    // Progress bar
+    const pct = batches.length ? Math.round(doneCount/batches.length*100) : 0;
+    h += `<div style="background:var(--s2);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--brd)">`;
+    h += `<div style="display:flex;justify-content:space-between;margin-bottom:8px">`;
+    h += `<span style="font-size:13px;font-weight:700;color:var(--tx)">${lvl.label} 全体進捗</span>`;
+    h += `<span style="font-size:12px;color:var(--txM)">${doneCount}/${batches.length} セット完了</span>`;
+    h += `</div>`;
+    h += `<div style="background:var(--s3);border-radius:20px;height:8px;overflow:hidden">`;
+    h += `<div style="height:100%;width:${pct}%;background:var(--g5);border-radius:20px;transition:width .4s"></div>`;
+    h += `</div>`;
+    h += `<div style="margin-top:8px;display:flex;gap:8px;justify-content:space-between;align-items:center">`;
+    h += `<span style="font-size:11px;color:var(--txD)">${lvl.data.length}語 / ${batches.length}セット × 10語</span>`;
+    if (doneCount > 0) {
+      h += `<button onclick="${sid}_resetAll()" style="font-size:11px;color:var(--txD);background:none;border:none;cursor:pointer;padding:0;font-family:inherit">↺ リセット</button>`;
+    } else { h += `<span></span>`; }
+    h += `</div></div>`;
+
+    // Batch cards grid
+    h += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`;
+    batches.forEach((batch, bi) => {
+      const done = isDone(lvl, bi);
+      const unlocked = isUnlocked(lvl, bi);
+      const startWord = batch[0][0] || '';
+      const endWord = batch[batch.length-1][0] || '';
+      const batchNum = bi + 1;
+
+      // Determine state
+      const isFirstOrPrevDone = bi === 0 || isDone(lvl, bi-1);
+      const accessible = isFirstOrPrevDone;
+
+      let cardStyle = `background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`;
+      if (!accessible) {
+        cardStyle = `background:var(--s2);border:1px solid var(--brd);border-radius:14px;padding:14px;cursor:default;opacity:0.6;position:relative;overflow:hidden`;
+      } else if (done) {
+        cardStyle = `background:linear-gradient(135deg,rgba(107,163,104,0.08),rgba(8,145,178,0.06));border:1px solid rgba(107,163,104,0.3);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`;
+      }
+
+      h += `<div style="${cardStyle}" ${accessible ? `onclick="${sid}_openBatch(${bi})"` : ''}>`;
+
+      // Status badge
+      if (done) {
+        h += `<div style="position:absolute;top:8px;right:8px;background:var(--grn);color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">✓ 完了</div>`;
+      } else if (!accessible) {
+        h += `<div style="position:absolute;top:8px;right:8px;font-size:14px">🔒</div>`;
+      } else {
+        h += `<div style="position:absolute;top:8px;right:8px;background:var(--acc);color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">▶ 開始</div>`;
+      }
+
+      h += `<div style="font-size:11px;font-weight:700;color:var(--txD);margin-bottom:6px">セット ${batchNum}</div>`;
+      h += `<div style="font-size:20px;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;color:var(--tx);margin-bottom:4px">${startWord}</div>`;
+      h += `<div style="font-size:11px;color:var(--txM)">〜 ${endWord}</div>`;
+      h += `<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">`;
+      // Flash badge
+      if (accessible) {
+        h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;${done?'background:rgba(107,163,104,0.15);color:var(--grn)':'background:var(--s2);color:var(--txM)'}">📇 カード${done?'✓':''}</div>`;
+        // Quiz badge
+        if (done) {
+          h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(228,87,46,0.15);color:var(--acc)">🎯 クイズ</div>`;
+        } else {
+          h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;background:var(--s2);color:var(--txD)">🔒 クイズ</div>`;
+        }
+      }
+      h += `</div>`;
+      h += `</div>`;
+    });
+    h += `</div>`;
+
+    const target = c.querySelector('.u-content') || c;
+    target.innerHTML = h;
+  }
+
+  // ── FLASH SCREEN for a batch ──
+  function renderFlash(bi) {
+    view = 'flash';
+    curBatch = bi;
+    const lvl = curLevel;
+    const batch = getBatches(lvl)[bi];
+    let pos = 0;
+    const order = shuf(batch.map((_,i)=>i));
+    const batchNum = bi + 1;
+
+    const render = () => {
+      const item = batch[order[pos]];
+      const pct = (pos+1)/order.length*100;
+      const fcId = 'bfc_'+sid+'_'+bi;
+      let h = '';
+      h += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
+      h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit">← 一覧</button>`;
+      h += `<div style="flex:1;font-size:13px;font-weight:700;color:var(--txM)">セット${batchNum} フラッシュカード</div>`;
+      h += `<div style="font-size:12px;color:var(--txD)">${pos+1}/${order.length}</div>`;
+      h += `</div>`;
+      h += `<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div></div>`;
+      h += `<div class="fcw" id="${fcId}_w"><div class="fc" id="${fcId}"><div class="fcf fc-fr"><div class="fc-bdg">${pos+1}/${order.length}</div>${frontFn(item)}<div class="fc-hint">${T('tap')}</div></div><div class="fc-bk-wrap">${backFn(item)}<div id="exbox_${fcId}" style="margin-top:6px"></div></div></div></div>`;
+      h += `<div class="fc-acts">`;
+      h += `<button class="fc-b pv" onclick="${sid}_fp()">${T('prev')}</button>`;
+      h += `<button class="tts" onclick="speak('${(item[0]||item.p||'').replace(/'/g,"\\'")}')">🔊</button>`;
+      if (pos < order.length - 1) {
+        h += `<button class="fc-b nx" style="background:var(--g1);color:#fff" onclick="${sid}_fn()">${T('next')}</button>`;
+      } else {
+        h += `<button class="fc-b nx" style="background:var(--g5);color:#fff" onclick="${sid}_fdone(${bi})">✓ 完了！</button>`;
+      }
+      h += `</div>`;
+      const target = c.querySelector('.u-content') || c;
+      target.innerHTML = h;
+      const fw = document.getElementById(fcId+'_w');
+      if (fw) fw.onclick = () => document.getElementById(fcId).classList.toggle('flip');
+    }
+
+    window[sid+'_fp'] = () => { pos = Math.max(0, pos-1); render(); };
+    window[sid+'_fn'] = () => { pos++; if(pos>=order.length) pos=order.length-1; render(); };
+    window[sid+'_fdone'] = (batchIdx) => {
+      setDone(lvl, batchIdx);
+      setUnlocked(lvl, batchIdx);
+      renderBatchComplete(batchIdx);
+    };
+    render();
+  }
+
+  // ── BATCH COMPLETE SCREEN ──
+  function renderBatchComplete(bi) {
+    const lvl = curLevel;
+    const batchNum = bi + 1;
+    let h = '';
+    h += `<div style="text-align:center;padding:40px 20px">`;
+    h += `<div style="font-size:48px;margin-bottom:12px">🎉</div>`;
+    h += `<div style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;color:var(--tx);margin-bottom:8px">セット${batchNum}のカード完了！</div>`;
+    h += `<div style="font-size:14px;color:var(--txM);margin-bottom:24px;line-height:1.8">クイズがアンロックされました！<br>同じ10語でクイズを試しましょう。</div>`;
+    h += `<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">`;
+    h += `<button onclick="${sid}_startQuiz(${bi})" style="background:var(--g1);color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">🎯 クイズを開始</button>`;
+    h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:14px 24px;font-size:14px;color:var(--txM);cursor:pointer;font-family:inherit">← セット一覧に戻る</button>`;
+    h += `</div>`;
+    h += `</div>`;
+    const target = c.querySelector('.u-content') || c;
+    target.innerHTML = h;
+  }
+
+  // ── QUIZ SCREEN for a batch ──
+  function renderQuiz(bi) {
+    view = 'quiz';
+    curBatch = bi;
+    const lvl = curLevel;
+    const batch = getBatches(lvl)[bi];
+    const batchNum = bi + 1;
+    let pos = 0;
+    const order = shuf(batch.map((_,i)=>i));
+    let sc = {c:0, w:0};
+    // For verb: pick random form
+    let vqf = null;
+    if (verbQF) vqf = verbQF[0];
+
+    const render = () => {
+      if (pos >= order.length) {
+        // Score screen
+        const t = sc.c + sc.w;
+        const pct = t ? Math.round(sc.c/t*100) : 0;
+        const msg = pct >= 90 ? '完璧！素晴らしい！🏆' : pct >= 70 ? 'よくできました！👍' : 'もう一度頑張ろう！💪';
+        let h = `<div style="text-align:center;padding:32px 20px">`;
+        h += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;justify-content:center">`;
+        h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit">← 一覧</button>`;
+        h += `</div>`;
+        h += `<div style="font-size:56px;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;color:var(--acc);margin-bottom:8px">${pct}%</div>`;
+        h += `<div style="font-size:16px;color:var(--txM);margin-bottom:8px">${msg}</div>`;
+        h += `<div style="font-size:14px;color:var(--txD);margin-bottom:24px">正解 ${sc.c} / ${t}</div>`;
+        h += `<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">`;
+        h += `<button onclick="${sid}_startQuiz(${bi})" style="background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:12px 24px;font-size:13px;color:var(--txM);cursor:pointer;font-family:inherit">🔄 もう一度</button>`;
+        // Next batch if available
+        const nextBatches = getBatches(lvl);
+        if (bi + 1 < nextBatches.length) {
+          h += `<button onclick="${sid}_openBatch(${bi+1})" style="background:var(--g1);color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">次のセット → セット${batchNum+1}</button>`;
+        } else {
+          h += `<button onclick="${sid}_backSelect()" style="background:var(--g5);color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">🎉 全セット完了！</button>`;
+        }
+        h += `</div></div>`;
+        const target = c.querySelector('.u-content') || c;
+        target.innerHTML = h;
+        return;
+      }
+
+      const item = batch[order[pos]];
+      const pct = pos/order.length*100;
+
+      // Generate options
+      let opts, ci;
+      if (verbQF) {
+        vqf = verbQF[Math.floor(Math.random()*verbQF.length)];
+        const correct = item[vqf.i];
+        const others = shuf(verbQF.filter(f=>f!==vqf&&item[f.i]&&item[f.i]!==correct).map(f=>item[f.i])).slice(0,3);
+        const o = shuf([correct,...others]);
+        opts = o; ci = o.indexOf(correct);
+      } else {
+        const {opts:o, ci:c2} = optFn(item, batch);
+        opts = o; ci = c2;
+      }
+      const qText = verbQF
+        ? `<div class="qb"><div class="qT">${vqf.l}${T('qForm')}</div><div class="qB" style="font-size:36px">${item[0]}</div><div class="qP">${item[1]}</div></div>`
+        : qFn(item);
+
+      let h = '';
+      h += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
+      h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit">← 一覧</button>`;
+      h += `<div style="flex:1;font-size:13px;font-weight:700;color:var(--txM)">セット${batchNum} クイズ</div>`;
+      h += `<div style="font-size:12px;color:var(--txD)">${pos+1}/${order.length}</div>`;
+      h += `</div>`;
+      h += `<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div></div>`;
+      h += qText;
+      const qid = 'bq_'+sid+'_'+bi+'_'+pos;
+      h += `<div id="${qid}" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">`;
+      opts.forEach((opt,oi) => {
+        h += `<div class="qo" data-v="${oi}" data-correct="${oi===ci?1:0}" onclick="${sid}_qa(this,${ci},'${qid}')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;border:2px solid var(--brd);background:var(--s1);cursor:pointer;transition:all .15s;min-height:56px;text-align:center;font-size:13px;line-height:1.4">`;
+        h += `<span style="font-size:10px;font-weight:700;color:var(--txD);min-width:14px">${['A','B','C','D'][oi]}</span>`;
+        h += `<span>${opt||''}</span></div>`;
+      });
+      h += `</div>`;
+      h += `<div id="${qid}_fb" style="min-height:32px;text-align:center;padding:6px;font-weight:700;font-size:14px"></div>`;
+      const target = c.querySelector('.u-content') || c;
+      target.innerHTML = h;
+    }
+
+    window[sid+'_qa'] = (el, correctIdx, gridId) => {
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+      const chosen = parseInt(el.dataset.v);
+      const isOk = chosen === correctIdx;
+      // Disable all
+      grid.querySelectorAll('.qo').forEach(o => {
+        o.onclick = null; o.style.cursor='default';
+        const v = parseInt(o.dataset.v);
+        if (v === correctIdx) { o.style.border='2px solid var(--grn)'; o.style.background='rgba(107,163,104,0.12)'; }
+        else if (v === chosen && !isOk) { o.style.border='2px solid var(--red)'; o.style.background='rgba(217,107,107,0.12)'; }
+      });
+      const fb = document.getElementById(gridId+'_fb');
+      if (fb) { fb.style.color=isOk?'var(--grn)':'var(--red)'; fb.textContent=isOk?T('correct'):T('incorrect'); }
+      if (isOk) sc.c++; else sc.w++;
+      if (typeof addS === 'function' && isOk) addS();
+      if (typeof rstS === 'function' && !isOk) rstS();
+      setTimeout(() => { pos++; render(); }, 900);
+    };
+    render();
+  }
+
+  // ── Batch entry point: show flash or quiz menu ──
+  function renderBatchMenu(bi) {
+    const lvl = curLevel;
+    const done = isDone(lvl, bi);
+    const batchNum = bi + 1;
+    const batch = getBatches(lvl)[bi];
+
+    let h = '';
+    h += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">`;
+    h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit">← 一覧</button>`;
+    h += `<div style="font-size:15px;font-weight:700;color:var(--tx)">セット ${batchNum} — ${lvl.label}</div>`;
+    h += `</div>`;
+
+    // Word preview
+    h += `<div style="background:var(--s2);border-radius:12px;padding:12px 16px;margin-bottom:20px;border:1px solid var(--brd)">`;
+    h += `<div style="font-size:11px;font-weight:700;color:var(--txD);margin-bottom:8px">このセットの10語</div>`;
+    h += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    batch.slice(0,10).forEach(item => {
+      h += `<span style="background:var(--s1);border:1px solid var(--brd);border-radius:20px;padding:3px 10px;font-size:13px">${item[0]}</span>`;
+    });
+    h += `</div></div>`;
+
+    h += `<div style="display:flex;flex-direction:column;gap:12px">`;
+    // Flashcard button
+    h += `<button onclick="${sid}_startFlash(${bi})" style="display:flex;align-items:center;gap:14px;background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s;${done?'border-color:rgba(107,163,104,0.4)':''}">`;
+    h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📇</div>`;
+    h += `<div><div style="font-size:15px;font-weight:700;color:var(--tx);margin-bottom:3px">フラッシュカード${done?' ✓':''}</div>`;
+    h += `<div style="font-size:12px;color:var(--txM)">10枚のカードで学習する</div></div></button>`;
+
+    // Quiz button
+    if (done) {
+      h += `<button onclick="${sid}_startQuiz(${bi})" style="display:flex;align-items:center;gap:14px;background:var(--s1);border:1px solid rgba(228,87,46,0.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s">`;
+      h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+      h += `<div><div style="font-size:15px;font-weight:700;color:var(--acc);margin-bottom:3px">クイズ 🔓</div>`;
+      h += `<div style="font-size:12px;color:var(--txM)">10問のクイズに挑戦</div></div></button>`;
+    } else {
+      h += `<div style="display:flex;align-items:center;gap:14px;background:var(--s2);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;opacity:0.6">`;
+      h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔒</div>`;
+      h += `<div><div style="font-size:15px;font-weight:700;color:var(--txM);margin-bottom:3px">クイズ（ロック中）</div>`;
+      h += `<div style="font-size:12px;color:var(--txD)">フラッシュカードを完了するとアンロック</div></div></div>`;
+    }
+    h += `</div>`;
+
+    const target = c.querySelector('.u-content') || c;
+    target.innerHTML = h;
+  }
+
+  // Wire up global handlers
+  window[sid+'_setLvl'] = label => {
+    const lv = levels.find(x=>x.label===label);
+    if (lv) { curLevel = lv; renderSelect(); }
+  };
+  window[sid+'_openBatch'] = bi => renderBatchMenu(bi);
+  window[sid+'_backSelect'] = () => renderSelect();
+  window[sid+'_startFlash'] = bi => renderFlash(bi);
+  window[sid+'_startQuiz'] = bi => renderQuiz(bi);
+  window[sid+'_resetAll'] = () => {
+    if (!confirm('このレベルの進捗をリセットしますか？')) return;
+    resetProgress(curLevel);
+    renderSelect();
+  };
+
+  // Initial render via mkU-like wrapper
+  let h = `<div class="mod-h"><div class="mod-t">${modKey === 'vocab' ? '📖 語彙' : modKey === 'kanji' ? '🈶 漢字' : '🔄 動詞活用'} — バッチ学習</div></div>`;
+  h += `<div class="u-content" id="uc_${sid}"></div>`;
+  c.innerHTML = h;
+  renderSelect();
+}
 
 function initM(c,id){
   switch(id){
@@ -2817,76 +3371,57 @@ function initM(c,id){
       break;}
 
     case 'vocab':{
-      const ds=[{label:'N5',data:JLPT_V5,cls:'n5'},{label:'N4',data:JLPT_V4,cls:'n4'},{label:'入門',data:IRO_NY,cls:'iro'},{label:'初級1',data:IRO_S1,cls:'iro'},{label:'初級2',data:IRO_S2,cls:'iro'},{label:'N3',data:JLPT_V3,cls:'n3'}];
-      mkU(c,T('secVoc'),[
-        {label:T('tFlash'),type:'flash',init:cc=>mkF(cc,ds,T('secVoc'),'📖',
-          i=>`<div class="fc-big">${i[0]}</div><div style="margin-top:8px;font-size:18px;color:var(--txM);font-weight:500">${i[2]||''}</div>`,
-          i=>`<div style="width:100%"><div class="fc-lbl">${T('fRead')}</div><div class="fc-v ac" style="font-size:22px">${i[1]||''}</div><div class="fc-lbl">${T('fMean')} (English)</div><div class="fc-v" style="font-size:22px">${i[2]||''}</div>${i[3]?'<div class="fc-lbl">বাংলা</div><div class="fc-mn">🇧🇩 '+i[3]+'</div>':''}<button class="ex-btn" onclick="event.stopPropagation();genExample('${(i[0]||'').replace(/'/g,"\\'")}','${(i[2]||'').replace(/'/g,"\\'")}',this.nextElementSibling)">${T('exGen')}</button><div></div></div>`,'vocab')},
-        {label:T('tQuiz'),type:'quiz',init:cc=>mkQ(cc,ds,T('secVoc'),'📖',
-          i=>`<div class="qb"><div class="qT">${T('qMean')}</div><div class="qB">${i[0]}</div><div class="qP" style="font-size:14px;color:var(--txD)">${i[1]||''}</div></div>`,
-          (i,all)=>{const w=pick(all.filter(v=>v[2]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>x[2]),ci:o.indexOf(i)}},10,'vocab')}
-      ]);break;}
+      const ds=[{label:'N5',data:JLPT_V5,cls:'n5'},{label:'N4',data:JLPT_V4,cls:'n4'},{label:'N3',data:JLPT_V3,cls:'n3'},{label:'入門',data:IRO_NY,cls:'iro'},{label:'初級1',data:IRO_S1,cls:'iro'},{label:'初級2',data:IRO_S2,cls:'iro'}];
+      mkBatch(c,'vocab',ds,
+        i=>`<div class="fc-big">${i[0]}</div><div style="margin-top:8px;font-size:18px;color:var(--txM);font-weight:500">${i[2]||''}</div>`,
+        i=>`<div style="width:100%"><div class="fc-lbl">${T('fRead')}</div><div class="fc-v ac" style="font-size:22px">${i[1]||''}</div><div class="fc-lbl">${T('fMean')} (English)</div><div class="fc-v" style="font-size:22px">${i[2]||''}</div>${i[3]?'<div class="fc-lbl">বাংলা</div><div class="fc-mn">🇧🇩 '+i[3]+'</div>':''}</div>`,
+        i=>`<div class="qb"><div class="qT">${T('qMean')}</div><div class="qB">${i[0]}</div><div class="qP" style="font-size:14px;color:var(--txD)">${i[1]||''}</div></div>`,
+        (i,batch)=>{const all=batch.filter(v=>v[2]);const w=pick(all.length>=4?all:JLPT_V5.filter(v=>v[2]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>x[2]),ci:o.indexOf(i)}},
+        null
+      );break;}
 
     case 'kanji':{
       const ds=[{label:'N5',data:JLPT_K5,cls:'n5'},{label:'N4',data:JLPT_K4,cls:'n4'},{label:'N3',data:JLPT_K3,cls:'n3'}];
-      mkU(c,T('secKan'),[
-        {label:T('tFlash'),type:'flash',init:cc=>mkF(cc,ds,T('secKan'),'🈶',
-          i=>`<div class="fc-big">${i[0]}</div>`,
-          i=>`<div style="width:100%"><div class="fc-lbl">${T('fRead')}</div><div class="fc-v ac">${i[1]}</div><div class="fc-lbl">${T('fMean')} (English)</div><div class="fc-v">${K_EN[i[0]]||''}</div><div class="fc-lbl">${T('fEx')}</div><div class="fc-v" style="font-size:16px">${i[2]||''}</div></div>`,'kanji')},
-        {label:T('tQuiz'),type:'quiz',init:cc=>{
-          const LQF=[{l:T('f_onyomi'),i:1},{l:T('f_kunyomi'),i:1},{l:T('fMean'),i:2}];
-          let lqf=LQF[0];
-          mkQ(cc,ds,T('secKan'),'🈶',
-            i=>{lqf=LQF[Math.floor(Math.random()*LQF.length)];return`<div class="qb"><div class="qT">${lqf.l}${T('qForm')}</div><div class="qB" style="font-size:72px">${i[0]}</div></div>`},
-            (i,all)=>{if(lqf.i===2){const w=pick(all.filter(v=>K_EN[v[0]]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>K_EN[x[0]]||x[2]),ci:o.indexOf(i)}}const w=pick(all.filter(v=>v[1]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>x[1]),ci:o.indexOf(i)}},10,'kanji')}}
-      ]);break;}
+      const _lqfPool=[{l:T('f_onyomi'),i:1},{l:T('f_kunyomi'),i:1},{l:T('fMean'),i:2}];
+      let _lqf=_lqfPool[0];
+      mkBatch(c,'kanji',ds,
+        i=>`<div class="fc-big" style="font-size:72px">${i[0]}</div>`,
+        i=>`<div style="width:100%"><div class="fc-lbl">${T('fRead')}</div><div class="fc-v ac">${i[1]}</div><div class="fc-lbl">${T('fMean')} (English)</div><div class="fc-v">${K_EN[i[0]]||''}</div><div class="fc-lbl">${T('fEx')}</div><div class="fc-v" style="font-size:16px">${i[2]||''}</div></div>`,
+        i=>{_lqf=_lqfPool[Math.floor(Math.random()*_lqfPool.length)];return`<div class="qb"><div class="qT">${_lqf.l}${T('qForm')}</div><div class="qB" style="font-size:72px">${i[0]}</div></div>`},
+        (i,batch)=>{if(_lqf.i===2){const w=pick(batch.filter(v=>K_EN[v[0]]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>K_EN[x[0]]||x[2]),ci:o.indexOf(i)}}const w=pick(batch.filter(v=>v[1]),3,i),o=shuf([i,...w]);return{opts:o.map(x=>x[1]),ci:o.indexOf(i)}},
+        null
+      );break;}
 
     case 'verb':{
       const VF=[{l:T('f_dict'),i:2},{l:T('f_nai'),i:3},{l:T('f_ta'),i:4},{l:T('f_te'),i:6},{l:T('f_ukemi'),i:10},{l:T('f_kanou'),i:13},{l:T('f_ikou'),i:15},{l:T('f_shieki'),i:16},{l:T('f_meirei'),i:18},{l:T('f_kinshi'),i:19}];
+      const QF=[{l:T('f_te'),i:6},{l:T('f_nai'),i:3},{l:T('f_ta'),i:4},{l:T('f_dict'),i:2},{l:T('f_ukemiK'),i:10},{l:T('f_kanouK'),i:13}];
       const ds=[{label:'N5',data:VERBS,cls:'n5'},{label:'N4',data:VERBS_N4,cls:'n4'}];
-      mkU(c,T('secVerb'),[
-        {label:T('tFlash'),type:'flash',init:cc=>mkF(cc,ds,T('secVerb'),'🔄',
-          i=>`<div class="fc-big" style="font-size:36px">${i[0]}</div><div style="margin-top:6px;font-size:13px;color:var(--txM)">${i[1]}</div>`,
-          i=>{const rows=VF.filter(f=>i[f.i]).map(f=>`<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:6px;background:var(--s1);margin:2px 0"><span style="color:var(--txD);font-size:11px">${f.l}</span><span style="color:var(--acc);font-family:'DM Mono',monospace;font-size:14px">${i[f.i]}</span></div>`).join('');return`<div style="width:100%"><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">${rows}</div></div>`},'verb')},
-        {label:T('tQuiz'),type:'quiz',init:cc=>{
-          const QF=[{l:T('f_te'),i:6},{l:T('f_nai'),i:3},{l:T('f_ta'),i:4},{l:T('f_dict'),i:2},{l:T('f_ukemiK'),i:10},{l:T('f_kanouK'),i:13}];
-          let vqf=QF[0];
-          // optFnでvqfを決定し、qFnはvqfを読むだけ（変更しない）
-          mkQ(cc,ds,T('secVerb'),'🔄',
-            i=>`<div class="qb"><div class="qT">${vqf.l}${T('qForm')}</div><div class="qB" style="font-size:36px">${i[0]}</div><div class="qP">${i[1]}</div></div>`,
-            (i,all)=>{
-              vqf=QF[Math.floor(Math.random()*QF.length)];
-              const correct=i[vqf.i];
-              // 同じ動詞の他の活用形を選択肢にする
-              const others=shuf(QF.filter(f=>f!==vqf&&i[f.i]&&i[f.i]!==correct).map(f=>i[f.i])).slice(0,3);
-              const o=shuf([correct,...others]);
-              return{opts:o,ci:o.indexOf(correct)};
-            },10,'verb')}}
-      ]);break;}
+      mkBatch(c,'verb',ds,
+        i=>`<div class="fc-big" style="font-size:36px">${i[0]}</div><div style="margin-top:6px;font-size:13px;color:var(--txM)">${i[1]}</div>`,
+        i=>{const rows=VF.filter(f=>i[f.i]).map(f=>`<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:6px;background:var(--s1);margin:2px 0"><span style="color:var(--txD);font-size:11px">${f.l}</span><span style="color:var(--acc);font-family:'DM Mono',monospace;font-size:14px">${i[f.i]}</span></div>`).join('');return`<div style="width:100%"><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">${rows}</div></div>`},
+        null, null, QF
+      );break;}
 
     case 'adj':{
       const AFI=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5},{l:T('f_ku'),i:6},{l:T('f_ba'),i:7}];
       const AFNA=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5},{l:T('f_ni'),i:6},{l:T('f_ba'),i:7}];
-      const ds=[{label:T('f_iadj'),data:I_ADJ,cls:'n5'},{label:T('f_naadj'),data:NA_ADJ,cls:'n4'},{label:T('t_all'),data:ALL_ADJ,cls:'iro'}];
-      mkU(c,T('secAdj'),[
-        {label:T('tFlash'),type:'flash',init:cc=>mkF(cc,ds,T('secAdj'),'📝',
-          i=>`<div class="fc-big" style="font-size:42px">${i[0]}</div><div style="margin-top:6px;font-size:13px;color:var(--txM)">${i[1]}</div>`,
-          i=>{const isI=I_ADJ.includes(i);const forms=isI?AFI:AFNA;const tl=isI?T('f_iadj'):T('f_naadj');
-            const rows=forms.filter(f=>i[f.i]).map(f=>`<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:6px;background:var(--s1);margin:2px 0"><span style="color:var(--txD);font-size:11px">${f.l}</span><span style="color:var(--acc);font-family:'DM Mono',monospace;font-size:14px">${i[f.i]}</span></div>`).join('');
-            return`<div style="width:100%"><div style="font-size:12px;color:var(--txM);margin-bottom:6px"><span style="background:${isI?'var(--accG)':'var(--accB)'};color:#000;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${tl}</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">${rows}</div></div>`},'adj')},
-        {label:T('tQuiz'),type:'quiz',init:cc=>{
-          const AQF=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5}];let aqf=AQF[0];
-          mkQ(cc,ds,T('secAdj'),'📝',
-            i=>`<div class="qb"><div class="qT">${aqf.l}${T('qForm')}</div><div class="qB" style="font-size:36px">${i[0]}</div><div class="qP">${i[1]}</div></div>`,
-            (i,all)=>{
-              aqf=AQF[Math.floor(Math.random()*AQF.length)];
-              const correct=i[aqf.i];
-              // 同じ形容詞の他の変形を選択肢にする
-              const others=shuf(AQF.filter(f=>f!==aqf&&i[f.i]&&i[f.i]!==correct).map(f=>i[f.i])).slice(0,3);
-              const o=shuf([correct,...others]);
-              return{opts:o,ci:o.indexOf(correct)};
-            },10,'adj')}}
-      ]);break;}
+      const AQF=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5}];
+      let _aqf=AQF[0];
+      const ds=[{label:'い形容詞',data:I_ADJ,cls:'n5'},{label:'な形容詞',data:NA_ADJ,cls:'n4'}];
+      mkBatch(c,'adj',ds,
+        i=>`<div class="fc-big" style="font-size:42px">${i[0]}</div><div style="margin-top:6px;font-size:13px;color:var(--txM)">${i[1]}</div>`,
+        i=>{const isI=I_ADJ.includes(i);const forms=isI?AFI:AFNA;const tl=isI?T('f_iadj'):T('f_naadj');
+          const rows=forms.filter(f=>i[f.i]).map(f=>`<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:6px;background:var(--s1);margin:2px 0"><span style="color:var(--txD);font-size:11px">${f.l}</span><span style="color:var(--acc);font-family:'DM Mono',monospace;font-size:14px">${i[f.i]}</span></div>`).join('');
+          return`<div style="width:100%"><div style="font-size:12px;color:var(--txM);margin-bottom:6px"><span style="background:${isI?'var(--accG)':'var(--accB)'};color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${tl}</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">${rows}</div></div>`},
+        i=>{_aqf=AQF[Math.floor(Math.random()*AQF.length)];return`<div class="qb"><div class="qT">${_aqf.l}${T('qForm')}</div><div class="qB" style="font-size:36px">${i[0]}</div><div class="qP">${i[1]}</div></div>`},
+        (i,batch)=>{
+          const correct=i[_aqf.i];
+          const others=shuf(AQF.filter(f=>f!==_aqf&&i[f.i]&&i[f.i]!==correct).map(f=>i[f.i])).slice(0,3);
+          const o=shuf([correct,...others]);
+          return{opts:o,ci:o.indexOf(correct)};
+        },
+        null
+      );break;}
 
     case 'timenum':{
       const timeAll=[...HOURS.map(h=>[h[2],h[1],'時',_hEN[h[0]]||'',_hBN[h[0]]||'']),...MINS.map(m=>[m[2],m[1],'分',_mEN[m[0]]||'',_mBN[m[0]]||''])];
@@ -2933,15 +3468,14 @@ function initM(c,id){
       break;}
       
     case 'dashboard':{
-      mkDashboard(c);
+      if(typeof mkDashboard==='function')mkDashboard(c);
       break;}
       
-    case 'longterm':{
-      mkLongTerm(c);
-      break;}
-      
-    case 'review':{
-      mkReview(c);
+    case 'longterm':
+    case 'review':
+    case 'revenge':{
+      if(typeof mkRevenge==='function')mkRevenge(c);
+      else c.innerHTML='<div style="padding:40px;text-align:center;color:var(--txM)">Loading...</div>';
       break;}
       
     case 'denkou':{
