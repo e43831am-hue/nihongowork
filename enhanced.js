@@ -334,8 +334,12 @@ function renderQuizResultDetails(scrEl,log){
   scrEl.innerHTML+=h;
 }
 
-// ── INIT HOOKS ──
-document.addEventListener('DOMContentLoaded',()=>{setTimeout(renderHomeDashboard,150);});
+// ── INIT HOOKS (dashboard disabled) ──
+// renderHomeDashboard disabled per UI update
 const _origGoHome=typeof goHome==='function'?goHome:null;
-goHome=function(){if(_origGoHome)_origGoHome();setTimeout(renderHomeDashboard,80);};
-console.log('✅ 苦手克服ダッシュボード v12');
+goHome=function(){
+  if(_origGoHome)_origGoHome();
+  // バトルマップを再描画
+  setTimeout(function(){ if(typeof renderBattleMap==='function') renderBattleMap(); }, 100);
+};
+console.log('✅ enhanced.js v12 (battle mode)');

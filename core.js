@@ -169,21 +169,32 @@ document.addEventListener('DOMContentLoaded',()=>{
 function mkK(c,base,daku,title,em){
   let data=base,pos=0,sc={c:0,w:0},order=shuf(base.map((_,i)=>i)),mode='type',filt='base';
   const sid=c.id.replace(/\W/g,'_');
-  function setD(){data=filt==='base'?base:filt==='daku'?daku:[...base,...daku];const pool=data.map((_,i)=>i);order=mode==='reverse'?shuf(pool).slice(0,Math.min(10,pool.length)):shuf(pool);pos=0;sc={c:0,w:0}}
+  let _kanaQuizLog=[], _kanaQStart=Date.now();
+  function setD(){data=filt==='base'?base:filt==='daku'?daku:[...base,...daku];const pool=data.map((_,i)=>i);order=mode==='reverse'?shuf(pool).slice(0,Math.min(10,pool.length)):shuf(pool);pos=0;sc={c:0,w:0};_kanaQuizLog=[];_kanaQStart=Date.now();}
   function tabs(cur){return `<div class="stabs"><div class="stab ${cur==='type'?'on':''}" onclick="${sid}_M('type')">${T("kType")}</div><div class="stab ${cur==='grid'?'on':''}" onclick="${sid}_M('grid')">${T("kGrid")}</div><div class="stab ${cur==='reverse'?'on':''}" onclick="${sid}_M('reverse')">4択</div></div>`}
   function filts(){return `<div class="flts"><button class="fb ${filt==='base'?'on':''}" onclick="${sid}_F('base')">基本(${base.length})</button><button class="fb ${filt==='daku'?'on':''}" onclick="${sid}_F('daku')">濁音(${daku.length})</button><button class="fb ${filt==='all'?'on':''}" onclick="${sid}_F('all')">全部(${base.length+daku.length})</button></div>`}
+  function kanaScoreScreen(){
+    const t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
+    if(typeof trackPV==='function')trackPV('/quiz/kana/score','Kana Score');
+    let h=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;
+    c.innerHTML=h;
+    if(_kanaQuizLog.length>0){const s=c.querySelector('.scr');if(s&&typeof renderQuizResultDetails==='function')renderQuizResultDetails(s,_kanaQuizLog);}
+  }
   function render(){
     if(mode==='grid'){let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('grid')+filts()+`<div class="kgrid">`;data.forEach(([ch,r])=>h+=`<div class="kcell"><div class="kch">${ch}</div><div class="kro">${r}</div></div>`);c.innerHTML=h+`</div>`;return}
-    if(pos>=order.length){let t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;if(typeof trackPV==='function')trackPV('/quiz/kana/score','Kana Score');c.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;return}
+    if(pos>=order.length){kanaScoreScreen();return}
     const [ch,rom]=data[order[pos]],pct=pos/order.length*100;
     if(typeof trackPV==='function')trackPV('/quiz/kana/'+filt+'/'+(pos+1),'Kana Q'+(pos+1));
+    _kanaQStart=Date.now();
     if(mode==='type'){
       let h=`<div class="mod-h"><div class="mod-t">${em} ${title}</div></div>`+tabs('type')+filts()+`<div class="prg"><div class="prg-bar"><div class="prg-fill" style="width:${pct}%"></div></div><div class="prg-tx">${pos+1}/${order.length}</div></div><div class="qb"><div class="qB" style="font-size:80px">${ch}</div><div class="qP">${T("kPrompt")}</div></div><input class="kinp" id="ki" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="romaji..."><div class="qfb" id="kfb"></div><div style="text-align:center"><button class="qnx" id="knx">${T("nextQ")}</button></div>`;
       c.innerHTML=h;const inp=document.getElementById('ki');inp.focus();
       inp.onkeydown=e=>{if(e.key!=='Enter')return;const v=inp.value.trim().toLowerCase();if(!v)return;
         const alts={shi:['si'],chi:['ti'],tsu:['tu'],fu:['hu'],n:['nn'],wo:['o'],ji:['zi'],zu:['du']};
         let ok=v===rom;if(!ok&&alts[rom])ok=alts[rom].includes(v);const fb=document.getElementById('kfb');
-        if(ok){sc.c++;addS();fb.className='qfb ok';fb.innerHTML='✓ '+ch+' = '+rom}else{sc.w++;rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+rom+'</b>'}
+        const elapsed=Math.round((Date.now()-_kanaQStart)/1000);
+        if(ok){sc.c++;SRS.correct('kana',data[order[pos]]);addS();fb.className='qfb ok';fb.innerHTML='✓ '+ch+' = '+rom}else{sc.w++;SRS.wrong('kana',data[order[pos]]);rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+rom+'</b>'}
+        _kanaQuizLog.push({question:ch,answer:rom,userAnswer:v,isCorrect:ok,seconds:elapsed});
         inp.disabled=true;const btn=document.getElementById('knx');btn.classList.add('sh');btn.onclick=()=>{pos++;render()}};
     } else {
       // 4択クイズ: limit to 10 questions
@@ -216,16 +227,18 @@ function mkK(c,base,daku,title,em){
           if(x.dataset.v===ch){x.style.border='2px solid var(--grn)';x.style.background='rgba(107,163,104,0.12)';}
         });
         const fb=document.getElementById('kfb');
-        if(o.dataset.v===ch){sc.c++;addS();fb.className='qfb ok';fb.innerHTML=T('ok');o.style.border='2px solid var(--grn)';o.style.background='rgba(107,163,104,0.12)';}
-        else{o.style.border='2px solid var(--red)';o.style.background='rgba(217,107,107,0.12)';sc.w++;rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+ch+'</b>';}
+        const elapsed=Math.round((Date.now()-_kanaQStart)/1000);
+        if(o.dataset.v===ch){sc.c++;SRS.correct('kana',data[order[pos]]);addS();fb.className='qfb ok';fb.innerHTML=T('ok');o.style.border='2px solid var(--grn)';o.style.background='rgba(107,163,104,0.12)';
+          _kanaQuizLog.push({question:rom,answer:ch,userAnswer:ch,isCorrect:true,seconds:elapsed});
+        }
+        else{o.style.border='2px solid var(--red)';o.style.background='rgba(217,107,107,0.12)';sc.w++;SRS.wrong('kana',data[order[pos]]);rstS();fb.className='qfb no';fb.innerHTML=T('no')+' → <b>'+ch+'</b>';
+          _kanaQuizLog.push({question:rom,answer:ch,userAnswer:o.querySelector('span:last-child').textContent,isCorrect:false,seconds:elapsed});
+        }
         const btn=document.getElementById('knx');btn.style.display='inline-block';
         btn.onclick=()=>{
           pos++;
-          if(pos>=totalQ){
-            // Show score
-            const t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
-            c.innerHTML=`<div class="scr sh"><div class="scr-big">${p}%</div><div class="scr-msg">${['もっと頑張ろう！','いい感じ！','すごい！','完璧！'][p<50?0:p<75?1:p<95?2:3]} (${sc.c}/${t})</div><div class="scr-tiles"><div class="scr-t g"><div class="tl">${T("scoreCo")}</div><div class="tv">${sc.c}</div></div><div class="scr-t r"><div class="tl">${T("scoreWr")}</div><div class="tv">${sc.w}</div></div></div><button class="rbtn" onclick="openM('${curMod}')">${T("again")}</button><button class="rbtn" style="background:var(--s2);color:var(--tx)" onclick="goHome()">${T("home")}</button></div>`;
-          } else {render();}
+          if(pos>=totalQ){kanaScoreScreen();}
+          else {render();}
         };
       }})
     }
@@ -3193,6 +3206,9 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
     // For verb: pick random form
     let vqf = null;
     if (verbQF) vqf = verbQF[0];
+    // Quiz log for detailed results
+    let _batchQuizLog = [];
+    let _batchQStart = Date.now();
 
     const render = () => {
       if (pos >= order.length) {
@@ -3200,6 +3216,7 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
         const t = sc.c + sc.w;
         const pct = t ? Math.round(sc.c/t*100) : 0;
         const msg = pct >= 90 ? '完璧！素晴らしい！🏆' : pct >= 70 ? 'よくできました！👍' : 'もう一度頑張ろう！💪';
+        const avgT = _batchQuizLog.length ? (_batchQuizLog.reduce((s,q)=>s+q.seconds,0)/_batchQuizLog.length).toFixed(1) : 0;
         let h = `<div style="text-align:center;padding:32px 20px">`;
         h += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;justify-content:center">`;
         h += `<button onclick="${sid}_backSelect()" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);cursor:pointer;font-family:inherit">← 一覧</button>`;
@@ -3216,7 +3233,37 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
         } else {
           h += `<button onclick="${sid}_backSelect()" style="background:var(--g5);color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">🎉 全セット完了！</button>`;
         }
-        h += `</div></div>`;
+        h += `</div>`;
+        // Detailed result section
+        if (_batchQuizLog.length > 0) {
+          const wrongs = _batchQuizLog.filter(q=>!q.isCorrect);
+          h += `<div style="margin-top:16px;background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:16px;text-align:left">`;
+          h += `<div style="font-size:14px;font-weight:700;margin-bottom:8px">📊 ${({ja:'詳細結果',en:'Detailed Results',bn:'বিস্তারিত ফলাফল'}[_lang]||'詳細結果')}</div>`;
+          h += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">`;
+          h += `<div style="text-align:center;padding:6px;background:var(--s2);border-radius:8px"><div style="font-size:16px;font-weight:900;color:var(--grn)">${sc.c}</div><div style="font-size:9px;color:var(--txM)">${T('scoreCo')}</div></div>`;
+          h += `<div style="text-align:center;padding:6px;background:var(--s2);border-radius:8px"><div style="font-size:16px;font-weight:900;color:var(--red)">${wrongs.length}</div><div style="font-size:9px;color:var(--txM)">${T('scoreWr')}</div></div>`;
+          h += `<div style="text-align:center;padding:6px;background:var(--s2);border-radius:8px"><div style="font-size:16px;font-weight:900;color:var(--accB)">${avgT}s</div><div style="font-size:9px;color:var(--txM)">${({ja:'平均時間',en:'Avg time',bn:'গড় সময়'}[_lang]||'平均時間')}</div></div>`;
+          h += `</div>`;
+          _batchQuizLog.forEach((q,i)=>{
+            const bg = q.isCorrect ? 'rgba(107,163,104,0.06)' : 'rgba(217,107,107,0.06)';
+            h += `<div style="display:flex;align-items:center;gap:5px;padding:5px 6px;margin-bottom:2px;background:${bg};border-radius:5px">`;
+            h += `<span style="font-size:9px;font-weight:700;color:var(--txD);min-width:18px">Q${i+1}</span>`;
+            h += `<span style="font-size:12px;color:${q.isCorrect?'var(--grn)':'var(--red)'}">${q.isCorrect?'✓':'✗'}</span>`;
+            h += `<div style="flex:1;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${q.question}</div>`;
+            if(!q.isCorrect) h += `<span style="font-size:8px;color:var(--red)">→${q.answer}</span>`;
+            h += `<span style="font-size:9px;color:var(--txD)">${q.seconds}s</span>`;
+            h += `</div>`;
+          });
+          if (wrongs.length) {
+            h += `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--brd)"><div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:6px">💀 ${({ja:'間違えた問題',en:'Wrong Questions',bn:'ভুল প্রশ্ন'}[_lang]||'間違えた問題')} (${wrongs.length})</div>`;
+            wrongs.forEach(q=>{
+              h += `<div style="padding:5px 8px;margin-bottom:3px;background:rgba(217,107,107,0.06);border-radius:6px"><div style="font-size:12px;font-weight:700">${q.question}</div><div style="font-size:10px;color:var(--txM)">${({ja:'正解',en:'Correct',bn:'সঠিক'}[_lang]||'正解')}: ${q.answer} | ⏱${q.seconds}s</div></div>`;
+            });
+            h += `</div>`;
+          }
+          h += `</div>`;
+        }
+        h += `</div>`;
         const target = c.querySelector('.u-content') || c;
         target.innerHTML = h;
         return;
@@ -3224,6 +3271,7 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
 
       const item = batch[order[pos]];
       const pct = pos/order.length*100;
+      _batchQStart = Date.now();
 
       // Generate options
       let opts, ci;
@@ -3267,6 +3315,8 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
       if (!grid) return;
       const chosen = parseInt(el.dataset.v);
       const isOk = chosen === correctIdx;
+      const item = batch[order[pos]];
+      const elapsed = Math.round((Date.now() - _batchQStart) / 1000);
       // Disable all
       grid.querySelectorAll('.qo').forEach(o => {
         o.onclick = null; o.style.cursor='default';
@@ -3276,9 +3326,20 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
       });
       const fb = document.getElementById(gridId+'_fb');
       if (fb) { fb.style.color=isOk?'var(--grn)':'var(--red)'; fb.textContent=isOk?T('correct'):T('incorrect'); }
-      if (isOk) sc.c++; else sc.w++;
+      if (isOk) { sc.c++; SRS.correct(modKey, item); } else { sc.w++; SRS.wrong(modKey, item); }
       if (typeof addS === 'function' && isOk) addS();
       if (typeof rstS === 'function' && !isOk) rstS();
+      // Get correct/chosen text for logging
+      const allOpts = grid.querySelectorAll('.qo');
+      const correctText = allOpts[correctIdx] ? allOpts[correctIdx].querySelector('span:last-child').textContent : '';
+      const chosenText = allOpts[chosen] ? allOpts[chosen].querySelector('span:last-child').textContent : '';
+      _batchQuizLog.push({
+        question: item[0] || item.q || item.p || '?',
+        answer: correctText,
+        userAnswer: chosenText,
+        isCorrect: isOk,
+        seconds: elapsed
+      });
       setTimeout(() => { pos++; render(); }, 900);
     };
     render();
@@ -3357,17 +3418,54 @@ function initM(c,id){
   switch(id){
     case 'kana':{
       const sid=c.id.replace(/\W/g,'_');
-      let kanaType=0;
-      function renderKana(){
+      let kanaType=0; // 0=hiragana, 1=katakana
+      let kanaView='menu'; // 'menu' | 'flash' | 'quiz'
+      function renderKanaMenu(){
+        kanaView='menu';
+        const typeLabel=kanaType===0?'ひらがな':'カタカナ';
+        const typeIcon=kanaType===0?'あ':'ア';
         let h=`<div class="u-tabs" style="margin-top:12px"><button class="u-tab ${kanaType===0?'on':''}" onclick="${sid}_kt(0)">ひらがな</button><button class="u-tab ${kanaType===1?'on':''}" onclick="${sid}_kt(1)">カタカナ</button></div>`;
-        h+=`<div id="kana_inner_${sid}"></div>`;
+        h+=`<div style="padding:16px">`;
+        h+=`<div style="font-family:'Zen Maru Gothic',sans-serif;font-size:20px;font-weight:900;margin-bottom:16px;text-align:center">${typeIcon} ${typeLabel}</div>`;
+        // Flashcard section
+        h+=`<div style="margin-bottom:16px">`;
+        h+=`<div style="font-size:13px;font-weight:700;color:var(--txM);margin-bottom:10px;display:flex;align-items:center;gap:6px">📇 ${({ja:'フラッシュカード・一覧',en:'Flashcards & Grid',bn:'ফ্ল্যাশকার্ড ও গ্রিড'}[_lang]||'フラッシュカード・一覧')}</div>`;
+        h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">`;
+        h+=`<button onclick="${sid}_startView('grid')" style="display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:18px 14px;cursor:pointer;font-family:inherit;transition:all .2s">`;
+        h+=`<div style="width:44px;height:44px;border-radius:12px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:20px">📋</div>`;
+        h+=`<div style="font-size:14px;font-weight:700;color:var(--tx)">${({ja:'一覧表',en:'Grid View',bn:'গ্রিড ভিউ'}[_lang]||'一覧表')}</div>`;
+        h+=`<div style="font-size:11px;color:var(--txM)">${({ja:'全文字を一覧で確認',en:'See all characters',bn:'সব অক্ষর দেখুন'}[_lang]||'全文字を一覧で確認')}</div>`;
+        h+=`</button>`;
+        h+=`<button onclick="${sid}_startView('type')" style="display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:18px 14px;cursor:pointer;font-family:inherit;transition:all .2s">`;
+        h+=`<div style="width:44px;height:44px;border-radius:12px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:20px">⌨️</div>`;
+        h+=`<div style="font-size:14px;font-weight:700;color:var(--tx)">${({ja:'タイピング練習',en:'Typing Drill',bn:'টাইপিং ড্রিল'}[_lang]||'タイピング練習')}</div>`;
+        h+=`<div style="font-size:11px;color:var(--txM)">${({ja:'ローマ字を入力して覚える',en:'Type romaji to memorize',bn:'রোমাজি টাইপ করুন'}[_lang]||'ローマ字を入力して覚える')}</div>`;
+        h+=`</button>`;
+        h+=`</div></div>`;
+        // Quiz section
+        h+=`<div>`;
+        h+=`<div style="font-size:13px;font-weight:700;color:var(--txM);margin-bottom:10px;display:flex;align-items:center;gap:6px">🎯 ${({ja:'クイズ',en:'Quiz',bn:'কুইজ'}[_lang]||'クイズ')}</div>`;
+        h+=`<button onclick="${sid}_startView('reverse')" style="display:flex;align-items:center;gap:14px;background:var(--s1);border:1px solid rgba(228,87,46,0.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s;width:100%">`;
+        h+=`<div style="width:48px;height:48px;border-radius:12px;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+        h+=`<div><div style="font-size:15px;font-weight:700;color:var(--acc);margin-bottom:3px">${({ja:'4択クイズ (10問)',en:'4-Choice Quiz (10Q)',bn:'৪-পছন্দ কুইজ (১০টি)'}[_lang]||'4択クイズ (10問)')}</div>`;
+        h+=`<div style="font-size:12px;color:var(--txM)">${({ja:'ローマ字から正しい文字を選ぶ',en:'Pick the correct character from romaji',bn:'রোমাজি থেকে সঠিক অক্ষর বাছুন'}[_lang]||'ローマ字から正しい文字を選ぶ')}</div></div></button>`;
+        h+=`</div>`;
+        h+=`</div>`;
         c.innerHTML=h;
-        const inner=document.getElementById('kana_inner_'+sid);
+      }
+      window[sid+'_kt']=t=>{kanaType=t;renderKanaMenu()};
+      window[sid+'_startView']=mode=>{
+        kanaView=mode;
+        const inner=document.createElement('div');
+        inner.id='kana_inner_'+sid;
+        c.innerHTML='';c.appendChild(inner);
         if(kanaType===0)mkK(inner,HB,HD,'ひらがな','あ');
         else mkK(inner,KB,KD,'カタカナ','ア');
-      }
-      window[sid+'_kt']=t=>{kanaType=t;renderKana()};
-      renderKana();
+        // Force the mode
+        const fnM=window[inner.id.replace(/\W/g,'_')+'_M'];
+        if(fnM)fnM(mode);
+      };
+      renderKanaMenu();
       break;}
 
     case 'vocab':{
@@ -3406,21 +3504,13 @@ function initM(c,id){
       const AFI=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5},{l:T('f_ku'),i:6},{l:T('f_ba'),i:7}];
       const AFNA=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5},{l:T('f_ni'),i:6},{l:T('f_ba'),i:7}];
       const AQF=[{l:T('f_hitei'),i:2},{l:T('f_kako'),i:3},{l:T('f_kakohitei'),i:4},{l:T('f_te'),i:5}];
-      let _aqf=AQF[0];
       const ds=[{label:'い形容詞',data:I_ADJ,cls:'n5'},{label:'な形容詞',data:NA_ADJ,cls:'n4'}];
       mkBatch(c,'adj',ds,
         i=>`<div class="fc-big" style="font-size:42px">${i[0]}</div><div style="margin-top:6px;font-size:13px;color:var(--txM)">${i[1]}</div>`,
         i=>{const isI=I_ADJ.includes(i);const forms=isI?AFI:AFNA;const tl=isI?T('f_iadj'):T('f_naadj');
           const rows=forms.filter(f=>i[f.i]).map(f=>`<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:6px;background:var(--s1);margin:2px 0"><span style="color:var(--txD);font-size:11px">${f.l}</span><span style="color:var(--acc);font-family:'DM Mono',monospace;font-size:14px">${i[f.i]}</span></div>`).join('');
           return`<div style="width:100%"><div style="font-size:12px;color:var(--txM);margin-bottom:6px"><span style="background:${isI?'var(--accG)':'var(--accB)'};color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${tl}</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">${rows}</div></div>`},
-        i=>{_aqf=AQF[Math.floor(Math.random()*AQF.length)];return`<div class="qb"><div class="qT">${_aqf.l}${T('qForm')}</div><div class="qB" style="font-size:36px">${i[0]}</div><div class="qP">${i[1]}</div></div>`},
-        (i,batch)=>{
-          const correct=i[_aqf.i];
-          const others=shuf(AQF.filter(f=>f!==_aqf&&i[f.i]&&i[f.i]!==correct).map(f=>i[f.i])).slice(0,3);
-          const o=shuf([correct,...others]);
-          return{opts:o,ci:o.indexOf(correct)};
-        },
-        null
+        null, null, AQF
       );break;}
 
     case 'timenum':{
