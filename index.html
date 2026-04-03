@@ -755,15 +755,15 @@ function setLang(l){
   <div class="battle-header">
     <div class="bh-top" style="gap:0">
       <div class="bh-counter enemies" style="flex:1;text-align:center;padding:14px 8px">
-        <div class="bc-icon" id="lbl-enemies">💀 間違えた問題数</div>
+        <div class="bc-icon" id="lbl-enemies">💀 過去に1回でも間違えた問題数</div>
         <div class="bc-n" id="dom-enemies" style="font-size:52px">--</div>
         <div class="bc-l" id="lbl-wrong-sub">問題</div>
       </div>
       <div style="width:1px;background:rgba(200,150,60,0.2);margin:8px 0"></div>
       <div class="bh-counter controlled" style="flex:1;text-align:center;padding:14px 8px">
-        <div class="bc-icon" id="lbl-controlled">⚔ 制圧</div>
+        <div class="bc-icon" id="lbl-controlled">⚔ 間違えた問題の中を克服した数</div>
         <div class="bc-n" id="dom-controlled" style="font-size:52px">0</div>
-        <div class="bc-l" id="lbl-ctrl-sub">問制圧済</div>
+        <div class="bc-l" id="lbl-ctrl-sub">問克服済</div>
       </div>
     </div>
   </div>
@@ -1060,10 +1060,10 @@ function renderBattleMap() {
 
   // 言語別ラベル
   const lblMap = {
-    'lbl-enemies':    {ja:'💀 間違えた問題数', en:'💀 Wrong Answers', bn:'💀 ভুল উত্তর সংখ্যা'},
+    'lbl-enemies':    {ja:'💀 過去に1回でも間違えた問題数', en:'💀 Ever Answered Wrong', bn:'💀 কখনো ভুল হয়েছে'},
     'lbl-wrong-sub':  {ja:'問題', en:'questions', bn:'প্রশ্ন'},
-    'lbl-controlled': {ja:'⚔ 制圧', en:'⚔ Conquered', bn:'⚔ জয়'},
-    'lbl-ctrl-sub':   {ja:'問制圧済', en:'conquered', bn:'জয় করা'},
+    'lbl-controlled': {ja:'⚔ 間違えた問題の中を克服した数', en:'⚔ Overcome from Mistakes', bn:'⚔ ভুল থেকে কাটিয়ে উঠেছে'},
+    'lbl-ctrl-sub':   {ja:'問克服済', en:'overcome', bn:'কাটিয়ে উঠেছে'},
     'attack-btn-label':{ja:'間違えた問題を攻略開始', en:'Start Wrong Answer Quiz', bn:'ভুল প্রশ্নের কুইজ শুরু'},
     'samurai-speech': {
       ja:['諦めるな、武士！','弱点を制圧せよ！','今日も修行だ！','敵を倒せ！'],
