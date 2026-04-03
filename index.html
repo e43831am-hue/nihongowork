@@ -994,9 +994,9 @@ function getAllWrongItems() {
       const key = 'nw3_srs_' + def.mod + '_' + (item[0]||item.q||item.p||'');
       try {
         const d = JSON.parse(localStorage.getItem(key)||'{}');
-        const w = d.w||0, c2 = d.c||0;
-        if(w > 0 && w >= c2) {  // 苦手 = 間違い回数が正解以上
-          results.push({ item, mod:def.mod, label:def.label, key, w, c:c2 });
+        const w = d.w||0;
+        if(w > 0) {  // 1回でも間違えたら永久にカウント（減らない）
+          results.push({ item, mod:def.mod, label:def.label, key, w, c:d.c||0 });
         }
       } catch(e){}
     });
@@ -1004,33 +1004,9 @@ function getAllWrongItems() {
   return results;
 }
 
-// 制圧数をSRSデータから動的に計算（c>=3 且つ c>w*2 のアイテム数）
-function getControlled() {
-  let count = 0;
-  const modDefs = [
-    { mod:'kana',    getData:()=>[...HB,...HD,...KB,...KD] },
-    { mod:'vocab',   getData:()=>[...(JLPT_V5||[]),...(JLPT_V4||[])] },
-    { mod:'kanji',   getData:()=>[...(JLPT_K5||[]),...(JLPT_K4||[])] },
-    { mod:'verb',    getData:()=>[...(VERBS||[]),...(VERBS_N4||[])] },
-    { mod:'adj',     getData:()=>[...(I_ADJ||[]),...(NA_ADJ||[])] },
-    { mod:'grammar', getData:()=>GRAM||[] },
-    { mod:'timenum', getData:()=>{try{const h=(typeof HOURS!=='undefined'?HOURS:[]).map(h=>({q:h[2],a:h[1]}));const m=(typeof MINS!=='undefined'?MINS:[]).map(m=>({q:m[2],a:m[1]}));return[...h,...m]}catch(e){return[]}} },
-  ];
-  modDefs.forEach(function(def){
-    let items;
-    try { items = def.getData(); } catch(e){ items=[]; }
-    items.forEach(function(item){
-      const key = 'nw3_srs_' + def.mod + '_' + (item[0]||item.q||item.p||'');
-      try {
-        const d = JSON.parse(localStorage.getItem(key)||'{}');
-        const w = d.w||0, c2 = d.c||0;
-        if(c2 >= 3 && c2 > w * 2) count++;
-      } catch(e){}
-    });
-  });
-  return count;
-}
-// setControlled is no longer needed - computed dynamically from SRS
+// 制圧数 = シンプルなカウンター（攻略クイズで1問正解 → +1）
+function getControlled() { return parseInt(localStorage.getItem('nw3_controlled')||'0'); }
+function addControlled(n) { var v = getControlled() + (n||1); localStorage.setItem('nw3_controlled', String(v)); return v; }
 
 // ── メイン：バトルマップ描画
 function renderBattleMap() {
@@ -1309,7 +1285,7 @@ function runWrongQuiz(questions, container, overlay) {
     const wrongCount = results.filter(r=>r&&!r.correct).length;
     const pct = Math.round(correctCount/total*100);
 
-    // Update SRS: correct ones remove wrong flag, wrong ones keep
+    // Update SRS + 制圧カウンター
     results.forEach(function(r){
       if(!r) return;
       const q = r.q;
@@ -1317,11 +1293,10 @@ function runWrongQuiz(questions, container, overlay) {
       try {
         const d = JSON.parse(localStorage.getItem(srsKey)||'{}');
         if(r.correct){
-          // 正解: correct++, 制圧カウント加算
+          // 正解: SRS correct++ & 制圧+1
           d.c = (d.c||0)+1;
           localStorage.setItem(srsKey, JSON.stringify(d));
-          setControlled(getControlled()+1);
-          // グローバルカウンタ更新
+          addControlled(1);
           try{ addS(); }catch(e){}
         } else {
           // 不正解: wrong++ 
