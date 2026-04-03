@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -9,11 +8,11 @@
   gtag('js', new Date());
   gtag('config', 'G-WK94Y3TPM0');
 </script>
-<meta name="description" content="Step-by-step guide to every module: JLPT quizzes, flashcards, grammar drills, and the Electrical Worker specialist course.">
+<meta name="description" content="Complete guide to the battle map, batch learning system, flashcards, conjugation quizzes, and every module in NIHONGO WORK.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nihongo-work.site/guide.html">
 <meta property="og:title" content="How to Use NIHONGO WORK App | Study Guide">
-<meta property="og:description" content="Step-by-step guide to every module: JLPT quizzes, flashcards, grammar drills, and the Electrical Worker specialist course.">
+<meta property="og:description" content="Complete guide to the battle map, batch learning, conjugation quizzes, and every module in NIHONGO WORK.">
 <meta property="og:url" content="https://nihongo-work.site/guide.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NIHONGO WORK">
@@ -23,651 +22,269 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #F7F6F2;
-  --s1: #FFFFFF;
-  --s2: #F0EFE9;
-  --s3: #E8E7E0;
-  --acc: #E4572E;
-  --acc2: #C94120;
-  --accG: #6BA368;
-  --accB: #1F3A5F;
-  --accY: #D4A017;
-  --accP: #8B5CF6;
-  --accC: #0891B2;
-  --tx: #1A1A2E;
-  --txM: #4A5568;
-  --txD: #9AA5B4;
-  --brd: rgba(0,0,0,0.08);
-  --g1: linear-gradient(135deg,#E4572E,#C94120);
-  --g2: linear-gradient(135deg,#1F3A5F,#2D4A7A);
-  --g3: linear-gradient(135deg,#D4A017,#E4572E);
-  --g4: linear-gradient(135deg,#8B5CF6,#1F3A5F);
-  --g5: linear-gradient(135deg,#6BA368,#0891B2);
-  --r: 14px;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--tx);
-  font-family: 'Noto Sans JP', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
-}
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 3px; }
-
-/* ── TOP BAR ── */
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px;
-  background: rgba(247,246,242,0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--brd);
-  position: sticky; top: 0; z-index: 100;
-}
-.logo {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-weight: 900; font-size: 18px;
-  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none;
-}
-.logo-sub {
-  font-size: 11px; color: var(--txD);
-  -webkit-text-fill-color: var(--txD);
-  font-weight: 400; letter-spacing: .06em;
-}
-.pill {
-  background: var(--s2); border: 1px solid var(--brd);
-  border-radius: 20px; padding: 4px 12px;
-  font-size: 11px; color: var(--txM);
-  font-family: 'DM Mono', monospace;
-}
-
-/* ── HERO ── */
-.hero {
-  max-width: 720px; margin: 0 auto;
-  padding: 52px 24px 36px;
-  text-align: center;
-  position: relative;
-}
-.hero::before {
-  content: '';
-  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 400px; height: 300px;
-  background: radial-gradient(circle, rgba(228,87,46,.07) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: 20px; padding: 5px 14px;
-  font-size: 11px; color: var(--txM); letter-spacing: .08em;
-  margin-bottom: 20px;
-}
-.hero-badge span { color: var(--acc); font-weight: 700; }
-.hero-title {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 900; line-height: 1.15;
-  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom: 14px;
-}
-.hero-desc {
-  font-size: 14px; color: var(--txM); line-height: 1.9;
-  max-width: 500px; margin: 0 auto;
-}
-
-/* ── NAV PILLS ── */
-.nav-pills {
-  max-width: 720px; margin: 0 auto 8px;
-  padding: 0 24px;
-  display: flex; gap: 8px; flex-wrap: wrap;
-}
-.nav-pill {
-  padding: 6px 14px; border-radius: 20px;
-  border: 1px solid var(--brd); background: var(--s1);
-  font-size: 12px; color: var(--txM); cursor: pointer;
-  text-decoration: none; transition: all .15s;
-  font-family: 'Noto Sans JP', sans-serif;
-  display: flex; align-items: center; gap: 5px;
-}
-.nav-pill:hover { background: var(--s2); color: var(--tx); border-color: rgba(0,0,0,.15); }
-.nav-pill.active { background: var(--acc); color: #fff; border-color: transparent; }
-
-/* ── MAIN LAYOUT ── */
-.content {
-  max-width: 720px; margin: 0 auto;
-  padding: 0 24px 80px;
-}
-
-/* ── SECTION HEADERS ── */
-.sec-header {
-  display: flex; align-items: center; gap: 10px;
-  margin: 40px 0 18px;
-  padding-top: 8px;
-}
-.sec-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.sec-title {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 18px; font-weight: 900; color: var(--tx);
-}
-.sec-line {
-  flex: 1; height: 1px; background: var(--brd);
-}
-
-/* ── STEP BOX ── */
-.steps {
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: var(--r); overflow: hidden;
-  margin-bottom: 16px;
-}
-.step {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--brd);
-  transition: background .15s;
-}
-.step:last-child { border-bottom: none; }
-.step:hover { background: var(--s2); }
-.step-num {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: var(--g1); color: #fff;
-  font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-.step-body {}
-.step-title { font-size: 14px; font-weight: 700; color: var(--tx); margin-bottom: 4px; }
-.step-desc { font-size: 13px; color: var(--txM); line-height: 1.75; }
-.step-desc code {
-  background: var(--s2); border: 1px solid var(--brd);
-  border-radius: 4px; padding: 1px 6px;
-  font-family: 'DM Mono', monospace; font-size: 12px; color: var(--acc);
-}
-
-/* ── MODULE CARDS ── */
-.module-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin-bottom: 16px;
-}
-@media (max-width: 520px) { .module-grid { grid-template-columns: 1fr; } }
-
-.module-card {
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: var(--r); padding: 18px 16px;
-  position: relative; overflow: hidden;
-  transition: all .22s;
-}
-.module-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
-.module-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-}
-.mc-1::before { background: var(--g1); }
-.mc-2::before { background: var(--g2); }
-.mc-3::before { background: var(--g3); }
-.mc-4::before { background: var(--g4); }
-.mc-5::before { background: var(--g5); }
-.mc-dk::before { background: linear-gradient(135deg,#e8a84c,#6bbf8a); }
-
-.mc-icon { font-size: 26px; margin-bottom: 10px; display: block; }
-.mc-name {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 14px; font-weight: 700; color: var(--tx); margin-bottom: 4px;
-}
-.mc-desc { font-size: 11px; color: var(--txD); line-height: 1.6; margin-bottom: 8px; }
-.mc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.mc-tag {
-  background: var(--s2); border: 1px solid var(--brd);
-  border-radius: 10px; padding: 2px 8px;
-  font-size: 10px; color: var(--txM);
-  font-family: 'DM Mono', monospace;
-}
-.mc-tag.g { background: rgba(107,163,104,.1); border-color: rgba(107,163,104,.25); color: #4a8f47; }
-.mc-tag.o { background: rgba(228,87,46,.08); border-color: rgba(228,87,46,.25); color: var(--acc); }
-.mc-tag.b { background: rgba(31,58,95,.08); border-color: rgba(31,58,95,.2); color: var(--accB); }
-
-/* ── DENKOU SECTION ── */
-.dk-banner {
-  background: #0e0f13; border-radius: var(--r);
-  padding: 24px; margin-bottom: 16px;
-  position: relative; overflow: hidden;
-}
-.dk-banner::before {
-  content: '⚡';
-  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-  font-size: 80px; opacity: .06; line-height: 1;
-}
-.dk-banner-title {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 18px; font-weight: 900; color: #e8e6df;
-  margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
-}
-.dk-banner-desc { font-size: 13px; color: #8a8880; line-height: 1.75; }
-.dk-stats {
-  display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
-}
-.dk-stat {
-  background: #16181f; border: 1px solid rgba(255,255,255,.07);
-  border-radius: 10px; padding: 10px 16px;
-  text-align: center;
-}
-.dk-stat-n {
-  font-family: 'DM Mono', monospace;
-  font-size: 22px; font-weight: 700; color: #e8a84c;
-  line-height: 1;
-}
-.dk-stat-l { font-size: 10px; color: #5a5856; margin-top: 3px; letter-spacing: .06em; }
-
-.dk-modes {
-  background: #0e0f13; border-radius: var(--r);
-  overflow: hidden; margin-bottom: 16px;
-}
-.dk-mode {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.05);
-  transition: background .15s;
-}
-.dk-mode:last-child { border-bottom: none; }
-.dk-mode:hover { background: #16181f; }
-.dk-mode-badge {
-  background: #1e2028; border: 1px solid rgba(255,255,255,.07);
-  border-radius: 8px; padding: 6px 10px;
-  font-size: 11px; color: #e8a84c; font-weight: 700;
-  white-space: nowrap; flex-shrink: 0;
-  font-family: 'DM Mono', monospace;
-}
-.dk-mode-title { font-size: 13px; font-weight: 700; color: #e8e6df; margin-bottom: 3px; }
-.dk-mode-desc { font-size: 12px; color: #8a8880; line-height: 1.7; }
-
-/* ── QUIZ FLOW ── */
-.quiz-flow {
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: var(--r); padding: 20px; margin-bottom: 16px;
-}
-.flow-row {
-  display: flex; align-items: center; gap: 0;
-  flex-wrap: wrap;
-}
-.flow-step {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 6px; min-width: 70px; padding: 0 6px;
-}
-.flow-circle {
-  width: 44px; height: 44px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.flow-circle.c1 { background: rgba(228,87,46,.1); }
-.flow-circle.c2 { background: rgba(31,58,95,.1); }
-.flow-circle.c3 { background: rgba(107,163,104,.1); }
-.flow-circle.c4 { background: rgba(212,160,23,.1); }
-.flow-label { font-size: 10px; color: var(--txM); text-align: center; line-height: 1.4; font-weight: 500; }
-.flow-arrow { color: var(--txD); font-size: 16px; margin: 0 2px; flex-shrink: 0; padding-bottom: 20px; }
-
-/* ── TIP BOXES ── */
-.tip {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 16px; border-radius: 10px;
-  margin-bottom: 10px; font-size: 13px; line-height: 1.75;
-}
-.tip.green { background: rgba(107,163,104,.08); border: 1px solid rgba(107,163,104,.2); color: #3a6e37; }
-.tip.blue  { background: rgba(31,58,95,.07);   border: 1px solid rgba(31,58,95,.18);  color: var(--accB); }
-.tip.orange{ background: rgba(228,87,46,.07);   border: 1px solid rgba(228,87,46,.2);  color: var(--acc2); }
-.tip.yellow{ background: rgba(212,160,23,.08);  border: 1px solid rgba(212,160,23,.25); color: #8a6200; }
-.tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-/* ── JLPT SECTION ── */
-.jlpt-exams {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 8px; margin-bottom: 16px;
-}
-@media (max-width: 480px) { .jlpt-exams { grid-template-columns: 1fr; } }
-.jlpt-exam {
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: 12px; padding: 14px 16px;
-  display: flex; align-items: center; gap: 12px;
-}
-.jlpt-badge {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 900; color: #fff;
-  font-family: 'DM Mono', monospace; flex-shrink: 0;
-}
-.jlpt-exam-title { font-size: 13px; font-weight: 700; color: var(--tx); margin-bottom: 2px; }
-.jlpt-exam-desc { font-size: 11px; color: var(--txD); }
-
-/* ── SCORE DISPLAY ── */
-.score-legend {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 8px; margin-bottom: 16px;
-}
-.score-item {
-  background: var(--s1); border: 1px solid var(--brd);
-  border-radius: 10px; padding: 12px 14px;
-  display: flex; align-items: center; gap: 10px;
-}
-.score-pct {
-  font-family: 'DM Mono', monospace; font-size: 18px;
-  font-weight: 700; min-width: 48px;
-}
-.score-msg { font-size: 11px; color: var(--txM); line-height: 1.5; }
-
-/* ── ANCHOR OFFSET ── */
-section[id] { scroll-margin-top: 70px; }
-
-/* ── FOOTER ── */
-.guide-footer {
-  border-top: 1px solid var(--brd);
-  padding: 32px 24px;
-  text-align: center;
-  max-width: 720px; margin: 0 auto;
-}
-.guide-footer-title {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 18px; font-weight: 900;
-  background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom: 6px;
-}
-.guide-footer-sub { font-size: 13px; color: var(--txD); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.hero { animation: fadeUp .5s ease both; }
-.hero-badge { animation: fadeUp .4s .05s ease both; }
+:root{--bg:#F7F6F2;--s1:#FFFFFF;--s2:#F0EFE9;--s3:#E8E7E0;--acc:#E4572E;--acc2:#C94120;--accG:#6BA368;--accB:#1F3A5F;--accY:#D4A017;--accP:#8B5CF6;--accC:#0891B2;--tx:#1A1A2E;--txM:#4A5568;--txD:#9AA5B4;--brd:rgba(0,0,0,0.08);--g1:linear-gradient(135deg,#E4572E,#C94120);--g2:linear-gradient(135deg,#1F3A5F,#2D4A7A);--g3:linear-gradient(135deg,#D4A017,#E4572E);--g4:linear-gradient(135deg,#8B5CF6,#1F3A5F);--g5:linear-gradient(135deg,#6BA368,#0891B2);--r:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-sub{font-size:11px;color:var(--txD);-webkit-text-fill-color:var(--txD);font-weight:400;letter-spacing:.06em}
+.pill{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--txM);font-family:'DM Mono',monospace}
+.home-btn{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);text-decoration:none;margin-right:8px}
+.hero{max-width:720px;margin:0 auto;padding:52px 24px 36px;text-align:center;position:relative;animation:fadeUp .5s ease both}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:400px;height:300px;background:radial-gradient(circle,rgba(228,87,46,.07) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--s1);border:1px solid var(--brd);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--txM);letter-spacing:.08em;margin-bottom:20px;animation:fadeUp .4s .05s ease both}
+.hero-badge span{color:var(--acc);font-weight:700}
+.hero-title{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:900;line-height:1.15;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.hero-desc{font-size:14px;color:var(--txM);line-height:1.9;max-width:540px;margin:0 auto}
+.nav-pills{max-width:720px;margin:0 auto 8px;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap}
+.nav-pill{padding:6px 14px;border-radius:20px;border:1px solid var(--brd);background:var(--s1);font-size:12px;color:var(--txM);cursor:pointer;text-decoration:none;transition:all .15s;font-family:'Noto Sans JP',sans-serif;display:flex;align-items:center;gap:5px}
+.nav-pill:hover{background:var(--s2);color:var(--tx);border-color:rgba(0,0,0,.15)}
+.nav-pill.active{background:var(--acc);color:#fff;border-color:transparent}
+.content{max-width:720px;margin:0 auto;padding:0 24px 80px}
+.sec-header{display:flex;align-items:center;gap:10px;margin:40px 0 18px;padding-top:8px}
+.sec-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sec-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:900;color:var(--tx)}
+.sec-line{flex:1;height:1px;background:var(--brd)}
+.steps{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.step{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border-bottom:1px solid var(--brd);transition:background .15s}
+.step:last-child{border-bottom:none}.step:hover{background:var(--s2)}
+.step-num{width:28px;height:28px;border-radius:8px;background:var(--g1);color:#fff;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-title{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--txM);line-height:1.75}
+.step-desc code{background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:1px 6px;font-family:'DM Mono',monospace;font-size:12px;color:var(--acc)}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+@media(max-width:520px){.module-grid{grid-template-columns:1fr}}
+.module-card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:18px 16px;position:relative;overflow:hidden;transition:all .22s}
+.module-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.module-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.mc-1::before{background:var(--g1)}.mc-2::before{background:var(--g2)}.mc-3::before{background:var(--g3)}.mc-4::before{background:var(--g4)}.mc-5::before{background:var(--g5)}
+.mc-icon{font-size:26px;margin-bottom:10px;display:block}
+.mc-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:var(--tx);margin-bottom:4px}
+.mc-desc{font-size:11px;color:var(--txD);line-height:1.6;margin-bottom:8px}
+.mc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.mc-tag{background:var(--s2);border:1px solid var(--brd);border-radius:10px;padding:2px 8px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
+.mc-tag.g{background:rgba(107,163,104,.1);border-color:rgba(107,163,104,.25);color:#4a8f47}
+.mc-tag.o{background:rgba(228,87,46,.08);border-color:rgba(228,87,46,.25);color:var(--acc)}
+.mc-tag.b{background:rgba(31,58,95,.08);border-color:rgba(31,58,95,.2);color:var(--accB)}
+.bm-card{background:linear-gradient(180deg,#0d0805,#140c04);border-radius:var(--r);padding:24px;margin-bottom:16px;position:relative;overflow:hidden;color:#e8d5b0}
+.bm-card::before{content:'⚔';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.04}
+.bm-title{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:900;margin-bottom:6px}
+.bm-desc{font-size:12px;color:#8a7a60;line-height:1.8}
+.hex-legend{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.hex-leg{display:flex;align-items:center;gap:5px;font-size:11px}
+.hex-dot{width:12px;height:12px;border-radius:3px}
+.hex-dot.red{background:#5a1a1a;border:1px solid rgba(192,57,43,0.45)}
+.hex-dot.yellow{background:#5a4a0a;border:1px solid rgba(200,160,10,0.35)}
+.hex-dot.green{background:#2d5a2d;border:1px solid rgba(74,160,74,0.4)}
+.hex-dot.dark{background:#1a1208;border:1px solid rgba(200,150,60,0.1)}
+.dk-banner{background:#0e0f13;border-radius:var(--r);padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
+.dk-banner::before{content:'⚡';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.06}
+.dk-banner-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:900;color:#e8e6df;margin-bottom:6px}
+.dk-banner-desc{font-size:13px;color:#8a8880;line-height:1.75}
+.dk-stats{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.dk-stat{background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 16px;text-align:center}
+.dk-stat-n{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:#e8a84c}
+.dk-stat-l{font-size:10px;color:#5a5856;margin-top:3px}
+.dk-modes{background:#0e0f13;border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.dk-mode{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.05)}
+.dk-mode:last-child{border-bottom:none}
+.dk-mode-badge{background:#1e2028;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 10px;font-size:11px;color:#e8a84c;font-weight:700;white-space:nowrap;flex-shrink:0;font-family:'DM Mono',monospace}
+.dk-mode-title{font-size:13px;font-weight:700;color:#e8e6df;margin-bottom:3px}
+.dk-mode-desc{font-size:12px;color:#8a8880;line-height:1.7}
+.quiz-flow{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.flow-step{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:70px;padding:0 6px}
+.flow-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.flow-circle.c1{background:rgba(228,87,46,.1)}.flow-circle.c2{background:rgba(31,58,95,.1)}.flow-circle.c3{background:rgba(107,163,104,.1)}.flow-circle.c4{background:rgba(212,160,23,.1)}
+.flow-label{font-size:10px;color:var(--txM);text-align:center;line-height:1.4;font-weight:500}
+.flow-arrow{color:var(--txD);font-size:16px;margin:0 2px;flex-shrink:0;padding-bottom:20px}
+.tip{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:10px;margin-bottom:10px;font-size:13px;line-height:1.75}
+.tip.green{background:rgba(107,163,104,.08);border:1px solid rgba(107,163,104,.2);color:#3a6e37}
+.tip.blue{background:rgba(31,58,95,.07);border:1px solid rgba(31,58,95,.18);color:var(--accB)}
+.tip.orange{background:rgba(228,87,46,.07);border:1px solid rgba(228,87,46,.2);color:var(--acc2)}
+.tip.yellow{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.25);color:#8a6200}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.jlpt-exams{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+@media(max-width:480px){.jlpt-exams{grid-template-columns:1fr}}
+.jlpt-exam{background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.jlpt-badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;font-family:'DM Mono',monospace;flex-shrink:0}
+.jlpt-exam-title{font-size:13px;font-weight:700;margin-bottom:2px}.jlpt-exam-desc{font-size:11px;color:var(--txD)}
+.score-legend{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+.score-item{background:var(--s1);border:1px solid var(--brd);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.score-pct{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;min-width:48px}
+.score-msg{font-size:11px;color:var(--txM);line-height:1.5}
+section[id]{scroll-margin-top:70px}
+.guide-footer{border-top:1px solid var(--brd);padding:32px 24px;text-align:center;max-width:720px;margin:0 auto}
+.guide-footer-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:900;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.guide-footer-sub{font-size:13px;color:var(--txD)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874205665564653"
-     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874205665564653" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <header class="topbar">
-  <a class="logo" href="index.html">
-    NIHONGO WORK
-    <span class="logo-sub">にほんごワーク</span>
-  </a>
-  <a class="home-btn" href="index.html">← Home</a><div class="pill">📖 User Guide</div>
+  <a class="logo" href="index.html">NIHONGO WORK <span class="logo-sub">にほんごワーク</span></a>
+  <div><a class="home-btn" href="index.html">← Home</a><span class="pill">📖 Guide</span></div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">⚡ Quick Start &nbsp;·&nbsp; <span>How to Use</span></div>
-  <h1 class="hero-title">Your Complete<br>Study Guide</h1>
-  <p class="hero-desc">Everything you need to get the most out of every module — flashcards, quizzes, mock exams, and the Electrical Worker special course.</p>
+  <div class="hero-badge">🗺 Updated &nbsp;·&nbsp; <span>Battle Map Edition</span></div>
+  <h1 class="hero-title">Complete<br>Study Guide</h1>
+  <p class="hero-desc">バトルマップ・バッチ学習・活用形クイズ・間違い克服 — 全機能のガイド。<br>Everything you need to master every module in NIHONGO WORK.</p>
 </div>
 
-<!-- NAV PILLS -->
 <nav class="nav-pills">
-  <a href="#getting-started" class="nav-pill active">🚀 Getting Started</a>
-  <a href="#modules" class="nav-pill">📦 Modules</a>
-  <a href="#quiz-how" class="nav-pill">🎯 Quiz Guide</a>
-  <a href="#denkou" class="nav-pill">⚡ Electrical Worker</a>
-  <a href="#jlpt" class="nav-pill">🎓 JLPT Mock Test</a>
+  <a href="#battle-map" class="nav-pill active">🗺 Battle Map</a>
+  <a href="#batch" class="nav-pill">📦 Batch Learning</a>
+  <a href="#kana" class="nav-pill">あ Kana</a>
+  <a href="#conjugation" class="nav-pill">🔄 Conjugation</a>
+  <a href="#modules" class="nav-pill">📚 Modules</a>
+  <a href="#results" class="nav-pill">📊 Results</a>
+  <a href="#denkou" class="nav-pill">⚡ Electrical</a>
+  <a href="#jlpt" class="nav-pill">🎓 JLPT</a>
   <a href="#tips" class="nav-pill">💡 Tips</a>
 </nav>
 
 <main class="content">
 
-  <!-- ── GETTING STARTED ── -->
-  <section id="getting-started">
+  <!-- ══ BATTLE MAP ══ -->
+  <section id="battle-map">
     <div class="sec-header">
-      <div class="sec-icon" style="background:rgba(228,87,46,.1)">🚀</div>
-      <div class="sec-title">Getting Started</div>
+      <div class="sec-icon" style="background:rgba(228,87,46,.1)">🗺</div>
+      <div class="sec-title">Battle Map（バトルマップ）</div>
       <div class="sec-line"></div>
     </div>
-
+    <div class="bm-card">
+      <div class="bm-title">⚔ 苦手を潰すバトルマップ</div>
+      <div class="bm-desc">ホーム画面のメインビュー。11個の六角形パネルがカテゴリー別の正答率をリアルタイム表示。クイズで正解するほどパネルの色が変わる。全パネルを緑にするのが目標！</div>
+      <div class="hex-legend">
+        <div class="hex-leg"><div class="hex-dot red"></div><span style="color:#e07070">敵支配 0–49%</span></div>
+        <div class="hex-leg"><div class="hex-dot yellow"></div><span style="color:#d4b840">交戦中 50–79%</span></div>
+        <div class="hex-leg"><div class="hex-dot green"></div><span style="color:#7dd87d">制圧済 80%+</span></div>
+        <div class="hex-leg"><div class="hex-dot dark"></div><span style="color:#6b5840">霧の戦場</span></div>
+      </div>
+    </div>
     <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">Open the app</div>
-          <div class="step-desc">The home screen shows all study modules. Your progress and streak are displayed at the top. No account needed — your progress is saved automatically in your browser.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Pick a module</div>
-          <div class="step-desc">Tap any card on the home screen to open a module. Each card shows the number of items inside. Start with <code>あ Characters</code> if you are a complete beginner.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Choose Flashcard or Quiz</div>
-          <div class="step-desc">Inside each module you will see tabs. Use <code>Flashcard</code> to browse freely, then switch to <code>Quiz</code> to test yourself with 4-choice questions.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <div class="step-title">Review your weak points</div>
-          <div class="step-desc">Every wrong answer is automatically saved. Tap <code>📋 Review Quiz</code> or <code>🧠 Long-term Memory</code> on the home screen to drill your weak items.</div>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">六角形パネルをタップ</div><div class="step-desc">各パネルには「ひらがな」「語彙N5」「動詞活用」などのカテゴリー名と正答率(%)が表示。タップするとそのモジュールのページへ移動します。</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">💀 過去に1回でも間違えた問題数</div><div class="step-desc">左側のカウンター。一度でも間違えた問題の合計数。<strong>この数は減りません</strong> — 間違えた事実は永久に記録されます。</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">⚔ 間違えた問題の中を克服した数</div><div class="step-desc">右側のカウンター。「間違えた問題を攻略開始」クイズで1問正解するたびに +1 増加。シンプルな累積カウンターです。</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">間違えた問題を攻略開始</div><div class="step-desc">バトルマップ下部の赤いボタン。過去の間違いからランダム10問を出題。正解すれば克服カウンター +1、SRS正答率も更新されます。</div></div></div>
     </div>
-
-    <!-- Quiz flow diagram -->
-    <div class="quiz-flow">
-      <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:14px;letter-spacing:.06em;">STUDY FLOW</div>
-      <div class="flow-row">
-        <div class="flow-step">
-          <div class="flow-circle c1">📖</div>
-          <div class="flow-label">Open<br>Module</div>
-        </div>
-        <div class="flow-arrow">›</div>
-        <div class="flow-step">
-          <div class="flow-circle c2">🃏</div>
-          <div class="flow-label">Study<br>Flashcard</div>
-        </div>
-        <div class="flow-arrow">›</div>
-        <div class="flow-step">
-          <div class="flow-circle c3">🎯</div>
-          <div class="flow-label">Take<br>Quiz</div>
-        </div>
-        <div class="flow-arrow">›</div>
-        <div class="flow-step">
-          <div class="flow-circle c4">📋</div>
-          <div class="flow-label">Review<br>Weak Items</div>
-        </div>
-      </div>
-    </div>
+    <div class="tip orange"><div class="tip-icon">🎯</div><div><strong>六角形パネルの % はリアルタイム。</strong>各カテゴリーのクイズで正解/不正解すると、SRSデータに基づきパーセンテージが即反映。ページリロード不要。</div></div>
   </section>
 
-  <!-- ── MODULES ── -->
-  <section id="modules">
+  <!-- ══ BATCH LEARNING ══ -->
+  <section id="batch">
     <div class="sec-header">
       <div class="sec-icon" style="background:rgba(31,58,95,.1)">📦</div>
-      <div class="sec-title">All Modules</div>
+      <div class="sec-title">Batch Learning（バッチ学習）</div>
       <div class="sec-line"></div>
     </div>
-
-    <div class="module-grid">
-      <div class="module-card mc-1">
-        <span class="mc-icon">あ</span>
-        <div class="mc-name">📝 Characters</div>
-        <div class="mc-desc">Hiragana and Katakana reading & writing drill with stroke-order hints.</div>
-        <div class="mc-tags">
-          <span class="mc-tag g">Beginner</span>
-          <span class="mc-tag">Flash + Quiz</span>
-        </div>
-      </div>
-      <div class="module-card mc-2">
-        <span class="mc-icon">📖</span>
-        <div class="mc-name">📖 Vocabulary</div>
-        <div class="mc-desc">JLPT N5/N4 + Irodori words with readings, meanings, and Bengali translations.</div>
-        <div class="mc-tags">
-          <span class="mc-tag b">N5 · N4 · N3</span>
-          <span class="mc-tag">2,404+ words</span>
-        </div>
-      </div>
-      <div class="module-card mc-3">
-        <span class="mc-icon">🈶</span>
-        <div class="mc-name">🈶 Kanji</div>
-        <div class="mc-desc">N5/N4 kanji readings, meanings, and example words. On-yomi and kun-yomi.</div>
-        <div class="mc-tags">
-          <span class="mc-tag b">N5 · N4 · N3</span>
-          <span class="mc-tag">741 kanji</span>
-        </div>
-      </div>
-      <div class="module-card mc-4">
-        <span class="mc-icon">🔄</span>
-        <div class="mc-name">🔄 Verb Conjugation</div>
-        <div class="mc-desc">N5/N4 verbs in all major forms: te-form, nai-form, ta-form, passive, potential, and more.</div>
-        <div class="mc-tags">
-          <span class="mc-tag b">N5 · N4</span>
-          <span class="mc-tag">408 verbs</span>
-        </div>
-      </div>
-      <div class="module-card mc-5">
-        <span class="mc-icon">📝</span>
-        <div class="mc-name">📝 Adjective Conjugation</div>
-        <div class="mc-desc">い-adjectives and な-adjectives: negative, past, te-form, ba-form, and more.</div>
-        <div class="mc-tags">
-          <span class="mc-tag">i-adj · na-adj</span>
-          <span class="mc-tag">70 items</span>
-        </div>
-      </div>
-      <div class="module-card mc-1">
-        <span class="mc-icon">🕐</span>
-        <div class="mc-name">🕐 Time &amp; Numbers</div>
-        <div class="mc-desc">Hours, minutes, months, days of the week, counters, and large numbers.</div>
-        <div class="mc-tags">
-          <span class="mc-tag g">Essential</span>
-          <span class="mc-tag">Flash + Quiz</span>
-        </div>
-      </div>
-      <div class="module-card mc-2">
-        <span class="mc-icon">📗</span>
-        <div class="mc-name">📗 Grammar &amp; Particles</div>
-        <div class="mc-desc">N5 sentence patterns and 18 types of Japanese particles with example sentences.</div>
-        <div class="mc-tags">
-          <span class="mc-tag b">N5</span>
-          <span class="mc-tag">26 + 18 items</span>
-        </div>
-      </div>
-      <div class="module-card mc-3">
-        <span class="mc-icon">💼</span>
-        <div class="mc-name">💼 Business Etiquette</div>
-        <div class="mc-desc">True/False (○×) quiz on Japanese workplace manners. 99 situations.</div>
-        <div class="mc-tags">
-          <span class="mc-tag o">Workplace</span>
-          <span class="mc-tag">99 questions</span>
-        </div>
+    <div class="tip blue"><div class="tip-icon">📦</div><div><strong>語彙・漢字・動詞・形容詞</strong>は全てバッチ学習方式。10語ずつのセットに分かれ、フラッシュカード → クイズ の順で進めます。</div></div>
+    <div class="quiz-flow">
+      <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:14px;letter-spacing:.06em">BATCH LEARNING FLOW</div>
+      <div class="flow-row">
+        <div class="flow-step"><div class="flow-circle c1">📇</div><div class="flow-label">10語の<br>カード学習</div></div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step"><div class="flow-circle c3">✓</div><div class="flow-label">完了で<br>クイズ解放</div></div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step"><div class="flow-circle c2">🎯</div><div class="flow-label">10問<br>クイズ</div></div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step"><div class="flow-circle c4">📊</div><div class="flow-label">詳細結果<br>確認</div></div>
       </div>
     </div>
-
-    <!-- Special modules -->
-    <div class="tip blue">
-      <div class="tip-icon">📋</div>
-      <div><strong>Review Quiz</strong> — Automatically collects every question you answered wrong and lets you drill them again. The list updates after each quiz session.</div>
-    </div>
-    <div class="tip blue">
-      <div class="tip-icon">🧠</div>
-      <div><strong>Long-term Memory Test</strong> — A cross-module quiz that picks weak items from <em>all</em> categories at once. Great for daily review before JLPT.</div>
-    </div>
-  </section>
-
-  <!-- ── QUIZ GUIDE ── -->
-  <section id="quiz-how">
-    <div class="sec-header">
-      <div class="sec-icon" style="background:rgba(107,163,104,.1)">🎯</div>
-      <div class="sec-title">How to Use the Quiz</div>
-      <div class="sec-line"></div>
-    </div>
-
     <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">Select a level filter</div>
-          <div class="step-desc">At the top of each module, tap a level button such as <code>N5</code>, <code>N4</code>, or <code>All</code> to narrow the question pool before starting.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Switch to Quiz tab</div>
-          <div class="step-desc">Tap the <code>🎯 Quiz</code> tab. A question appears showing a word, kanji, or sentence. Read it carefully before choosing your answer.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Tap one of the four choices</div>
-          <div class="step-desc">Choose A, B, C, or D. The correct answer turns <span style="color:var(--accG);font-weight:700">green</span> and wrong choices turn <span style="color:#d96b6b;font-weight:700">red</span> immediately. Feedback explains the right answer.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <div class="step-title">Tap "Next Question"</div>
-          <div class="step-desc">After seeing the feedback, tap <code>Next Question →</code> to continue. Each question gets its own URL, so you can share or bookmark a specific question.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <div class="step-title">See your score</div>
-          <div class="step-desc">After 10 questions, your score is shown as a percentage. Tap <code>Try Again</code> to reshuffle and retry, or go back to the home screen.</div>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">レベルタブを選択</div><div class="step-desc">各モジュール上部の <code>N5</code> <code>N4</code> <code>N3</code> タブでレベルを選択。セット一覧がグリッド表示されます。</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">セットカードをタップ</div><div class="step-desc">「セット1」「セット2」... と並んだカードをタップ。前のセット完了で次がアンロック。各カードにはそのセットの最初の語と最後の語が表示されます。</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">フラッシュカードを完了</div><div class="step-desc">10枚のカードを順にめくって学習。最後のカードで <code>✓ 完了！</code> を押すとクイズがアンロックされます。</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">クイズに挑戦 → 詳細結果</div><div class="step-desc">同じ10語から4択クイズ。正解/不正解はSRSに記録→六角形パネルに即反映。終了後に全問の正誤・正解・解答時間を含む詳細結果画面が表示されます。</div></div></div>
     </div>
+    <div class="tip green"><div class="tip-icon">📊</div><div><strong>詳細結果画面</strong>: 正解数・不正解数・平均時間 + Q1〜Q10の正誤マーク(✓/✗)・問題文・間違いの正解・各問の解答時間(秒)が一覧表示。</div></div>
+  </section>
 
-    <!-- Score legend -->
-    <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:10px;letter-spacing:.05em;">SCORE GUIDE</div>
-    <div class="score-legend">
-      <div class="score-item">
-        <div class="score-pct" style="color:#d96b6b">0–49%</div>
-        <div class="score-msg">もっと頑張ろう！<br>Keep practicing.</div>
-      </div>
-      <div class="score-item">
-        <div class="score-pct" style="color:var(--accY)">50–74%</div>
-        <div class="score-msg">いい感じ！<br>Getting there!</div>
-      </div>
-      <div class="score-item">
-        <div class="score-pct" style="color:var(--accG)">75–94%</div>
-        <div class="score-msg">すごい！<br>Great work!</div>
-      </div>
-      <div class="score-item">
-        <div class="score-pct" style="color:var(--acc)">95–100%</div>
-        <div class="score-msg">完璧！<br>Perfect score!</div>
-      </div>
+  <!-- ══ KANA ══ -->
+  <section id="kana">
+    <div class="sec-header">
+      <div class="sec-icon" style="background:rgba(228,87,46,.1)">あ</div>
+      <div class="sec-title">Kana Practice（かな練習）</div>
+      <div class="sec-line"></div>
     </div>
+    <div class="tip blue"><div class="tip-icon">あ</div><div>ひらがな・カタカナは<strong>フラッシュカード・一覧</strong>エリアと<strong>クイズ</strong>エリアが明確に分かれたメニュー画面から選択します。</div></div>
+    <div class="steps">
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:11px">📋</div><div class="step-body"><div class="step-title">📋 一覧表（Grid View）</div><div class="step-desc">全文字をグリッド形式で一覧表示。文字とローマ字がセットで確認できます。暗記の第一歩。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:11px">⌨️</div><div class="step-body"><div class="step-title">⌨️ タイピング練習（Typing Drill）</div><div class="step-desc">文字が表示 → ローマ字を入力して回答。Enter で判定。正解/不正解はSRSに記録。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--g1);color:#fff;font-size:11px">🎯</div><div class="step-body"><div class="step-title">🎯 4択クイズ（10問）</div><div class="step-desc">ローマ字 → 正しい文字を4択で選ぶ。10問終了後に詳細結果画面（各問の正誤・解答時間）が表示。基本/濁音/全部フィルターで範囲を切替可能。</div></div></div>
+    </div>
+    <div class="tip yellow"><div class="tip-icon">💡</div><div>「ひらがな」「カタカナ」タブで切替。それぞれ独立したSRSデータで追跡 — 六角形パネルも別々に更新されます。</div></div>
+  </section>
 
-    <div class="tip green">
-      <div class="tip-icon">💡</div>
-      <div>Use the <strong>Flashcard</strong> tab first to study the material, then switch to <strong>Quiz</strong> to test yourself. This two-step method is the fastest way to memorise.</div>
+  <!-- ══ CONJUGATION ══ -->
+  <section id="conjugation">
+    <div class="sec-header">
+      <div class="sec-icon" style="background:rgba(139,92,246,.1)">🔄</div>
+      <div class="sec-title">Conjugation Quiz（活用形クイズ）</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num" style="background:var(--g4);font-size:11px">🔄</div><div class="step-body"><div class="step-title">動詞活用クイズ</div><div class="step-desc">問題:「食べる」+「て形は？」→ 選択肢は<strong>同じ動詞の異なる活用形</strong>（食べて / 食べない / 食べた / 食べられる）。正しい形を選んでください。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--g5);font-size:11px">📝</div><div class="step-body"><div class="step-title">形容詞活用クイズ</div><div class="step-desc">問題:「大きい」+「否定形は？」→ 選択肢は<strong>同じ形容詞の異なる活用形</strong>（大きくない / 大きかった / 大きくなかった / 大きくて）。動詞と同じパターン。</div></div></div>
+    </div>
+    <div class="tip green"><div class="tip-icon">✓</div><div><strong>ポイント:</strong> 4つの選択肢は全て同じ単語の別形。意味の違いではなく<strong>形の違い</strong>を見分ける力が鍛えられます。バッチ学習のフラッシュカードで全活用形を確認してからクイズに挑戦しよう。</div></div>
+  </section>
+
+  <!-- ══ ALL MODULES ══ -->
+  <section id="modules">
+    <div class="sec-header">
+      <div class="sec-icon" style="background:rgba(31,58,95,.1)">📚</div>
+      <div class="sec-title">All Modules（全モジュール）</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="module-grid">
+      <div class="module-card mc-1"><span class="mc-icon">あ</span><div class="mc-name">あ/ア Kana</div><div class="mc-desc">ひらがな・カタカナ 一覧 + タイピング + 4択クイズ</div><div class="mc-tags"><span class="mc-tag g">Beginner</span><span class="mc-tag">Grid / Type / Quiz</span></div></div>
+      <div class="module-card mc-2"><span class="mc-icon">📖</span><div class="mc-name">📖 Vocabulary</div><div class="mc-desc">N5/N4/N3 + いろどり。バッチ学習。ベンガル語対応。</div><div class="mc-tags"><span class="mc-tag b">N5·N4·N3</span><span class="mc-tag">2,404+ words</span></div></div>
+      <div class="module-card mc-3"><span class="mc-icon">🈶</span><div class="mc-name">🈶 Kanji</div><div class="mc-desc">N5/N4/N3 漢字。音読み・訓読み・意味。バッチ学習。</div><div class="mc-tags"><span class="mc-tag b">N5·N4·N3</span><span class="mc-tag">741 kanji</span></div></div>
+      <div class="module-card mc-4"><span class="mc-icon">🔄</span><div class="mc-name">🔄 Verb Forms</div><div class="mc-desc">N5/N4動詞。同一動詞の活用形4択。バッチ学習。</div><div class="mc-tags"><span class="mc-tag b">N5·N4</span><span class="mc-tag">408 verbs</span></div></div>
+      <div class="module-card mc-5"><span class="mc-icon">📝</span><div class="mc-name">📝 Adjective Forms</div><div class="mc-desc">い形/な形。同一形容詞の活用形4択。バッチ学習。</div><div class="mc-tags"><span class="mc-tag">i·na adj</span><span class="mc-tag">70 items</span></div></div>
+      <div class="module-card mc-1"><span class="mc-icon">🕐</span><div class="mc-name">🕐 Time &amp; Numbers</div><div class="mc-desc">時間・日付・数字・助数詞。Flash + Quiz。</div><div class="mc-tags"><span class="mc-tag g">Essential</span><span class="mc-tag">Flash + Quiz</span></div></div>
+      <div class="module-card mc-2"><span class="mc-icon">📗</span><div class="mc-name">📗 Grammar</div><div class="mc-desc">N5文型 + 18種助詞。例文付き。Flash + Quiz。</div><div class="mc-tags"><span class="mc-tag b">N5</span><span class="mc-tag">26+18 items</span></div></div>
+      <div class="module-card mc-3"><span class="mc-icon">💼</span><div class="mc-name">💼 Business</div><div class="mc-desc">職場マナー○×クイズ。99の場面。</div><div class="mc-tags"><span class="mc-tag o">Workplace</span><span class="mc-tag">99 Q</span></div></div>
     </div>
   </section>
 
-  <!-- ── DENKOU ── -->
+  <!-- ══ RESULTS ══ -->
+  <section id="results">
+    <div class="sec-header">
+      <div class="sec-icon" style="background:rgba(107,163,104,.1)">📊</div>
+      <div class="sec-title">Quiz Results（クイズ結果）</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">スコア画面</div><div class="step-desc">10問終了後、正答率(%)・正解数・不正解数・平均解答時間が表示。</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">📊 詳細結果</div><div class="step-desc">全問一覧: Q番号、正誤マーク(✓/✗)、問題文、間違い時の正解、各問の解答時間(秒)。</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">💀 間違えた問題セクション</div><div class="step-desc">不正解だけまとめて表示。問題文 + 正解 + 解答時間。弱点の集中復習に活用。</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">SRS → 六角形パネル自動更新</div><div class="step-desc">正解/不正解はSRSに自動記録。ホームに戻ると六角形パネルの % と色が最新に更新。</div></div></div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:10px;letter-spacing:.05em">SCORE GUIDE</div>
+    <div class="score-legend">
+      <div class="score-item"><div class="score-pct" style="color:#d96b6b">0–49%</div><div class="score-msg">もっと頑張ろう！<br>Keep practicing.</div></div>
+      <div class="score-item"><div class="score-pct" style="color:var(--accY)">50–74%</div><div class="score-msg">いい感じ！<br>Getting there!</div></div>
+      <div class="score-item"><div class="score-pct" style="color:var(--accG)">75–94%</div><div class="score-msg">すごい！<br>Great work!</div></div>
+      <div class="score-item"><div class="score-pct" style="color:var(--acc)">95–100%</div><div class="score-msg">完璧！<br>Perfect!</div></div>
+    </div>
+  </section>
+
+  <!-- ══ DENKOU ══ -->
   <section id="denkou">
     <div class="sec-header">
       <div class="sec-icon" style="background:rgba(232,168,76,.15)">⚡</div>
       <div class="sec-title">⚡ Electrical Worker Module</div>
       <div class="sec-line"></div>
     </div>
-
     <div class="dk-banner">
       <div class="dk-banner-title">⚡ 電気工事士</div>
-      <div class="dk-banner-desc">
-        A specialist course for Bangladeshi engineers preparing to work in Japan's electrical construction industry. Covers the kanji, katakana terms, and technical vocabulary used on Japanese job sites and in the 電気工事士 (Electrical Worker) licence examination.
-      </div>
+      <div class="dk-banner-desc">Specialist course for Bangladeshi engineers preparing to work in Japan's electrical construction industry. Covers kanji, katakana terms, and technical vocabulary for the 電気工事士 licence exam.</div>
       <div class="dk-stats">
         <div class="dk-stat"><div class="dk-stat-n">409</div><div class="dk-stat-l">KANJI</div></div>
         <div class="dk-stat"><div class="dk-stat-n">106</div><div class="dk-stat-l">KATAKANA</div></div>
@@ -675,232 +292,54 @@ section[id] { scroll-margin-top: 70px; }
         <div class="dk-stat"><div class="dk-stat-n">599</div><div class="dk-stat-l">TOTAL</div></div>
       </div>
     </div>
-
-    <!-- Filter buttons explanation -->
-    <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:10px;letter-spacing:.05em;">FILTER BUTTONS</div>
-    <div class="steps" style="margin-bottom:16px">
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:11px">ALL</div>
-        <div class="step-body">
-          <div class="step-title">All cards</div>
-          <div class="step-desc">Show all 599 items — kanji, katakana, and technical terms together.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:11px">漢字</div>
-        <div class="step-body">
-          <div class="step-title">Kanji only</div>
-          <div class="step-desc">409 electrical-industry kanji with on-yomi, kun-yomi, and job-site usage examples.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">カタカナ</div>
-        <div class="step-body">
-          <div class="step-title">Katakana words</div>
-          <div class="step-desc">106 loanword tool and equipment names (e.g. アース, インバータ, クランプメータ).</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">用語</div>
-        <div class="step-body">
-          <div class="step-title">Technical terms</div>
-          <div class="step-desc">84 specialised compound terms: laws, grounding classes, wiring methods, motor theory, and more.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5 quiz modes -->
-    <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:10px;letter-spacing:.05em;">5 STUDY MODES</div>
+    <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:10px;letter-spacing:.05em">5 STUDY MODES</div>
     <div class="dk-modes">
-      <div class="dk-mode">
-        <div class="dk-mode-badge">⚡ FLASH</div>
-        <div>
-          <div class="dk-mode-title">Flash Cards</div>
-          <div class="dk-mode-desc">Browse all cards. Tap a card to flip it and see the reading, meaning, and usage example. Use <code style="background:#252730;color:#e8a84c;padding:1px 5px;border-radius:4px;font-family:'DM Mono',monospace;font-size:11px">🔖</code> to flag cards for later review.</div>
-        </div>
-      </div>
-      <div class="dk-mode">
-        <div class="dk-mode-badge">🔤 MEAN</div>
-        <div>
-          <div class="dk-mode-title">Meaning Quiz</div>
-          <div class="dk-mode-desc">A kanji or term is shown. Choose the correct <strong>English meaning</strong> from four options. Works for all three card types.</div>
-        </div>
-      </div>
-      <div class="dk-mode">
-        <div class="dk-mode-badge">📖 READ</div>
-        <div>
-          <div class="dk-mode-title">Reading Quiz</div>
-          <div class="dk-mode-desc">A kanji is shown. Choose the correct <strong>Japanese reading</strong> (on-yomi / kun-yomi) from four options. Kanji cards only.</div>
-        </div>
-      </div>
-      <div class="dk-mode">
-        <div class="dk-mode-badge">🔧 EX</div>
-        <div>
-          <div class="dk-mode-title">Example Quiz</div>
-          <div class="dk-mode-desc">A kanji is shown. Choose the correct <strong>usage example</strong> (e.g. 電圧, 接地). Tests whether you know how the kanji is used on site. Kanji cards only.</div>
-        </div>
-      </div>
-      <div class="dk-mode">
-        <div class="dk-mode-badge">🎯 VOC</div>
-        <div>
-          <div class="dk-mode-title">Vocab Quiz</div>
-          <div class="dk-mode-desc">An <strong>English definition</strong> is shown. Choose the correct Japanese term or katakana word. Tests katakana and technical terms.</div>
-        </div>
-      </div>
+      <div class="dk-mode"><div class="dk-mode-badge">⚡ FLASH</div><div><div class="dk-mode-title">Flash Cards</div><div class="dk-mode-desc">Browse all cards. Tap to flip. Filter: ALL / 漢字 / カタカナ / 用語.</div></div></div>
+      <div class="dk-mode"><div class="dk-mode-badge">🔤 MEAN</div><div><div class="dk-mode-title">Meaning Quiz</div><div class="dk-mode-desc">Kanji/term → choose correct English meaning.</div></div></div>
+      <div class="dk-mode"><div class="dk-mode-badge">📖 READ</div><div><div class="dk-mode-title">Reading Quiz</div><div class="dk-mode-desc">Kanji → choose correct Japanese reading.</div></div></div>
+      <div class="dk-mode"><div class="dk-mode-badge">🔧 EX</div><div><div class="dk-mode-title">Example Quiz</div><div class="dk-mode-desc">Kanji → choose correct usage example.</div></div></div>
+      <div class="dk-mode"><div class="dk-mode-badge">🎯 VOC</div><div><div class="dk-mode-title">Vocab Quiz</div><div class="dk-mode-desc">English def → choose correct Japanese/katakana term.</div></div></div>
     </div>
-
-    <div class="tip yellow">
-      <div class="tip-icon">⚡</div>
-      <div><strong>Recommended study order:</strong> Flash Cards → Meaning Quiz → Reading Quiz → Vocab Quiz. Add Example Quiz last — it is the hardest mode and closest to the real exam format.</div>
-    </div>
-    <div class="tip green">
-      <div class="tip-icon">🔖</div>
-      <div>Flag difficult cards using the <strong>🔖 Review</strong> button on the flash card. Switch the filter to <strong>Flagged</strong> to practice only those cards until they feel solid.</div>
-    </div>
+    <div class="tip yellow"><div class="tip-icon">⚡</div><div><strong>Recommended:</strong> Flash Cards → Meaning → Reading → Vocab → Example (hardest).</div></div>
   </section>
 
-  <!-- ── JLPT ── -->
+  <!-- ══ JLPT ══ -->
   <section id="jlpt">
     <div class="sec-header">
       <div class="sec-icon" style="background:rgba(212,160,23,.12)">🎓</div>
       <div class="sec-title">JLPT N4 Mock Tests</div>
       <div class="sec-line"></div>
     </div>
-
-    <div class="tip orange">
-      <div class="tip-icon">🎓</div>
-      <div>The JLPT Practice module contains <strong>four full-length N4 vocabulary mock examinations</strong> (A–D), each with a 30-minute timer and multiple question types matching the real JLPT format.</div>
-    </div>
-
-    <div style="font-size:12px;font-weight:700;color:var(--txM);margin:16px 0 10px;letter-spacing:.05em;">FOUR EXAMS</div>
+    <div class="tip orange"><div class="tip-icon">🎓</div><div><strong>4つのN4語彙模擬試験</strong>（A–D）。各30分、本番同形式（問1〜問5）。</div></div>
     <div class="jlpt-exams">
-      <div class="jlpt-exam">
-        <div class="jlpt-badge" style="background:var(--accY)">A</div>
-        <div>
-          <div class="jlpt-exam-title">模擬試験 A</div>
-          <div class="jlpt-exam-desc">Mondai 1–5 · 30 min</div>
-        </div>
-      </div>
-      <div class="jlpt-exam">
-        <div class="jlpt-badge" style="background:var(--accB)">B</div>
-        <div>
-          <div class="jlpt-exam-title">模擬試験 B</div>
-          <div class="jlpt-exam-desc">Mondai 1–5 · 30 min</div>
-        </div>
-      </div>
-      <div class="jlpt-exam">
-        <div class="jlpt-badge" style="background:var(--accG)">C</div>
-        <div>
-          <div class="jlpt-exam-title">模擬試験 C</div>
-          <div class="jlpt-exam-desc">Mondai 1–5 · 30 min</div>
-        </div>
-      </div>
-      <div class="jlpt-exam">
-        <div class="jlpt-badge" style="background:var(--accP)">D</div>
-        <div>
-          <div class="jlpt-exam-title">模擬試験 D</div>
-          <div class="jlpt-exam-desc">Mondai 1–5 · 30 min</div>
-        </div>
-      </div>
+      <div class="jlpt-exam"><div class="jlpt-badge" style="background:var(--accY)">A</div><div><div class="jlpt-exam-title">模擬試験 A</div><div class="jlpt-exam-desc">問1–5 · 30min</div></div></div>
+      <div class="jlpt-exam"><div class="jlpt-badge" style="background:var(--accB)">B</div><div><div class="jlpt-exam-title">模擬試験 B</div><div class="jlpt-exam-desc">問1–5 · 30min</div></div></div>
+      <div class="jlpt-exam"><div class="jlpt-badge" style="background:var(--accG)">C</div><div><div class="jlpt-exam-title">模擬試験 C</div><div class="jlpt-exam-desc">問1–5 · 30min</div></div></div>
+      <div class="jlpt-exam"><div class="jlpt-badge" style="background:var(--accP)">D</div><div><div class="jlpt-exam-title">模擬試験 D</div><div class="jlpt-exam-desc">問1–5 · 30min</div></div></div>
     </div>
-
-    <div style="font-size:12px;font-weight:700;color:var(--txM);margin:16px 0 10px;letter-spacing:.05em;">QUESTION TYPES (問題)</div>
     <div class="steps">
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問1</div>
-        <div class="step-body">
-          <div class="step-title">Kanji Reading (漢字の読み方)</div>
-          <div class="step-desc">An underlined kanji word in a sentence. Choose the correct hiragana reading.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問2</div>
-        <div class="step-body">
-          <div class="step-title">Kanji Writing (表記)</div>
-          <div class="step-desc">An underlined hiragana word in a sentence. Choose the correct kanji spelling.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問3</div>
-        <div class="step-body">
-          <div class="step-title">Fill in the Blank (文脈規定)</div>
-          <div class="step-desc">A sentence with a blank ( __ ). Choose the word that best fits the context.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問4</div>
-        <div class="step-body">
-          <div class="step-title">Paraphrase (言い換え類義語)</div>
-          <div class="step-desc">An underlined word in a sentence. Choose the sentence with the closest meaning. (Some exams)</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問5</div>
-        <div class="step-body">
-          <div class="step-title">Usage (用法)</div>
-          <div class="step-desc">A target word is given. Choose the sentence where it is used most naturally. (Some exams)</div>
-        </div>
-      </div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問1</div><div class="step-body"><div class="step-title">漢字の読み方</div><div class="step-desc">下線漢字 → 正しいひらがな読みを選択。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問2</div><div class="step-body"><div class="step-title">表記</div><div class="step-desc">下線ひらがな → 正しい漢字を選択。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問3</div><div class="step-body"><div class="step-title">文脈規定</div><div class="step-desc">空欄 → 最適語彙を選択。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問4</div><div class="step-body"><div class="step-title">言い換え</div><div class="step-desc">下線語 → 最も近い意味の文を選択。</div></div></div>
+      <div class="step"><div class="step-num" style="background:var(--s3);color:var(--txM);font-size:10px">問5</div><div class="step-body"><div class="step-title">用法</div><div class="step-desc">目標語 → 最も自然な使用文を選択。</div></div></div>
     </div>
-
-    <div class="steps" style="margin-top:16px">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">Select an exam (A–D)</div>
-          <div class="step-desc">Tap the exam card to see the total question count and time. Then tap <code>Start Exam</code>.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Answer within the timer</div>
-          <div class="step-desc">A 30-minute countdown runs during the exam. Try to keep pace — about 1–2 minutes per question.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Review your answers</div>
-          <div class="step-desc">After finishing, tap <code>Review Answers</code> to see every question with your response highlighted in green (correct) or red (wrong).</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tip green">
-      <div class="tip-icon">🎯</div>
-      <div>Take all four exams in order. Wrong answers from the mock tests are added to your <strong>Review Quiz</strong> pool automatically — so every mistake becomes a study card.</div>
-    </div>
+    <div class="tip green"><div class="tip-icon">🎯</div><div>4試験を順にA→D。間違いは自動でSRSに記録 → バトルマップの六角形パネルにも反映されます。</div></div>
   </section>
 
-  <!-- ── TIPS ── -->
+  <!-- ══ TIPS ══ -->
   <section id="tips">
     <div class="sec-header">
       <div class="sec-icon" style="background:rgba(139,92,246,.1)">💡</div>
       <div class="sec-title">Tips &amp; Tricks</div>
       <div class="sec-line"></div>
     </div>
-
-    <div class="tip green">
-      <div class="tip-icon">🔀</div>
-      <div><strong>Shuffle often.</strong> Tap the <code>🔀</code> button to re-randomise the deck. Seeing cards in a different order prevents you from guessing by position.</div>
-    </div>
-    <div class="tip blue">
-      <div class="tip-icon">📊</div>
-      <div><strong>Check the Dashboard.</strong> The Progress Dashboard shows your pass rate per JLPT level and your weakest categories at a glance.</div>
-    </div>
-    <div class="tip orange">
-      <div class="tip-icon">🔁</div>
-      <div><strong>Reset carefully.</strong> The <code>↺ Reset</code> button restores all cards to the deck. Use it when you want to start fresh, but note it clears your current flagged list too.</div>
-    </div>
-    <div class="tip yellow">
-      <div class="tip-icon">🌐</div>
-      <div><strong>Language switcher.</strong> Tap the language pill (🇯🇵 / 🇬🇧 / 🇧🇩) in the top bar to switch the interface between Japanese, English, and Bengali at any time.</div>
-    </div>
-    <div class="tip green">
-      <div class="tip-icon">📱</div>
-      <div><strong>Works offline.</strong> Once loaded, most features work without an internet connection. Save the page to your home screen for quick access.</div>
-    </div>
+    <div class="tip green"><div class="tip-icon">🗺</div><div><strong>バトルマップを毎日チェック。</strong>赤い六角形が弱点。そこを重点的にクイズして黄→緑に変えよう。</div></div>
+    <div class="tip blue"><div class="tip-icon">📦</div><div><strong>バッチは順番通りに。</strong>セット1カード完了→クイズ→セット2... 順番に進めれば確実に定着。</div></div>
+    <div class="tip orange"><div class="tip-icon">⚔</div><div><strong>「攻略開始」を毎日。</strong>間違いを繰り返し正解して克服カウンターを増やす。放置すると六角形が赤いまま。</div></div>
+    <div class="tip yellow"><div class="tip-icon">🌐</div><div><strong>言語切替。</strong>🇯🇵/🇬🇧/🇧🇩 で全UIを日本語・英語・ベンガル語に切替。六角形ラベルも対応。</div></div>
+    <div class="tip green"><div class="tip-icon">📊</div><div><strong>詳細結果を活用。</strong>各クイズ後の結果画面で解答時間を分析。反応が遅い問題は重点復習。</div></div>
+    <div class="tip blue"><div class="tip-icon">📱</div><div><strong>オフラインOK。</strong>一度読み込めばネットなしで動作。ホーム画面に追加して毎日学習。</div></div>
   </section>
 
 </main>
@@ -911,26 +350,24 @@ section[id] { scroll-margin-top: 70px; }
 </footer>
 
 <script>
-  // Smooth scroll + active nav pill
-  document.querySelectorAll('.nav-pill').forEach(pill => {
-    pill.addEventListener('click', e => {
-      document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-    });
+document.querySelectorAll('.nav-pill').forEach(pill=>{
+  pill.addEventListener('click',e=>{
+    document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+    pill.classList.add('active');
   });
-
-  const sections = document.querySelectorAll('section[id]');
-  const pills = document.querySelectorAll('.nav-pill');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        pills.forEach(p => p.classList.remove('active'));
-        const target = document.querySelector(`.nav-pill[href="#${entry.target.id}"]`);
-        if (target) target.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach(s => observer.observe(s));
+});
+const sections=document.querySelectorAll('section[id]');
+const pills=document.querySelectorAll('.nav-pill');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      pills.forEach(p=>p.classList.remove('active'));
+      const target=document.querySelector(`.nav-pill[href="#${entry.target.id}"]`);
+      if(target)target.classList.add('active');
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>observer.observe(s));
 </script>
 </body>
 </html>
