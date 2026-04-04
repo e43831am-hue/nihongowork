@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
 <script>
@@ -556,15 +556,24 @@ function setLang(l){
 </script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
-  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
-  <div style="display:flex;gap:20px;">
-    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
-    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
-    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
-    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;position:sticky;top:0;z-index:200">
+  <a href="index.html" style="font-size:16px;font-weight:700;color:#fff;text-decoration:none">Nihongo<span style="color:#e74c3c">-Work</span></a>
+  <button id="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('nav-open')" style="display:none;background:none;border:1px solid #555;border-radius:6px;color:#ccc;padding:5px 10px;cursor:pointer;font-size:18px">☰</button>
+  <div id="nav-menu" style="display:flex;gap:16px;align-items:center">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px">About</a>
+    <a href="roadmap.html" style="color:#ccc;text-decoration:none;font-size:13px">Roadmap</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px">Contact</a>
   </div>
 </nav>
+<style>
+@media(max-width:600px){
+  #nav-toggle{display:block!important}
+  #nav-menu{display:none;position:absolute;top:50px;left:0;right:0;background:#1a1a1a;flex-direction:column;padding:16px 20px;gap:14px;border-bottom:1px solid #333;z-index:199}
+  #nav-menu.nav-open{display:flex!important}
+  #nav-menu a{font-size:15px}
+}
+</style>
 
 <div class="topbar">
   <a href="index.html" class="logo" style="text-decoration:none;background:var(--g5);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
@@ -579,6 +588,33 @@ function setLang(l){
   <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px">⚡ 電気工事士 — Electrician Japanese</h1>
   <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px">Study Japanese technical vocabulary for electricians and SSW (Specified Skilled Worker) candidates. Kanji, katakana terms and quizzes for the electrical construction trade.</p>
   <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:20px">🇧🇩 ইলেকট্রিশিয়ান ও SSW প্রার্থীদের জন্য জাপানি প্রযুক্তিগত শব্দভাণ্ডার। বৈদ্যুতিক নির্মাণ কাজের জন্য কাঞ্জি, কাতাকানা টার্ম ও কুইজ।</p>
+<article style="max-width:720px;margin:0 auto;padding:32px 16px 8px;font-family:'Noto Sans JP',sans-serif">
+  <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;color:#1a1a1e">Japanese Electrician Vocabulary — Technical Terms for the Japanese Workplace</h2>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Bangladesh sends thousands of skilled workers to Japan every year, many in the construction and electrical engineering sectors. For electricians, electrical engineers, and construction workers, understanding Japanese technical vocabulary is essential — both for on-site safety and for qualifying through the Japan Technical Intern Training Program (TITP) and Specified Skilled Worker (SSW / 特定技能) visa schemes.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Why Technical Vocabulary Matters</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    On a Japanese construction site, instructions come in Japanese: 電源を切ってください (please cut the power), 配線を確認してください (please check the wiring), 感電に注意 (warning: electric shock hazard). Misunderstanding a safety instruction can be fatal. Even for office-based electrical engineers, reading circuit diagrams, specifications (仕様書, shiyōsho), and inspection reports requires Japanese technical literacy.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Key Technical Categories</h3>
+  <ul style="font-size:14px;color:#555;line-height:2;margin-bottom:14px;padding-left:20px">
+    <li><strong>Basic electrical terms:</strong> 電気 (denki — electricity), 電圧 (den-atsu — voltage), 電流 (denryū — current/amperage), 電力 (denryoku — electric power/wattage), 抵抗 (teikō — resistance), 周波数 (shūhasū — frequency).</li>
+    <li><strong>Equipment:</strong> 変圧器 (hen-atsuki — transformer), 配電盤 (haiden-ban — distribution board), ブレーカー (burēkā — circuit breaker), コンセント (konsento — electrical outlet), スイッチ (suicchi — switch), 電線 (densen — electric wire/cable).</li>
+    <li><strong>Work actions:</strong> 配線する (haisen suru — to wire), 接続する (setsuzoku suru — to connect), 絶縁する (zetsuen suru — to insulate), 点検する (tenken suru — to inspect/check), 修理する (shūri suru — to repair).</li>
+    <li><strong>Safety:</strong> 感電 (kanden — electric shock), 漏電 (rōden — electrical leakage), 過負荷 (kafuka — overload), 短絡 (tanraku — short circuit), 接地 (setchi — grounding/earthing), 安全装置 (anzen sōchi — safety device).</li>
+  </ul>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Japan's Electrician Qualification System</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Japan has a national electrician certification system. The <strong>第二種電気工事士 (Dai-ni-shu Denki Kōjishi)</strong> — Second Class Electrician — is the entry-level qualification for residential electrical work. The <strong>第一種電気工事士</strong> covers larger installations. Foreign workers in the Specified Skilled Worker (電気・電子情報関連産業) field must pass Japanese language and technical skills evaluations. This module is designed to help Bangladeshi electrical workers prepare for those assessments.
+  </p>
+  <p style="font-size:13px;color:#777;line-height:1.8">
+    This module contains 599 electrical engineering vocabulary items with kanji, readings, meanings in English and Bengali, and quiz practice — covering all major categories needed for technical work and qualification exams in Japan.
+  </p>
+</article>
   <div class="mod on" id="m-denkou" style="display:block;padding:0"></div>
 </div>
 
@@ -596,12 +632,50 @@ function setLang(l){
 <a href="biz.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">💼<br>Business</a>
   </div>
 </nav>
-<footer style="text-align:center;padding:20px 0 60px;color:var(--txD);font-size:11px">
-  <a href="index.html" style="color:var(--txM);text-decoration:none">NIHONGO WORK</a> —
-  Free Japanese Learning for Bangladeshi Learners |
-  <a href="about.html" style="color:var(--txM)">About</a> |
-  <a href="privacy.html" style="color:var(--txM)">Privacy</a> |
-  <a href="contact.html" style="color:var(--txM)">Contact</a>
+<footer style="background:#111;color:#888;padding:40px 24px 40px;font-family:'Noto Sans JP',sans-serif;font-size:12px;margin-top:0">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;margin-bottom:32px;text-align:left">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px">Nihongo<span style="color:#e74c3c">-Work</span></div>
+        <p style="line-height:1.8;color:#888">Free Japanese learning platform for Bangladeshi learners. JLPT N5 to N4.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Learning Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="kana-practice.html" style="color:#888;text-decoration:none">あ Kana Practice</a>
+          <a href="vocab.html" style="color:#888;text-decoration:none">📖 Vocabulary (N5/N4)</a>
+          <a href="kanji.html" style="color:#888;text-decoration:none">🈶 Kanji (N5/N4)</a>
+          <a href="verb.html" style="color:#888;text-decoration:none">🔄 Verb Conjugation</a>
+          <a href="adj.html" style="color:#888;text-decoration:none">📝 Adjective Conjugation</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">More Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="grammar.html" style="color:#888;text-decoration:none">📗 Grammar &amp; Particles</a>
+          <a href="timenum.html" style="color:#888;text-decoration:none">🕐 Time &amp; Numbers</a>
+          <a href="biz.html" style="color:#888;text-decoration:none">💼 Business Japanese</a>
+          <a href="denkou.html" style="color:#888;text-decoration:none">⚡ Electrician Vocab</a>
+          <a href="roadmap.html" style="color:#888;text-decoration:none">🗺 Study Roadmap</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Site</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="index.html" style="color:#888;text-decoration:none">🏠 Home</a>
+          <a href="about.html" style="color:#888;text-decoration:none">About</a>
+          <a href="guide.html" style="color:#888;text-decoration:none">Study Guide</a>
+          <a href="contact.html" style="color:#888;text-decoration:none">Contact</a>
+          <a href="privacy.html" style="color:#888;text-decoration:none">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #222;padding-top:20px;text-align:center;color:#555">
+      &copy; 2025 Nihongo-Work &nbsp;·&nbsp; Free Japanese for Bangladeshi Learners &nbsp;·&nbsp;
+      <a href="privacy.html" style="color:#555">Privacy</a> &nbsp;·&nbsp;
+      <a href="contact.html" style="color:#555">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script src="./data.js"></script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
 <script>
@@ -556,15 +556,24 @@ function setLang(l){
 </script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
-  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
-  <div style="display:flex;gap:20px;">
-    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
-    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
-    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
-    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;position:sticky;top:0;z-index:200">
+  <a href="index.html" style="font-size:16px;font-weight:700;color:#fff;text-decoration:none">Nihongo<span style="color:#e74c3c">-Work</span></a>
+  <button id="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('nav-open')" style="display:none;background:none;border:1px solid #555;border-radius:6px;color:#ccc;padding:5px 10px;cursor:pointer;font-size:18px">☰</button>
+  <div id="nav-menu" style="display:flex;gap:16px;align-items:center">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px">About</a>
+    <a href="roadmap.html" style="color:#ccc;text-decoration:none;font-size:13px">Roadmap</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px">Contact</a>
   </div>
 </nav>
+<style>
+@media(max-width:600px){
+  #nav-toggle{display:block!important}
+  #nav-menu{display:none;position:absolute;top:50px;left:0;right:0;background:#1a1a1a;flex-direction:column;padding:16px 20px;gap:14px;border-bottom:1px solid #333;z-index:199}
+  #nav-menu.nav-open{display:flex!important}
+  #nav-menu a{font-size:15px}
+}
+</style>
 
 <div class="topbar">
   <a href="index.html" class="logo" style="text-decoration:none;background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
@@ -579,6 +588,47 @@ function setLang(l){
   <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px">📗 文法・助詞 — Grammar & Particles</h1>
   <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px">Practice JLPT N5 Japanese grammar patterns and 18 essential particles with quizzes and reference cards in Bengali and English. For Bangladeshi Japanese learners.</p>
   <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:20px">🇧🇩 JLPT N5 জাপানি ব্যাকরণ প্যাটার্ন এবং ১৮টি প্রয়োজনীয় পার্টিকেল অনুশীলন। বাংলা ও ইংরেজিতে কুইজ ও রেফারেন্স কার্ড।</p>
+<article style="max-width:720px;margin:0 auto;padding:32px 16px 8px;font-family:'Noto Sans JP',sans-serif">
+  <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;color:#1a1a1e">JLPT N5 Japanese Grammar &amp; Particles — Complete Study Guide</h2>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Japanese grammar is built on <strong>particles (助詞, joshi)</strong> — small words that mark the role of each noun in a sentence. Unlike English, Japanese word order is flexible because particles tell you what each word is doing. Mastering particles is the single most important grammar skill for JLPT N5 and N4.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">The 18 Essential Particles</h3>
+  <ul style="font-size:14px;color:#555;line-height:2;margin-bottom:14px;padding-left:20px">
+    <li><strong>は (wa):</strong> Topic marker. 私は学生です。(I am a student.)</li>
+    <li><strong>が (ga):</strong> Subject marker, emphasis, contrast. 猫が好きです。(I like cats.)</li>
+    <li><strong>を (wo/o):</strong> Direct object. りんごを食べます。(I eat an apple.)</li>
+    <li><strong>に (ni):</strong> Direction, destination, time, indirect object, existence location. 駅に行きます。(I go to the station.)</li>
+    <li><strong>で (de):</strong> Location of action, means/method. 図書館で勉強します。(I study at the library.)</li>
+    <li><strong>へ (e):</strong> Direction (towards). 日本へ行きたい。(I want to go to Japan.)</li>
+    <li><strong>と (to):</strong> With, and (exhaustive list), quotation. 友達と行く。(Go with a friend.)</li>
+    <li><strong>の (no):</strong> Possession, noun modification. 私の本。(My book.)</li>
+    <li><strong>も (mo):</strong> Also, too, even. 私も行く。(I'll go too.)</li>
+    <li><strong>か (ka):</strong> Question marker. これは何ですか。(What is this?)</li>
+    <li><strong>から (kara):</strong> From (time/place), because. 9時から始まります。(It starts from 9.)</li>
+    <li><strong>まで (made):</strong> Until, up to. 5時まで働きます。(I work until 5.)</li>
+    <li><strong>より (yori):</strong> Comparison, more than. 東京は大阪より大きい。(Tokyo is bigger than Osaka.)</li>
+    <li><strong>ね (ne):</strong> Seeking agreement. いい天気ですね。(Nice weather, isn't it?)</li>
+    <li><strong>よ (yo):</strong> Asserting information. そうですよ。(That's right.)</li>
+    <li><strong>だけ (dake):</strong> Only, just. 一つだけ。(Just one.)</li>
+    <li><strong>でも (demo):</strong> Even, but, however. 水でもいいです。(Even water is fine.)</li>
+    <li><strong>ので (node):</strong> Because (soft reason). 疲れたので帰ります。(I'll go home because I'm tired.)</li>
+  </ul>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">は vs が — The Most Common Point of Confusion</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    は (wa) marks the topic — what the sentence is about. が (ga) marks the grammatical subject — often emphasising new or contrasted information. <em>猫は魚を食べる</em> (As for the cat, it eats fish — general statement about cats). <em>猫が魚を食べた</em> (It was the cat that ate the fish — emphasis on who did it). Both are correct but carry different nuance. JLPT N5 tests this distinction directly.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">N5 Grammar Patterns</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Beyond particles, N5 grammar includes: 〜ます/〜ません (polite present/negative), 〜ました/〜ませんでした (polite past), 〜たい (want to), 〜てください (please do), 〜てもいいですか (may I?), 〜なければなりません (must do), 〜ことができる (can do), 〜と思います (I think that…), 〜から / 〜ので (because), 〜が (but / however).
+  </p>
+  <p style="font-size:13px;color:#777;line-height:1.8">
+    This module covers all 18 essential particles with example sentences in Japanese, English, and Bengali, plus N5 grammar pattern reference cards and quiz practice.
+  </p>
+</article>
   <div class="mod on" id="m-grammar" style="display:block;padding:0"></div>
 </div>
 
@@ -596,12 +646,50 @@ function setLang(l){
 <a href="denkou.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">⚡<br>Electrician</a>
   </div>
 </nav>
-<footer style="text-align:center;padding:20px 0 60px;color:var(--txD);font-size:11px">
-  <a href="index.html" style="color:var(--txM);text-decoration:none">NIHONGO WORK</a> —
-  Free Japanese Learning for Bangladeshi Learners |
-  <a href="about.html" style="color:var(--txM)">About</a> |
-  <a href="privacy.html" style="color:var(--txM)">Privacy</a> |
-  <a href="contact.html" style="color:var(--txM)">Contact</a>
+<footer style="background:#111;color:#888;padding:40px 24px 40px;font-family:'Noto Sans JP',sans-serif;font-size:12px;margin-top:0">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;margin-bottom:32px;text-align:left">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px">Nihongo<span style="color:#e74c3c">-Work</span></div>
+        <p style="line-height:1.8;color:#888">Free Japanese learning platform for Bangladeshi learners. JLPT N5 to N4.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Learning Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="kana-practice.html" style="color:#888;text-decoration:none">あ Kana Practice</a>
+          <a href="vocab.html" style="color:#888;text-decoration:none">📖 Vocabulary (N5/N4)</a>
+          <a href="kanji.html" style="color:#888;text-decoration:none">🈶 Kanji (N5/N4)</a>
+          <a href="verb.html" style="color:#888;text-decoration:none">🔄 Verb Conjugation</a>
+          <a href="adj.html" style="color:#888;text-decoration:none">📝 Adjective Conjugation</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">More Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="grammar.html" style="color:#888;text-decoration:none">📗 Grammar &amp; Particles</a>
+          <a href="timenum.html" style="color:#888;text-decoration:none">🕐 Time &amp; Numbers</a>
+          <a href="biz.html" style="color:#888;text-decoration:none">💼 Business Japanese</a>
+          <a href="denkou.html" style="color:#888;text-decoration:none">⚡ Electrician Vocab</a>
+          <a href="roadmap.html" style="color:#888;text-decoration:none">🗺 Study Roadmap</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Site</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="index.html" style="color:#888;text-decoration:none">🏠 Home</a>
+          <a href="about.html" style="color:#888;text-decoration:none">About</a>
+          <a href="guide.html" style="color:#888;text-decoration:none">Study Guide</a>
+          <a href="contact.html" style="color:#888;text-decoration:none">Contact</a>
+          <a href="privacy.html" style="color:#888;text-decoration:none">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #222;padding-top:20px;text-align:center;color:#555">
+      &copy; 2025 Nihongo-Work &nbsp;·&nbsp; Free Japanese for Bangladeshi Learners &nbsp;·&nbsp;
+      <a href="privacy.html" style="color:#555">Privacy</a> &nbsp;·&nbsp;
+      <a href="contact.html" style="color:#555">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script src="./data.js"></script>

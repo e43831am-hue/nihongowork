@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
 <script>
@@ -556,15 +556,24 @@ function setLang(l){
 </script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
-  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
-  <div style="display:flex;gap:20px;">
-    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
-    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
-    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
-    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;position:sticky;top:0;z-index:200">
+  <a href="index.html" style="font-size:16px;font-weight:700;color:#fff;text-decoration:none">Nihongo<span style="color:#e74c3c">-Work</span></a>
+  <button id="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('nav-open')" style="display:none;background:none;border:1px solid #555;border-radius:6px;color:#ccc;padding:5px 10px;cursor:pointer;font-size:18px">☰</button>
+  <div id="nav-menu" style="display:flex;gap:16px;align-items:center">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px">About</a>
+    <a href="roadmap.html" style="color:#ccc;text-decoration:none;font-size:13px">Roadmap</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px">Contact</a>
   </div>
 </nav>
+<style>
+@media(max-width:600px){
+  #nav-toggle{display:block!important}
+  #nav-menu{display:none;position:absolute;top:50px;left:0;right:0;background:#1a1a1a;flex-direction:column;padding:16px 20px;gap:14px;border-bottom:1px solid #333;z-index:199}
+  #nav-menu.nav-open{display:flex!important}
+  #nav-menu a{font-size:15px}
+}
+</style>
 
 <div class="topbar">
   <a href="index.html" class="logo" style="text-decoration:none;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
@@ -579,6 +588,44 @@ function setLang(l){
   <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px">🕐 時間・数字 — Time & Numbers</h1>
   <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px">Learn Japanese time expressions, numbers, dates, weekdays and counters with quizzes and flashcards in Bengali and English. Essential for daily life in Japan.</p>
   <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:20px">🇧🇩 বাংলায় জাপানি সময় প্রকাশ, সংখ্যা, তারিখ, বার এবং গণনা অনুশীলন। জাপানে দৈনন্দিন জীবনের জন্য অপরিহার্য।</p>
+<article style="max-width:720px;margin:0 auto;padding:32px 16px 8px;font-family:'Noto Sans JP',sans-serif">
+  <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;color:#1a1a1e">Japanese Time, Numbers &amp; Counters — Complete Guide for JLPT N5/N4</h2>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Numbers and time expressions appear in every real-world Japanese interaction: reading a schedule, understanding a salary, booking an appointment, reading a visa expiry date. JLPT N5 tests basic numbers and time; N4 extends to more complex date expressions, durations, and counters. This module covers everything from 1 to 10,000 and beyond.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Numbers in Japanese</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:10px">
+    Japanese numbers are logical and regular up to 9,999: 一(1)、二(2)、三(3)、四(4)、五(5)、六(6)、七(7)、八(8)、九(9)、十(10)、百(100)、千(1,000)、万(10,000). Above that: 二十 (20), 三十五 (35), 二百六十三 (263). There are no irregular number words unlike European languages.
+  </p>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    However, some numbers have two readings: 4 is よん or し, 7 is なな or しち, 9 is きゅう or く. The choice depends on what follows: 4時 (よじ — 4 o'clock), 4月 (しがつ — April), 7時 (しちじ), 7月 (しちがつ). These must be memorised by context.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Telling Time</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:10px">
+    Hours use 〜時 (ji): 一時 (1:00), 二時 (2:00), 十二時 (12:00). Minutes use 〜分 (fun/pun): 五分 (5 minutes), 十五分 (15 minutes). Note the sound changes: 1分 is いっぷん, 3分 is さんぷん, 6分 is ろっぷん, 8分 is はっぷん, 10分 is じゅっぷん (or じっぷん).
+  </p>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    AM/PM: 午前 (gozen — AM) and 午後 (gogo — PM). Half past: 〜時半 (ji-han): 三時半 (3:30). Quarter past has no special word — say 三時十五分 (3:15).
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Dates and the Japanese Calendar</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:10px">
+    Months: 一月 (January) through 十二月 (December) — simply number + 月. Days of the month: irregular for 1–10 (ついたち, ふつか, みっか, よっか, いつか, むいか, なのか, ようか, ここのか, とおか), then regular (十一日, 十二日…). Days of the week: 月 (Mon), 火 (Tue), 水 (Wed), 木 (Thu), 金 (Fri), 土 (Sat), 日 (Sun) — each followed by 曜日 (yōbi).
+  </p>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Japan also uses its own imperial era calendar: the current era is <strong>令和 (Reiwa)</strong>, which began in May 2019. Official Japanese documents (residence cards, contracts, tax forms) use Reiwa years alongside western years. 2025 CE = 令和7年.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Counters (助数詞)</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Japanese uses different counting words depending on what you are counting — these are called counters (助数詞, josūshi). Common N5/N4 counters: 〜個 (small objects), 〜本 (long thin objects — pens, bottles, umbrellas), 〜枚 (flat things — paper, tickets, shirts), 〜冊 (bound books), 〜台 (machines — cars, computers), 〜匹 (small animals), 〜頭 (large animals), 〜人 (people — ひとり, ふたり for 1 and 2), 〜階 (floors of a building). JLPT N4 tests counters regularly.
+  </p>
+  <p style="font-size:13px;color:#777;line-height:1.8">
+    This module covers all time, date, number, and counter expressions needed for JLPT N5 and N4, with Bengali translations, sound-change rules, and quiz practice.
+  </p>
+</article>
   <div class="mod on" id="m-timenum" style="display:block;padding:0"></div>
 </div>
 
@@ -596,12 +643,50 @@ function setLang(l){
 <a href="denkou.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">⚡<br>Electrician</a>
   </div>
 </nav>
-<footer style="text-align:center;padding:20px 0 60px;color:var(--txD);font-size:11px">
-  <a href="index.html" style="color:var(--txM);text-decoration:none">NIHONGO WORK</a> —
-  Free Japanese Learning for Bangladeshi Learners |
-  <a href="about.html" style="color:var(--txM)">About</a> |
-  <a href="privacy.html" style="color:var(--txM)">Privacy</a> |
-  <a href="contact.html" style="color:var(--txM)">Contact</a>
+<footer style="background:#111;color:#888;padding:40px 24px 40px;font-family:'Noto Sans JP',sans-serif;font-size:12px;margin-top:0">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;margin-bottom:32px;text-align:left">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px">Nihongo<span style="color:#e74c3c">-Work</span></div>
+        <p style="line-height:1.8;color:#888">Free Japanese learning platform for Bangladeshi learners. JLPT N5 to N4.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Learning Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="kana-practice.html" style="color:#888;text-decoration:none">あ Kana Practice</a>
+          <a href="vocab.html" style="color:#888;text-decoration:none">📖 Vocabulary (N5/N4)</a>
+          <a href="kanji.html" style="color:#888;text-decoration:none">🈶 Kanji (N5/N4)</a>
+          <a href="verb.html" style="color:#888;text-decoration:none">🔄 Verb Conjugation</a>
+          <a href="adj.html" style="color:#888;text-decoration:none">📝 Adjective Conjugation</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">More Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="grammar.html" style="color:#888;text-decoration:none">📗 Grammar &amp; Particles</a>
+          <a href="timenum.html" style="color:#888;text-decoration:none">🕐 Time &amp; Numbers</a>
+          <a href="biz.html" style="color:#888;text-decoration:none">💼 Business Japanese</a>
+          <a href="denkou.html" style="color:#888;text-decoration:none">⚡ Electrician Vocab</a>
+          <a href="roadmap.html" style="color:#888;text-decoration:none">🗺 Study Roadmap</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Site</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="index.html" style="color:#888;text-decoration:none">🏠 Home</a>
+          <a href="about.html" style="color:#888;text-decoration:none">About</a>
+          <a href="guide.html" style="color:#888;text-decoration:none">Study Guide</a>
+          <a href="contact.html" style="color:#888;text-decoration:none">Contact</a>
+          <a href="privacy.html" style="color:#888;text-decoration:none">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #222;padding-top:20px;text-align:center;color:#555">
+      &copy; 2025 Nihongo-Work &nbsp;·&nbsp; Free Japanese for Bangladeshi Learners &nbsp;·&nbsp;
+      <a href="privacy.html" style="color:#555">Privacy</a> &nbsp;·&nbsp;
+      <a href="contact.html" style="color:#555">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script src="./data.js"></script>

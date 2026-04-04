@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
 <script>
@@ -556,15 +556,24 @@ function setLang(l){
 </script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
-  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
-  <div style="display:flex;gap:20px;">
-    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
-    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
-    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
-    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;position:sticky;top:0;z-index:200">
+  <a href="index.html" style="font-size:16px;font-weight:700;color:#fff;text-decoration:none">Nihongo<span style="color:#e74c3c">-Work</span></a>
+  <button id="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('nav-open')" style="display:none;background:none;border:1px solid #555;border-radius:6px;color:#ccc;padding:5px 10px;cursor:pointer;font-size:18px">☰</button>
+  <div id="nav-menu" style="display:flex;gap:16px;align-items:center">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px">About</a>
+    <a href="roadmap.html" style="color:#ccc;text-decoration:none;font-size:13px">Roadmap</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px">Contact</a>
   </div>
 </nav>
+<style>
+@media(max-width:600px){
+  #nav-toggle{display:block!important}
+  #nav-menu{display:none;position:absolute;top:50px;left:0;right:0;background:#1a1a1a;flex-direction:column;padding:16px 20px;gap:14px;border-bottom:1px solid #333;z-index:199}
+  #nav-menu.nav-open{display:flex!important}
+  #nav-menu a{font-size:15px}
+}
+</style>
 
 <div class="topbar">
   <a href="index.html" class="logo" style="text-decoration:none;background:var(--g4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
@@ -579,6 +588,47 @@ function setLang(l){
   <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px">🔄 動詞活用 — Verb Conjugation</h1>
   <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px">Practice Japanese verb conjugation: te-form, nai-form, ta-form, passive, potential and more. N5/N4 verbs with Bengali and English explanations for Bangladeshi workers.</p>
   <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:20px">🇧🇩 জাপানি ক্রিয়া রূপান্তর অনুশীলন: তে-ফর্ম, নাই-ফর্ম, তা-ফর্ম, প্যাসিভ, পোটেনশিয়াল। বাংলা ও ইংরেজি ব্যাখ্যাসহ N5/N4 ক্রিয়া।</p>
+<article style="max-width:720px;margin:0 auto;padding:32px 16px 8px;font-family:'Noto Sans JP',sans-serif">
+  <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;color:#1a1a1e">Japanese Verb Conjugation Guide — Te-form, Nai-form, Ta-form &amp; More</h2>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Verb conjugation is the backbone of Japanese grammar. Every JLPT level — from N5 to N1 — tests verb forms, and every conversation at a Japanese workplace depends on using them correctly. This guide explains the key conjugation patterns for <strong>godan verbs (Group 1)</strong>, <strong>ichidan verbs (Group 2)</strong>, and the two <strong>irregular verbs</strong> する and くる.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">The Three Verb Groups</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:10px">
+    <strong>Godan verbs (五段動詞 / Group 1)</strong> end in a consonant + u sound: 書く (kaku), 読む (yomu), 話す (hanasu), 買う (kau), 飲む (nomu). Their stems shift across the five vowel rows of the hiragana chart — hence "five steps."
+  </p>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:10px">
+    <strong>Ichidan verbs (一段動詞 / Group 2)</strong> end in る and always use the same stem: 食べる (taberu), 見る (miru), 起きる (okiru). They are simpler — remove る and add the ending.
+  </p>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    <strong>Irregular verbs:</strong> する (to do) → します / して / しない / した. くる (to come) → きます / きて / こない / きた. These must be memorised as special cases.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Key Forms You Must Know</h3>
+  <ul style="font-size:14px;color:#555;line-height:2;margin-bottom:14px;padding-left:20px">
+    <li><strong>Nai-form (ない形):</strong> Negative present. 書かない, 食べない, しない.</li>
+    <li><strong>Te-form (て形):</strong> Used for connecting actions, requests (〜てください), permission (〜てもいい), and progressive (〜ている). The godan te-form has sound changes: く→いて, ぐ→いで, す→して, ぬ/む/ぶ→んで, る/う/つ→って.</li>
+    <li><strong>Ta-form (た形):</strong> Simple past. 書いた, 食べた, した.</li>
+    <li><strong>Potential form (可能形):</strong> Can do. 書ける, 食べられる, できる.</li>
+    <li><strong>Passive form (受身形):</strong> Is done / was done. 書かれる, 食べられる, される.</li>
+    <li><strong>Volitional form (意向形):</strong> Let's / shall we. 書こう, 食べよう, しよう.</li>
+    <li><strong>Causative (使役形):</strong> Make someone do. 書かせる, 食べさせる, させる.</li>
+  </ul>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">Workplace Japanese — Why Verb Forms Matter</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    In Japanese offices, requests use the te-form: <em>資料を送ってください</em> (please send the document). Ongoing work uses the progressive: <em>確認しています</em> (I am checking). Permissions and obligations appear constantly: <em>帰ってもいいですか</em> (may I go home?), <em>報告しなければなりません</em> (I must report). Mastering these forms lets you communicate professionally from day one.
+  </p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:#1a1a1e">How to Study Effectively</h3>
+  <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
+    Group your study by verb type: first master godan sound changes for the te-form (the most common source of errors), then practice ichidan verbs (which follow a simple rule), and finally drill the two irregulars until they are reflex. Use the flashcard mode to see each verb in dictionary form, then quiz yourself on all its conjugated forms. The quiz mode here presents one form at a time with distractors drawn from other forms of the same verb — exactly the style of JLPT grammar questions.
+  </p>
+  <p style="font-size:13px;color:#777;line-height:1.8">
+    This module covers all major N5 and N4 verbs with full conjugation tables — godan, ichidan, and irregular — in English, Japanese, and Bengali.
+  </p>
+</article>
   <div class="mod on" id="m-verb" style="display:block;padding:0"></div>
 </div>
 
@@ -596,12 +646,50 @@ function setLang(l){
 <a href="denkou.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">⚡<br>Electrician</a>
   </div>
 </nav>
-<footer style="text-align:center;padding:20px 0 60px;color:var(--txD);font-size:11px">
-  <a href="index.html" style="color:var(--txM);text-decoration:none">NIHONGO WORK</a> —
-  Free Japanese Learning for Bangladeshi Learners |
-  <a href="about.html" style="color:var(--txM)">About</a> |
-  <a href="privacy.html" style="color:var(--txM)">Privacy</a> |
-  <a href="contact.html" style="color:var(--txM)">Contact</a>
+<footer style="background:#111;color:#888;padding:40px 24px 40px;font-family:'Noto Sans JP',sans-serif;font-size:12px;margin-top:0">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;margin-bottom:32px;text-align:left">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px">Nihongo<span style="color:#e74c3c">-Work</span></div>
+        <p style="line-height:1.8;color:#888">Free Japanese learning platform for Bangladeshi learners. JLPT N5 to N4.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Learning Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="kana-practice.html" style="color:#888;text-decoration:none">あ Kana Practice</a>
+          <a href="vocab.html" style="color:#888;text-decoration:none">📖 Vocabulary (N5/N4)</a>
+          <a href="kanji.html" style="color:#888;text-decoration:none">🈶 Kanji (N5/N4)</a>
+          <a href="verb.html" style="color:#888;text-decoration:none">🔄 Verb Conjugation</a>
+          <a href="adj.html" style="color:#888;text-decoration:none">📝 Adjective Conjugation</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">More Modules</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="grammar.html" style="color:#888;text-decoration:none">📗 Grammar &amp; Particles</a>
+          <a href="timenum.html" style="color:#888;text-decoration:none">🕐 Time &amp; Numbers</a>
+          <a href="biz.html" style="color:#888;text-decoration:none">💼 Business Japanese</a>
+          <a href="denkou.html" style="color:#888;text-decoration:none">⚡ Electrician Vocab</a>
+          <a href="roadmap.html" style="color:#888;text-decoration:none">🗺 Study Roadmap</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Site</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="index.html" style="color:#888;text-decoration:none">🏠 Home</a>
+          <a href="about.html" style="color:#888;text-decoration:none">About</a>
+          <a href="guide.html" style="color:#888;text-decoration:none">Study Guide</a>
+          <a href="contact.html" style="color:#888;text-decoration:none">Contact</a>
+          <a href="privacy.html" style="color:#888;text-decoration:none">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #222;padding-top:20px;text-align:center;color:#555">
+      &copy; 2025 Nihongo-Work &nbsp;·&nbsp; Free Japanese for Bangladeshi Learners &nbsp;·&nbsp;
+      <a href="privacy.html" style="color:#555">Privacy</a> &nbsp;·&nbsp;
+      <a href="contact.html" style="color:#555">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script src="./data.js"></script>
