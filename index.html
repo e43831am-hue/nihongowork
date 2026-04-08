@@ -664,6 +664,12 @@ const L={
   dashSub:{ja:'進捗確認・合格率・ランクアップ',en:'Progress · Pass Rate · Rank Up',bn:'অগ্রগতি · পাসের হার · র্যাংক আপ'},
   homeBtnLbl:{ja:'🏠 ホーム',en:'🏠 Home',bn:'🏠 হোম'},
   specialSec:{ja:'🚀 スペシャル学習',en:'🚀 Special Learning',bn:'🚀 বিশেষ শিক্ষা'},
+  spBizN:{ja:'ビジネスマナー',en:'Business Etiquette',bn:'ব্যবসায়িক শিষ্টাচার'},
+  spBizD:{ja:'○×クイズ 99問',en:'True/False Quiz · 99 Qs',bn:'সত্য/মিথ্যা কুইজ · ৯৯টি'},
+  spDkN:{ja:'電気工事士',en:'Electrician Exam',bn:'ইলেকট্রিশিয়ান পরীক্ষা'},
+  spDkD:{ja:'電工漢字・専門用語',en:'Kanji & technical terms',bn:'কাঞ্জি ও কারিগরি শব্দ'},
+  spKanjiN:{ja:'漢字の成り立ち',en:'Kanji Origins',bn:'কাঞ্জির উৎস'},
+  spKanjiD:{ja:'絵で学ぶ漢字の起源 N5',en:'Learn N5 kanji through pictures',bn:'ছবি দিয়ে N5 কাঞ্জি শিখুন'},
 
   // ── Denkou module strings ──
   dkFlash:{ja:'⚡ フラッシュ',en:'⚡ Flash',bn:'⚡ ফ্ল্যাশ'},
@@ -710,9 +716,10 @@ function setLang(l){
   // Update lang button states
   ['ja','en','bn'].forEach(function(lg){const b=document.getElementById('lb-'+lg);if(b){b.classList.toggle('on',lg===l);}});
   // If inside a module, re-render it without losing position
-  if(curMod){
-    const c=document.getElementById('m-'+curMod);
-    if(c){c.innerHTML='';initM(c,curMod);}
+  var _curMod = (typeof curMod !== 'undefined') ? curMod : null;
+  if(_curMod){
+    var c=document.getElementById('m-'+_curMod);
+    if(c){c.innerHTML='';if(typeof initM==='function')initM(c,_curMod);}
   } else {
     // On home page: reload to apply translations to static script tags
     location.reload();
@@ -890,8 +897,9 @@ function setLang(l){
   <!-- ── スペシャル学習 ── -->
   <div class="sec-t" style="margin:20px 12px 10px"><script>document.write(T('specialSec'))</script></div>
   <div class="cg">
-    <a class="cd c1" href="biz.html" style="text-decoration:none;color:inherit"><span class="cd-i">💼</span><div class="cd-n">ビジネスマナー</div><div class="cd-d">○×クイズ 99問</div></a>
-    <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n">電気工事士</div><div class="cd-d">電工漢字・専門用語</div></a>
+    <a class="cd c1" href="biz.html" style="text-decoration:none;color:inherit"><span class="cd-i">💼</span><div class="cd-n"><script>document.write(T('spBizN'))</script></div><div class="cd-d"><script>document.write(T('spBizD'))</script></div></a>
+    <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n"><script>document.write(T('spDkN'))</script></div><div class="cd-d"><script>document.write(T('spDkD'))</script></div></a>
+    <a class="cd c3" href="kanjiforminghistory.html" style="text-decoration:none;color:inherit"><span class="cd-i">🖼️</span><div class="cd-n"><script>document.write(T('spKanjiN'))</script></div><div class="cd-d"><script>document.write(T('spKanjiD'))</script></div></a>
   </div>
 
   <!-- ── Articles & Guides ── -->
