@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT N5 Kanji Origins ── Set 04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Zen+Maru+Gothic:wght@300;400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d1a2a;--paper:#eef4fb;--sky:#2e7ab5;--deep:#1a4f7a;--light:#deeef8;--border:#b8d4ea;--orange:#e07b39;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:'Zen Maru Gothic',sans-serif;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.5;}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(60px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ── fixed top bar ── */
+  .top-bar{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:48px;background:rgba(238,244,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+  .home-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.72rem;letter-spacing:.1em;border-radius:2px;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+  .home-btn:hover{opacity:.8;}
+  .home-btn svg{flex-shrink:0;}
+  .lang-bar{display:flex;gap:6px;}
+  .lang-btn{padding:5px 13px;border:1.5px solid var(--sky);background:white;color:var(--sky);font-size:.72rem;letter-spacing:.08em;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;transition:all .2s;}
+  .lang-btn.active{background:var(--sky);color:white;}
+
+  header{text-align:center;padding:96px 20px 56px;border-bottom:2px solid var(--sky);background:linear-gradient(180deg,#cde4f5 0%,var(--paper) 100%);position:relative;overflow:hidden;}
+  header::after{content:'';position:absolute;top:20px;left:-60px;width:180px;height:60px;background:radial-gradient(ellipse at 40% 50%,#fff 60%,transparent 100%);opacity:0.55;border-radius:50%;animation:drift 12s ease-in-out infinite alternate;}
+  .header-label{font-family:'Noto Serif JP',serif;font-size:.75rem;letter-spacing:.4em;color:var(--sky);margin-bottom:18px;animation:fadeUp .8s ease both;position:relative;}
+  header h1{font-family:'Kaisei Decol',serif;font-size:clamp(2rem,8vw,4rem);color:var(--ink);line-height:1;animation:fadeUp .9s .1s ease both;letter-spacing:.12em;}
+  .header-sub{font-family:'Noto Serif JP',serif;font-size:.95rem;color:var(--deep);margin-top:14px;animation:fadeUp 1s .2s ease both;letter-spacing:.1em;}
+  .brushstroke-deco{width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--sky),transparent);margin:22px auto 0;animation:fadeUp 1s .3s ease both;}
+  main{max-width:860px;margin:0 auto;padding:56px 24px 100px;}
+  .section-card{background:white;border:1px solid var(--border);border-radius:2px;padding:44px 50px;margin-bottom:44px;position:relative;box-shadow:4px 4px 0 var(--border);animation:fadeUp .8s ease both;}
+  .section-card::before{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;border:1px solid var(--border);z-index:-1;border-radius:2px;}
+  .section-card:nth-child(1){animation-delay:.1s}.section-card:nth-child(2){animation-delay:.2s}.section-card:nth-child(3){animation-delay:.3s}
+  .tag{display:inline-block;background:var(--sky);color:white;font-size:.63rem;letter-spacing:.2em;padding:3px 10px;border-radius:1px;margin-bottom:11px;font-family:'Noto Serif JP',serif;}
+  .section-title{font-family:'Kaisei Decol',serif;font-size:1.45rem;color:var(--ink);margin-bottom:24px;padding-bottom:13px;border-bottom:1px solid var(--light);}
+  .body-text{font-size:.93rem;line-height:1.9;color:#1e3040;margin-bottom:14px;}
+  .highlight{background:linear-gradient(to right,#a8d4f055,#a8d4f022);padding:2px 6px;border-radius:2px;font-weight:700;color:var(--deep);}
+  .kanji-origin-block{border-top:1px solid var(--light);padding-top:32px;margin-top:32px;}
+  .kanji-origin-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .origin-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;}
+  .origin-char{font-family:'Kaisei Decol',serif;font-size:3rem;color:var(--deep);line-height:1;flex-shrink:0;}
+  .origin-meta{display:flex;flex-direction:column;gap:5px;}
+  .origin-meaning{font-size:.92rem;font-weight:700;color:var(--ink);}
+  .origin-type{font-size:.65rem;background:var(--border);color:var(--deep);padding:2px 8px;border-radius:1px;width:fit-content;letter-spacing:.1em;font-family:'Noto Serif JP',serif;}
+  .readings-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+  .reading-badge{display:flex;align-items:center;gap:5px;font-size:.78rem;}
+  .badge-label{padding:2px 7px;border-radius:2px;font-size:.6rem;letter-spacing:.1em;font-family:'Noto Serif JP',serif;font-weight:700;}
+  .badge-on{background:#e07b39;color:white;}
+  .badge-kun{background:#2e7ab5;color:white;}
+  .badge-val{font-family:'Kaisei Decol',serif;color:var(--ink);}
+  .pictograph-row{display:flex;align-items:center;justify-content:center;gap:20px;margin:22px 0 18px;flex-wrap:wrap;}
+  .pic-box{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .pic-box-label{text-align:center;}
+  .pic-box-label .kanji-big{font-family:'Kaisei Decol',serif;font-size:1.9rem;color:var(--deep);display:block;line-height:1.2;}
+  .pic-box-label .reading{font-size:.76rem;color:var(--sky);display:block;letter-spacing:.1em;margin-top:3px;}
+  .pic-box-label .meaning{font-size:.74rem;color:#3a5570;display:block;margin-top:3px;}
+  .pic-operator{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--sky);opacity:.5;flex-shrink:0;padding-bottom:44px;}
+  .pic-result-box{display:flex;flex-direction:column;align-items:center;gap:12px;background:var(--deep);border-radius:4px;padding:20px 24px;}
+  .compound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;margin:18px 0 0;}
+  .compound-card{border:1px solid var(--border);background:var(--light);padding:18px 14px;text-align:center;border-radius:2px;transition:transform .2s,box-shadow .2s;cursor:default;}
+  .compound-card:hover{transform:translateY(-3px);box-shadow:3px 3px 0 var(--border);}
+  .compound-kanji{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);display:block;margin-bottom:5px;}
+  .compound-reading{font-size:.72rem;color:var(--sky);letter-spacing:.1em;display:block;margin-bottom:3px;}
+  .compound-meaning{font-size:.76rem;color:#2a4060;}
+  .quiz-block{border-top:1px solid var(--light);padding-top:28px;margin-top:28px;}
+  .quiz-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .quiz-q-label{font-size:.62rem;letter-spacing:.15em;font-family:'Noto Serif JP',serif;margin-bottom:8px;}
+  .quiz-q-label.on-label{color:var(--orange);}
+  .quiz-q-label.kun-label{color:var(--sky);}
+  .quiz-question{font-family:'Kaisei Decol',serif;font-size:1.5rem;color:var(--ink);margin-bottom:18px;line-height:1.5;}
+  .quiz-question .q-kanji{color:var(--deep);font-size:1.8rem;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .quiz-opt{padding:12px 16px;border:1.5px solid var(--border);border-radius:2px;background:white;font-size:.9rem;cursor:pointer;text-align:center;transition:all .2s;font-family:'Zen Maru Gothic',sans-serif;}
+  .quiz-opt:hover:not(.disabled){background:var(--light);border-color:var(--sky);}
+  .quiz-opt.correct{background:#d4f0d4;border-color:#2a8a2a;color:#1a5a1a;}
+  .quiz-opt.wrong{background:#f0d4d4;border-color:#8a2a2a;color:#5a1a1a;}
+  .quiz-opt.disabled{cursor:default;}
+  .quiz-feedback{font-size:.85rem;padding:10px 14px;border-radius:2px;margin-top:4px;display:none;line-height:1.6;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.correct-fb{background:#d4f0d4;color:#1a5a1a;border-left:3px solid #2a8a2a;}
+  .quiz-feedback.wrong-fb{background:#f0d4d4;color:#5a1a1a;border-left:3px solid #8a2a2a;}
+  .quiz-score-bar{background:var(--light);border:1px solid var(--border);border-radius:2px;padding:16px 20px;margin-top:20px;text-align:center;}
+  .score-num{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);}
+  .score-label{font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;letter-spacing:.1em;}
+  .quiz-reset-btn{margin-top:12px;padding:8px 20px;background:var(--deep);color:white;border:none;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:.78rem;letter-spacing:.1em;}
+  .quiz-reset-btn:hover{opacity:.8;}
+  .page-nav{display:flex;justify-content:space-between;align-items:center;margin-top:44px;gap:12px;}
+  .nav-btn{display:inline-block;padding:10px 22px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.76rem;letter-spacing:.1em;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+  .nav-btn:hover{opacity:.8;}
+  .nav-btn.disabled{background:var(--border);color:#6a8fa8;cursor:default;pointer-events:none;}
+  .nav-center{font-family:'Noto Serif JP',serif;font-size:.7rem;color:var(--sky);letter-spacing:.1em;text-align:center;}
+  footer{text-align:center;padding:44px 20px;border-top:1px solid var(--border);font-size:.78rem;color:var(--sky);letter-spacing:.15em;font-family:'Noto Serif JP',serif;background:linear-gradient(0deg,#cde4f5 0%,var(--paper) 100%);}
+  @media(max-width:600px){
+    .section-card{padding:26px 18px;}
+    .pictograph-row{gap:10px;}.pic-operator{padding-bottom:0;}
+    .compound-grid{grid-template-columns:repeat(2,1fr);}
+    .quiz-options{grid-template-columns:1fr;}
+    .home-btn span{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Fixed top bar: Home + Lang ── -->
+<div class="top-bar">
+  <a href="index.html" class="home-btn">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 10.5L10 3.5L17 10.5V18H13V13H7V18H3V10.5Z" fill="white"/>
+    </svg>
+    <span data-en="Home" data-bn="হোম">Home</span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+    <button class="lang-btn" onclick="setLang('bn')" id="btn-bn">বাংলা</button>
+  </div>
+</div>
+
+<header>
+  <p class="header-label" data-en="NIHONGO WORK ── JLPT N5 KANJI ORIGINS" data-bn="নিহোঙ্গো ওয়ার্ক ── JLPT N5 কানজি উৎস">NIHONGO WORK ── JLPT N5 KANJI ORIGINS</p>
+  <h1>家　新　広　古　上</h1>
+  <p class="header-sub" data-en="Set 04 of 29 · 5 characters" data-bn="সেট ০৪ / ২৯ · ৫টি অক্ষর">Set 04 of 29 · 5 characters</p>
+  <div class="brushstroke-deco"></div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 01 — Origins
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 01</span>
+  <h2 class="section-title" data-en="🖼️ Where did these kanji come from?" data-bn="🖼️ এই কানজিগুলো কোথা থেকে এলো?">🖼️ Where did these kanji come from?</h2>
+  <p class="body-text" data-en="Each kanji began as a picture. Follow the journey from <span class='highlight'>real-world image → ancient script → modern kanji</span> for each character in this set." data-bn="প্রতিটি কানজি একটি ছবি থেকে শুরু হয়েছিল। প্রতিটি অক্ষরের জন্য <span class='highlight'>বাস্তব চিত্র → প্রাচীন লিপি → আধুনিক কানজি</span>-র যাত্রা অনুসরণ করুন।">Each kanji began as a picture. Follow the journey from <span class="highlight">real-world image → ancient script → modern kanji</span> for each character in this set.</p>
+
+  <!-- ── 家 ie / ka ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">家</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="house / home / family" data-bn="বাড়ি / ঘর / পরিবার">house / home / family</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">カ・ケ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">いえ・や</span></div>
+        </div>
+        <span class="origin-type" data-en="Compound Pictograph" data-bn="যৌগিক চিত্রলিপি">Compound Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="家 combines a <strong>roof (宀)</strong> on top with a <strong>pig (豕)</strong> underneath. In ancient times, people and livestock lived under the same roof — a <span class='highlight'>house with a pig</span> was the very image of a home. Livestock represented wealth and family prosperity." data-bn="家 গঠিত হয়েছে উপরে একটি <strong>ছাদ (宀)</strong> এবং নিচে একটি <strong>শূকর (豕)</strong> দিয়ে। প্রাচীনকালে মানুষ এবং গবাদি পশু একই ছাদের নিচে থাকত — <span class='highlight'>শূকরসহ একটি ঘর</span>ই ছিল বাড়ির প্রতীক। গবাদি পশু পরিবারের সম্পদ ও সমৃদ্ধি বোঝাত।">家 combines a <strong>roof (宀)</strong> on top with a <strong>pig (豕)</strong> underneath. In ancient times, people and livestock lived under the same roof — a <span class="highlight">house with a pig</span> was the very image of a home. Livestock represented wealth and family prosperity.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#f5f0e0"/>
+          <!-- roof -->
+          <polygon points="70,8 10,52 130,52" fill="#8b5018" opacity="0.85"/>
+          <rect x="62" y="4" width="16" height="12" rx="2" fill="#a06030"/>
+          <!-- walls -->
+          <rect x="22" y="52" width="96" height="56" rx="2" fill="#d4c090" opacity="0.9"/>
+          <!-- door -->
+          <rect x="56" y="76" width="28" height="32" rx="2" fill="#8b5018" opacity="0.8"/>
+          <circle cx="79" cy="93" r="3" fill="#e8c870"/>
+          <!-- window -->
+          <rect x="32" y="62" width="20" height="18" rx="2" fill="#a8d4f0" opacity="0.8"/>
+          <rect x="88" y="62" width="20" height="18" rx="2" fill="#a8d4f0" opacity="0.8"/>
+          <!-- pig inside hint -->
+          <ellipse cx="70" cy="96" rx="10" ry="7" fill="#e8b090" opacity="0.5"/>
+          <text x="70" y="124" text-anchor="middle" font-family="Arial" font-size="9" fill="#5a3810">roof over a pig = home</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- roof strokes 宀 -->
+          <line x1="50" y1="10" x2="50" y2="20" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <path d="M16 34 Q50 14 84 34" stroke="#2c1a08" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <line x1="20" y1="42" x2="80" y2="42" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- pig body strokes 豕 -->
+          <path d="M36 48 Q50 44 64 48" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="50" cy="58" rx="18" ry="10" stroke="#2c1a08" stroke-width="2.5" fill="none"/>
+          <path d="M34 64 L26 78" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M40 68 L36 80" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M60 68 L64 80" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M66 64 L74 78" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M66 56 Q76 50 80 58" stroke="#2c1a08" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">家</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">家</span>
+          <span class="reading" style="color:#a8cce0;">ka / ie</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="house / home" data-bn="বাড়ি / ঘর">house / home</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 新 shin / atarashii ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">新</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="new" data-bn="নতুন">new</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">シン</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">あたらしい・あら</span></div>
+        </div>
+        <span class="origin-type" data-en="Compound Ideograph" data-bn="যৌগিক ভাবচিত্র">Compound Ideograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="新 is built from <strong>辛 (hard work / bitter)</strong> on the left, <strong>木 (tree)</strong> in the middle, and <strong>斤 (axe)</strong> on the right. The image is of an <span class='highlight'>axe cutting into a fresh tree</span> — the newly split wood with its bright white interior was the ancient symbol for something completely new." data-bn="新 গঠিত হয়েছে বাম দিকে <strong>辛 (কঠোর পরিশ্রম / তিক্ত)</strong>, মাঝে <strong>木 (গাছ)</strong> এবং ডানে <strong>斤 (কুড়াল)</strong> দিয়ে। ছবিটি হলো একটি <span class='highlight'>কুড়াল দিয়ে তাজা গাছ কাটা</span> — নতুনভাবে কাটা কাঠের উজ্জ্বল সাদা ভেতরটাই প্রাচীনকালে সম্পূর্ণ নতুন কিছুর প্রতীক ছিল।">新 is built from <strong>辛 (hard work / bitter)</strong> on the left, <strong>木 (tree)</strong> in the middle, and <strong>斤 (axe)</strong> on the right. The image is of an <span class="highlight">axe cutting into a fresh tree</span> — the newly split wood with its bright white interior was the ancient symbol for something completely new.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#e8f5e8"/>
+          <!-- tree trunk -->
+          <rect x="62" y="28" width="16" height="68" rx="3" fill="#6b4226"/>
+          <!-- branches -->
+          <line x1="70" y1="42" x2="38" y2="20" stroke="#4a7c30" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="42" x2="102" y2="20" stroke="#4a7c30" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="70" cy="16" rx="20" ry="12" fill="#5a9c40" opacity="0.8"/>
+          <!-- roots -->
+          <line x1="70" y1="96" x2="46" y2="114" stroke="#8b5018" stroke-width="4" stroke-linecap="round"/>
+          <line x1="70" y1="96" x2="94" y2="114" stroke="#8b5018" stroke-width="4" stroke-linecap="round"/>
+          <!-- axe -->
+          <rect x="92" y="48" width="30" height="12" rx="3" fill="#8b6030" opacity="0.9"/>
+          <polygon points="118,42 136,54 118,66" fill="#c8c8c8" opacity="0.95"/>
+          <!-- fresh cut mark -->
+          <ellipse cx="92" cy="54" rx="8" ry="16" fill="#f5e8d0" opacity="0.9"/>
+          <text x="70" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#2a6020">axe + fresh-cut tree</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- 立 / 辛 left compressed -->
+          <line x1="18" y1="14" x2="40" y2="14" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="29" y1="14" x2="29" y2="38" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="28" x2="44" y2="28" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="38" x2="44" y2="38" stroke="#2c1a08" stroke-width="2" stroke-linecap="round"/>
+          <!-- 木 tree middle compressed -->
+          <line x1="50" y1="12" x2="50" y2="56" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="36" y1="28" x2="64" y2="28" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="56" x2="40" y2="70" stroke="#2c1a08" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="56" x2="60" y2="70" stroke="#2c1a08" stroke-width="2" stroke-linecap="round"/>
+          <!-- 斤 axe right -->
+          <line x1="66" y1="18" x2="88" y2="18" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="72" y1="18" x2="68" y2="42" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="62" y1="42" x2="88" y2="42" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="82" y1="42" x2="86" y2="70" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="50" y="88" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">新</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">新</span>
+          <span class="reading" style="color:#a8cce0;">shin / atarashii</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="new" data-bn="নতুন">new</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 広 hiro / kou ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">広</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="wide / spacious / broad" data-bn="প্রশস্ত / বিস্তৃত">wide / spacious / broad</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">コウ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">ひろい・ひろ</span></div>
+        </div>
+        <span class="origin-type" data-en="Compound Pictograph" data-bn="যৌগিক চিত্রলিপি">Compound Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="広 is the simplified form of 廣. It shows a <strong>cliff or overhang (广)</strong> with a <strong>large, open space (黄/廿)</strong> underneath — like a <span class='highlight'>vast shelter extending under a rocky ledge</span>. The original full form 廣 includes more strokes showing pillars of a great hall." data-bn="広 হলো 廣-এর সরলীকৃত রূপ। এটি একটি <strong>পাথুরে খাঁজ বা ঝুলন্ত টিলা (广)</strong> এবং নিচে একটি <strong>বিশাল খোলা জায়গা</strong> দেখায় — যেন একটি পাথুরে তাকের নিচে <span class='highlight'>বিস্তৃত আশ্রয়স্থল</span>। মূল পূর্ণ রূপ 廣-এ একটি বড় হলের খুঁটিও দেখানো হয়।">広 is the simplified form of 廣. It shows a <strong>cliff or overhang (广)</strong> with a <strong>large, open space</strong> underneath — like a <span class="highlight">vast shelter extending under a rocky ledge</span>. The original full form 廣 includes more strokes showing pillars of a great hall.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#e8eef5"/>
+          <!-- cliff / rocky overhang -->
+          <path d="M20 10 L20 60 Q20 55 130 50 L130 10 Z" fill="#8090a0" opacity="0.7"/>
+          <path d="M20 60 Q75 65 130 50" fill="#606878" opacity="0.6"/>
+          <!-- open space below -->
+          <rect x="20" y="60" width="110" height="55" rx="0" fill="#d4e4f4" opacity="0.5"/>
+          <!-- ground -->
+          <line x1="20" y1="115" x2="130" y2="115" stroke="#8090a0" stroke-width="3"/>
+          <!-- wide open arrows hint -->
+          <line x1="35" y1="88" x2="105" y2="88" stroke="#2e7ab5" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4,4" opacity="0.7"/>
+          <polygon points="105,84 114,88 105,92" fill="#2e7ab5" opacity="0.7"/>
+          <polygon points="35,84 26,88 35,92" fill="#2e7ab5" opacity="0.7"/>
+          <text x="70" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#2a4060">wide space under a cliff</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- 广 radical — cliff/overhang -->
+          <line x1="50" y1="10" x2="50" y2="22" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="18" y1="22" x2="82" y2="22" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="18" y1="22" x2="14" y2="75" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- inner space strokes (ム / open area) -->
+          <path d="M36 42 Q50 36 64 42" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <line x1="50" y1="42" x2="50" y2="64" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="64" x2="70" y2="64" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M30 64 L24 80" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M70 64 L76 80" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">広</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">広</span>
+          <span class="reading" style="color:#a8cce0;">kou / hiroi</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="wide / spacious" data-bn="প্রশস্ত">wide / spacious</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 古 furu / ko ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">古</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="old / ancient" data-bn="পুরনো / প্রাচীন">old / ancient</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">コ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">ふるい・ふる</span></div>
+        </div>
+        <span class="origin-type" data-en="Ideograph" data-bn="ভাবচিত্র">Ideograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="古 combines <strong>十 (ten)</strong> on top with <strong>口 (mouth)</strong> below — the idea of <span class='highlight'>ten generations of mouths</span>, meaning stories passed down through many generations. What has been spoken of for ten generations is truly ancient. Some scholars also see it as a skull: a mouth on an old bone." data-bn="古 গঠিত হয়েছে উপরে <strong>十 (দশ)</strong> এবং নিচে <strong>口 (মুখ)</strong> দিয়ে — <span class='highlight'>দশ প্রজন্মের মুখের</span> ধারণা, অর্থাৎ বহু প্রজন্ম ধরে চলে আসা গল্প। দশ প্রজন্ম ধরে যা বলা হয়েছে তাই সত্যিকারের প্রাচীন। কেউ কেউ এটিকে একটি করোটিও মনে করেন — পুরনো হাড়ের উপর মুখ।">古 combines <strong>十 (ten)</strong> on top with <strong>口 (mouth)</strong> below — the idea of <span class="highlight">ten generations of mouths</span>, meaning stories passed down through many generations. What has been spoken of for ten generations is truly ancient. Some scholars also see it as a skull: a mouth on an old bone.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#f0ece0"/>
+          <!-- ten / cross -->
+          <line x1="70" y1="12" x2="70" y2="52" stroke="#5a4020" stroke-width="6" stroke-linecap="round"/>
+          <line x1="44" y1="32" x2="96" y2="32" stroke="#5a4020" stroke-width="6" stroke-linecap="round"/>
+          <!-- mouth / open jar -->
+          <rect x="32" y="58" width="76" height="50" rx="8" fill="none" stroke="#5a4020" stroke-width="5"/>
+          <!-- crack / age lines on the mouth/vessel -->
+          <path d="M56 64 Q58 80 54 90" stroke="#9a7a50" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <path d="M84 66 Q82 78 86 88" stroke="#9a7a50" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <text x="70" y="124" text-anchor="middle" font-family="Arial" font-size="9" fill="#5a4020">ten generations of mouths</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- 十 cross -->
+          <line x1="50" y1="10" x2="50" y2="42" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="74" y2="26" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- 口 box -->
+          <rect x="28" y="50" width="44" height="32" rx="2" stroke="#2c1a08" stroke-width="3.5" fill="none"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">古</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">古</span>
+          <span class="reading" style="color:#a8cce0;">ko / furui</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="old / ancient" data-bn="পুরনো">old / ancient</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 上 ue / jou ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">上</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="above / up / top" data-bn="উপরে / উপর">above / up / top</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">ジョウ・ショウ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">うえ・あ・のぼ</span></div>
+        </div>
+        <span class="origin-type" data-en="Indicative Pictograph" data-bn="নির্দেশক চিত্রলিপি">Indicative Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="上 is a simple but elegant <strong>directional indicator</strong> — a short stroke or dot placed <span class='highlight'>above a baseline</span>. The ancient form was literally a vertical mark sitting on top of a horizontal line, pointing upward. Its partner 下 (below) is the mirror image with the mark below the line." data-bn="上 একটি সরল কিন্তু মার্জিত <strong>দিকনির্দেশক চিহ্ন</strong> — একটি <span class='highlight'>বেসলাইনের উপরে</span> রাখা ছোট রেখা বা বিন্দু। প্রাচীন রূপটি ছিল একটি অনুভূমিক রেখার উপরে বসানো একটি উল্লম্ব চিহ্ন, যা উপর দিকে নির্দেশ করে। এর সঙ্গী 下 (নিচে) হলো উল্টো চিত্র।">上 is a simple but elegant <strong>directional indicator</strong> — a short stroke or dot placed <span class="highlight">above a baseline</span>. The ancient form was literally a vertical mark sitting on top of a horizontal line, pointing upward. Its partner 下 (below) is the mirror image with the mark below the line.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#eef4fb"/>
+          <!-- baseline -->
+          <line x1="20" y1="88" x2="120" y2="88" stroke="#2e7ab5" stroke-width="4" stroke-linecap="round"/>
+          <!-- upward arrow / indicator above -->
+          <line x1="70" y1="88" x2="70" y2="32" stroke="#1a4f7a" stroke-width="6" stroke-linecap="round"/>
+          <polygon points="70,16 56,40 84,40" fill="#1a4f7a"/>
+          <!-- dot / mark above line (ancient form hint) -->
+          <circle cx="70" cy="70" r="5" fill="#e07b39" opacity="0.8"/>
+          <text x="70" y="116" text-anchor="middle" font-family="Arial" font-size="9" fill="#1a4f7a">mark above a baseline = up</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- baseline -->
+          <line x1="18" y1="72" x2="82" y2="72" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- vertical mark above -->
+          <line x1="50" y1="72" x2="50" y2="28" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- small horizontal on top -->
+          <line x1="34" y1="36" x2="66" y2="36" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">上</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">上</span>
+          <span class="reading" style="color:#a8cce0;">jou / ue</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="above / up" data-bn="উপরে">above / up</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 02 — Key Words
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 02</span>
+  <h2 class="section-title" data-en="📖 Key Words Using These Kanji" data-bn="📖 এই কানজি দিয়ে গুরুত্বপূর্ণ শব্দ">📖 Key Words Using These Kanji</h2>
+  <p class="body-text" data-en="See how each kanji appears in everyday Japanese words." data-bn="প্রতিটি কানজি কীভাবে দৈনন্দিন জাপানি শব্দে ব্যবহৃত হয় দেখুন।">See how each kanji appears in everyday Japanese words.</p>
+
+  <!-- 家 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">家 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="ka / ie · house / home" data-bn="কা / ইয়ে · বাড়ি / ঘর">ka / ie · house / home</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">家</span><span class="compound-reading">いえ</span><span class="compound-meaning" data-en="house / home" data-bn="বাড়ি / ঘর">house / home</span></div>
+      <div class="compound-card"><span class="compound-kanji">家族</span><span class="compound-reading">かぞく</span><span class="compound-meaning" data-en="family" data-bn="পরিবার">family</span></div>
+      <div class="compound-card"><span class="compound-kanji">帰宅</span><span class="compound-reading">きたく</span><span class="compound-meaning" data-en="returning home" data-bn="বাড়ি ফেরা">returning home</span></div>
+      <div class="compound-card"><span class="compound-kanji">家賃</span><span class="compound-reading">やちん</span><span class="compound-meaning" data-en="rent" data-bn="ভাড়া">rent</span></div>
+    </div>
+  </div>
+
+  <!-- 新 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">新 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="shin / atarashii · new" data-bn="শিন / আতারাশিই · নতুন">shin / atarashii · new</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">新しい</span><span class="compound-reading">あたらしい</span><span class="compound-meaning" data-en="new (adjective)" data-bn="নতুন (বিশেষণ)">new (adjective)</span></div>
+      <div class="compound-card"><span class="compound-kanji">新幹線</span><span class="compound-reading">しんかんせん</span><span class="compound-meaning" data-en="bullet train" data-bn="বুলেট ট্রেন">bullet train</span></div>
+      <div class="compound-card"><span class="compound-kanji">新聞</span><span class="compound-reading">しんぶん</span><span class="compound-meaning" data-en="newspaper" data-bn="সংবাদপত্র">newspaper</span></div>
+      <div class="compound-card"><span class="compound-kanji">最新</span><span class="compound-reading">さいしん</span><span class="compound-meaning" data-en="latest / newest" data-bn="সর্বশেষ / নবীনতম">latest / newest</span></div>
+    </div>
+  </div>
+
+  <!-- 広 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">広 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="kou / hiroi · wide / spacious" data-bn="কো / হিরোই · প্রশস্ত">kou / hiroi · wide / spacious</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">広い</span><span class="compound-reading">ひろい</span><span class="compound-meaning" data-en="wide / spacious" data-bn="প্রশস্ত">wide / spacious</span></div>
+      <div class="compound-card"><span class="compound-kanji">広場</span><span class="compound-reading">ひろば</span><span class="compound-meaning" data-en="plaza / square" data-bn="চত্বর / স্কোয়ার">plaza / square</span></div>
+      <div class="compound-card"><span class="compound-kanji">広告</span><span class="compound-reading">こうこく</span><span class="compound-meaning" data-en="advertisement" data-bn="বিজ্ঞাপন">advertisement</span></div>
+      <div class="compound-card"><span class="compound-kanji">広大</span><span class="compound-reading">こうだい</span><span class="compound-meaning" data-en="vast / extensive" data-bn="বিশাল / বিস্তৃত">vast / extensive</span></div>
+    </div>
+  </div>
+
+  <!-- 古 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">古 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="ko / furui · old / ancient" data-bn="কো / ফুরুই · পুরনো">ko / furui · old / ancient</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">古い</span><span class="compound-reading">ふるい</span><span class="compound-meaning" data-en="old (adjective)" data-bn="পুরনো (বিশেষণ)">old (adjective)</span></div>
+      <div class="compound-card"><span class="compound-kanji">古典</span><span class="compound-reading">こてん</span><span class="compound-meaning" data-en="classic / classical" data-bn="ক্লাসিক / ধ্রুপদী">classic / classical</span></div>
+      <div class="compound-card"><span class="compound-kanji">中古</span><span class="compound-reading">ちゅうこ</span><span class="compound-meaning" data-en="used / second-hand" data-bn="ব্যবহৃত / সেকেন্ড হ্যান্ড">used / second-hand</span></div>
+      <div class="compound-card"><span class="compound-kanji">古代</span><span class="compound-reading">こだい</span><span class="compound-meaning" data-en="ancient times" data-bn="প্রাচীন যুগ">ancient times</span></div>
+    </div>
+  </div>
+
+  <!-- 上 -->
+  <div>
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">上 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="jou / ue · above / up" data-bn="জো / উয়ে · উপরে">jou / ue · above / up</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">上</span><span class="compound-reading">うえ</span><span class="compound-meaning" data-en="above / top" data-bn="উপরে / উপর">above / top</span></div>
+      <div class="compound-card"><span class="compound-kanji">上手</span><span class="compound-reading">じょうず</span><span class="compound-meaning" data-en="skilled / good at" data-bn="দক্ষ / ভালো">skilled / good at</span></div>
+      <div class="compound-card"><span class="compound-kanji">上がる</span><span class="compound-reading">あがる</span><span class="compound-meaning" data-en="to rise / go up" data-bn="উঠা / বাড়া">to rise / go up</span></div>
+      <div class="compound-card"><span class="compound-kanji">以上</span><span class="compound-reading">いじょう</span><span class="compound-meaning" data-en="more than / above" data-bn="এর বেশি / উপরে">more than / above</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 03 — Quiz
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 03</span>
+  <h2 class="section-title" data-en="✏️ Reading Quiz" data-bn="✏️ পড়ার কুইজ">✏️ Reading Quiz</h2>
+  <p class="body-text" data-en="Each question shows a <span class='highlight'>word containing the kanji you learned</span>. Choose the correct reading. <span style='color:var(--orange);font-weight:700;'>ON</span> = Chinese reading &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = Japanese reading." data-bn="প্রতিটি প্রশ্নে <span class='highlight'>আপনার শেখা কানজি সহ একটি শব্দ</span> দেখানো হয়। সঠিক পড়া বেছে নিন। <span style='color:var(--orange);font-weight:700;'>ON</span> = চীনা পড়া &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = জাপানি পড়া।">Each question shows a <span class="highlight">word containing the kanji you learned</span>. Choose the correct reading. <span style="color:var(--orange);font-weight:700;">ON</span> = Chinese reading &nbsp;·&nbsp; <span style="color:var(--sky);font-weight:700;">KUN</span> = Japanese reading.</p>
+  <div id="quiz-container"></div>
+  <div class="quiz-score-bar" id="score-bar" style="display:none;">
+    <div class="score-num" id="score-num">0 / 0</div>
+    <div class="score-label" data-en="Your Score" data-bn="আপনার স্কোর">Your Score</div>
+    <button class="quiz-reset-btn" onclick="resetQuiz()">Try Again</button>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="n5_kanji_03.html" class="nav-btn" data-en="← Set 03" data-bn="← সেট ০৩">← Set 03</a>
+  <div class="nav-center" data-en="Set 04 / 29<br><span style='color:#aaa;font-size:.65rem;'>N5 Kanji Origins</span>" data-bn="সেট ০৪ / ২৯<br><span style='color:#aaa;font-size:.65rem;'>N5 কানজি উৎস</span>">Set 04 / 29<br><span style="color:#aaa;font-size:.65rem;">N5 Kanji Origins</span></div>
+  <a href="n5_kanji_05.html" class="nav-btn" data-en="Set 05 →" data-bn="সেট ০৫ →">Set 05 →</a>
+</div>
+
+</main>
+<footer data-en="JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs" data-bn="JLPT N5 কানজি উৎস সিরিজ ── NIHONGO WORK | চিত্রলিপির মাধ্যমে জাপানি শেখা">JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs</footer>
+
+<script>
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+  renderQuiz();
+}
+
+const QUIZ_QUESTIONS = [
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>家</u>族",
+    ask_type:"ON",
+    ask_en:"ON reading of 家 in 家族",
+    ask_bn:"家族-এ 家-এর ON পড়া",
+    options:["いえ (ie)","や (ya)","か (ka)","け (ke)"],
+    correct:2,
+    fb_en:"✓ 家族 (かぞく = family) uses the ON reading <strong>か (KA)</strong>. In kanji compound words, ON readings are typically used.",
+    fb_bn:"✓ 家族 (かぞく = পরিবার)-এ ON পড়া <strong>か (KA)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>家</u>賃",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 家 in 家賃",
+    ask_bn:"家賃-এ 家-এর KUN পড়া",
+    options:["か (ka)","け (ke)","いえ (ie)","や (ya)"],
+    correct:3,
+    fb_en:"✓ 家賃 (やちん = rent) uses the KUN reading <strong>や (YA)</strong> — a shorter KUN form of 家. This is a common native Japanese compound.",
+    fb_bn:"✓ 家賃 (やちん = ভাড়া)-এ KUN পড়া <strong>や (YA)</strong> ব্যবহৃত হয়। এটি 家-এর সংক্ষিপ্ত KUN রূপ।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>新</u>聞",
+    ask_type:"ON",
+    ask_en:"ON reading of 新 in 新聞",
+    ask_bn:"新聞-এ 新-এর ON পড়া",
+    options:["あたらしい (atarashii)","あら (ara)","しん (shin)","さい (sai)"],
+    correct:2,
+    fb_en:"✓ 新聞 (しんぶん = newspaper) uses the ON reading <strong>しん (SHIN)</strong>. Compound words of Chinese origin always use ON readings.",
+    fb_bn:"✓ 新聞 (しんぶん = সংবাদপত্র)-এ ON পড়া <strong>しん (SHIN)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>新</u>しい",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 新 in 新しい",
+    ask_bn:"新しい-এ 新-এর KUN পড়া",
+    options:["しん (shin)","あたらしい (atarashii)","あら (ara)","さいしん (saishin)"],
+    correct:1,
+    fb_en:"✓ 新しい (あたらしい = new) uses the KUN reading <strong>あたら (ATARA)</strong>. い-adjective forms always use KUN readings.",
+    fb_bn:"✓ 新しい (あたらしい = নতুন)-এ KUN পড়া <strong>あたら (ATARA)</strong> ব্যবহৃত হয়। い-বিশেষণ সর্বদা KUN পড়া ব্যবহার করে।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>広</u>い",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 広 in 広い",
+    ask_bn:"広い-এ 広-এর KUN পড়া",
+    options:["こう (kou)","ひろい (hiroi)","おおきい (ookii)","ひろば (hiroba)"],
+    correct:1,
+    fb_en:"✓ 広い (ひろい = wide / spacious) uses the KUN reading <strong>ひろ (HIRO)</strong>. い-adjectives always take KUN readings.",
+    fb_bn:"✓ 広い (ひろい = প্রশস্ত)-এ KUN পড়া <strong>ひろ (HIRO)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>広</u>告",
+    ask_type:"ON",
+    ask_en:"ON reading of 広 in 広告",
+    ask_bn:"広告-এ 広-এর ON পড়া",
+    options:["ひろ (hiro)","こう (kou)","おお (oo)","かん (kan)"],
+    correct:1,
+    fb_en:"✓ 広告 (こうこく = advertisement) uses the ON reading <strong>こう (KOU)</strong>. Both kanji in this Sino-Japanese compound use their ON readings.",
+    fb_bn:"✓ 広告 (こうこく = বিজ্ঞাপন)-এ ON পড়া <strong>こう (KOU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"中<u>古</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 古 in 中古",
+    ask_bn:"中古-এ 古-এর ON পড়া",
+    options:["ふるい (furui)","ふる (furu)","こ (ko)","ちゅう (chuu)"],
+    correct:2,
+    fb_en:"✓ 中古 (ちゅうこ = used / second-hand) uses the ON reading <strong>こ (KO)</strong>. Both kanji use ON readings in this compound.",
+    fb_bn:"✓ 中古 (ちゅうこ = ব্যবহৃত)-এ ON পড়া <strong>こ (KO)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>古</u>い",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 古 in 古い",
+    ask_bn:"古い-এ 古-এর KUN পড়া",
+    options:["こ (ko)","ふるい (furui)","むかし (mukashi)","ふるさと (furusato)"],
+    correct:1,
+    fb_en:"✓ 古い (ふるい = old) uses the KUN reading <strong>ふる (FURU)</strong>. い-adjective forms always use KUN readings.",
+    fb_bn:"✓ 古い (ふるい = পুরনো)-এ KUN পড়া <strong>ふる (FURU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>上</u>手",
+    ask_type:"ON",
+    ask_en:"ON reading of 上 in 上手",
+    ask_bn:"上手-এ 上-এর ON পড়া",
+    options:["うえ (ue)","あ (a)","のぼ (nobo)","じょう (jou)"],
+    correct:3,
+    fb_en:"✓ 上手 (じょうず = skilled) uses the ON reading <strong>じょう (JOU)</strong>. Note: 上手 is actually read as じょうず, not じょうて — an irregular reading to memorise!",
+    fb_bn:"✓ 上手 (じょうず = দক্ষ)-এ ON পড়া <strong>じょう (JOU)</strong> ব্যবহৃত হয়। মনে রাখুন: 上手 অনিয়মিতভাবে じょうず পড়া হয়।"
+  }
+];
+
+let answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+let score = 0;
+
+function renderQuiz() {
+  const lang = currentLang;
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  QUIZ_QUESTIONS.forEach((q, qi) => {
+    const typeLabel = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON reading</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN reading</span>';
+    const typeLabelBn = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON পড়া</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN পড়া</span>';
+    const askText = lang === 'en' ? q.ask_en : q.ask_bn;
+    const qText   = lang === 'en' ? q.q_en   : q.q_bn;
+    const fbText  = lang === 'en' ? q.fb_en  : q.fb_bn;
+    const lblDisplay = lang === 'en' ? typeLabel : typeLabelBn;
+
+    let optsHtml = q.options.map((opt, oi) => {
+      let cls = 'quiz-opt';
+      if (answered[qi]) {
+        cls += ' disabled';
+        if (oi === q.correct) cls += ' correct';
+        else if (answered[qi] === oi + 1) cls += ' wrong';
+      }
+      return '<button class="' + cls + '" onclick="checkAnswer(' + qi + ',' + oi + ')">' + opt + '</button>';
+    }).join('');
+
+    const fbClass = answered[qi] ? (answered[qi] === q.correct + 1 ? 'correct-fb show' : 'wrong-fb show') : '';
+
+    container.innerHTML += '<div class="quiz-block" id="qblock-' + qi + '">' +
+      '<div class="quiz-q-label ' + (q.ask_type === 'ON' ? 'on-label' : 'kun-label') + '">' +
+      'Q' + (qi+1) + ' &nbsp;·&nbsp; ' + askText + ' &nbsp;·&nbsp; ' + lblDisplay + '</div>' +
+      '<div class="quiz-question"><span style="font-size:1.1rem;color:#555;">' + qText + '</span><br><span class="q-kanji">' + q.word + '</span></div>' +
+      '<div class="quiz-options">' + optsHtml + '</div>' +
+      '<div class="quiz-feedback ' + fbClass + '" id="fb-' + qi + '">' + fbText + '</div></div>';
+  });
+
+  const allDone = answered.every(a => a !== false);
+  document.getElementById('score-bar').style.display = allDone ? 'block' : 'none';
+  if (allDone) {
+    document.getElementById('score-num').textContent = score + ' / ' + QUIZ_QUESTIONS.length;
+    document.querySelector('.quiz-reset-btn').textContent = lang === 'en' ? 'Try Again' : 'আবার চেষ্টা করুন';
+  }
+}
+
+function checkAnswer(qi, oi) {
+  if (answered[qi]) return;
+  answered[qi] = oi + 1;
+  if (oi === QUIZ_QUESTIONS[qi].correct) score++;
+  renderQuiz();
+}
+
+function resetQuiz() {
+  answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+  score = 0;
+  renderQuiz();
+  document.getElementById('score-bar').style.display = 'none';
+}
+
+renderQuiz();
+</script>
+</body>
+</html>

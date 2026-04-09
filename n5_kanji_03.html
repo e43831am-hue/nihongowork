@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT N5 Kanji Origins ── Set 03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Zen+Maru+Gothic:wght@300;400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d1a2a;--paper:#eef4fb;--sky:#2e7ab5;--deep:#1a4f7a;--light:#deeef8;--border:#b8d4ea;--orange:#e07b39;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:'Zen Maru Gothic',sans-serif;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.5;}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(60px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .top-bar{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:48px;background:rgba(238,244,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+  .home-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.72rem;letter-spacing:.1em;border-radius:2px;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+  .home-btn:hover{opacity:.8;}
+  .lang-bar{display:flex;gap:6px;}
+  .lang-btn{padding:5px 13px;border:1.5px solid var(--sky);background:white;color:var(--sky);font-size:.72rem;letter-spacing:.08em;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;transition:all .2s;}
+  .lang-btn.active{background:var(--sky);color:white;}
+  header{text-align:center;padding:96px 20px 56px;border-bottom:2px solid var(--sky);background:linear-gradient(180deg,#cde4f5 0%,var(--paper) 100%);position:relative;overflow:hidden;}
+  header::after{content:'';position:absolute;top:20px;left:-60px;width:180px;height:60px;background:radial-gradient(ellipse at 40% 50%,#fff 60%,transparent 100%);opacity:0.55;border-radius:50%;animation:drift 12s ease-in-out infinite alternate;}
+  .header-label{font-family:'Noto Serif JP',serif;font-size:.75rem;letter-spacing:.4em;color:var(--sky);margin-bottom:18px;animation:fadeUp .8s ease both;position:relative;}
+  header h1{font-family:'Kaisei Decol',serif;font-size:clamp(2rem,8vw,4rem);color:var(--ink);line-height:1;animation:fadeUp .9s .1s ease both;letter-spacing:.12em;}
+  .header-sub{font-family:'Noto Serif JP',serif;font-size:.95rem;color:var(--deep);margin-top:14px;animation:fadeUp 1s .2s ease both;letter-spacing:.1em;}
+  .brushstroke-deco{width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--sky),transparent);margin:22px auto 0;animation:fadeUp 1s .3s ease both;}
+  main{max-width:860px;margin:0 auto;padding:56px 24px 100px;}
+  .section-card{background:white;border:1px solid var(--border);border-radius:2px;padding:44px 50px;margin-bottom:44px;position:relative;box-shadow:4px 4px 0 var(--border);animation:fadeUp .8s ease both;}
+  .section-card::before{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;border:1px solid var(--border);z-index:-1;border-radius:2px;}
+  .section-card:nth-child(1){animation-delay:.1s}.section-card:nth-child(2){animation-delay:.2s}.section-card:nth-child(3){animation-delay:.3s}
+  .tag{display:inline-block;background:var(--sky);color:white;font-size:.63rem;letter-spacing:.2em;padding:3px 10px;border-radius:1px;margin-bottom:11px;font-family:'Noto Serif JP',serif;}
+  .section-title{font-family:'Kaisei Decol',serif;font-size:1.45rem;color:var(--ink);margin-bottom:24px;padding-bottom:13px;border-bottom:1px solid var(--light);}
+  .body-text{font-size:.93rem;line-height:1.9;color:#1e3040;margin-bottom:14px;}
+  .highlight{background:linear-gradient(to right,#a8d4f055,#a8d4f022);padding:2px 6px;border-radius:2px;font-weight:700;color:var(--deep);}
+  .kanji-origin-block{border-top:1px solid var(--light);padding-top:32px;margin-top:32px;}
+  .kanji-origin-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .origin-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;}
+  .origin-char{font-family:'Kaisei Decol',serif;font-size:3rem;color:var(--deep);line-height:1;flex-shrink:0;}
+  .origin-meta{display:flex;flex-direction:column;gap:5px;}
+  .origin-meaning{font-size:.92rem;font-weight:700;color:var(--ink);}
+  .origin-type{font-size:.65rem;background:var(--border);color:var(--deep);padding:2px 8px;border-radius:1px;width:fit-content;letter-spacing:.1em;font-family:'Noto Serif JP',serif;}
+  .readings-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+  .reading-badge{display:flex;align-items:center;gap:5px;font-size:.78rem;}
+  .badge-label{padding:2px 7px;border-radius:2px;font-size:.6rem;letter-spacing:.1em;font-family:'Noto Serif JP',serif;font-weight:700;}
+  .badge-on{background:#e07b39;color:white;}
+  .badge-kun{background:#2e7ab5;color:white;}
+  .badge-val{font-family:'Kaisei Decol',serif;color:var(--ink);}
+  .pictograph-row{display:flex;align-items:center;justify-content:center;gap:20px;margin:22px 0 18px;flex-wrap:wrap;}
+  .pic-box{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .pic-box-label{text-align:center;}
+  .pic-box-label .kanji-big{font-family:'Kaisei Decol',serif;font-size:1.9rem;color:var(--deep);display:block;line-height:1.2;}
+  .pic-box-label .reading{font-size:.76rem;color:var(--sky);display:block;letter-spacing:.1em;margin-top:3px;}
+  .pic-box-label .meaning{font-size:.74rem;color:#3a5570;display:block;margin-top:3px;}
+  .pic-operator{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--sky);opacity:.5;flex-shrink:0;padding-bottom:44px;}
+  .pic-result-box{display:flex;flex-direction:column;align-items:center;gap:12px;background:var(--deep);border-radius:4px;padding:20px 24px;}
+  .compound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;margin:18px 0 0;}
+  .compound-card{border:1px solid var(--border);background:var(--light);padding:18px 14px;text-align:center;border-radius:2px;transition:transform .2s,box-shadow .2s;cursor:default;}
+  .compound-card:hover{transform:translateY(-3px);box-shadow:3px 3px 0 var(--border);}
+  .compound-kanji{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);display:block;margin-bottom:5px;}
+  .compound-reading{font-size:.72rem;color:var(--sky);letter-spacing:.1em;display:block;margin-bottom:3px;}
+  .compound-meaning{font-size:.76rem;color:#2a4060;}
+  .quiz-block{border-top:1px solid var(--light);padding-top:28px;margin-top:28px;}
+  .quiz-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .quiz-q-label{font-size:.62rem;letter-spacing:.15em;font-family:'Noto Serif JP',serif;margin-bottom:8px;}
+  .quiz-q-label.on-label{color:var(--orange);}
+  .quiz-q-label.kun-label{color:var(--sky);}
+  .quiz-question{font-family:'Kaisei Decol',serif;font-size:1.5rem;color:var(--ink);margin-bottom:18px;line-height:1.5;}
+  .quiz-question .q-kanji{color:var(--deep);font-size:1.8rem;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .quiz-opt{padding:12px 16px;border:1.5px solid var(--border);border-radius:2px;background:white;font-size:.9rem;cursor:pointer;text-align:center;transition:all .2s;font-family:'Zen Maru Gothic',sans-serif;}
+  .quiz-opt:hover:not(.disabled){background:var(--light);border-color:var(--sky);}
+  .quiz-opt.correct{background:#d4f0d4;border-color:#2a8a2a;color:#1a5a1a;}
+  .quiz-opt.wrong{background:#f0d4d4;border-color:#8a2a2a;color:#5a1a1a;}
+  .quiz-opt.disabled{cursor:default;}
+  .quiz-feedback{font-size:.85rem;padding:10px 14px;border-radius:2px;margin-top:4px;display:none;line-height:1.6;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.correct-fb{background:#d4f0d4;color:#1a5a1a;border-left:3px solid #2a8a2a;}
+  .quiz-feedback.wrong-fb{background:#f0d4d4;color:#5a1a1a;border-left:3px solid #8a2a2a;}
+  .quiz-score-bar{background:var(--light);border:1px solid var(--border);border-radius:2px;padding:16px 20px;margin-top:20px;text-align:center;}
+  .score-num{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);}
+  .score-label{font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;letter-spacing:.1em;}
+  .quiz-reset-btn{margin-top:12px;padding:8px 20px;background:var(--deep);color:white;border:none;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:.78rem;letter-spacing:.1em;}
+  .quiz-reset-btn:hover{opacity:.8;}
+  .page-nav{display:flex;justify-content:space-between;align-items:center;margin-top:44px;gap:12px;}
+  .nav-btn{display:inline-block;padding:10px 22px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.76rem;letter-spacing:.1em;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+  .nav-btn:hover{opacity:.8;}
+  .nav-btn.disabled{background:var(--border);color:#6a8fa8;cursor:default;pointer-events:none;}
+  .nav-center{font-family:'Noto Serif JP',serif;font-size:.7rem;color:var(--sky);letter-spacing:.1em;text-align:center;}
+  footer{text-align:center;padding:44px 20px;border-top:1px solid var(--border);font-size:.78rem;color:var(--sky);letter-spacing:.15em;font-family:'Noto Serif JP',serif;background:linear-gradient(0deg,#cde4f5 0%,var(--paper) 100%);}
+  @media(max-width:600px){
+    .section-card{padding:26px 18px;}
+    .pictograph-row{gap:10px;}.pic-operator{padding-bottom:0;}
+    .compound-grid{grid-template-columns:repeat(2,1fr);}
+    .quiz-options{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html" class="home-btn">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 10.5L10 3.5L17 10.5V18H13V13H7V18H3V10.5Z" fill="white"/>
+    </svg>
+    <span data-en="Home" data-bn="হোম">Home</span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+    <button class="lang-btn" onclick="setLang('bn')" id="btn-bn">বাংলা</button>
+  </div>
+</div>
+
+<header>
+  <p class="header-label" data-en="NIHONGO WORK ── JLPT N5 KANJI ORIGINS" data-bn="নিহোঙ্গো ওয়ার্ক ── JLPT N5 কানজি উৎস">NIHONGO WORK ── JLPT N5 KANJI ORIGINS</p>
+  <h1>食　飲　魚　肉　好</h1>
+  <p class="header-sub" data-en="Set 03 of 29 · 5 characters" data-bn="সেট ০৩ / ২৯ · ৫টি অক্ষর">Set 03 of 29 · 5 characters</p>
+  <div class="brushstroke-deco"></div>
+</header>
+
+<main>
+
+<!-- SECTION 01 -->
+<div class="section-card">
+  <span class="tag">SECTION 01</span>
+  <h2 class="section-title" data-en="🖼️ Where did these kanji come from?" data-bn="🖼️ এই কানজিগুলো কোথা থেকে এলো?">🖼️ Where did these kanji come from?</h2>
+  <p class="body-text" data-en="Each kanji began as a picture. Follow the journey from <span class='highlight'>real-world image → ancient script → modern kanji</span> for each character in this set." data-bn="প্রতিটি কানজি একটি ছবি থেকে শুরু হয়েছিল। প্রতিটি অক্ষরের জন্য <span class='highlight'>বাস্তব চিত্র → প্রাচীন লিপি → আধুনিক কানজি</span>-র যাত্রা অনুসরণ করুন।">Each kanji began as a picture. Follow the journey from <span class="highlight">real-world image → ancient script → modern kanji</span> for each character in this set.</p>
+
+  <!-- 食 shoku/ta -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">食</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="eat / food" data-bn="খাওয়া / খাবার">eat / food</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">ショク・ジキ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">た・く</span></div>
+        </div>
+        <span class="origin-type" data-en="Compound Pictograph" data-bn="যৌগিক চিত্রলিপি">Compound Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="The character 食 combines a <strong>lid (△)</strong> on top with a <strong>vessel of food</strong> below — a covered bowl ready to eat. The image captures a person bending toward the bowl, mouth open. <span class='highlight'>Eating</span> is the act of uncovering and consuming." data-bn="食 অক্ষরে উপরে একটি <strong>ঢাকনা (△)</strong> এবং নিচে একটি <strong>খাবারের পাত্র</strong> — ঢাকা বাটি খাওয়ার জন্য প্রস্তুত। ছবিটিতে একজন ব্যক্তি মুখ খুলে বাটির দিকে ঝুঁকছে। <span class='highlight'>খাওয়া</span> হলো ঢাকনা খুলে গ্রহণ করার কাজ।">The character 食 combines a <strong>lid (△)</strong> on top with a <strong>vessel of food</strong> below — a covered bowl ready to eat. The image captures a person bending toward the bowl, mouth open. <span class="highlight">Eating</span> is the act of uncovering and consuming.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#fdf5e8"/>
+          <!-- bowl -->
+          <ellipse cx="70" cy="95" rx="40" ry="12" fill="#c8906a" opacity="0.7"/>
+          <path d="M30 88 Q70 115 110 88" fill="#d4a870" opacity="0.9"/>
+          <!-- steam wisps -->
+          <path d="M55 72 Q52 60 58 50" stroke="#e0c8a0" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+          <path d="M70 68 Q67 55 73 44" stroke="#e0c8a0" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+          <path d="M85 72 Q82 60 88 50" stroke="#e0c8a0" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+          <!-- lid -->
+          <polygon points="70,28 38,58 102,58" fill="#8b5018" opacity="0.85"/>
+          <ellipse cx="70" cy="58" rx="32" ry="6" fill="#a06030" opacity="0.9"/>
+          <circle cx="70" cy="28" r="5" fill="#c87840"/>
+          <!-- rice mound inside bowl hint -->
+          <ellipse cx="70" cy="82" rx="22" ry="7" fill="#f5e8c8" opacity="0.7"/>
+          <text x="70" y="124" text-anchor="middle" font-family="Arial" font-size="9" fill="#7a4020">covered bowl of food</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- lid stroke -->
+          <polygon points="50,12 28,38 72,38" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <!-- horizontal divider -->
+          <line x1="22" y1="48" x2="78" y2="48" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <!-- vessel body strokes -->
+          <line x1="50" y1="48" x2="50" y2="76" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <path d="M30 60 Q50 72 70 60" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M26 76 L50 88 L74 76" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="50" y="98" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">食</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">食</span>
+          <span class="reading" style="color:#a8cce0;">shoku / ta(beru)</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="eat / food" data-bn="খাওয়া / খাবার">eat / food</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 飲 in/no -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">飲</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="drink" data-bn="পান করা">drink</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">イン</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">の</span></div>
+        </div>
+        <span class="origin-type" data-en="Compound Pictograph" data-bn="যৌগিক চিত্রলিপি">Compound Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="飲 is composed of the <strong>food/bowl radical 食</strong> on the left and a <strong>person tilting their head back (欠)</strong> on the right — an open mouth leaning over a vessel. The right side 欠 shows a <span class='highlight'>person yawning or opening wide to drink</span>." data-bn="飲 গঠিত হয়েছে বাম দিকে <strong>খাবার/বাটির র‍্যাডিকেল 食</strong> এবং ডান দিকে <strong>মাথা পিছনে হেলানো একজন ব্যক্তি (欠)</strong> দিয়ে — একটি পাত্রের উপর ঝুঁকে খোলা মুখ। ডান পাশের 欠 একজন ব্যক্তিকে <span class='highlight'>হাঁ করে পান করতে</span> দেখায়।">飲 is composed of the <strong>food/bowl radical 食</strong> on the left and a <strong>person tilting their head back (欠)</strong> on the right — an open mouth leaning over a vessel. The right side 欠 shows a <span class="highlight">person yawning or opening wide to drink</span>.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#e8f0fa"/>
+          <!-- cup / vessel left -->
+          <rect x="22" y="60" width="44" height="38" rx="4" fill="#c8d8f0" opacity="0.9"/>
+          <ellipse cx="44" cy="60" rx="22" ry="6" fill="#a8c4e8" opacity="0.9"/>
+          <!-- liquid surface -->
+          <ellipse cx="44" cy="62" rx="18" ry="4" fill="#6aa4d8" opacity="0.7"/>
+          <!-- person tilting head back right side -->
+          <ellipse cx="100" cy="32" rx="13" ry="14" fill="#f5d4b8" opacity="0.95"/>
+          <!-- open mouth -->
+          <path d="M94 42 Q100 52 106 42" stroke="#c8906a" stroke-width="3" stroke-linecap="round" fill="#e8afa8" opacity="0.8"/>
+          <!-- body leaning back -->
+          <path d="M100 46 Q104 70 98 90" stroke="#c8906a" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M100 62 Q116 68 118 80" stroke="#c8906a" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M100 62 Q88 68 86 80" stroke="#c8906a" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <text x="70" y="124" text-anchor="middle" font-family="Arial" font-size="9" fill="#1a4f7a">vessel + person drinking</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- 食 left compressed -->
+          <polygon points="28,12 14,32 42,32" stroke="#2c1a08" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          <line x1="10" y1="40" x2="44" y2="40" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="28" y1="40" x2="28" y2="60" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M14 52 Q28 60 42 52" stroke="#2c1a08" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M10 60 L28 70 L46 60" stroke="#2c1a08" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- 欠 right — head + open mouth -->
+          <ellipse cx="72" cy="22" rx="10" ry="11" stroke="#2c1a08" stroke-width="2.5" fill="none"/>
+          <path d="M66 34 Q72 44 78 34" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <line x1="72" y1="44" x2="68" y2="72" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M68 58 L58 72" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M68 58 L80 72" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="50" y="90" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">飲</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">飲</span>
+          <span class="reading" style="color:#a8cce0;">in / no(mu)</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="drink" data-bn="পান করা">drink</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 魚 sakana/gyo -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">魚</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="fish" data-bn="মাছ">fish</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">ギョ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">さかな・うお</span></div>
+        </div>
+        <span class="origin-type" data-en="Pictograph" data-bn="চিত্রলিপি">Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="魚 is one of the most faithful pictographs in Japanese — it clearly shows a <strong>fish in profile</strong> with a head, body, fins, and tail. The three horizontal strokes at the bottom represent the <span class='highlight'>fish's tail fins</span>, still visible in the modern character." data-bn="魚 জাপানি ভাষার সবচেয়ে বিশ্বস্ত চিত্রলিপিগুলোর একটি — এটি স্পষ্টভাবে একটি <strong>মাছের পার্শ্ব চিত্র</strong> দেখায়: মাথা, দেহ, পাখনা ও লেজ। নিচের তিনটি অনুভূমিক রেখা <span class='highlight'>মাছের লেজের পাখনা</span> বোঝায়, যা আধুনিক অক্ষরেও দৃশ্যমান।">魚 is one of the most faithful pictographs in Japanese — it clearly shows a <strong>fish in profile</strong> with a head, body, fins, and tail. The three horizontal strokes at the bottom represent the <span class="highlight">fish's tail fins</span>, still visible in the modern character.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#cce8f8"/>
+          <!-- fish body -->
+          <ellipse cx="68" cy="62" rx="36" ry="20" fill="#4a9ccc" opacity="0.85"/>
+          <!-- fish head bump -->
+          <ellipse cx="96" cy="62" rx="18" ry="16" fill="#3a8cbc" opacity="0.9"/>
+          <!-- eye -->
+          <circle cx="100" cy="57" r="5" fill="white"/>
+          <circle cx="101" cy="57" r="3" fill="#1a3a5a"/>
+          <!-- mouth -->
+          <path d="M110 66 Q114 70 110 72" stroke="#2a6a9a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- dorsal fin -->
+          <path d="M70 42 Q58 25 48 42" fill="#2e7ab5" opacity="0.7"/>
+          <!-- tail fin -->
+          <path d="M32 62 L14 46 L14 78 Z" fill="#2e7ab5" opacity="0.8"/>
+          <!-- scales hint -->
+          <path d="M60 54 Q66 50 72 54" stroke="#6ab8e8" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <path d="M50 62 Q56 58 62 62" stroke="#6ab8e8" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <!-- tail strokes -->
+          <line x1="28" y1="90" x2="52" y2="90" stroke="#2e7ab5" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="28" y1="100" x2="52" y2="100" stroke="#2e7ab5" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="28" y1="110" x2="52" y2="110" stroke="#2e7ab5" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="70" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#1a4f7a">fish with fins and tail</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- head / top part -->
+          <line x1="32" y1="14" x2="68" y2="14" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="14" x2="50" y2="30" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <!-- body box strokes -->
+          <line x1="22" y1="30" x2="78" y2="30" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="22" y1="30" x2="22" y2="62" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="78" y1="30" x2="78" y2="62" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <path d="M22 50 Q50 58 78 50" stroke="#2c1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- tail three strokes -->
+          <line x1="26" y1="68" x2="74" y2="68" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="26" y1="78" x2="74" y2="78" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="26" y1="88" x2="74" y2="88" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="98" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">魚</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">魚</span>
+          <span class="reading" style="color:#a8cce0;">gyo / sakana</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="fish" data-bn="মাছ">fish</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 肉 niku -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">肉</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="meat / flesh" data-bn="মাংস">meat / flesh</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">ニク</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">（にく）</span></div>
+        </div>
+        <span class="origin-type" data-en="Pictograph" data-bn="চিত্রলিপি">Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="肉 originated as a picture of a <strong>cut of meat with visible muscle layers</strong> — the two inner strokes represent the <span class='highlight'>grain or marbling of flesh</span>. When used as a radical in other kanji, it looks like 月 (moon) but means 'body / flesh', not 'moon'." data-bn="肉 এসেছে একটি <strong>কাটা মাংসের টুকরোর চিত্র</strong> থেকে যেখানে পেশির স্তর দৃশ্যমান — ভেতরের দুটি রেখা <span class='highlight'>মাংসের আঁশ বা মার্বেলিং</span> বোঝায়। অন্য কানজিতে র‍্যাডিকেল হিসেবে ব্যবহৃত হলে এটি 月 (চাঁদ)-এর মতো দেখায়, কিন্তু অর্থ 'শরীর / মাংস'।">肉 originated as a picture of a <strong>cut of meat with visible muscle layers</strong> — the two inner strokes represent the <span class="highlight">grain or marbling of flesh</span>. When used as a radical in other kanji, it looks like 月 (moon) but means 'body / flesh', not 'moon'.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#fdeae8"/>
+          <!-- meat cut outline -->
+          <path d="M36 30 Q70 18 104 30 L110 95 Q70 108 30 95 Z" fill="#d4706a" opacity="0.85"/>
+          <!-- bone handle -->
+          <rect x="60" y="8" width="20" height="26" rx="4" fill="#e8d4c0" opacity="0.9"/>
+          <ellipse cx="70" cy="8" rx="10" ry="7" fill="#f0e0cc"/>
+          <!-- muscle grain lines -->
+          <line x1="44" y1="50" x2="96" y2="50" stroke="#e89090" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <line x1="40" y1="66" x2="100" y2="66" stroke="#e89090" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <line x1="42" y1="82" x2="98" y2="82" stroke="#e89090" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <!-- fat marbling -->
+          <path d="M55 45 Q64 58 55 70" stroke="#f5c8b8" stroke-width="2" fill="none" opacity="0.7"/>
+          <path d="M82 50 Q90 62 82 75" stroke="#f5c8b8" stroke-width="2" fill="none" opacity="0.7"/>
+          <text x="70" y="124" text-anchor="middle" font-family="Arial" font-size="9" fill="#8a2020">cut meat with muscle layers</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- outer box shape -->
+          <line x1="26" y1="14" x2="74" y2="14" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="26" y1="14" x2="22" y2="82" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="74" y1="14" x2="78" y2="82" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <path d="M22 82 Q50 92 78 82" stroke="#2c1a08" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- inner muscle strokes -->
+          <line x1="34" y1="42" x2="66" y2="42" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <line x1="34" y1="62" x2="66" y2="62" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="98" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">肉</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">肉</span>
+          <span class="reading" style="color:#a8cce0;">niku</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="meat / flesh" data-bn="মাংস">meat / flesh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 好 suki/kou -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">好</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="like / love / good" data-bn="পছন্দ / ভালোবাসা / ভালো">like / love / good</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">コウ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">す・この</span></div>
+        </div>
+        <span class="origin-type" data-en="Ideograph (two parts)" data-bn="ভাবচিত্র (দুই অংশ)">Ideograph (two parts)</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="好 is a beautiful ideograph combining <strong>女 (woman)</strong> on the left and <strong>子 (child)</strong> on the right. A <span class='highlight'>mother holding her child</span> — what could be more 'good' or 'beloved'? This character expresses the universal feeling of deep affection and love." data-bn="好 একটি সুন্দর ভাবচিত্র যেখানে বাম দিকে <strong>女 (নারী)</strong> এবং ডান দিকে <strong>子 (শিশু)</strong> — <span class='highlight'>মা তার সন্তানকে ধরে</span> আছেন। এর চেয়ে 'ভালো' বা 'প্রিয়' আর কী হতে পারে? এই অক্ষরটি গভীর স্নেহ ও ভালোবাসার সার্বজনীন অনুভূতি প্রকাশ করে।">好 is a beautiful ideograph combining <strong>女 (woman)</strong> on the left and <strong>子 (child)</strong> on the right. A <span class="highlight">mother holding her child</span> — what could be more 'good' or 'beloved'? This character expresses the universal feeling of deep affection and love.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="80" height="130" viewBox="0 0 80 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="80" height="130" rx="6" fill="#fce8f0"/>
+          <!-- woman figure -->
+          <ellipse cx="40" cy="28" rx="13" ry="14" fill="#f5d4b8" opacity="0.95"/>
+          <path d="M28 42 Q20 70 24 95 Q40 105 56 95 Q60 70 52 42 Z" fill="#c87890" opacity="0.8"/>
+          <path d="M28 55 Q14 65 16 80" stroke="#c87890" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M52 55 Q66 65 64 80" stroke="#c87890" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <text x="40" y="124" text-anchor="middle" font-family="Arial" font-size="8" fill="#8a2060">女 woman</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" style="color:var(--sky);">女</span></div>
+      </div>
+      <div class="pic-operator" style="padding-bottom:0;font-size:1.5rem;">＋</div>
+      <div class="pic-box">
+        <svg width="80" height="130" viewBox="0 0 80 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="80" height="130" rx="6" fill="#e8f5e8"/>
+          <!-- child figure -->
+          <ellipse cx="40" cy="32" rx="18" ry="20" fill="#f5d4b8" opacity="0.95"/>
+          <circle cx="33" cy="29" r="3" fill="#3a2010"/>
+          <circle cx="47" cy="29" r="3" fill="#3a2010"/>
+          <path d="M35 41 Q40 47 45 41" stroke="#c8906a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="40" cy="82" rx="14" ry="20" fill="#90c890" opacity="0.85"/>
+          <line x1="26" y1="68" x2="8" y2="60" stroke="#f5d4b8" stroke-width="7" stroke-linecap="round"/>
+          <line x1="54" y1="68" x2="72" y2="60" stroke="#f5d4b8" stroke-width="7" stroke-linecap="round"/>
+          <text x="40" y="116" text-anchor="middle" font-family="Arial" font-size="8" fill="#2a6040">子 child</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" style="color:var(--sky);">子</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">好</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">好</span>
+          <span class="reading" style="color:#a8cce0;">kou / su(ki)</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="like / good" data-bn="পছন্দ / ভালো">like / good</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="section-card">
+  <span class="tag">SECTION 02</span>
+  <h2 class="section-title" data-en="📖 Key Words Using These Kanji" data-bn="📖 এই কানজি দিয়ে গুরুত্বপূর্ণ শব্দ">📖 Key Words Using These Kanji</h2>
+  <p class="body-text" data-en="See how each kanji appears in everyday Japanese words." data-bn="প্রতিটি কানজি কীভাবে দৈনন্দিন জাপানি শব্দে ব্যবহৃত হয় দেখুন।">See how each kanji appears in everyday Japanese words.</p>
+
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">食 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="shoku / ta · eat / food" data-bn="শোকু / তা · খাওয়া / খাবার">shoku / ta · eat / food</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">食べる</span><span class="compound-reading">たべる</span><span class="compound-meaning" data-en="to eat" data-bn="খাওয়া">to eat</span></div>
+      <div class="compound-card"><span class="compound-kanji">食事</span><span class="compound-reading">しょくじ</span><span class="compound-meaning" data-en="meal / dining" data-bn="খাবার / ভোজন">meal / dining</span></div>
+      <div class="compound-card"><span class="compound-kanji">食べ物</span><span class="compound-reading">たべもの</span><span class="compound-meaning" data-en="food (things to eat)" data-bn="খাবার (খাওয়ার জিনিস)">food (things to eat)</span></div>
+      <div class="compound-card"><span class="compound-kanji">朝食</span><span class="compound-reading">ちょうしょく</span><span class="compound-meaning" data-en="breakfast" data-bn="সকালের নাস্তা">breakfast</span></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">飲 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="in / no · drink" data-bn="ইন / নো · পান করা">in / no · drink</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">飲む</span><span class="compound-reading">のむ</span><span class="compound-meaning" data-en="to drink" data-bn="পান করা">to drink</span></div>
+      <div class="compound-card"><span class="compound-kanji">飲み物</span><span class="compound-reading">のみもの</span><span class="compound-meaning" data-en="drink / beverage" data-bn="পানীয়">drink / beverage</span></div>
+      <div class="compound-card"><span class="compound-kanji">飲食</span><span class="compound-reading">いんしょく</span><span class="compound-meaning" data-en="eating and drinking" data-bn="পানাহার">eating and drinking</span></div>
+      <div class="compound-card"><span class="compound-kanji">飲み会</span><span class="compound-reading">のみかい</span><span class="compound-meaning" data-en="drinking party" data-bn="পানীয় পার্টি">drinking party</span></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">魚 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="gyo / sakana · fish" data-bn="গ্যো / সাকানা · মাছ">gyo / sakana · fish</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">魚</span><span class="compound-reading">さかな</span><span class="compound-meaning" data-en="fish (as food)" data-bn="মাছ (খাবার)">fish (as food)</span></div>
+      <div class="compound-card"><span class="compound-kanji">魚介類</span><span class="compound-reading">ぎょかいるい</span><span class="compound-meaning" data-en="seafood" data-bn="সামুদ্রিক খাবার">seafood</span></div>
+      <div class="compound-card"><span class="compound-kanji">金魚</span><span class="compound-reading">きんぎょ</span><span class="compound-meaning" data-en="goldfish" data-bn="সোনামাছ">goldfish</span></div>
+      <div class="compound-card"><span class="compound-kanji">焼き魚</span><span class="compound-reading">やきざかな</span><span class="compound-meaning" data-en="grilled fish" data-bn="গ্রিল করা মাছ">grilled fish</span></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">肉 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="niku · meat / flesh" data-bn="নিকু · মাংস">niku · meat / flesh</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">肉</span><span class="compound-reading">にく</span><span class="compound-meaning" data-en="meat" data-bn="মাংস">meat</span></div>
+      <div class="compound-card"><span class="compound-kanji">牛肉</span><span class="compound-reading">ぎゅうにく</span><span class="compound-meaning" data-en="beef" data-bn="গরুর মাংস">beef</span></div>
+      <div class="compound-card"><span class="compound-kanji">鶏肉</span><span class="compound-reading">とりにく</span><span class="compound-meaning" data-en="chicken meat" data-bn="মুরগির মাংস">chicken meat</span></div>
+      <div class="compound-card"><span class="compound-kanji">肉体</span><span class="compound-reading">にくたい</span><span class="compound-meaning" data-en="the body / flesh" data-bn="শরীর / দেহ">the body / flesh</span></div>
+    </div>
+  </div>
+
+  <div>
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">好 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="kou / su · like / good" data-bn="কো / সু · পছন্দ / ভালো">kou / su · like / good</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">好き</span><span class="compound-reading">すき</span><span class="compound-meaning" data-en="like / favourite" data-bn="পছন্দ / প্রিয়">like / favourite</span></div>
+      <div class="compound-card"><span class="compound-kanji">好む</span><span class="compound-reading">このむ</span><span class="compound-meaning" data-en="to prefer / to fancy" data-bn="পছন্দ করা">to prefer / to fancy</span></div>
+      <div class="compound-card"><span class="compound-kanji">好き嫌い</span><span class="compound-reading">すききらい</span><span class="compound-meaning" data-en="likes and dislikes" data-bn="পছন্দ-অপছন্দ">likes and dislikes</span></div>
+      <div class="compound-card"><span class="compound-kanji">好意</span><span class="compound-reading">こうい</span><span class="compound-meaning" data-en="goodwill / favour" data-bn="সদিচ্ছা / অনুগ্রহ">goodwill / favour</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 QUIZ -->
+<div class="section-card">
+  <span class="tag">SECTION 03</span>
+  <h2 class="section-title" data-en="✏️ Reading Quiz" data-bn="✏️ পড়ার কুইজ">✏️ Reading Quiz</h2>
+  <p class="body-text" data-en="Each question shows a <span class='highlight'>word containing the kanji you learned</span>. Choose the correct reading. <span style='color:var(--orange);font-weight:700;'>ON</span> = Chinese reading &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = Japanese reading." data-bn="প্রতিটি প্রশ্নে <span class='highlight'>আপনার শেখা কানজি সহ একটি শব্দ</span> দেখানো হয়। সঠিক পড়া বেছে নিন। <span style='color:var(--orange);font-weight:700;'>ON</span> = চীনা পড়া &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = জাপানি পড়া।">Each question shows a <span class="highlight">word containing the kanji you learned</span>. Choose the correct reading. <span style="color:var(--orange);font-weight:700;">ON</span> = Chinese reading &nbsp;·&nbsp; <span style="color:var(--sky);font-weight:700;">KUN</span> = Japanese reading.</p>
+  <div id="quiz-container"></div>
+  <div class="quiz-score-bar" id="score-bar" style="display:none;">
+    <div class="score-num" id="score-num">0 / 0</div>
+    <div class="score-label" data-en="Your Score" data-bn="আপনার স্কোর">Your Score</div>
+    <button class="quiz-reset-btn" onclick="resetQuiz()">Try Again</button>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="n5_kanji_02.html" class="nav-btn" data-en="← Set 02" data-bn="← সেট ০২">← Set 02</a>
+  <div class="nav-center" data-en="Set 03 / 29<br><span style='color:#aaa;font-size:.65rem;'>N5 Kanji Origins</span>" data-bn="সেট ০৩ / ২৯<br><span style='color:#aaa;font-size:.65rem;'>N5 কানজি উৎস</span>">Set 03 / 29<br><span style="color:#aaa;font-size:.65rem;">N5 Kanji Origins</span></div>
+  <a href="n5_kanji_04.html" class="nav-btn" data-en="Set 04 →" data-bn="সেট ০৪ →">Set 04 →</a>
+</div>
+
+</main>
+<footer data-en="JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs" data-bn="JLPT N5 কানজি উৎস সিরিজ ── NIHONGO WORK | চিত্রলিপির মাধ্যমে জাপানি শেখা">JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs</footer>
+
+<script>
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+  renderQuiz();
+}
+
+const QUIZ_QUESTIONS = [
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>食</u>べる",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 食 in 食べる",
+    ask_bn:"食べる-এ 食-এর KUN পড়া",
+    options:["しょく (shoku)","た (ta)","じき (jiki)","く (ku)"],
+    correct:1,
+    fb_en:"✓ 食べる (たべる = to eat) uses the KUN reading <strong>た (TA)</strong>. When 食 is followed by kana (べる), use the KUN reading.",
+    fb_bn:"✓ 食べる (たべる = খাওয়া)-এ KUN পড়া <strong>た (TA)</strong> ব্যবহৃত হয়। কানজির পরে কানা (べる) থাকলে KUN পড়া ব্যবহার করতে হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"朝<u>食</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 食 in 朝食",
+    ask_bn:"朝食-এ 食-এর ON পড়া",
+    options:["たべ (tabe)","く (ku)","しょく (shoku)","じき (jiki)"],
+    correct:2,
+    fb_en:"✓ 朝食 (ちょうしょく = breakfast) uses the ON reading <strong>しょく (SHOKU)</strong>. Kanji compound words use ON readings.",
+    fb_bn:"✓ 朝食 (ちょうしょく = সকালের নাস্তা)-এ ON পড়া <strong>しょく (SHOKU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>飲</u>む",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 飲 in 飲む",
+    ask_bn:"飲む-এ 飲-এর KUN পড়া",
+    options:["いん (in)","の (no)","のみ (nomi)","き (ki)"],
+    correct:1,
+    fb_en:"✓ 飲む (のむ = to drink) uses the KUN reading <strong>の (NO)</strong>. The verb form with む always takes the KUN reading.",
+    fb_bn:"✓ 飲む (のむ = পান করা)-এ KUN পড়া <strong>の (NO)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"飲<u>食</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 食 in 飲食",
+    ask_bn:"飲食-এ 食-এর ON পড়া",
+    options:["たべ (tabe)","しょく (shoku)","く (ku)","じき (jiki)"],
+    correct:1,
+    fb_en:"✓ 飲食 (いんしょく = eating and drinking) uses the ON reading <strong>しょく (SHOKU)</strong>. Both kanji in this compound use their ON readings.",
+    fb_bn:"✓ 飲食 (いんしょく = পানাহার)-এ ON পড়া <strong>しょく (SHOKU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>魚</u>",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 魚 (standalone)",
+    ask_bn:"একা 魚-এর KUN পড়া",
+    options:["ぎょ (gyo)","さかな (sakana)","うお (uo)","かい (kai)"],
+    correct:1,
+    fb_en:"✓ 魚 alone (= fish, as food) is read as <strong>さかな (SAKANA)</strong>. This is the most common KUN reading used in daily life.",
+    fb_bn:"✓ একা 魚 (= মাছ, খাবার হিসেবে) পড়া হয় <strong>さかな (SAKANA)</strong>। এটিই দৈনন্দিন জীবনে সবচেয়ে বেশি ব্যবহৃত KUN পড়া।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"金<u>魚</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 魚 in 金魚",
+    ask_bn:"金魚-এ 魚-এর ON পড়া",
+    options:["さかな (sakana)","うお (uo)","ぎょ (gyo)","きん (kin)"],
+    correct:2,
+    fb_en:"✓ 金魚 (きんぎょ = goldfish) uses the ON reading <strong>ぎょ (GYO)</strong>. In compound kanji words, ON readings are typically used.",
+    fb_bn:"✓ 金魚 (きんぎょ = সোনামাছ)-এ ON পড়া <strong>ぎょ (GYO)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"牛<u>肉</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 肉 in 牛肉",
+    ask_bn:"牛肉-এ 肉-এর ON পড়া",
+    options:["しし (shishi)","からだ (karada)","にく (niku)","きん (kin)"],
+    correct:2,
+    fb_en:"✓ 牛肉 (ぎゅうにく = beef) uses the reading <strong>にく (NIKU)</strong>. 肉 almost exclusively uses this reading in both standalone and compound forms.",
+    fb_bn:"✓ 牛肉 (ぎゅうにく = গরুর মাংস)-এ <strong>にく (NIKU)</strong> পড়া ব্যবহৃত হয়। 肉 সাধারণত সব ক্ষেত্রেই এই পড়া ব্যবহার করে।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>好</u>き",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 好 in 好き",
+    ask_bn:"好き-এ 好-এর KUN পড়া",
+    options:["こう (kou)","この (kono)","す (su)","よ (yo)"],
+    correct:2,
+    fb_en:"✓ 好き (すき = like / favourite) uses the KUN reading <strong>す (SU)</strong>. The い-adjective form 好き always uses this KUN reading.",
+    fb_bn:"✓ 好き (すき = পছন্দ)-এ KUN পড়া <strong>す (SU)</strong> ব্যবহৃত হয়। い-বিশেষণ রূপ 好き সর্বদা এই KUN পড়া ব্যবহার করে।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>好</u>意",
+    ask_type:"ON",
+    ask_en:"ON reading of 好 in 好意",
+    ask_bn:"好意-এ 好-এর ON পড়া",
+    options:["す (su)","この (kono)","こう (kou)","よし (yoshi)"],
+    correct:2,
+    fb_en:"✓ 好意 (こうい = goodwill / favour) uses the ON reading <strong>こう (KOU)</strong>. In formal compound words, 好 uses its ON reading.",
+    fb_bn:"✓ 好意 (こうい = সদিচ্ছা)-এ ON পড়া <strong>こう (KOU)</strong> ব্যবহৃত হয়। আনুষ্ঠানিক যৌগিক শব্দে 好 তার ON পড়া ব্যবহার করে।"
+  }
+];
+
+let answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+let score = 0;
+
+function renderQuiz() {
+  const lang = currentLang;
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  QUIZ_QUESTIONS.forEach((q, qi) => {
+    const typeLabel = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON reading</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN reading</span>';
+    const typeLabelBn = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON পড়া</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN পড়া</span>';
+    const askText = lang === 'en' ? q.ask_en : q.ask_bn;
+    const qText = lang === 'en' ? q.q_en : q.q_bn;
+    const fbText = lang === 'en' ? q.fb_en : q.fb_bn;
+    const lblDisplay = lang === 'en' ? typeLabel : typeLabelBn;
+
+    let optsHtml = q.options.map((opt, oi) => {
+      let cls = 'quiz-opt';
+      if (answered[qi]) {
+        cls += ' disabled';
+        if (oi === q.correct) cls += ' correct';
+        else if (answered[qi] === oi + 1) cls += ' wrong';
+      }
+      return '<button class="' + cls + '" onclick="checkAnswer(' + qi + ',' + oi + ')">' + opt + '</button>';
+    }).join('');
+
+    const fbClass = answered[qi] ? (answered[qi] === q.correct + 1 ? 'correct-fb show' : 'wrong-fb show') : '';
+
+    container.innerHTML += '<div class="quiz-block" id="qblock-' + qi + '">' +
+      '<div class="quiz-q-label ' + (q.ask_type === 'ON' ? 'on-label' : 'kun-label') + '">' +
+      'Q' + (qi+1) + ' &nbsp;·&nbsp; ' + askText + ' &nbsp;·&nbsp; ' + lblDisplay + '</div>' +
+      '<div class="quiz-question"><span style="font-size:1.1rem;color:#555;">' + qText + '</span><br><span class="q-kanji">' + q.word + '</span></div>' +
+      '<div class="quiz-options">' + optsHtml + '</div>' +
+      '<div class="quiz-feedback ' + fbClass + '" id="fb-' + qi + '">' + fbText + '</div></div>';
+  });
+
+  const allDone = answered.every(a => a !== false);
+  document.getElementById('score-bar').style.display = allDone ? 'block' : 'none';
+  if (allDone) {
+    document.getElementById('score-num').textContent = score + ' / ' + QUIZ_QUESTIONS.length;
+    document.querySelector('.quiz-reset-btn').textContent = lang === 'en' ? 'Try Again' : 'আবার চেষ্টা করুন';
+  }
+}
+
+function checkAnswer(qi, oi) {
+  if (answered[qi]) return;
+  answered[qi] = oi + 1;
+  if (oi === QUIZ_QUESTIONS[qi].correct) score++;
+  renderQuiz();
+}
+
+function resetQuiz() {
+  answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+  score = 0;
+  renderQuiz();
+  document.getElementById('score-bar').style.display = 'none';
+}
+
+renderQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT N5 Kanji Origins ── Set 05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Zen+Maru+Gothic:wght@300;400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d1a2a;--paper:#eef4fb;--sky:#2e7ab5;--deep:#1a4f7a;--light:#deeef8;--border:#b8d4ea;--orange:#e07b39;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:'Zen Maru Gothic',sans-serif;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.5;}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(60px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ── fixed top bar ── */
+  .top-bar{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:48px;background:rgba(238,244,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+  .home-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.72rem;letter-spacing:.1em;border-radius:2px;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+  .home-btn:hover{opacity:.8;}
+  .home-btn svg{flex-shrink:0;}
+  .lang-bar{display:flex;gap:6px;}
+  .lang-btn{padding:5px 13px;border:1.5px solid var(--sky);background:white;color:var(--sky);font-size:.72rem;letter-spacing:.08em;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;transition:all .2s;}
+  .lang-btn.active{background:var(--sky);color:white;}
+
+  header{text-align:center;padding:96px 20px 56px;border-bottom:2px solid var(--sky);background:linear-gradient(180deg,#cde4f5 0%,var(--paper) 100%);position:relative;overflow:hidden;}
+  header::after{content:'';position:absolute;top:20px;left:-60px;width:180px;height:60px;background:radial-gradient(ellipse at 40% 50%,#fff 60%,transparent 100%);opacity:0.55;border-radius:50%;animation:drift 12s ease-in-out infinite alternate;}
+  .header-label{font-family:'Noto Serif JP',serif;font-size:.75rem;letter-spacing:.4em;color:var(--sky);margin-bottom:18px;animation:fadeUp .8s ease both;position:relative;}
+  header h1{font-family:'Kaisei Decol',serif;font-size:clamp(2rem,8vw,4rem);color:var(--ink);line-height:1;animation:fadeUp .9s .1s ease both;letter-spacing:.12em;}
+  .header-sub{font-family:'Noto Serif JP',serif;font-size:.95rem;color:var(--deep);margin-top:14px;animation:fadeUp 1s .2s ease both;letter-spacing:.1em;}
+  .brushstroke-deco{width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--sky),transparent);margin:22px auto 0;animation:fadeUp 1s .3s ease both;}
+  main{max-width:860px;margin:0 auto;padding:56px 24px 100px;}
+  .section-card{background:white;border:1px solid var(--border);border-radius:2px;padding:44px 50px;margin-bottom:44px;position:relative;box-shadow:4px 4px 0 var(--border);animation:fadeUp .8s ease both;}
+  .section-card::before{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;border:1px solid var(--border);z-index:-1;border-radius:2px;}
+  .section-card:nth-child(1){animation-delay:.1s}.section-card:nth-child(2){animation-delay:.2s}.section-card:nth-child(3){animation-delay:.3s}
+  .tag{display:inline-block;background:var(--sky);color:white;font-size:.63rem;letter-spacing:.2em;padding:3px 10px;border-radius:1px;margin-bottom:11px;font-family:'Noto Serif JP',serif;}
+  .section-title{font-family:'Kaisei Decol',serif;font-size:1.45rem;color:var(--ink);margin-bottom:24px;padding-bottom:13px;border-bottom:1px solid var(--light);}
+  .body-text{font-size:.93rem;line-height:1.9;color:#1e3040;margin-bottom:14px;}
+  .highlight{background:linear-gradient(to right,#a8d4f055,#a8d4f022);padding:2px 6px;border-radius:2px;font-weight:700;color:var(--deep);}
+  .kanji-origin-block{border-top:1px solid var(--light);padding-top:32px;margin-top:32px;}
+  .kanji-origin-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .origin-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;}
+  .origin-char{font-family:'Kaisei Decol',serif;font-size:3rem;color:var(--deep);line-height:1;flex-shrink:0;}
+  .origin-meta{display:flex;flex-direction:column;gap:5px;}
+  .origin-meaning{font-size:.92rem;font-weight:700;color:var(--ink);}
+  .origin-type{font-size:.65rem;background:var(--border);color:var(--deep);padding:2px 8px;border-radius:1px;width:fit-content;letter-spacing:.1em;font-family:'Noto Serif JP',serif;}
+  .readings-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+  .reading-badge{display:flex;align-items:center;gap:5px;font-size:.78rem;}
+  .badge-label{padding:2px 7px;border-radius:2px;font-size:.6rem;letter-spacing:.1em;font-family:'Noto Serif JP',serif;font-weight:700;}
+  .badge-on{background:#e07b39;color:white;}
+  .badge-kun{background:#2e7ab5;color:white;}
+  .badge-val{font-family:'Kaisei Decol',serif;color:var(--ink);}
+  .pictograph-row{display:flex;align-items:center;justify-content:center;gap:20px;margin:22px 0 18px;flex-wrap:wrap;}
+  .pic-box{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .pic-box-label{text-align:center;}
+  .pic-box-label .kanji-big{font-family:'Kaisei Decol',serif;font-size:1.9rem;color:var(--deep);display:block;line-height:1.2;}
+  .pic-box-label .reading{font-size:.76rem;color:var(--sky);display:block;letter-spacing:.1em;margin-top:3px;}
+  .pic-box-label .meaning{font-size:.74rem;color:#3a5570;display:block;margin-top:3px;}
+  .pic-operator{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--sky);opacity:.5;flex-shrink:0;padding-bottom:44px;}
+  .pic-result-box{display:flex;flex-direction:column;align-items:center;gap:12px;background:var(--deep);border-radius:4px;padding:20px 24px;}
+  .compound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;margin:18px 0 0;}
+  .compound-card{border:1px solid var(--border);background:var(--light);padding:18px 14px;text-align:center;border-radius:2px;transition:transform .2s,box-shadow .2s;cursor:default;}
+  .compound-card:hover{transform:translateY(-3px);box-shadow:3px 3px 0 var(--border);}
+  .compound-kanji{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);display:block;margin-bottom:5px;}
+  .compound-reading{font-size:.72rem;color:var(--sky);letter-spacing:.1em;display:block;margin-bottom:3px;}
+  .compound-meaning{font-size:.76rem;color:#2a4060;}
+  .quiz-block{border-top:1px solid var(--light);padding-top:28px;margin-top:28px;}
+  .quiz-block:first-child{border-top:none;padding-top:0;margin-top:0;}
+  .quiz-q-label{font-size:.62rem;letter-spacing:.15em;font-family:'Noto Serif JP',serif;margin-bottom:8px;}
+  .quiz-q-label.on-label{color:var(--orange);}
+  .quiz-q-label.kun-label{color:var(--sky);}
+  .quiz-question{font-family:'Kaisei Decol',serif;font-size:1.5rem;color:var(--ink);margin-bottom:18px;line-height:1.5;}
+  .quiz-question .q-kanji{color:var(--deep);font-size:1.8rem;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .quiz-opt{padding:12px 16px;border:1.5px solid var(--border);border-radius:2px;background:white;font-size:.9rem;cursor:pointer;text-align:center;transition:all .2s;font-family:'Zen Maru Gothic',sans-serif;}
+  .quiz-opt:hover:not(.disabled){background:var(--light);border-color:var(--sky);}
+  .quiz-opt.correct{background:#d4f0d4;border-color:#2a8a2a;color:#1a5a1a;}
+  .quiz-opt.wrong{background:#f0d4d4;border-color:#8a2a2a;color:#5a1a1a;}
+  .quiz-opt.disabled{cursor:default;}
+  .quiz-feedback{font-size:.85rem;padding:10px 14px;border-radius:2px;margin-top:4px;display:none;line-height:1.6;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.correct-fb{background:#d4f0d4;color:#1a5a1a;border-left:3px solid #2a8a2a;}
+  .quiz-feedback.wrong-fb{background:#f0d4d4;color:#5a1a1a;border-left:3px solid #8a2a2a;}
+  .quiz-score-bar{background:var(--light);border:1px solid var(--border);border-radius:2px;padding:16px 20px;margin-top:20px;text-align:center;}
+  .score-num{font-family:'Kaisei Decol',serif;font-size:2rem;color:var(--deep);}
+  .score-label{font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;letter-spacing:.1em;}
+  .quiz-reset-btn{margin-top:12px;padding:8px 20px;background:var(--deep);color:white;border:none;border-radius:2px;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:.78rem;letter-spacing:.1em;}
+  .quiz-reset-btn:hover{opacity:.8;}
+  .page-nav{display:flex;justify-content:space-between;align-items:center;margin-top:44px;gap:12px;}
+  .nav-btn{display:inline-block;padding:10px 22px;background:var(--deep);color:white;font-family:'Noto Serif JP',serif;font-size:.76rem;letter-spacing:.1em;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+  .nav-btn:hover{opacity:.8;}
+  .nav-btn.disabled{background:var(--border);color:#6a8fa8;cursor:default;pointer-events:none;}
+  .nav-center{font-family:'Noto Serif JP',serif;font-size:.7rem;color:var(--sky);letter-spacing:.1em;text-align:center;}
+  footer{text-align:center;padding:44px 20px;border-top:1px solid var(--border);font-size:.78rem;color:var(--sky);letter-spacing:.15em;font-family:'Noto Serif JP',serif;background:linear-gradient(0deg,#cde4f5 0%,var(--paper) 100%);}
+  @media(max-width:600px){
+    .section-card{padding:26px 18px;}
+    .pictograph-row{gap:10px;}.pic-operator{padding-bottom:0;}
+    .compound-grid{grid-template-columns:repeat(2,1fr);}
+    .quiz-options{grid-template-columns:1fr;}
+    .home-btn span{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Fixed top bar ── -->
+<div class="top-bar">
+  <a href="index.html" class="home-btn">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 10.5L10 3.5L17 10.5V18H13V13H7V18H3V10.5Z" fill="white"/>
+    </svg>
+    <span data-en="Home" data-bn="হোম">Home</span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+    <button class="lang-btn" onclick="setLang('bn')" id="btn-bn">বাংলা</button>
+  </div>
+</div>
+
+<header>
+  <p class="header-label" data-en="NIHONGO WORK ── JLPT N5 KANJI ORIGINS" data-bn="নিহোঙ্গো ওয়ার্ক ── JLPT N5 কানজি উৎস">NIHONGO WORK ── JLPT N5 KANJI ORIGINS</p>
+  <h1>下　中　月　火　木</h1>
+  <p class="header-sub" data-en="Set 05 of 29 · 5 characters" data-bn="সেট ০৫ / ২৯ · ৫টি অক্ষর">Set 05 of 29 · 5 characters</p>
+  <div class="brushstroke-deco"></div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 01 — Origins
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 01</span>
+  <h2 class="section-title" data-en="🖼️ Where did these kanji come from?" data-bn="🖼️ এই কানজিগুলো কোথা থেকে এলো?">🖼️ Where did these kanji come from?</h2>
+  <p class="body-text" data-en="Each kanji began as a picture. Follow the journey from <span class='highlight'>real-world image → ancient script → modern kanji</span> for each character in this set." data-bn="প্রতিটি কানজি একটি ছবি থেকে শুরু হয়েছিল। প্রতিটি অক্ষরের জন্য <span class='highlight'>বাস্তব চিত্র → প্রাচীন লিপি → আধুনিক কানজি</span>-র যাত্রা অনুসরণ করুন।">Each kanji began as a picture. Follow the journey from <span class="highlight">real-world image → ancient script → modern kanji</span> for each character in this set.</p>
+
+  <!-- ── 下 shita / ka ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">下</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="below / down / under" data-bn="নিচে / নিম্ন">below / down / under</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">カ・ゲ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">した・さ・くだ・お</span></div>
+        </div>
+        <span class="origin-type" data-en="Indicative Pictograph" data-bn="নির্দেশক চিত্রলিপি">Indicative Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="下 is the mirror twin of 上 (above). It shows a short stroke or dot placed <span class='highlight'>below a baseline</span> — directly pointing downward. The ancient form was a vertical dash hanging beneath a horizontal line, one of the simplest direction markers in the writing system." data-bn="下 হলো 上 (উপরে)-এর দর্পণ যমজ। এটি একটি <span class='highlight'>বেসলাইনের নিচে</span> রাখা ছোট রেখা বা বিন্দু দেখায় — সরাসরি নিচের দিকে নির্দেশকারী। প্রাচীন রূপটি ছিল একটি অনুভূমিক রেখার নিচে ঝুলন্ত একটি উল্লম্ব দাগ।">下 is the mirror twin of 上 (above). It shows a short stroke or dot placed <span class="highlight">below a baseline</span> — directly pointing downward. The ancient form was a vertical dash hanging beneath a horizontal line, one of the simplest direction markers in the writing system.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#eef4fb"/>
+          <!-- baseline -->
+          <line x1="20" y1="44" x2="120" y2="44" stroke="#2e7ab5" stroke-width="4" stroke-linecap="round"/>
+          <!-- downward arrow -->
+          <line x1="70" y1="44" x2="70" y2="96" stroke="#1a4f7a" stroke-width="6" stroke-linecap="round"/>
+          <polygon points="70,114 56,90 84,90" fill="#1a4f7a"/>
+          <!-- indicator dot below line -->
+          <circle cx="70" cy="58" r="5" fill="#e07b39" opacity="0.8"/>
+          <text x="70" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#1a4f7a">mark below a baseline = down</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- small top stroke -->
+          <line x1="34" y1="18" x2="66" y2="18" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <!-- baseline -->
+          <line x1="18" y1="34" x2="82" y2="34" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- vertical hanging below -->
+          <line x1="50" y1="34" x2="50" y2="78" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">下</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">下</span>
+          <span class="reading" style="color:#a8cce0;">ka / shita</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="below / down" data-bn="নিচে">below / down</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 中 naka / chuu ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">中</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="middle / inside / center" data-bn="মাঝখান / ভেতর / কেন্দ্র">middle / inside / center</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">チュウ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">なか</span></div>
+        </div>
+        <span class="origin-type" data-en="Indicative Pictograph" data-bn="নির্দেশক চিত্রলিপি">Indicative Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="中 shows a <strong>vertical line piercing through the exact center of a rectangle</strong>. Ancient interpretations suggest it depicts a <span class='highlight'>flag or pole planted in the middle of a field</span> to mark the center of a territory. The line divides the space perfectly in half — defining what is 'inside' or 'middle'." data-bn="中 একটি <strong>আয়তক্ষেত্রের ঠিক মাঝখান দিয়ে বিদ্ধ একটি উল্লম্ব রেখা</strong> দেখায়। প্রাচীন ব্যাখ্যা অনুযায়ী, এটি একটি ভূখণ্ডের কেন্দ্র চিহ্নিত করতে <span class='highlight'>মাঠের মাঝে পোঁতা একটি পতাকা বা খুঁটি</span> চিত্রিত করে।">中 shows a <strong>vertical line piercing through the exact center of a rectangle</strong>. Ancient interpretations suggest it depicts a <span class="highlight">flag or pole planted in the middle of a field</span> to mark the center of a territory. The line divides the space perfectly in half — defining what is 'inside' or 'middle'.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#e8f0e8"/>
+          <!-- field / territory rectangle -->
+          <rect x="22" y="30" width="96" height="70" rx="4" fill="none" stroke="#4a7c30" stroke-width="3" stroke-dasharray="6,4"/>
+          <rect x="22" y="30" width="96" height="70" rx="4" fill="#d4e8c8" opacity="0.4"/>
+          <!-- pole / flag in center -->
+          <line x1="70" y1="10" x2="70" y2="100" stroke="#8b5018" stroke-width="5" stroke-linecap="round"/>
+          <!-- flag -->
+          <polygon points="70,10 70,32 96,21" fill="#e07b39" opacity="0.9"/>
+          <!-- center dot -->
+          <circle cx="70" cy="65" r="6" fill="#1a4f7a" opacity="0.7"/>
+          <text x="70" y="122" text-anchor="middle" font-family="Arial" font-size="9" fill="#2a5010">pole through the center</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- outer rectangle -->
+          <rect x="22" y="18" width="56" height="58" rx="2" stroke="#2c1a08" stroke-width="3.5" fill="none"/>
+          <!-- center vertical line piercing through -->
+          <line x1="50" y1="8" x2="50" y2="86" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="50" y="98" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">中</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">中</span>
+          <span class="reading" style="color:#a8cce0;">chuu / naka</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="middle / inside" data-bn="মাঝখান / ভেতর">middle / inside</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 月 tsuki / getsu ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">月</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="moon / month" data-bn="চাঁদ / মাস">moon / month</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">ゲツ・ガツ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">つき</span></div>
+        </div>
+        <span class="origin-type" data-en="Pictograph" data-bn="চিত্রলিপি">Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="月 is a pictograph of the <strong>crescent moon</strong>. The ancient form clearly showed a curved crescent with a line inside — distinguishing it from 日 (sun), which was a full circle. The two inner strokes represent the <span class='highlight'>glow or shadow of the moon's surface</span>. Because months were measured by the lunar cycle, 月 also means 'month'." data-bn="月 হলো <strong>অর্ধচন্দ্রের</strong> একটি চিত্রলিপি। প্রাচীন রূপে স্পষ্টভাবে ভেতরে একটি রেখাসহ বাঁকানো অর্ধচন্দ্র দেখা যেত — যা 日 (সূর্য, একটি পূর্ণ বৃত্ত) থেকে আলাদা। ভেতরের দুটি রেখা <span class='highlight'>চাঁদের পৃষ্ঠের আলো বা ছায়া</span> বোঝায়। চন্দ্রচক্র দিয়ে মাস গণনা করা হত বলে 月 'মাস'ও বোঝায়।">月 is a pictograph of the <strong>crescent moon</strong>. The ancient form clearly showed a curved crescent with a line inside — distinguishing it from 日 (sun), which was a full circle. The two inner strokes represent the <span class="highlight">glow or shadow of the moon's surface</span>. Because months were measured by the lunar cycle, 月 also means 'month'.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#1a1a3a"/>
+          <!-- stars -->
+          <circle cx="20" cy="18" r="1.5" fill="white" opacity="0.7"/>
+          <circle cx="48" cy="10" r="1" fill="white" opacity="0.5"/>
+          <circle cx="110" cy="22" r="1.5" fill="white" opacity="0.6"/>
+          <circle cx="125" cy="8" r="1" fill="white" opacity="0.5"/>
+          <circle cx="30" cy="50" r="1" fill="white" opacity="0.4"/>
+          <circle cx="118" cy="55" r="1.5" fill="white" opacity="0.5"/>
+          <!-- crescent moon -->
+          <circle cx="75" cy="65" r="42" fill="#f5e090" opacity="0.95"/>
+          <circle cx="96" cy="55" r="36" fill="#1a1a3a"/>
+          <!-- surface glow lines -->
+          <path d="M44 58 Q52 65 44 72" stroke="#e8c840" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M40 68 Q50 76 42 84" stroke="#e8c840" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+          <text x="70" y="122" text-anchor="middle" font-family="Arial" font-size="9" fill="#a8c0e0">crescent moon in night sky</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- crescent outline — left curve + right partial -->
+          <path d="M36 12 Q20 50 36 88" stroke="#2c1a08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M36 12 Q68 12 70 50 Q68 88 36 88" stroke="#2c1a08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <!-- two inner strokes -->
+          <line x1="36" y1="40" x2="64" y2="40" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="36" y1="60" x2="64" y2="60" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="50" y="98" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">月</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">月</span>
+          <span class="reading" style="color:#a8cce0;">getsu / tsuki</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="moon / month" data-bn="চাঁদ / মাস">moon / month</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 火 hi / ka ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">火</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="fire / flame" data-bn="আগুন / শিখা">fire / flame</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">カ</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">ひ・ほ</span></div>
+        </div>
+        <span class="origin-type" data-en="Pictograph" data-bn="চিত্রলিপি">Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="火 is one of the most vivid pictographs — a direct drawing of <strong>flames leaping upward</strong>. The ancient form showed a central pillar of fire with two curved tongues of flame spreading to each side, like a <span class='highlight'>campfire viewed from the front</span>. The modern character still carries that dynamic, upward energy." data-bn="火 সবচেয়ে প্রাণবন্ত চিত্রলিপিগুলোর একটি — <strong>উপরের দিকে লেলিহান শিখার</strong> সরাসরি চিত্র। প্রাচীন রূপে আগুনের একটি কেন্দ্রীয় স্তম্ভ এবং দুই পাশে ছড়িয়ে পড়া বাঁকানো শিখা দেখানো হত, যেন <span class='highlight'>সামনে থেকে দেখা একটি ক্যাম্পফায়ার</span>। আধুনিক অক্ষরটিতেও সেই গতিশীল, ঊর্ধ্বমুখী শক্তি রয়ে গেছে।">火 is one of the most vivid pictographs — a direct drawing of <strong>flames leaping upward</strong>. The ancient form showed a central pillar of fire with two curved tongues of flame spreading to each side, like a <span class="highlight">campfire viewed from the front</span>. The modern character still carries that dynamic, upward energy.</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#1a0a00"/>
+          <!-- glow base -->
+          <ellipse cx="70" cy="108" rx="38" ry="10" fill="#e07b00" opacity="0.5"/>
+          <!-- logs -->
+          <line x1="38" y1="112" x2="72" y2="100" stroke="#5a3010" stroke-width="6" stroke-linecap="round"/>
+          <line x1="102" y1="112" x2="68" y2="100" stroke="#5a3010" stroke-width="6" stroke-linecap="round"/>
+          <!-- outer left flame -->
+          <path d="M70 100 Q40 78 48 48 Q52 30 44 16 Q36 36 38 56 Q30 70 38 88 Q46 100 70 100Z" fill="#ff6600" opacity="0.8"/>
+          <!-- outer right flame -->
+          <path d="M70 100 Q100 78 92 48 Q88 30 96 16 Q104 36 102 56 Q110 70 102 88 Q94 100 70 100Z" fill="#ff6600" opacity="0.8"/>
+          <!-- inner bright flame -->
+          <path d="M70 100 Q56 72 62 46 Q66 28 70 12 Q74 28 78 46 Q84 72 70 100Z" fill="#ffe040" opacity="0.95"/>
+          <!-- central hot core -->
+          <path d="M70 95 Q64 75 68 55 Q70 42 70 35 Q70 42 72 55 Q76 75 70 95Z" fill="white" opacity="0.7"/>
+          <text x="70" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#e8a060">flames leaping upward</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- central upward stroke -->
+          <line x1="50" y1="10" x2="50" y2="62" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- left flame curve -->
+          <path d="M50 38 Q36 50 28 72 Q32 82 42 78" stroke="#2c1a08" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- right flame curve -->
+          <path d="M50 38 Q64 50 72 72 Q68 82 58 78" stroke="#2c1a08" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- base horizontal -->
+          <line x1="28" y1="78" x2="72" y2="78" stroke="#2c1a08" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="50" y="96" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">火</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">火</span>
+          <span class="reading" style="color:#a8cce0;">ka / hi</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="fire / flame" data-bn="আগুন">fire / flame</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 木 ki / moku ── -->
+  <div class="kanji-origin-block">
+    <div class="origin-header">
+      <div class="origin-char">木</div>
+      <div class="origin-meta">
+        <span class="origin-meaning" data-en="tree / wood" data-bn="গাছ / কাঠ">tree / wood</span>
+        <div class="readings-row">
+          <div class="reading-badge"><span class="badge-label badge-on">ON</span><span class="badge-val">モク・ボク</span></div>
+          <div class="reading-badge"><span class="badge-label badge-kun">KUN</span><span class="badge-val">き・こ</span></div>
+        </div>
+        <span class="origin-type" data-en="Pictograph" data-bn="চিত্রলিপি">Pictograph</span>
+      </div>
+    </div>
+    <p class="body-text" data-en="木 is a beautifully clear pictograph of a <strong>tree in full profile</strong>: the vertical stroke is the trunk, the horizontal stroke is the spreading branches, and the two downward strokes at the bottom are the <span class='highlight'>roots reaching into the earth</span>. This same character is the base for 本 (root/book) and 末 (tip/end)." data-bn="木 একটি অত্যন্ত স্পষ্ট চিত্রলিপি — <strong>পার্শ্ব থেকে দেখা একটি পূর্ণ গাছ</strong>: উল্লম্ব রেখা হলো কাণ্ড, অনুভূমিক রেখা হলো ছড়ানো ডালপালা, এবং নিচের দুটি নিম্নমুখী রেখা হলো <span class='highlight'>মাটিতে প্রোথিত শিকড়</span>। এই একই অক্ষর 本 (মূল/বই) ও 末 (আগা/শেষ)-এর ভিত্তি।">木 is a beautifully clear pictograph of a <strong>tree in full profile</strong>: the vertical stroke is the trunk, the horizontal stroke is the spreading branches, and the two downward strokes at the bottom are the <span class="highlight">roots reaching into the earth</span>. This same character is the base for 本 (root/book) and 末 (tip/end).</p>
+    <div class="pictograph-row">
+      <div class="pic-box">
+        <svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="130" rx="6" fill="#e8f0e0"/>
+          <!-- canopy -->
+          <ellipse cx="70" cy="28" rx="36" ry="22" fill="#4a9c30" opacity="0.85"/>
+          <ellipse cx="52" cy="38" rx="22" ry="16" fill="#3a8c28" opacity="0.7"/>
+          <ellipse cx="88" cy="35" rx="20" ry="15" fill="#3a8c28" opacity="0.7"/>
+          <!-- trunk -->
+          <rect x="62" y="44" width="16" height="52" rx="3" fill="#7a4a20"/>
+          <!-- branches left -->
+          <line x1="70" y1="56" x2="32" y2="38" stroke="#5a3818" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="64" x2="28" y2="58" stroke="#5a3818" stroke-width="4" stroke-linecap="round"/>
+          <!-- branches right -->
+          <line x1="70" y1="56" x2="108" y2="38" stroke="#5a3818" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="64" x2="112" y2="58" stroke="#5a3818" stroke-width="4" stroke-linecap="round"/>
+          <!-- roots -->
+          <line x1="70" y1="96" x2="44" y2="116" stroke="#7a4a20" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="96" x2="96" y2="116" stroke="#7a4a20" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="96" x2="70" y2="120" stroke="#7a4a20" stroke-width="4" stroke-linecap="round"/>
+          <text x="70" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#2a5010">full tree with roots</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="real-world image" data-bn="বাস্তব চিত্র">real-world image</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#f5f0e8"/>
+          <!-- trunk vertical -->
+          <line x1="50" y1="10" x2="50" y2="80" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- branches horizontal -->
+          <line x1="20" y1="38" x2="80" y2="38" stroke="#2c1a08" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- roots — two diagonal strokes down -->
+          <path d="M50 80 L28 95" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50 80 L72 95" stroke="#2c1a08" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="100" text-anchor="middle" font-family="serif" font-size="10" fill="#8b6914">ancient glyph</text>
+        </svg>
+        <div class="pic-box-label"><span class="reading" data-en="ancient form" data-bn="প্রাচীন রূপ">ancient form</span></div>
+      </div>
+      <div class="pic-operator">→</div>
+      <div class="pic-result-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="4" fill="#1a4f7a"/>
+          <text x="50" y="72" text-anchor="middle" font-family="serif" font-size="58" fill="white">木</text>
+        </svg>
+        <div class="pic-box-label">
+          <span class="kanji-big" style="color:white;">木</span>
+          <span class="reading" style="color:#a8cce0;">moku / ki</span>
+          <span class="meaning" style="color:#c8dce8;" data-en="tree / wood" data-bn="গাছ / কাঠ">tree / wood</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section-card 01 -->
+
+<!-- ═══════════════════════════════════════════
+     SECTION 02 — Key Words
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 02</span>
+  <h2 class="section-title" data-en="📖 Key Words Using These Kanji" data-bn="📖 এই কানজি দিয়ে গুরুত্বপূর্ণ শব্দ">📖 Key Words Using These Kanji</h2>
+  <p class="body-text" data-en="See how each kanji appears in everyday Japanese words." data-bn="প্রতিটি কানজি কীভাবে দৈনন্দিন জাপানি শব্দে ব্যবহৃত হয় দেখুন।">See how each kanji appears in everyday Japanese words.</p>
+
+  <!-- 下 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">下 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="ka / shita · below / down" data-bn="কা / শিতা · নিচে">ka / shita · below / down</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">下</span><span class="compound-reading">した</span><span class="compound-meaning" data-en="below / underneath" data-bn="নিচে / নিম্নে">below / underneath</span></div>
+      <div class="compound-card"><span class="compound-kanji">下手</span><span class="compound-reading">へた</span><span class="compound-meaning" data-en="unskilled / bad at" data-bn="অদক্ষ / খারাপ">unskilled / bad at</span></div>
+      <div class="compound-card"><span class="compound-kanji">地下</span><span class="compound-reading">ちか</span><span class="compound-meaning" data-en="underground / basement" data-bn="ভূগর্ভস্থ">underground</span></div>
+      <div class="compound-card"><span class="compound-kanji">下がる</span><span class="compound-reading">さがる</span><span class="compound-meaning" data-en="to fall / go down" data-bn="নামা / কমা">to fall / go down</span></div>
+    </div>
+  </div>
+
+  <!-- 中 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">中 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="chuu / naka · middle / inside" data-bn="চু / নাকা · মাঝখান / ভেতর">chuu / naka · middle / inside</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">中</span><span class="compound-reading">なか</span><span class="compound-meaning" data-en="inside / middle" data-bn="ভেতর / মাঝখান">inside / middle</span></div>
+      <div class="compound-card"><span class="compound-kanji">中国</span><span class="compound-reading">ちゅうごく</span><span class="compound-meaning" data-en="China" data-bn="চীন">China</span></div>
+      <div class="compound-card"><span class="compound-kanji">中学校</span><span class="compound-reading">ちゅうがっこう</span><span class="compound-meaning" data-en="middle school" data-bn="মিডেল স্কুল">middle school</span></div>
+      <div class="compound-card"><span class="compound-kanji">世界中</span><span class="compound-reading">せかいじゅう</span><span class="compound-meaning" data-en="throughout the world" data-bn="সারা বিশ্বে">throughout the world</span></div>
+    </div>
+  </div>
+
+  <!-- 月 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">月 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="getsu / tsuki · moon / month" data-bn="গেতসু / তসুকি · চাঁদ / মাস">getsu / tsuki · moon / month</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">月</span><span class="compound-reading">つき</span><span class="compound-meaning" data-en="moon" data-bn="চাঁদ">moon</span></div>
+      <div class="compound-card"><span class="compound-kanji">月曜日</span><span class="compound-reading">げつようび</span><span class="compound-meaning" data-en="Monday" data-bn="সোমবার">Monday</span></div>
+      <div class="compound-card"><span class="compound-kanji">来月</span><span class="compound-reading">らいげつ</span><span class="compound-meaning" data-en="next month" data-bn="আগামী মাস">next month</span></div>
+      <div class="compound-card"><span class="compound-kanji">毎月</span><span class="compound-reading">まいつき</span><span class="compound-meaning" data-en="every month" data-bn="প্রতি মাস">every month</span></div>
+    </div>
+  </div>
+
+  <!-- 火 -->
+  <div style="margin-bottom:26px;">
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">火 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="ka / hi · fire" data-bn="কা / হি · আগুন">ka / hi · fire</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">火</span><span class="compound-reading">ひ</span><span class="compound-meaning" data-en="fire / flame" data-bn="আগুন / শিখা">fire / flame</span></div>
+      <div class="compound-card"><span class="compound-kanji">火曜日</span><span class="compound-reading">かようび</span><span class="compound-meaning" data-en="Tuesday" data-bn="মঙ্গলবার">Tuesday</span></div>
+      <div class="compound-card"><span class="compound-kanji">花火</span><span class="compound-reading">はなび</span><span class="compound-meaning" data-en="fireworks" data-bn="আতশবাজি">fireworks</span></div>
+      <div class="compound-card"><span class="compound-kanji">火山</span><span class="compound-reading">かざん</span><span class="compound-meaning" data-en="volcano" data-bn="আগ্নেয়গিরি">volcano</span></div>
+    </div>
+  </div>
+
+  <!-- 木 -->
+  <div>
+    <p style="font-family:'Kaisei Decol',serif;font-size:1.1rem;color:var(--deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--light);">木 <span style="font-size:.8rem;color:var(--sky);font-family:'Noto Serif JP',serif;" data-en="moku / ki · tree / wood" data-bn="মোকু / কি · গাছ / কাঠ">moku / ki · tree / wood</span></p>
+    <div class="compound-grid">
+      <div class="compound-card"><span class="compound-kanji">木</span><span class="compound-reading">き</span><span class="compound-meaning" data-en="tree" data-bn="গাছ">tree</span></div>
+      <div class="compound-card"><span class="compound-kanji">木曜日</span><span class="compound-reading">もくようび</span><span class="compound-meaning" data-en="Thursday" data-bn="বৃহস্পতিবার">Thursday</span></div>
+      <div class="compound-card"><span class="compound-kanji">木村</span><span class="compound-reading">きむら</span><span class="compound-meaning" data-en="Kimura (common surname)" data-bn="কিমুরা (পদবি)">Kimura (surname)</span></div>
+      <div class="compound-card"><span class="compound-kanji">大木</span><span class="compound-reading">たいぼく</span><span class="compound-meaning" data-en="large tree" data-bn="বড় গাছ">large tree</span></div>
+    </div>
+  </div>
+</div><!-- /section-card 02 -->
+
+<!-- ═══════════════════════════════════════════
+     SECTION 03 — Quiz
+     ═══════════════════════════════════════════ -->
+<div class="section-card">
+  <span class="tag">SECTION 03</span>
+  <h2 class="section-title" data-en="✏️ Reading Quiz" data-bn="✏️ পড়ার কুইজ">✏️ Reading Quiz</h2>
+  <p class="body-text" data-en="Each question shows a <span class='highlight'>word containing the kanji you learned</span>. Choose the correct reading. <span style='color:var(--orange);font-weight:700;'>ON</span> = Chinese reading &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = Japanese reading." data-bn="প্রতিটি প্রশ্নে <span class='highlight'>আপনার শেখা কানজি সহ একটি শব্দ</span> দেখানো হয়। সঠিক পড়া বেছে নিন। <span style='color:var(--orange);font-weight:700;'>ON</span> = চীনা পড়া &nbsp;·&nbsp; <span style='color:var(--sky);font-weight:700;'>KUN</span> = জাপানি পড়া।">Each question shows a <span class="highlight">word containing the kanji you learned</span>. Choose the correct reading. <span style="color:var(--orange);font-weight:700;">ON</span> = Chinese reading &nbsp;·&nbsp; <span style="color:var(--sky);font-weight:700;">KUN</span> = Japanese reading.</p>
+  <div id="quiz-container"></div>
+  <div class="quiz-score-bar" id="score-bar" style="display:none;">
+    <div class="score-num" id="score-num">0 / 0</div>
+    <div class="score-label" data-en="Your Score" data-bn="আপনার স্কোর">Your Score</div>
+    <button class="quiz-reset-btn" onclick="resetQuiz()">Try Again</button>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="n5_kanji_04.html" class="nav-btn" data-en="← Set 04" data-bn="← সেট ০৪">← Set 04</a>
+  <div class="nav-center" data-en="Set 05 / 29<br><span style='color:#aaa;font-size:.65rem;'>N5 Kanji Origins</span>" data-bn="সেট ০৫ / ২৯<br><span style='color:#aaa;font-size:.65rem;'>N5 কানজি উৎস</span>">Set 05 / 29<br><span style="color:#aaa;font-size:.65rem;">N5 Kanji Origins</span></div>
+  <a href="n5_kanji_06.html" class="nav-btn" data-en="Set 06 →" data-bn="সেট ০৬ →">Set 06 →</a>
+</div>
+
+</main>
+<footer data-en="JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs" data-bn="JLPT N5 কানজি উৎস সিরিজ ── NIHONGO WORK | চিত্রলিপির মাধ্যমে জাপানি শেখা">JLPT N5 Kanji Origins Series ── NIHONGO WORK | Learning Japanese through pictographs</footer>
+
+<script>
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+  renderQuiz();
+}
+
+const QUIZ_QUESTIONS = [
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>下</u>手",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 下 in 下手",
+    ask_bn:"下手-এ 下-এর KUN পড়া",
+    options:["か (ka)","げ (ge)","した (shita)","へ (he)"],
+    correct:2,
+    fb_en:"✓ 下手 (へた = unskilled) is an exception — it reads as <strong>へた</strong>, where 下 is read as <strong>へ (HE)</strong>, a rare KUN form. This is a vocabulary item to memorise whole.",
+    fb_bn:"✓ 下手 (へた = অদক্ষ) একটি ব্যতিক্রম — এটি <strong>へた</strong> পড়া হয়, যেখানে 下 পড়া হয় <strong>へ (HE)</strong>। এটি সম্পূর্ণ শব্দ হিসেবে মুখস্থ করতে হবে।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"地<u>下</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 下 in 地下",
+    ask_bn:"地下-এ 下-এর ON পড়া",
+    options:["した (shita)","か (ka)","さ (sa)","げ (ge)"],
+    correct:1,
+    fb_en:"✓ 地下 (ちか = underground) uses the ON reading <strong>か (KA)</strong>. Both kanji in this compound use their ON readings.",
+    fb_bn:"✓ 地下 (ちか = ভূগর্ভস্থ)-এ ON পড়া <strong>か (KA)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>中</u>国",
+    ask_type:"ON",
+    ask_en:"ON reading of 中 in 中国",
+    ask_bn:"中国-এ 中-এর ON পড়া",
+    options:["なか (naka)","ちゅう (chuu)","じゅう (juu)","うち (uchi)"],
+    correct:1,
+    fb_en:"✓ 中国 (ちゅうごく = China) uses the ON reading <strong>ちゅう (CHUU)</strong>. Sino-Japanese compounds always use ON readings.",
+    fb_bn:"✓ 中国 (ちゅうごく = চীন)-এ ON পড়া <strong>ちゅう (CHUU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"世界<u>中</u>",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 中 in 世界中",
+    ask_bn:"世界中-এ 中-এর KUN পড়া",
+    options:["ちゅう (chuu)","うち (uchi)","じゅう (juu)","なか (naka)"],
+    correct:2,
+    fb_en:"✓ 世界中 (せかいじゅう = throughout the world) uses the KUN reading <strong>じゅう (JUU)</strong> — a special KUN reading of 中 meaning 'throughout / all over'.",
+    fb_bn:"✓ 世界中 (せかいじゅう = সারা বিশ্বে)-এ KUN পড়া <strong>じゅう (JUU)</strong> ব্যবহৃত হয় — 中-এর বিশেষ KUN পড়া যার অর্থ 'সর্বত্র'।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>月</u>曜日",
+    ask_type:"ON",
+    ask_en:"ON reading of 月 in 月曜日",
+    ask_bn:"月曜日-এ 月-এর ON পড়া",
+    options:["つき (tsuki)","がつ (gatsu)","げつ (getsu)","まい (mai)"],
+    correct:2,
+    fb_en:"✓ 月曜日 (げつようび = Monday) uses the ON reading <strong>げつ (GETSU)</strong>. All weekday names use ON readings for their element kanji.",
+    fb_bn:"✓ 月曜日 (げつようび = সোমবার)-এ ON পড়া <strong>げつ (GETSU)</strong> ব্যবহৃত হয়। সকল সাপ্তাহিক নামে ON পড়া ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"来<u>月</u>",
+    ask_type:"ON",
+    ask_en:"ON reading of 月 in 来月",
+    ask_bn:"来月-এ 月-এর ON পড়া",
+    options:["つき (tsuki)","がつ (gatsu)","げつ (getsu)","らい (rai)"],
+    correct:2,
+    fb_en:"✓ 来月 (らいげつ = next month) uses the ON reading <strong>げつ (GETSU)</strong>. When 月 means 'month' in time expressions, it usually uses the ON reading.",
+    fb_bn:"✓ 来月 (らいげつ = আগামী মাস)-এ ON পড়া <strong>げつ (GETSU)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>火</u>曜日",
+    ask_type:"ON",
+    ask_en:"ON reading of 火 in 火曜日",
+    ask_bn:"火曜日-এ 火-এর ON পড়া",
+    options:["ひ (hi)","ほ (ho)","か (ka)","もえ (moe)"],
+    correct:2,
+    fb_en:"✓ 火曜日 (かようび = Tuesday) uses the ON reading <strong>か (KA)</strong>. All the days of the week use ON readings for their element kanji.",
+    fb_bn:"✓ 火曜日 (かようび = মঙ্গলবার)-এ ON পড়া <strong>か (KA)</strong> ব্যবহৃত হয়।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"花<u>火</u>",
+    ask_type:"KUN",
+    ask_en:"KUN reading of 火 in 花火",
+    ask_bn:"花火-এ 火-এর KUN পড়া",
+    options:["か (ka)","ほ (ho)","もえ (moe)","び (bi)"],
+    correct:3,
+    fb_en:"✓ 花火 (はなび = fireworks) uses the KUN reading <strong>び (BI)</strong> — a voiced form of ひ (HI). This sound change (rendaku) happens when 火 follows another word.",
+    fb_bn:"✓ 花火 (はなび = আতশবাজি)-এ KUN পড়া <strong>び (BI)</strong> ব্যবহৃত হয় — ひ (HI)-এর ঘোষ রূপ। এই শব্দ পরিবর্তন (rendaku) তখন ঘটে যখন 火 অন্য শব্দের পরে আসে।"
+  },
+  {
+    q_en:"How do you read the underlined kanji in this word?",
+    q_bn:"এই শব্দে আন্ডারলাইন করা কানজিটি কীভাবে পড়বেন?",
+    word:"<u>木</u>曜日",
+    ask_type:"ON",
+    ask_en:"ON reading of 木 in 木曜日",
+    ask_bn:"木曜日-এ 木-এর ON পড়া",
+    options:["き (ki)","こ (ko)","もく (moku)","ぼく (boku)"],
+    correct:2,
+    fb_en:"✓ 木曜日 (もくようび = Thursday) uses the ON reading <strong>もく (MOKU)</strong>. All weekday names use ON readings for their element kanji.",
+    fb_bn:"✓ 木曜日 (もくようび = বৃহস্পতিবার)-এ ON পড়া <strong>もく (MOKU)</strong> ব্যবহৃত হয়।"
+  }
+];
+
+let answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+let score = 0;
+
+function renderQuiz() {
+  const lang = currentLang;
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  QUIZ_QUESTIONS.forEach((q, qi) => {
+    const typeLabel = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON reading</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN reading</span>';
+    const typeLabelBn = q.ask_type === 'ON'
+      ? '<span style="color:var(--orange);font-weight:700;font-size:.85rem;">ON পড়া</span>'
+      : '<span style="color:var(--sky);font-weight:700;font-size:.85rem;">KUN পড়া</span>';
+    const askText    = lang === 'en' ? q.ask_en : q.ask_bn;
+    const qText      = lang === 'en' ? q.q_en   : q.q_bn;
+    const fbText     = lang === 'en' ? q.fb_en  : q.fb_bn;
+    const lblDisplay = lang === 'en' ? typeLabel : typeLabelBn;
+
+    let optsHtml = q.options.map((opt, oi) => {
+      let cls = 'quiz-opt';
+      if (answered[qi]) {
+        cls += ' disabled';
+        if (oi === q.correct) cls += ' correct';
+        else if (answered[qi] === oi + 1) cls += ' wrong';
+      }
+      return '<button class="' + cls + '" onclick="checkAnswer(' + qi + ',' + oi + ')">' + opt + '</button>';
+    }).join('');
+
+    const fbClass = answered[qi] ? (answered[qi] === q.correct + 1 ? 'correct-fb show' : 'wrong-fb show') : '';
+
+    container.innerHTML += '<div class="quiz-block" id="qblock-' + qi + '">' +
+      '<div class="quiz-q-label ' + (q.ask_type === 'ON' ? 'on-label' : 'kun-label') + '">' +
+      'Q' + (qi+1) + ' &nbsp;·&nbsp; ' + askText + ' &nbsp;·&nbsp; ' + lblDisplay + '</div>' +
+      '<div class="quiz-question"><span style="font-size:1.1rem;color:#555;">' + qText + '</span><br><span class="q-kanji">' + q.word + '</span></div>' +
+      '<div class="quiz-options">' + optsHtml + '</div>' +
+      '<div class="quiz-feedback ' + fbClass + '" id="fb-' + qi + '">' + fbText + '</div></div>';
+  });
+
+  const allDone = answered.every(a => a !== false);
+  document.getElementById('score-bar').style.display = allDone ? 'block' : 'none';
+  if (allDone) {
+    document.getElementById('score-num').textContent = score + ' / ' + QUIZ_QUESTIONS.length;
+    document.querySelector('.quiz-reset-btn').textContent = lang === 'en' ? 'Try Again' : 'আবার চেষ্টা করুন';
+  }
+}
+
+function checkAnswer(qi, oi) {
+  if (answered[qi]) return;
+  answered[qi] = oi + 1;
+  if (oi === QUIZ_QUESTIONS[qi].correct) score++;
+  renderQuiz();
+}
+
+function resetQuiz() {
+  answered = new Array(QUIZ_QUESTIONS.length).fill(false);
+  score = 0;
+  renderQuiz();
+  document.getElementById('score-bar').style.display = 'none';
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
