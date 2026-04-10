@@ -20,196 +20,311 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIHONGO WORK | Free Japanese Learning for Bangladeshi Learners</title>
-<!-- Google Analytics (replace G-XXXXXXXXXX with your GA4 Measurement ID) -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Zen+Antique&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
-
 :root {
-  --bg: #0a0804;
-  --bg2: #110d08;
-  --s1: #1a1208;
-  --s2: #221808;
-  --s3: #2e2010;
-  --acc: #c0392b;
-  --acc2: #96281b;
-  --accG: #4a8c4a;
-  --accB: #2c5f8a;
-  --accY: #c8960a;
-  --accP: #7c4dff;
-  --accC: #0891B2;
-  --tx: #e8d5b0;
-  --txM: #a89070;
-  --txD: #6b5840;
-  --grn: #4caf50;
-  --red: #e53935;
-  --brd: rgba(200,150,60,0.15);
-  --brdS: rgba(200,150,60,0.35);
-  --g1: linear-gradient(135deg,#c0392b,#8b1a0f);
-  --g2: linear-gradient(135deg,#2c5f8a,#1a3d5c);
-  --g3: linear-gradient(135deg,#c8960a,#96580a);
-  --g4: linear-gradient(135deg,#7c4dff,#4a2c8a);
-  --g5: linear-gradient(135deg,#4a8c4a,#2d6b2d);
-  --r: 4px;
-  --hex-green: #2d5a2d;
-  --hex-yellow: #5a4a0a;
-  --hex-red: #5a1a1a;
-  --hex-dark: #1a0f05;
+  /* ── Sakura Palette ── */
+  --bg: #fef9f4;
+  --bg2: #fdf3ea;
+  --s1: #fff7f2;
+  --s2: #ffeee4;
+  --s3: #ffe4d6;
+  --acc: #e8729a;
+  --acc2: #d4537f;
+  --accG: #5dba7d;
+  --accB: #5a9fd4;
+  --accY: #e8a84c;
+  --accP: #9b7dff;
+  --accC: #3db5c9;
+  --tx: #3a2a1e;
+  --txM: #8a7060;
+  --txD: #b09888;
+  --grn: #4cb870;
+  --red: #e05858;
+  --brd: rgba(180,120,80,0.15);
+  --brdS: rgba(180,120,80,0.3);
+  --g1: linear-gradient(135deg,#e8729a,#f4a0b8);
+  --g2: linear-gradient(135deg,#5a9fd4,#7cc0e8);
+  --g3: linear-gradient(135deg,#e8a84c,#f4c87c);
+  --g4: linear-gradient(135deg,#9b7dff,#b8a0ff);
+  --g5: linear-gradient(135deg,#5dba7d,#88d4a0);
+  --r: 12px;
+  --sakura1: #f8c8d8;
+  --sakura2: #f5b0c8;
+  --sakura3: #f0e0d0;
+  --petal-glow: rgba(232,114,154,0.25);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;
   background-image:
-    radial-gradient(ellipse at 50% 0%,rgba(192,57,43,0.06) 0%,transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8960a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#3d2a10;border-radius:2px}
+    radial-gradient(ellipse at 20% 10%,rgba(232,114,154,0.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 90%,rgba(93,186,125,0.06) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(232,168,76,0.04) 0%,transparent 60%);
+}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#e0c8b8;border-radius:3px}
+
+/* ── Floating Sakura Petals (Background Animation) ── */
+@keyframes sakuraFloat {
+  0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
+  10%  { opacity:0.7; }
+  90%  { opacity:0.5; }
+  100% { transform: translateY(105vh) translateX(80px) rotate(360deg); opacity:0; }
+}
+.sakura-bg {
+  position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+}
+.sakura-bg .petal {
+  position:absolute;
+  width:12px;height:12px;
+  background: radial-gradient(ellipse at 30% 30%, #fce0e8 0%, #f5b8cc 60%, #f0a0b8 100%);
+  border-radius: 50% 0 50% 0;
+  opacity:0;
+  animation: sakuraFloat linear infinite;
+}
+.sakura-bg .petal:nth-child(1){left:10%;animation-duration:12s;animation-delay:0s;width:10px;height:10px}
+.sakura-bg .petal:nth-child(2){left:25%;animation-duration:15s;animation-delay:2s;width:14px;height:14px}
+.sakura-bg .petal:nth-child(3){left:45%;animation-duration:11s;animation-delay:4s;width:8px;height:8px}
+.sakura-bg .petal:nth-child(4){left:65%;animation-duration:14s;animation-delay:1s;width:12px;height:12px}
+.sakura-bg .petal:nth-child(5){left:80%;animation-duration:13s;animation-delay:3s;width:10px;height:10px}
+.sakura-bg .petal:nth-child(6){left:90%;animation-duration:16s;animation-delay:5s;width:6px;height:6px}
+.sakura-bg .petal:nth-child(7){left:5%;animation-duration:10s;animation-delay:6s;width:9px;height:9px}
+.sakura-bg .petal:nth-child(8){left:55%;animation-duration:17s;animation-delay:7s;width:11px;height:11px}
 
 /* ── TOPBAR ── */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;
-  background:rgba(10,8,4,0.95);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--brdS);position:sticky;top:0;z-index:100;
-  box-shadow:0 2px 20px rgba(192,57,43,0.15)}
+  background:rgba(255,250,245,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(232,114,154,0.15);position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(232,114,154,0.08)}
 .logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:17px;cursor:pointer;
-  color:#e8d5b0;display:flex;align-items:center;gap:6px;letter-spacing:0.02em}
-.logo span.red{color:#c0392b}
+  color:var(--tx);display:flex;align-items:center;gap:6px;letter-spacing:0.02em}
+.logo span.red{color:var(--acc)}
 .logo-jp{font-size:10px;color:var(--txM);font-weight:400;letter-spacing:.1em}
 .top-r{display:flex;gap:6px;align-items:center}
-/* Pill stats — fire/sword style */
-.pill{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.4);border-radius:3px;padding:4px 10px;font-size:11px;
+.pill{background:rgba(232,114,154,0.1);border:1px solid rgba(232,114,154,0.25);border-radius:20px;padding:4px 12px;font-size:11px;
   color:var(--txM);display:flex;align-items:center;gap:5px}
-.pill b{color:#e05c4a;font-family:'DM Mono',monospace;font-size:13px}
-.pill.g{background:rgba(74,140,74,0.12);border-color:rgba(74,140,74,0.3)}
+.pill b{color:var(--acc);font-family:'DM Mono',monospace;font-size:13px}
+.pill.g{background:rgba(93,186,125,0.1);border-color:rgba(93,186,125,0.25)}
 .pill.g b{color:var(--grn)}
-.back-b{background:rgba(30,20,8,0.8);border:1px solid var(--brdS);border-radius:3px;padding:6px 12px;font-size:12px;
+.back-b{background:rgba(255,240,230,0.8);border:1px solid var(--brdS);border-radius:20px;padding:6px 14px;font-size:12px;
   color:var(--txM);cursor:pointer;font-family:inherit;transition:all .15s;display:none;align-items:center;gap:4px}
 .back-b:hover{background:var(--s2);color:var(--tx)}.back-b.show{display:flex}
 
 
 /* HOME */
-.home{padding:0;max-width:900px;margin:0 auto}
+.home{padding:0;max-width:900px;margin:0 auto;position:relative;z-index:1}
 .hero{text-align:center;padding:24px 20px 16px;position:relative;display:none}
 .hero-t{font-family:'Zen Maru Gothic',sans-serif;font-size:28px;font-weight:900;color:var(--tx);margin-bottom:4px}
 .hero-d{font-size:12px;color:var(--txM);line-height:1.8}
 
-/* ── BATTLE MAP HEADER ── */
-.battle-header{background:linear-gradient(180deg,rgba(20,12,4,0.98) 0%,rgba(26,18,8,0.95) 100%);
-  border:1px solid var(--brdS);margin:10px 12px 0;border-radius:6px 6px 0 0;
+/* ── SAKURA HEADER ── */
+.battle-header{
+  background:linear-gradient(180deg,rgba(255,247,242,0.98) 0%,rgba(253,243,234,0.95) 100%);
+  border:1px solid rgba(232,114,154,0.15);margin:10px 12px 0;border-radius:16px 16px 0 0;
   padding:0;position:relative;overflow:hidden}
 .battle-header::before{content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L95 27.5 L95 72.5 L50 95 L5 72.5 L5 27.5Z' fill='none' stroke='rgba(200,150,60,0.04)' stroke-width='1'/%3E%3C/svg%3E") repeat;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 10 C45 15, 48 25, 40 35 C32 25, 35 15, 40 10Z' fill='rgba(232,114,154,0.04)'/%3E%3C/svg%3E") repeat;
   pointer-events:none}
 .bh-top{display:flex;align-items:stretch;gap:0;position:relative}
 .bh-counters{display:flex;gap:8px;margin-left:auto}
-.bh-counter{text-align:center;padding:12px 8px;border-radius:3px;border:1px solid}
-.bh-counter.enemies{background:rgba(192,57,43,0.15);border-color:rgba(192,57,43,0.4)}
-.bh-counter.enemies .bc-n{color:#e05c4a;font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
-.bh-counter.controlled{background:rgba(44,95,138,0.12);border-color:rgba(44,95,138,0.35)}
-.bh-counter.controlled .bc-n{color:#5b9fd4;font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
-.bh-counter.today{background:rgba(200,150,10,0.10);border-color:rgba(200,150,10,0.3)}
-.bh-counter.today .bc-n{color:#d4a836;font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.bh-counter{text-align:center;padding:12px 8px;border-radius:12px;border:1px solid}
+.bh-counter.enemies{background:rgba(232,114,154,0.08);border-color:rgba(232,114,154,0.2)}
+.bh-counter.enemies .bc-n{color:var(--acc);font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.bh-counter.controlled{background:rgba(90,159,212,0.08);border-color:rgba(90,159,212,0.2)}
+.bh-counter.controlled .bc-n{color:var(--accB);font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.bh-counter.today{background:rgba(232,168,76,0.08);border-color:rgba(232,168,76,0.2)}
+.bh-counter.today .bc-n{color:var(--accY);font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;line-height:1}
 .bc-n{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;line-height:1.1;transition:all 0.4s ease}
 .bc-l{font-size:10px;color:var(--txM);margin-top:4px}
 .bc-icon{font-size:10px;margin-bottom:4px;font-weight:600}
 
-/* ── HEXAGONAL BATTLE MAP ── */
-.battle-map{background:linear-gradient(180deg,#0d0805 0%,#140c04 40%,#0a0604 100%);
-  margin:0 12px;border-left:1px solid var(--brdS);border-right:1px solid var(--brdS);
-  padding:20px 16px 16px;position:relative;overflow:hidden;min-height:320px}
+/* ── HEXAGONAL SAKURA MAP ── */
+.battle-map{
+  background:linear-gradient(180deg,#fff8f3 0%,#fef5ee 40%,#fdf0e6 100%);
+  margin:0 12px;border-left:1px solid rgba(232,114,154,0.12);border-right:1px solid rgba(232,114,154,0.12);
+  padding:24px 16px 20px;position:relative;overflow:hidden;min-height:440px}
 .battle-map::before{
   content:'';position:absolute;inset:0;
   background:
-    radial-gradient(circle at 30% 60%,rgba(192,57,43,0.12) 0%,transparent 40%),
-    radial-gradient(circle at 70% 30%,rgba(74,140,74,0.08) 0%,transparent 35%),
-    radial-gradient(circle at 50% 80%,rgba(192,57,43,0.08) 0%,transparent 30%);
+    radial-gradient(circle at 25% 30%,rgba(232,114,154,0.08) 0%,transparent 40%),
+    radial-gradient(circle at 75% 70%,rgba(93,186,125,0.06) 0%,transparent 35%),
+    radial-gradient(circle at 50% 50%,rgba(232,168,76,0.05) 0%,transparent 40%);
   pointer-events:none}
-/* Blood/battle stain effect */
-.battle-map::after{content:'';position:absolute;bottom:20%;left:15%;width:200px;height:120px;
-  background:radial-gradient(ellipse,rgba(100,20,20,0.3) 0%,transparent 70%);
-  pointer-events:none;border-radius:50%}
+/* Sakura branch decorative — hidden since flowers are visible */
+.battle-map::after{display:none}
 
-/* Hexagon grid */
-.hex-grid{position:relative;display:flex;flex-direction:column;align-items:center;gap:0;z-index:2}
-.hex-row{display:flex;gap:6px;margin-bottom:-12px;position:relative}
-.hex-row:nth-child(even){margin-left:68px}
+/* ══ SAKURA FLOWER PETAL GRID ══ 
+   Each cell is a heart-shaped petal like a cherry blossom.
+   11 petals form 2 flowers (5 petals each) + 1 center bonus petal. */
 
-/* Individual hex */
-.hex-cell{position:relative;width:84px;height:88px;cursor:pointer;transition:all .25s;text-decoration:none}
-.hex-cell:hover{transform:translateY(-4px);filter:brightness(1.25)}
-.hex-cell:active{transform:translateY(-1px)}
-.hex-inner{position:relative;width:100%;height:100%;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+.hex-grid{position:relative;z-index:2;
+  width:100%;max-width:800px;margin:0 auto;
+  min-height:680px;
+}
+.hex-row{display:contents}
+
+/* ── Single petal: heart-shaped like the reference image ── */
+.hex-cell{position:absolute;width:120px;height:120px;cursor:pointer;
+  transition:all .4s cubic-bezier(.34,1.56,.64,1);text-decoration:none;
+  transform-origin:center center;
+}
+.hex-cell:hover{z-index:10;filter:brightness(1.08) drop-shadow(0 6px 20px rgba(232,114,154,0.35)) !important;
+  transform:translate(0,0) rotate(var(--rot,0deg)) scale(1.12) !important}
+
+/* Heart / petal clip-path — rounded top lobes with pointed bottom (like screenshot) */
+.hex-inner{position:relative;width:100%;height:100%;
+  clip-path:path('M60 110 C60 110,10 80,5 50 C0 20,20 0,40 0 C52 0,58 10,60 18 C62 10,68 0,80 0 C100 0,120 20,115 50 C110 80,60 110,60 110Z');
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:all .25s}
-/* Status colors */
-.hex-cell.status-green .hex-inner{background:linear-gradient(160deg,#2d5a2d,#1f3f1f);
-  box-shadow:inset 0 -3px 8px rgba(0,0,0,0.4)}
-.hex-cell.status-yellow .hex-inner{background:linear-gradient(160deg,#5a4a0a,#3d3206);
-  box-shadow:inset 0 -3px 8px rgba(0,0,0,0.4)}
+  transition:all .3s}
+
+/* ── Status colors ── */
+.hex-cell.status-green .hex-inner{
+  background:linear-gradient(160deg,#c8ecd4,#a8dcb8)}
+.hex-cell.status-yellow .hex-inner{
+  background:linear-gradient(160deg,#ffecd0,#ffddb8)}
 .hex-cell.status-red .hex-inner,
-.hex-cell.status-danger .hex-inner{background:linear-gradient(160deg,#5a1a1a,#3d0f0f);
-  box-shadow:inset 0 -3px 8px rgba(0,0,0,0.5)}
-.hex-cell.status-red .hex-inner{background:linear-gradient(160deg,#7a1a1a,#5a0f0f)}
-.hex-cell.status-dark .hex-inner{background:linear-gradient(160deg,#1a1208,#0f0a04)}
-/* Glow for high/low mastery */
-.hex-cell.status-green{filter:drop-shadow(0 2px 6px rgba(74,140,74,0.35))}
-.hex-cell.status-red{filter:drop-shadow(0 2px 8px rgba(192,57,43,0.4))}
-.hex-cell.status-yellow{filter:drop-shadow(0 2px 6px rgba(200,150,10,0.3))}
+.hex-cell.status-danger .hex-inner{
+  background:linear-gradient(160deg,#fce0e8,#f5bbd0)}
+.hex-cell.status-red .hex-inner{background:linear-gradient(160deg,#f8d0dc,#f0b8c8)}
+.hex-cell.status-dark .hex-inner{background:linear-gradient(160deg,#f0e8e0,#e8ddd4)}
 
-.hex-icon{font-size:22px;line-height:1;margin-bottom:2px}
-.hex-name{font-size:8px;color:rgba(232,213,176,0.75);text-align:center;line-height:1.2;margin-bottom:2px;white-space:nowrap}
-.hex-pct{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:900;text-align:center}
-.hex-cell.status-green .hex-pct{color:#7dd87d}
-.hex-cell.status-yellow .hex-pct{color:#d4b840}
-.hex-cell.status-red .hex-pct,.hex-cell.status-danger .hex-pct{color:#e07070}
-.hex-cell.status-dark .hex-pct{color:#4a3a20}
-/* Hex border shimmer */
-.hex-cell::before{content:'';position:absolute;inset:0;
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-  background:transparent;border:1px solid;z-index:1;pointer-events:none}
-.hex-cell.status-green::before{border-color:rgba(74,160,74,0.4)}
-.hex-cell.status-yellow::before{border-color:rgba(200,160,10,0.35)}
-.hex-cell.status-red::before,.hex-cell.status-danger::before{border-color:rgba(192,57,43,0.45)}
-.hex-cell.status-dark::before{border-color:rgba(200,150,60,0.1)}
+/* Petal glow */
+.hex-cell.status-green{filter:drop-shadow(0 4px 14px rgba(93,186,125,0.35))}
+.hex-cell.status-red{filter:drop-shadow(0 4px 14px rgba(232,114,154,0.3))}
+.hex-cell.status-yellow{filter:drop-shadow(0 4px 14px rgba(232,168,76,0.3))}
+.hex-cell.status-danger{filter:drop-shadow(0 4px 14px rgba(232,114,154,0.25))}
+.hex-cell.status-dark{filter:drop-shadow(0 3px 10px rgba(180,160,140,0.2))}
 
-/* Samurai mascot */
+/* ── Text inside petals — LARGE and readable ── */
+.hex-icon{font-size:26px;line-height:1;margin-bottom:2px}
+.hex-name{font-size:11px;font-weight:700;color:rgba(58,42,30,0.7);text-align:center;line-height:1.2;margin-bottom:1px;white-space:nowrap}
+.hex-pct{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:900;text-align:center}
+.hex-cell.status-green .hex-pct{color:#2d8a48}
+.hex-cell.status-yellow .hex-pct{color:#c88a30}
+.hex-cell.status-red .hex-pct,.hex-cell.status-danger .hex-pct{color:#c84868}
+.hex-cell.status-dark .hex-pct{color:#b0a090}
+
+/* Counter-rotate text so it stays upright */
+.hex-inner-content{
+  transform:rotate(calc(var(--rot,0deg) * -1));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;height:100%;
+  padding-top:14px; /* push content into the fat part of the heart */
+}
+
+/* ::before border removed — drop-shadow is sufficient for petals */
+.hex-cell::before{display:none}
+
+/* ═══════════════════════════════════════
+   FLOWER 1  (left) — 5 petals, center at ~165,190
+   Petals point OUTWARD from center (tip = center)
+   ═══════════════════════════════════════ */
+/* Top petal — points down toward center */
+.hex-row:nth-child(1) .hex-cell:nth-child(1){
+  left:105px;top:20px;--rot:0deg;
+  transform:rotate(0deg)}
+/* Right petal — rotated 72° CW */
+.hex-row:nth-child(1) .hex-cell:nth-child(2){
+  left:195px;top:90px;--rot:72deg;
+  transform:rotate(72deg)}
+/* Bottom-right petal — 144° */
+.hex-row:nth-child(1) .hex-cell:nth-child(3){
+  left:170px;top:205px;--rot:144deg;
+  transform:rotate(144deg)}
+/* Bottom-left petal — 216° */
+.hex-row:nth-child(1) .hex-cell:nth-child(4){
+  left:40px;top:205px;--rot:216deg;
+  transform:rotate(216deg)}
+/* Left petal — 288° */
+.hex-row:nth-child(2) .hex-cell:nth-child(1){
+  left:15px;top:90px;--rot:288deg;
+  transform:rotate(288deg)}
+
+/* ═══════════════════════════════════════
+   FLOWER 2  (right) — 5 petals, center at ~555,190
+   ═══════════════════════════════════════ */
+/* Top petal */
+.hex-row:nth-child(2) .hex-cell:nth-child(2){
+  left:495px;top:20px;--rot:0deg;
+  transform:rotate(0deg)}
+/* Right petal */
+.hex-row:nth-child(2) .hex-cell:nth-child(3){
+  left:585px;top:90px;--rot:72deg;
+  transform:rotate(72deg)}
+/* Bottom-right petal */
+.hex-row:nth-child(3) .hex-cell:nth-child(1){
+  left:560px;top:205px;--rot:144deg;
+  transform:rotate(144deg)}
+/* Bottom-left petal */
+.hex-row:nth-child(3) .hex-cell:nth-child(2){
+  left:430px;top:205px;--rot:216deg;
+  transform:rotate(216deg)}
+/* Left petal */
+.hex-row:nth-child(3) .hex-cell:nth-child(3){
+  left:405px;top:90px;--rot:288deg;
+  transform:rotate(288deg)}
+
+/* ═══════════════════════════════════════
+   BONUS CENTER PETAL (between flowers)
+   ═══════════════════════════════════════ */
+.hex-row:nth-child(3) .hex-cell:nth-child(4){
+  left:300px;top:270px;--rot:0deg;
+  transform:rotate(0deg);
+  width:130px;height:130px;
+}
+.hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-icon{font-size:30px}
+.hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-name{font-size:12px}
+.hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-pct{font-size:18px}
+
+/* ── Flower center dots (decorative) ── */
+.hex-grid::before,.hex-grid::after{
+  content:'';position:absolute;width:18px;height:18px;border-radius:50%;
+  background:radial-gradient(circle,#f5d080 30%,#f0c060 70%);
+  z-index:3;pointer-events:none;
+  box-shadow:0 0 8px rgba(240,192,96,0.4)}
+.hex-grid::before{left:156px;top:175px}  /* flower 1 center */
+.hex-grid::after{left:546px;top:175px}   /* flower 2 center */
+
+/* Samurai mascot → Sakura spirit */
 .samurai-mascot{position:absolute;right:20px;bottom:40px;z-index:5;pointer-events:none}
 .samurai-mascot-img{width:100px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
-.samurai-speech{position:absolute;top:-18px;right:0;background:rgba(20,12,4,0.95);border:1px solid var(--brdS);
-  border-radius:3px;padding:4px 10px;font-size:10px;color:var(--accY);white-space:nowrap;font-weight:700}
-.samurai-speech::after{content:'▼';position:absolute;bottom:-12px;right:15px;font-size:10px;color:var(--brdS)}
-.samurai-body{font-size:72px;line-height:1;filter:drop-shadow(0 4px 12px rgba(192,57,43,0.4))}
+.samurai-speech{position:absolute;top:-18px;right:0;background:rgba(255,250,245,0.95);border:1px solid rgba(232,114,154,0.2);
+  border-radius:12px;padding:4px 12px;font-size:10px;color:var(--acc);white-space:nowrap;font-weight:700}
+.samurai-speech::after{content:'▼';position:absolute;bottom:-12px;right:15px;font-size:10px;color:rgba(232,114,154,0.3)}
+.samurai-body{font-size:72px;line-height:1;filter:drop-shadow(0 4px 12px rgba(232,114,154,0.2))}
 
 /* Legend */
 .map-legend{display:flex;gap:14px;justify-content:center;padding-top:16px;position:relative;z-index:2}
 .leg-item{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--txM)}
 .leg-dot{width:8px;height:8px;border-radius:50%}
-.leg-dot.red{background:#c0392b}.leg-dot.yellow{background:#c8960a}
-.leg-dot.green{background:#4a8c4a}.leg-dot.dark{background:#3d2a10}
+.leg-dot.red{background:var(--acc)}.leg-dot.yellow{background:var(--accY)}
+.leg-dot.green{background:var(--accG)}.leg-dot.dark{background:#ccc0b4}
 
 /* ── BATTLE BUTTONS ── */
-.battle-actions{display:flex;margin:0 12px;border:1px solid var(--brdS);border-top:none;
-  border-radius:0 0 6px 6px;overflow:hidden}
+.battle-actions{display:flex;margin:0 12px;border:1px solid rgba(232,114,154,0.15);border-top:none;
+  border-radius:0 0 16px 16px;overflow:hidden}
 .battle-btn{flex:1;padding:16px 8px;text-align:center;cursor:pointer;transition:all .2s;
   border:none;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;
   display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;letter-spacing:.02em}
-.battle-btn.primary{background:linear-gradient(135deg,#b02a1e,#8b1a10);color:#f5d5c0;
-  border-right:1px solid rgba(200,150,60,0.2)}
-.battle-btn.primary:hover{background:linear-gradient(135deg,#c0392b,#96281b);
-  box-shadow:inset 0 -2px 8px rgba(0,0,0,0.3)}
-.battle-btn.secondary{background:rgba(20,15,6,0.9);color:var(--txM)}
-.battle-btn.secondary:hover{background:rgba(40,28,10,0.9);color:var(--tx)}
+.battle-btn.primary{background:linear-gradient(135deg,#e8729a,#f4a0b8);color:#fff;
+  border-right:1px solid rgba(232,114,154,0.2)}
+.battle-btn.primary:hover{background:linear-gradient(135deg,#d4537f,#e8729a);
+  box-shadow:0 4px 16px rgba(232,114,154,0.3)}
+.battle-btn.secondary{background:rgba(255,245,238,0.9);color:var(--txM)}
+.battle-btn.secondary:hover{background:var(--s2);color:var(--tx)}
 
 /* ── STUDY MENU ── */
 .study-menu-label{margin:16px 12px 8px;font-size:11px;color:var(--txM);letter-spacing:.1em;
   display:flex;align-items:center;gap:8px;padding-left:2px}
-.study-menu-label::before{content:'▸';color:var(--accY)}
+.study-menu-label::before{content:'🌸';font-size:12px}
 .study-menu-label::after{content:'';flex:1;height:1px;background:var(--brd)}
 
 /* Stats row */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 12px 16px;display:none}
 .stat-card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px;text-align:center;
   position:relative;overflow:hidden}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
 .stat-card.c1::before{background:var(--g1)}.stat-card.c2::before{background:var(--g2)}
 .stat-card.c3::before{background:var(--g3)}.stat-card.c4::before{background:var(--g5)}
 .stat-num{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:900;margin-bottom:2px}
@@ -221,22 +336,20 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
   margin:20px 12px 10px;letter-spacing:.08em;display:flex;align-items:center;gap:8px;text-transform:uppercase}
 .sec-t::after{content:'';flex:1;height:1px;background:var(--brd)}
 
-/* bottom-nav removed */
-
 /* ── CARD GRID ── */
 .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 12px 16px}
 .cd{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px 14px;
-  cursor:pointer;transition:all .22s;position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit}
-.cd:hover{transform:translateY(-2px);border-color:var(--accY);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+  cursor:pointer;transition:all .25s;position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit}
+.cd:hover{transform:translateY(-3px);border-color:var(--acc);box-shadow:0 6px 20px rgba(232,114,154,.12)}
 .cd:active{transform:translateY(-1px)}
-.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:.8}
+.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:.8;border-radius:12px 12px 0 0}
 .cd.c1::before{background:var(--g1)}.cd.c2::before{background:var(--g2)}
 .cd.c3::before{background:var(--g3)}.cd.c4::before{background:var(--g4)}.cd.c5::before{background:var(--g5)}
 .cd-i{font-size:28px;margin-bottom:6px;display:block}
 .cd-n{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:2px;color:var(--tx)}
 .cd-d{font-size:10px;color:var(--txD);line-height:1.5}
 .cd-count{position:absolute;top:8px;right:8px;font-size:9px;color:var(--txD);
-  background:var(--s2);border-radius:2px;padding:2px 6px;border:1px solid var(--brd)}
+  background:var(--s2);border-radius:8px;padding:2px 6px;border:1px solid var(--brd)}
 
 
 /* MODULE */
@@ -247,84 +360,84 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .mod-d{font-size:12px;color:var(--txM)}
 
 /* Sub tabs */
-.stabs{display:flex;gap:0;background:var(--s1);border-radius:3px;border:1px solid var(--brd);
+.stabs{display:flex;gap:0;background:var(--s1);border-radius:12px;border:1px solid var(--brd);
   margin-bottom:16px;overflow-x:auto}
 .stab{padding:10px 14px;font-size:11px;font-weight:500;color:var(--txM);cursor:pointer;
   border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
-.stab:hover{color:var(--tx)}.stab.on{color:var(--accY);border-bottom-color:var(--accY)}
+.stab:hover{color:var(--tx)}.stab.on{color:var(--acc);border-bottom-color:var(--acc)}
 
 /* Filters */
 .flts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.fb{padding:5px 12px;border-radius:3px;border:1px solid var(--brd);background:var(--s2);
+.fb{padding:5px 12px;border-radius:20px;border:1px solid var(--brd);background:var(--s2);
   color:var(--txM);font-size:11px;cursor:pointer;transition:all .15s;font-family:inherit;font-weight:500}
 .fb:hover{border-color:var(--brdS);color:var(--tx)}
-.fb.on{background:rgba(192,57,43,0.15);border-color:rgba(192,57,43,0.45);color:var(--acc)}
+.fb.on{background:rgba(232,114,154,0.12);border-color:rgba(232,114,154,0.35);color:var(--acc)}
 
 /* Progress */
 .prg{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.prg-bar{flex:1;height:4px;background:var(--s3);border-radius:2px;overflow:hidden}
-.prg-fill{height:100%;background:var(--g1);border-radius:2px;transition:width .3s}
+.prg-bar{flex:1;height:6px;background:var(--s3);border-radius:3px;overflow:hidden}
+.prg-fill{height:100%;background:var(--g1);border-radius:3px;transition:width .3s}
 .prg-tx{font-size:11px;color:var(--txM);min-width:55px;text-align:right}
 
 /* Flashcard */
 .fcw{min-height:200px;height:auto;margin-bottom:18px;cursor:pointer}
 .fc{width:100%;position:relative;transition:opacity .2s}
 .fc.flip .fc-fr{display:none}.fc.flip .fc-bk-wrap{display:block}
-.fcf{backface-visibility:hidden;border-radius:4px;
+.fcf{backface-visibility:hidden;border-radius:16px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   border:1px solid var(--brd)}
 .fc-fr{min-height:200px}
-.fc-bk-wrap{display:none;border-radius:4px;border:1px solid var(--brd);background:var(--s2);padding:16px}
-.fc-fr{background:linear-gradient(160deg,#1a1208,#120d04);
-  background-image:radial-gradient(circle at 50% 30%,rgba(192,57,43,.06) 0%,transparent 50%)}
+.fc-bk-wrap{display:none;border-radius:16px;border:1px solid var(--brd);background:var(--s2);padding:16px}
+.fc-fr{background:linear-gradient(160deg,#fff8f3,#fef2e8);
+  background-image:radial-gradient(circle at 50% 30%,rgba(232,114,154,.06) 0%,transparent 50%)}
 .fc-bk{background:var(--s2);transform:rotateY(180deg);padding:16px;align-items:flex-start;justify-content:flex-start;overflow-y:auto}
 .fc-big{font-family:'Zen Maru Gothic',sans-serif;font-size:88px;font-weight:900;color:var(--tx);line-height:1;
-  text-shadow:0 2px 30px rgba(192,57,43,.15)}
+  text-shadow:0 2px 30px rgba(232,114,154,.12)}
 .fc-hint{margin-top:12px;font-size:10px;color:var(--txD);letter-spacing:.1em;
   display:flex;align-items:center;gap:8px}
 .fc-hint::before,.fc-hint::after{content:'';width:16px;height:1px;background:var(--txD)}
 .fc-bdg{position:absolute;top:10px;right:10px;background:var(--s3);border:1px solid var(--brd);
-  border-radius:3px;padding:2px 8px;font-size:10px;color:var(--txM)}
+  border-radius:12px;padding:2px 8px;font-size:10px;color:var(--txM)}
 .fc-lbl{font-size:11px;color:var(--txD);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
 .fc-v{font-size:20px;color:var(--tx);font-weight:500;margin-bottom:12px;line-height:1.5}
 .fc-v.ac{color:var(--accY);font-family:'DM Mono',monospace;font-size:14px}
 .fc-mn{font-size:18px;font-weight:700;color:var(--tx);border-left:3px solid var(--acc);padding-left:12px;margin-bottom:12px}
-.fc-ex{background:var(--s3);border-radius:4px;border:1px solid var(--brd);padding:10px 12px;width:100%;
+.fc-ex{background:var(--s3);border-radius:12px;border:1px solid var(--brd);padding:10px 12px;width:100%;
   font-size:12px;color:var(--tx);line-height:1.6}
 .fc-acts{display:flex;gap:8px;justify-content:center}
-.fc-b{padding:10px 20px;border-radius:4px;border:1px solid var(--brd);font-size:12px;font-weight:500;
+.fc-b{padding:10px 20px;border-radius:20px;border:1px solid var(--brd);font-size:12px;font-weight:500;
   cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:6px}
 .fc-b.pv{background:var(--s2);color:var(--txM)}.fc-b.pv:hover{background:var(--s3);color:var(--tx)}
 .fc-b.nx{background:var(--acc);color:#fff;border-color:transparent}.fc-b.nx:hover{background:var(--acc2)}
-.fc-b.bk{background:var(--s2);color:var(--txM);border-color:rgba(255,255,255,.06)}
+.fc-b.bk{background:var(--s2);color:var(--txM);border-color:rgba(0,0,0,.06)}
 
 /* Quiz */
-.qb{background:linear-gradient(160deg,#1a1208,#120d04);border:1px solid var(--brd);border-radius:4px;padding:32px;
+.qb{background:linear-gradient(160deg,#fff8f3,#fef2e8);border:1px solid var(--brd);border-radius:16px;padding:32px;
   text-align:center;margin-bottom:14px;min-height:160px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden}
-.qb::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--g1);opacity:.7}
+.qb::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--g1);opacity:.7;border-radius:16px 16px 0 0}
 .qB{font-family:'Zen Maru Gothic',sans-serif;font-size:64px;font-weight:900;color:var(--tx);line-height:1;
-  text-shadow:0 0 40px rgba(192,57,43,0.2)}
+  text-shadow:0 0 40px rgba(232,114,154,0.12)}
 .qP{font-size:13px;color:var(--txM);margin-top:8px}
 .qT{display:inline-block;margin-bottom:10px;background:var(--s3);border:1px solid var(--brd);
-  border-radius:3px;padding:3px 12px;font-size:10px;color:var(--accY);letter-spacing:.06em}
+  border-radius:12px;padding:3px 12px;font-size:10px;color:var(--acc);letter-spacing:.06em}
 .qos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.qo{padding:13px 16px;border-radius:3px;border:1px solid var(--brd);background:var(--s2);
+.qo{padding:13px 16px;border-radius:12px;border:1px solid var(--brd);background:var(--s1);
   color:var(--tx);font-size:13px;cursor:pointer;transition:all .15s;text-align:left;
   font-family:inherit;line-height:1.5;display:flex;align-items:center;gap:8px}
-.qo:hover:not(.dis){background:var(--s3);border-color:var(--brdS)}
-.qo.ok{background:rgba(74,140,74,.12);border-color:var(--grn);color:var(--grn)}
-.qo.no{background:rgba(192,57,43,.1);border-color:var(--red);color:var(--red)}
+.qo:hover:not(.dis){background:var(--s2);border-color:var(--brdS)}
+.qo.ok{background:rgba(93,186,125,.1);border-color:var(--grn);color:#2a8848}
+.qo.no{background:rgba(232,114,154,.08);border-color:var(--acc);color:var(--acc)}
 .qo.dis{cursor:default}
 .qo .ol{display:flex;align-items:center;justify-content:center;width:22px;height:22px;min-width:22px;
-  background:var(--s3);border-radius:3px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
-.qo.ok .ol{background:rgba(74,140,74,.2);color:var(--grn)}
-.qo.no .ol{background:rgba(192,57,43,.15);color:var(--red)}
-.qfb{padding:12px 16px;border-radius:4px;margin-bottom:12px;font-size:12px;display:none;line-height:1.7}
-.qfb.ok{background:rgba(74,140,74,.08);border:1px solid rgba(74,140,74,.2);color:var(--grn);display:block}
-.qfb.no{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.18);color:#e89070;display:block}
-.qnx{padding:10px 28px;border-radius:3px;background:var(--acc);color:#fff;border:none;
+  background:var(--s3);border-radius:8px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
+.qo.ok .ol{background:rgba(93,186,125,.15);color:var(--grn)}
+.qo.no .ol{background:rgba(232,114,154,.1);color:var(--acc)}
+.qfb{padding:12px 16px;border-radius:12px;margin-bottom:12px;font-size:12px;display:none;line-height:1.7}
+.qfb.ok{background:rgba(93,186,125,.08);border:1px solid rgba(93,186,125,.2);color:#2a8848;display:block}
+.qfb.no{background:rgba(232,114,154,.06);border:1px solid rgba(232,114,154,.18);color:#c05878;display:block}
+.qnx{padding:10px 28px;border-radius:20px;background:var(--acc);color:#fff;border:none;
   font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:none}
 .qnx:hover{background:var(--acc2)}.qnx.sh{display:inline-block}
 
@@ -335,23 +448,23 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
   background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .scr-msg{font-size:13px;color:var(--txM);margin:8px 0 24px}
 .scr-tiles{display:flex;gap:12px;justify-content:center;margin-bottom:24px}
-.scr-t{background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:14px 20px;min-width:80px}
+.scr-t{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:14px 20px;min-width:80px}
 .scr-t .tl{font-size:10px;color:var(--txD);margin-bottom:4px}
 .scr-t .tv{font-size:22px;font-weight:700}
 .scr-t.g .tv{color:var(--grn)}.scr-t.r .tv{color:var(--red)}
-.rbtn{padding:10px 24px;border-radius:3px;background:var(--acc);color:#fff;border:none;
+.rbtn{padding:10px 24px;border-radius:20px;background:var(--acc);color:#fff;border:none;
   font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin:0 4px}
 
 /* Kana */
 .kgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:420px;margin:0 auto 16px}
-.kcell{background:var(--s1);border:1px solid var(--brd);border-radius:10px;padding:10px 6px;
+.kcell{background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:10px 6px;
   text-align:center;cursor:pointer;transition:all .15s;min-height:56px;
   display:flex;flex-direction:column;align-items:center;justify-content:center}
-.kcell:hover{background:var(--s2);border-color:rgba(255,255,255,.1)}
-.kcell.done{background:rgba(107,191,138,.06);border-color:rgba(107,191,138,.2)}
-.kch{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:700}
+.kcell:hover{background:var(--s2);border-color:rgba(232,114,154,.2)}
+.kcell.done{background:rgba(93,186,125,.06);border-color:rgba(93,186,125,.2)}
+.kch{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:700;color:var(--tx)}
 .kro{font-size:9px;color:var(--txD);margin-top:1px;font-family:'DM Mono',monospace}
-.kinp{width:100%;max-width:280px;padding:14px 18px;border-radius:12px;border:2px solid var(--brd);
+.kinp{width:100%;max-width:280px;padding:14px 18px;border-radius:16px;border:2px solid var(--brd);
   background:var(--s1);color:var(--tx);font-size:20px;text-align:center;font-family:'DM Mono',monospace;
   outline:none;transition:border-color .2s;margin:0 auto 14px;display:block}
 .kinp:focus{border-color:var(--acc)}
@@ -359,36 +472,10 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 /* Grammar */
 .gcard{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:20px;
   margin-bottom:12px;transition:all .2s}
-.gcard:hover{border-color:rgba(255,255,255,.08)}
-.gcard-t{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;
-  color:var(--acc)}
+.gcard:hover{border-color:rgba(232,114,154,.15)}
+.gcard-t{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;color:var(--acc)}
 .gcard-p{font-size:13px;color:var(--txM);margin-bottom:10px;line-height:1.6}
-.gcard-ex{background:var(--s2);border-radius:8px;padding:10px 14px;font-size:13px;line-height:1.8;
-  border-left:3px solid var(--acc)}
-.gcard-ex .jp{color:var(--tx)}.gcard-ex .en{color:var(--txM);font-size:12px}
-.gcard-bn{font-size:11px;color:var(--accC);margin-top:6px}
-
-/* ── Kana ── */
-.kgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:420px;margin:0 auto 16px}
-.kcell{background:var(--s1);border:1px solid var(--brd);border-radius:3px;padding:10px 6px;
-  text-align:center;cursor:pointer;transition:all .15s;min-height:56px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center}
-.kcell:hover{background:var(--s2);border-color:var(--brdS)}
-.kcell.done{background:rgba(74,140,74,.08);border-color:rgba(74,140,74,.2)}
-.kch{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:700;color:var(--tx)}
-.kro{font-size:9px;color:var(--txD);margin-top:1px;font-family:'DM Mono',monospace}
-.kinp{width:100%;max-width:280px;padding:14px 18px;border-radius:3px;border:2px solid var(--brd);
-  background:var(--s1);color:var(--tx);font-size:20px;text-align:center;font-family:'DM Mono',monospace;
-  outline:none;transition:border-color .2s;margin:0 auto 14px;display:block}
-.kinp:focus{border-color:var(--accY)}
-
-/* ── Grammar ── */
-.gcard{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:20px;
-  margin-bottom:12px;transition:all .2s}
-.gcard:hover{border-color:var(--brdS)}
-.gcard-t{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;color:var(--accY)}
-.gcard-p{font-size:13px;color:var(--txM);margin-bottom:10px;line-height:1.6}
-.gcard-ex{background:var(--s2);border-radius:3px;padding:10px 14px;font-size:13px;line-height:1.8;
+.gcard-ex{background:var(--s2);border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.8;
   border-left:3px solid var(--acc)}
 .gcard-ex .jp{color:var(--tx)}.gcard-ex .en{color:var(--txM);font-size:12px}
 .gcard-bn{font-size:11px;color:var(--accY);margin-top:6px}
@@ -403,10 +490,42 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
   .kch{font-size:20px}
   .fcw{min-height:250px;height:auto}
   .battle-header{margin:8px 8px 0}
-  .battle-map{margin:0 8px}
+  .battle-map{margin:0 8px;min-height:700px;padding:16px 8px 20px}
   .battle-actions{margin:0 8px}
-  .hex-cell{width:70px;height:73px}
-  .hex-row:nth-child(even){margin-left:52px}
+
+  /* Smaller petals on mobile */
+  .hex-cell{width:80px;height:80px}
+  .hex-icon{font-size:20px}
+  .hex-name{font-size:9px}
+  .hex-pct{font-size:13px}
+  .hex-inner-content{padding-top:10px}
+  .hex-grid{min-height:620px;max-width:360px}
+
+  /* Flower 1 — center ~110,130 */
+  .hex-row:nth-child(1) .hex-cell:nth-child(1){left:70px;top:10px}
+  .hex-row:nth-child(1) .hex-cell:nth-child(2){left:140px;top:55px}
+  .hex-row:nth-child(1) .hex-cell:nth-child(3){left:120px;top:150px}
+  .hex-row:nth-child(1) .hex-cell:nth-child(4){left:20px;top:150px}
+  .hex-row:nth-child(2) .hex-cell:nth-child(1){left:0;top:55px}
+
+  /* Flower 2 — center ~250,380 */
+  .hex-row:nth-child(2) .hex-cell:nth-child(2){left:210px;top:260px}
+  .hex-row:nth-child(2) .hex-cell:nth-child(3){left:280px;top:305px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(1){left:260px;top:400px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(2){left:160px;top:400px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(3){left:140px;top:305px}
+
+  /* Bonus petal */
+  .hex-row:nth-child(3) .hex-cell:nth-child(4){
+    left:130px;top:500px;width:100px;height:100px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-icon{font-size:24px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-name{font-size:10px}
+  .hex-row:nth-child(3) .hex-cell:nth-child(4) .hex-pct{font-size:15px}
+
+  /* Center dots */
+  .hex-grid::before{left:101px;top:118px;width:14px;height:14px}
+  .hex-grid::after{left:241px;top:368px;width:14px;height:14px}
+
   .bh-counters{display:none}
   .samurai-mascot{display:none}
   .bottom-nav{margin:0 8px}
@@ -419,23 +538,23 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 
 /* ── v3 level tabs ── */
 .lvl-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-.lvl-b{padding:5px 14px;border-radius:3px;border:1px solid var(--brd);background:var(--s2);
+.lvl-b{padding:5px 14px;border-radius:20px;border:1px solid var(--brd);background:var(--s2);
   color:var(--txM);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit;font-weight:700}
 .lvl-b:hover{border-color:var(--brdS);color:var(--tx)}
-.lvl-b.on{color:#e8d5b0;border-color:transparent}
-.lvl-b.n5{background:rgba(74,140,74,.15);color:var(--accG)}.lvl-b.n5.on{background:var(--accG);color:#000}
-.lvl-b.n4{background:rgba(44,95,138,.2);color:#6aabdc}.lvl-b.n4.on{background:var(--accB);color:#e8d5b0}
-.lvl-b.n3{background:rgba(200,150,10,.15);color:var(--accY)}.lvl-b.n3.on{background:var(--accY);color:#000}
-.lvl-b.n2{background:rgba(124,77,255,.15);color:var(--accP)}.lvl-b.n2.on{background:var(--accP);color:#fff}
-.lvl-b.iro{background:rgba(192,57,43,.15);color:var(--acc)}.lvl-b.iro.on{background:var(--acc);color:#fff}
-.badge-n5{background:var(--accG);color:#000;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700}
-.badge-n4{background:var(--accB);color:#e8d5b0;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700}
-.badge-n3{background:var(--accY);color:#000;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700}
+.lvl-b.on{color:#fff;border-color:transparent}
+.lvl-b.n5{background:rgba(93,186,125,.1);color:var(--accG)}.lvl-b.n5.on{background:var(--accG);color:#fff}
+.lvl-b.n4{background:rgba(90,159,212,.1);color:var(--accB)}.lvl-b.n4.on{background:var(--accB);color:#fff}
+.lvl-b.n3{background:rgba(232,168,76,.1);color:var(--accY)}.lvl-b.n3.on{background:var(--accY);color:#fff}
+.lvl-b.n2{background:rgba(155,125,255,.1);color:var(--accP)}.lvl-b.n2.on{background:var(--accP);color:#fff}
+.lvl-b.iro{background:rgba(232,114,154,.1);color:var(--acc)}.lvl-b.iro.on{background:var(--acc);color:#fff}
+.badge-n5{background:var(--accG);color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700}
+.badge-n4{background:var(--accB);color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700}
+.badge-n3{background:var(--accY);color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700}
 .src-tag{font-size:9px;color:var(--txD);letter-spacing:.05em;position:absolute;bottom:8px;right:10px}
 
 /* ── Lang switcher ── */
 .lang-sw{display:flex;gap:4px;margin-right:12px}
-.lb{background:var(--s2);border:1px solid var(--brd);border-radius:3px;padding:3px 8px;font-size:12px;cursor:pointer;color:var(--txM);transition:all .15s}
+.lb{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--txM);transition:all .15s}
 .lb:hover{background:var(--s3);color:var(--tx)}
 .lb.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 
@@ -444,7 +563,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .tmr-ring{position:relative;width:48px;height:48px}
 .tmr-ring svg{transform:rotate(-90deg)}
 .tmr-ring circle{fill:none;stroke-width:3.5}
-.tmr-ring .bg{stroke:var(--s3)}.tmr-ring .fg{stroke:var(--accY);stroke-linecap:round;transition:stroke-dashoffset .3s linear}
+.tmr-ring .bg{stroke:var(--s3)}.tmr-ring .fg{stroke:var(--acc);stroke-linecap:round;transition:stroke-dashoffset .3s linear}
 .tmr-ring .fg.danger{stroke:var(--red)}
 .tmr-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--tx)}
 .tmr-num.danger{color:var(--red)}
@@ -452,57 +571,57 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .tmr-toggle label{font-size:11px;color:var(--txM);cursor:pointer;display:flex;align-items:center;gap:6px}
 .tg-sw{position:relative;width:36px;height:20px;background:var(--s3);border-radius:10px;cursor:pointer;transition:background .2s;border:none;padding:0}
 .tg-sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:var(--txM);border-radius:50%;transition:all .2s}
-.tg-sw.on{background:var(--accY)}.tg-sw.on::after{left:18px;background:#0a0804}
-.tmr-sec{width:44px;background:var(--s2);border:1px solid var(--brd);border-radius:3px;color:var(--tx);font-size:12px;text-align:center;padding:3px;font-family:'DM Mono',monospace}
+.tg-sw.on{background:var(--acc)}.tg-sw.on::after{left:18px;background:#fff}
+.tmr-sec{width:44px;background:var(--s2);border:1px solid var(--brd);border-radius:8px;color:var(--tx);font-size:12px;text-align:center;padding:3px;font-family:'DM Mono',monospace}
 
 /* ── Bookmark ── */
-.bm-btn{position:absolute;top:10px;left:10px;background:var(--s3);border:1px solid var(--brd);border-radius:3px;font-size:14px;cursor:pointer;transition:all .15s;z-index:5;padding:4px 10px;line-height:1;color:var(--txM)}
-.bm-btn:hover{background:var(--s2);color:var(--accY);border-color:rgba(200,150,10,.35);transform:scale(1.05)}
-.bm-btn.on{background:rgba(200,150,10,.12);color:var(--accY);border-color:rgba(200,150,10,.4)}
-.bm-count{font-size:9px;background:var(--accY);color:#0a0804;border-radius:3px;padding:1px 6px;font-weight:700;margin-left:4px}
+.bm-btn{position:absolute;top:10px;left:10px;background:var(--s3);border:1px solid var(--brd);border-radius:12px;font-size:14px;cursor:pointer;transition:all .15s;z-index:5;padding:4px 10px;line-height:1;color:var(--txM)}
+.bm-btn:hover{background:var(--s2);color:var(--acc);border-color:rgba(232,114,154,.3);transform:scale(1.05)}
+.bm-btn.on{background:rgba(232,114,154,.08);color:var(--acc);border-color:rgba(232,114,154,.3)}
+.bm-count{font-size:9px;background:var(--acc);color:#fff;border-radius:8px;padding:1px 6px;font-weight:700;margin-left:4px}
 .fc-fr{position:relative}
 
 /* ── Unified module tabs ── */
 .u-tabs{display:flex;gap:4px;margin:10px 0;padding:0 4px;flex-wrap:wrap}
-.u-tab{flex:1;min-width:70px;padding:8px 4px;border:1px solid var(--brd);border-radius:3px;background:var(--s2);color:var(--txM);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.u-tab{flex:1;min-width:70px;padding:8px 4px;border:1px solid var(--brd);border-radius:12px;background:var(--s2);color:var(--txM);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
 .u-tab:hover{background:var(--s3);color:var(--tx)}
 .u-tab.on{background:var(--acc);color:#fff;border-color:transparent}
-.u-tab.quiz.on{background:var(--accB);color:#e8d5b0}
-.u-tab.write.on{background:var(--accG);color:#0a0804}
+.u-tab.quiz.on{background:var(--accB);color:#fff}
+.u-tab.write.on{background:var(--accG);color:#fff}
 
 /* ── TTS ── */
-.tts{background:none;border:1px solid var(--brd);border-radius:3px;padding:4px 10px;cursor:pointer;font-size:16px;color:var(--txM);transition:all .15s;margin:0 4px}
-.tts:hover{background:var(--s3);color:var(--accY);border-color:var(--accY)}
-.tts.playing{color:var(--accY);border-color:var(--accY);animation:pulse .6s ease infinite}
+.tts{background:none;border:1px solid var(--brd);border-radius:12px;padding:4px 10px;cursor:pointer;font-size:16px;color:var(--txM);transition:all .15s;margin:0 4px}
+.tts:hover{background:var(--s3);color:var(--acc);border-color:var(--acc)}
+.tts.playing{color:var(--acc);border-color:var(--acc);animation:pulse .6s ease infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 
 /* ── SRS weak badge ── */
-.srs-badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;padding:1px 6px;border-radius:3px;font-weight:700;margin-left:4px}
+.srs-badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;padding:1px 6px;border-radius:8px;font-weight:700;margin-left:4px}
 
 /* ── Writing practice ── */
-.wr-area{background:var(--s1);border:1px solid var(--brd);border-radius:4px;padding:16px;margin:12px 0}
+.wr-area{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:16px;margin:12px 0}
 .wr-word{font-size:32px;font-weight:700;text-align:center;margin:8px 0;color:var(--tx)}
 .wr-hint{font-size:13px;color:var(--txM);text-align:center;margin-bottom:12px}
-.wr-input{width:100%;background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:12px;font-size:16px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;resize:none;min-height:60px}
-.wr-input:focus{border-color:var(--accY);outline:none}
-.wr-sub{width:100%;padding:12px;border:none;border-radius:3px;background:var(--accG);color:#0a0804;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:all .15s}
-.wr-sub:hover{filter:brightness(1.15)}
+.wr-input{width:100%;background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:16px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;resize:none;min-height:60px}
+.wr-input:focus{border-color:var(--acc);outline:none}
+.wr-sub{width:100%;padding:12px;border:none;border-radius:12px;background:var(--accG);color:#fff;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:all .15s}
+.wr-sub:hover{filter:brightness(1.1)}
 .wr-sub:disabled{opacity:.4;cursor:not-allowed}
-.wr-fb{background:var(--s2);border-radius:4px;padding:14px;margin-top:12px;line-height:1.7;font-size:14px;white-space:pre-wrap;color:var(--tx)}
-.wr-fb .ok{color:var(--grn)}.wr-fb .fix{color:var(--accY)}.wr-fb .ex{color:#6aabdc;font-size:13px;margin-top:8px;display:block}
+.wr-fb{background:var(--s2);border-radius:12px;padding:14px;margin-top:12px;line-height:1.7;font-size:14px;white-space:pre-wrap;color:var(--tx)}
+.wr-fb .ok{color:var(--grn)}.wr-fb .fix{color:var(--accY)}.wr-fb .ex{color:var(--accB);font-size:13px;margin-top:8px;display:block}
 
 /* ── API loading ── */
 .api-loading{text-align:center;padding:20px;color:var(--txM)}
 .api-loading .dot{display:inline-block;animation:dotBounce .6s ease infinite;font-size:24px;margin:0 2px}
 .api-loading .dot:nth-child(2){animation-delay:.1s}.api-loading .dot:nth-child(3){animation-delay:.2s}
 @keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.ex-btn{background:var(--s3);border:1px solid var(--brd);border-radius:3px;padding:6px 12px;cursor:pointer;font-size:12px;color:var(--txM);margin-top:8px;transition:all .15s}
-.ex-btn:hover{background:var(--s2);color:var(--accY);border-color:var(--accY)}
-.ex-box{background:var(--s1);border-radius:4px;padding:10px;margin-top:8px;font-size:13px;line-height:1.7}
+.ex-btn{background:var(--s3);border:1px solid var(--brd);border-radius:12px;padding:6px 12px;cursor:pointer;font-size:12px;color:var(--txM);margin-top:8px;transition:all .15s}
+.ex-btn:hover{background:var(--s2);color:var(--acc);border-color:var(--acc)}
+.ex-box{background:var(--s1);border-radius:12px;padding:10px;margin-top:8px;font-size:13px;line-height:1.7}
 .ex-box .ja{font-size:16px;color:var(--tx)}.ex-box .en{color:var(--txM);font-size:12px}.ex-box .bn{color:var(--accY);font-size:12px}
 
 /* ── N3 fold ── */
-.n3-fold{background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:10px 14px;margin-top:8px;cursor:pointer;font-size:12px;color:var(--txM)}
+.n3-fold{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:10px 14px;margin-top:8px;cursor:pointer;font-size:12px;color:var(--txM)}
 .n3-fold:hover{background:var(--s3);color:var(--tx)}
 .n3-fold .arrow{transition:transform .2s;display:inline-block}
 .n3-fold.open .arrow{transform:rotate(90deg)}
@@ -513,12 +632,13 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .lvl-b.n3{opacity:.55;border-style:dashed}.lvl-b.n3:hover{opacity:1}
 .cd .cd-sub{font-size:10px;color:var(--txD);margin-top:4px}
 
-/* ── Scrolling battle animation ── */
-@keyframes hexGlow{0%,100%{filter:drop-shadow(0 2px 4px rgba(192,57,43,0.25))}
-  50%{filter:drop-shadow(0 2px 12px rgba(192,57,43,0.55))}}
-.hex-cell.status-red{animation:hexGlow 3s ease-in-out infinite}
-.hex-cell.status-danger{animation:hexGlow 2s ease-in-out infinite}
-
+/* ── Hex petal bloom animation ── */
+@keyframes petalBloom{
+  0%,100%{filter:drop-shadow(0 3px 8px rgba(232,114,154,0.2))}
+  50%{filter:drop-shadow(0 3px 14px rgba(232,114,154,0.4))}
+}
+.hex-cell.status-red{animation:petalBloom 3s ease-in-out infinite}
+.hex-cell.status-danger{animation:petalBloom 2.5s ease-in-out infinite}
 
 
 </style>
@@ -532,7 +652,6 @@ const L={
   heroD2:{ja:'N5〜N3 + いろどり対応',en:'N5–N3 + Irodori',bn:'N5–N3 + ইরোদোরি'},
   streak:{ja:'🔥 連続',en:'🔥 STREAK',bn:'🔥 ধারা'},correct:{ja:'✓ 正解',en:'✓ CORRECT',bn:'✓ সঠিক'},
   vocabL:{ja:'📖 語彙',en:'📖 VOCAB',bn:'📖 শব্দ'},kanjiL:{ja:'🈶 漢字',en:'🈶 KANJI',bn:'🈶 কাঞ্জি'},
-  // Sections
   secKana:{ja:'📝 もじ',en:'📝 Characters',bn:'📝 অক্ষর'},
   secVoc:{ja:'📖 語彙',en:'📖 Vocabulary',bn:'📖 শব্দভাণ্ডার'},
   secKan:{ja:'🈶 漢字',en:'🈶 Kanji',bn:'🈶 কাঞ্জি'},
@@ -541,13 +660,11 @@ const L={
   secTime:{ja:'🕐 時間・数字',en:'🕐 Time & Numbers',bn:'🕐 সময় ও সংখ্যা'},
   secGram:{ja:'📗 文法・助詞',en:'📗 Grammar & Particles',bn:'📗 ব্যাকরণ ও পার্টিকেল'},
   secWrite:{ja:'✍️ 作文練習',en:'✍️ Writing Practice',bn:'✍️ লেখার অনুশীলন'},
-  // Tabs
   tFlash:{ja:'📇 フラッシュ',en:'📇 Flash',bn:'📇 ফ্ল্যাশ'},
   tQuiz:{ja:'🎯 クイズ',en:'🎯 Quiz',bn:'🎯 কুইজ'},
   tWrite:{ja:'✍️ 作文',en:'✍️ Write',bn:'✍️ লেখা'},
   tWeak:{ja:'💀 弱点',en:'💀 Weak',bn:'💀 দুর্বল'},
   tPattern:{ja:'📗 パターン',en:'📗 Patterns',bn:'📗 প্যাটার্ন'},
-  // Card descriptions
   cdKana:{ja:'ひらがな・カタカナ練習',en:'Hiragana & Katakana practice',bn:'হিরাগানা ও কাতাকানা অনুশীলন'},
   cdVoc:{ja:'N5/N4 + いろどり語彙',en:'N5/N4 + Irodori vocabulary',bn:'N5/N4 + ইরোদোরি শব্দ'},
   cdKan:{ja:'N5/N4 読み書き',en:'N5/N4 reading & writing',bn:'N5/N4 পড়া ও লেখা'},
@@ -556,7 +673,6 @@ const L={
   cdTime:{ja:'時間・日付・数字・助数詞',en:'Time, date, numbers, counters',bn:'সময়, তারিখ, সংখ্যা, গণনা'},
   cdGram:{ja:'N5文型 + 助詞18種',en:'N5 patterns + 18 particles',bn:'N5 প্যাটার্ন + ১৮ পার্টিকেল'},
   cdWrite:{ja:'語彙を使って文を作る練習',en:'Practice making sentences',bn:'বাক্য তৈরির অনুশীলন'},
-  // In-module UI
   prev:{ja:'← 前',en:'← Prev',bn:'← আগে'},next:{ja:'次 →',en:'Next →',bn:'পরে →'},
   nextQ:{ja:'次へ →',en:'Next →',bn:'পরবর্তী →'},
   tap:{ja:'タップで答えを見る',en:'Tap to see answer',bn:'উত্তর দেখতে ট্যাপ করুন'},
@@ -590,8 +706,6 @@ const L={
   speak:{ja:'🔊',en:'🔊',bn:'🔊'},
   weakList:{ja:'💀 弱点リスト',en:'💀 Weak items',bn:'💀 দুর্বল তালিকা'},
   noWeak:{ja:'弱点なし！全問正解！',en:'No weak items! All correct!',bn:'দুর্বল কিছু নেই! সব সঠিক!'},
-
-  // ── Verb/Adj form labels ──
   f_dict:{ja:'辞書形',en:'Dictionary',bn:'অভিধান'},
   f_nai:{ja:'ない形',en:'Nai-form',bn:'নাই-ফর্ম'},
   f_ta:{ja:'た形',en:'Ta-form',bn:'তা-ফর্ম'},
@@ -610,14 +724,11 @@ const L={
   f_ku:{ja:'く(adv)',en:'ku (adv)',bn:'কু (ক্রিয়া বি.)'},
   f_ni:{ja:'に(adv)',en:'ni (adv)',bn:'নি (ক্রিয়া বি.)'},
   f_ba:{ja:'ば形',en:'Ba-form',bn:'বা-ফর্ম'},
-
   f_iadj:{ja:'い形容詞',en:'i-adjective',bn:'ই-বিশেষণ'},
   f_naadj:{ja:'な形容詞',en:'na-adjective',bn:'না-বিশেষণ'},
   f_onyomi:{ja:'音読み',en:'On-yomi',bn:'অন-ইয়োমি'},
   f_kunyomi:{ja:'訓読み',en:'Kun-yomi',bn:'কুন-ইয়োমি'},
-
   t_all:{ja:'全部',en:'All',bn:'সব'},
-
   c_hour:{ja:'時',en:'Hour',bn:'ঘণ্টা'},
   c_min:{ja:'分',en:'Minute',bn:'মিনিট'},
   c_month:{ja:'月',en:'Month',bn:'মাস'},
@@ -627,12 +738,9 @@ const L={
   c_num:{ja:'数字',en:'Number',bn:'সংখ্যা'},
   c_time:{ja:'時間',en:'Time',bn:'সময়'},
   c_date:{ja:'日付',en:'Date',bn:'তারিখ'},
-
   cPF:{ja:'助詞',en:'Particles',bn:'পার্টিকেল'},
   cGQ:{ja:'助詞クイズ',en:'Particle Quiz',bn:'পার্টিকেল কুইজ'},
   resultPageLabel:{ja:'📋 解説',en:'📋 Answer',bn:'📋 উত্তর ব্যাখ্যা'},
-
-  // ── Review / LongTerm / Dashboard strings ──
   revTitle:{ja:'📋 復習クイズ',en:'📋 Review Quiz',bn:'📋 পুনরালোচনা কুইজ'},
   revSelectCat:{ja:'カテゴリーを選んでください',en:'Choose a category',bn:'একটি বিভাগ বেছে নিন'},
   revOtherCat:{ja:'別のカテゴリーを選ぶ',en:'Choose another category',bn:'অন্য বিভাগ বেছে নিন'},
@@ -663,15 +771,13 @@ const L={
   dashTitle:{ja:'📊 ダッシュボード',en:'📊 Dashboard',bn:'📊 ড্যাশবোর্ড'},
   dashSub:{ja:'進捗確認・合格率・ランクアップ',en:'Progress · Pass Rate · Rank Up',bn:'অগ্রগতি · পাসের হার · র্যাংক আপ'},
   homeBtnLbl:{ja:'🏠 ホーム',en:'🏠 Home',bn:'🏠 হোম'},
-  specialSec:{ja:'🚀 スペシャル学習',en:'🚀 Special Learning',bn:'🚀 বিশেষ শিক্ষা'},
+  specialSec:{ja:'🌸 スペシャル学習',en:'🌸 Special Learning',bn:'🌸 বিশেষ শিক্ষা'},
   spBizN:{ja:'ビジネスマナー',en:'Business Etiquette',bn:'ব্যবসায়িক শিষ্টাচার'},
   spBizD:{ja:'○×クイズ 99問',en:'True/False Quiz · 99 Qs',bn:'সত্য/মিথ্যা কুইজ · ৯৯টি'},
   spDkN:{ja:'電気工事士',en:'Electrician Exam',bn:'ইলেকট্রিশিয়ান পরীক্ষা'},
   spDkD:{ja:'電工漢字・専門用語',en:'Kanji & technical terms',bn:'কাঞ্জি ও কারিগরি শব্দ'},
   spKanjiN:{ja:'漢字の成り立ち',en:'Kanji Origins',bn:'কাঞ্জির উৎস'},
   spKanjiD:{ja:'絵で学ぶ漢字の起源 N5',en:'Learn N5 kanji through pictures',bn:'ছবি দিয়ে N5 কাঞ্জি শিখুন'},
-
-  // ── Denkou module strings ──
   dkFlash:{ja:'⚡ フラッシュ',en:'⚡ Flash',bn:'⚡ ফ্ল্যাশ'},
   dkMeaning:{ja:'🔤 意味クイズ',en:'🔤 Meaning Quiz',bn:'🔤 অর্থ কুইজ'},
   dkReading:{ja:'📖 読みクイズ',en:'📖 Reading Quiz',bn:'📖 পড়া কুইজ'},
@@ -713,15 +819,12 @@ const L={
 function T(k){return (L[k]&&L[k][_lang])||L[k]?.ja||k}
 function setLang(l){
   _lang=l;localStorage.setItem('nw3_lang',l);
-  // Update lang button states
   ['ja','en','bn'].forEach(function(lg){const b=document.getElementById('lb-'+lg);if(b){b.classList.toggle('on',lg===l);}});
-  // If inside a module, re-render it without losing position
   var _curMod = (typeof curMod !== 'undefined') ? curMod : null;
   if(_curMod){
     var c=document.getElementById('m-'+_curMod);
     if(c){c.innerHTML='';if(typeof initM==='function')initM(c,_curMod);}
   } else {
-    // On home page: reload to apply translations to static script tags
     location.reload();
   }
 }
@@ -731,19 +834,26 @@ function setLang(l){
      crossorigin="anonymous"></script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#080604;border-bottom:1px solid rgba(200,150,60,0.2);font-family:'Noto Sans JP',sans-serif;">
-  <span style="font-size:15px;font-weight:700;color:#e8d5b0;letter-spacing:0.05em;">Nihongo<span style="color:#c0392b;">-Work</span></span>
+
+<!-- Floating Sakura Petals -->
+<div class="sakura-bg">
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(255,250,245,0.95);border-bottom:1px solid rgba(232,114,154,0.12);font-family:'Noto Sans JP',sans-serif;position:relative;z-index:10;">
+  <span style="font-size:15px;font-weight:700;color:#3a2a1e;letter-spacing:0.05em;">Nihongo<span style="color:#e8729a;">-Work</span> <span style="font-size:10px;color:#b0a090;font-weight:400;">🌸</span></span>
   <div style="display:flex;gap:18px;">
-    <a href="index.html" style="color:#a89070;text-decoration:none;font-size:12px;">Home</a>
-    <a href="about.html" style="color:#a89070;text-decoration:none;font-size:12px;">About</a>
-    <a href="#" onclick="openArticles();return false;" style="color:#c8960a;text-decoration:none;font-size:12px;font-weight:600;">Articles</a>
-    <a href="contact.html" style="color:#a89070;text-decoration:none;font-size:12px;">Contact</a>
-    <a href="privacy.html" style="color:#a89070;text-decoration:none;font-size:12px;">Privacy</a>
+    <a href="index.html" style="color:#8a7060;text-decoration:none;font-size:12px;">Home</a>
+    <a href="about.html" style="color:#8a7060;text-decoration:none;font-size:12px;">About</a>
+    <a href="#" onclick="openArticles();return false;" style="color:#e8729a;text-decoration:none;font-size:12px;font-weight:600;">Articles</a>
+    <a href="contact.html" style="color:#8a7060;text-decoration:none;font-size:12px;">Contact</a>
+    <a href="privacy.html" style="color:#8a7060;text-decoration:none;font-size:12px;">Privacy</a>
   </div>
 </nav>
 
 <div class="topbar">
-  <div class="logo" onclick="goHome()">にほんごワーク<span class="red">-Work</span> <span class="logo-jp">攻略戦記</span></div>
+  <div class="logo" onclick="goHome()">🌸 にほんごワーク<span class="red">-Work</span> <span class="logo-jp">学びの道</span></div>
   <div class="lang-sw">
     <button class="lb" onclick="setLang('ja')" id="lb-ja">🇯🇵</button>
     <button class="lb" onclick="setLang('en')" id="lb-en">EN</button>
@@ -752,143 +862,143 @@ function setLang(l){
   <button id="home-btn" class="back-b" style="display:none" onclick="goHome()"><script>document.write(T('homeBtnLbl'))</script></button>
   <div class="top-r">
     <div class="pill" id="st-pill"><span>🔥</span><b id="st-v">0</b></div>
-    <div class="pill g"><span>✕</span><b id="sc-v">0</b></div>
+    <div class="pill g"><span>✓</span><b id="sc-v">0</b></div>
   </div>
 </div>
 
 <div class="home" id="homeV">
 
-  <!-- ── BATTLE HEADER ── -->
+  <!-- ── SAKURA HEADER ── -->
   <div class="battle-header">
     <div class="bh-top" style="gap:0">
       <div class="bh-counter enemies" style="flex:1;text-align:center;padding:14px 8px">
-        <div class="bc-icon" id="lbl-enemies">💀 過去に1回でも間違えた問題数</div>
+        <div class="bc-icon" id="lbl-enemies">🌸 復習が必要な問題</div>
         <div class="bc-n" id="dom-enemies" style="font-size:52px">--</div>
         <div class="bc-l" id="lbl-wrong-sub">問題</div>
       </div>
-      <div style="width:1px;background:rgba(200,150,60,0.2);margin:8px 0"></div>
+      <div style="width:1px;background:rgba(232,114,154,0.15);margin:8px 0"></div>
       <div class="bh-counter controlled" style="flex:1;text-align:center;padding:14px 8px">
-        <div class="bc-icon" id="lbl-controlled">⚔ 間違えた問題の中を克服した数</div>
+        <div class="bc-icon" id="lbl-controlled">✨ 克服した問題</div>
         <div class="bc-n" id="dom-controlled" style="font-size:52px">0</div>
         <div class="bc-l" id="lbl-ctrl-sub">問克服済</div>
       </div>
     </div>
   </div>
 
-  <!-- ── HEXAGONAL BATTLE MAP ── -->
+  <!-- ── HEXAGONAL SAKURA MAP ── -->
   <div class="battle-map">
     <div class="hex-grid" id="hex-map">
-      <!-- Row 1: top 4 modules (high mastery = green) -->
+      <!-- Row 1 -->
       <div class="hex-row">
         <a class="hex-cell status-danger" href="kana-practice.html" id="hex-kana">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">あ</div>
             <div class="hex-name">ひらがな</div>
             <div class="hex-pct" id="hpct-kana">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="kana-practice.html#kata" id="hex-kata">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">ア</div>
             <div class="hex-name">カタカナ</div>
             <div class="hex-pct" id="hpct-kata">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="vocab.html" id="hex-vocab">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">📖</div>
             <div class="hex-name">語彙N5</div>
             <div class="hex-pct" id="hpct-vocab">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="kanji.html" id="hex-kanji">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">漢</div>
             <div class="hex-name">漢字N5</div>
             <div class="hex-pct" id="hpct-kanji">0%</div>
-          </div>
+          </div></div>
         </a>
       </div>
-      <!-- Row 2: mid level -->
+      <!-- Row 2 -->
       <div class="hex-row">
         <a class="hex-cell status-danger" href="verb.html" id="hex-verb">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">🔄</div>
             <div class="hex-name">動詞活用</div>
             <div class="hex-pct" id="hpct-verb">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="adj.html" id="hex-adj">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">📝</div>
             <div class="hex-name">形容詞</div>
             <div class="hex-pct" id="hpct-adj">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="vocab.html#n4" id="hex-vocab4">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">📖</div>
             <div class="hex-name">語彙N4</div>
             <div class="hex-pct" id="hpct-vocab4">0%</div>
-          </div>
+          </div></div>
         </a>
       </div>
-      <!-- Row 3: harder modules -->
+      <!-- Row 3 -->
       <div class="hex-row">
         <a class="hex-cell status-danger" href="grammar.html" id="hex-gram">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">📗</div>
             <div class="hex-name">文法</div>
             <div class="hex-pct" id="hpct-gram">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="grammar.html#particles" id="hex-part">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">abc</div>
             <div class="hex-name">助詞</div>
             <div class="hex-pct" id="hpct-part">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="kanji.html#n4" id="hex-kanji4">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">漢</div>
             <div class="hex-name">漢字N4</div>
             <div class="hex-pct" id="hpct-kanji4">0%</div>
-          </div>
+          </div></div>
         </a>
         <a class="hex-cell status-danger" href="timenum.html" id="hex-time">
-          <div class="hex-inner">
+          <div class="hex-inner"><div class="hex-inner-content">
             <div class="hex-icon">🕐</div>
             <div class="hex-name">時間・数</div>
             <div class="hex-pct" id="hpct-time">0%</div>
-          </div>
+          </div></div>
         </a>
       </div>
     </div>
 
-    <!-- Samurai mascot -->
+    <!-- Mascot -->
     <div class="samurai-mascot">
-      <div class="samurai-speech" id="samurai-speech">敵陣を突破せよ！</div>
-      <div class="samurai-body">🥷</div>
+      <div class="samurai-speech" id="samurai-speech">一緒に頑張ろう！</div>
+      <div class="samurai-body">🌸</div>
     </div>
 
     <!-- Legend -->
     <div class="map-legend">
-      <div class="leg-item"><div class="leg-dot red"></div><span id="leg-red">敵支配</span></div>
-      <div class="leg-item"><div class="leg-dot yellow"></div><span id="leg-yellow">交戦中</span></div>
-      <div class="leg-item"><div class="leg-dot green"></div><span id="leg-green">制圧済</span></div>
-      <div class="leg-item"><div class="leg-dot dark"></div><span id="leg-dark">霧の戦場</span></div>
+      <div class="leg-item"><div class="leg-dot red"></div><span id="leg-red">つぼみ</span></div>
+      <div class="leg-item"><div class="leg-dot yellow"></div><span id="leg-yellow">開花中</span></div>
+      <div class="leg-item"><div class="leg-dot green"></div><span id="leg-green">満開</span></div>
+      <div class="leg-item"><div class="leg-dot dark"></div><span id="leg-dark">未開花</span></div>
     </div>
   </div>
 
-  <!-- ── BATTLE BUTTONS ── -->
+  <!-- ── ACTION BUTTON ── -->
   <div class="battle-actions" style="display:block">
-    <button class="battle-btn primary" onclick="startWrongQuiz()" style="width:100%;border-radius:0;font-size:15px;padding:16px" id="attack-btn">
-      <span>⚔</span> <span id="attack-btn-label">間違えた問題を攻略開始</span>
+    <button class="battle-btn primary" onclick="startWrongQuiz()" style="width:100%;border-radius:0 0 16px 16px;font-size:15px;padding:16px" id="attack-btn">
+      <span>🌸</span> <span id="attack-btn-label">復習クイズを始めよう！</span>
     </button>
   </div>
   <!-- Wrong Quiz Overlay -->
-  <div id="wrong-quiz-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;overflow-y:auto">
+  <div id="wrong-quiz-overlay" style="display:none;position:fixed;inset:0;background:rgba(254,249,244,0.96);z-index:200;overflow-y:auto">
     <div style="max-width:600px;margin:0 auto;padding:20px">
       <div id="wrong-quiz-inner"></div>
     </div>
@@ -905,21 +1015,21 @@ function setLang(l){
   <!-- ── Articles & Guides ── -->
   <div class="sec-t" style="margin:20px 12px 10px">📚 Articles &amp; Guides</div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin:0 12px 8px">
-    <a href="roadmap.html" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;display:block;text-decoration:none" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(200,150,10,0.4)'" onmouseout="this.style.transform='';this.style.borderColor=''">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#c8960a,#c0392b)"></div>
+    <a href="roadmap.html" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;display:block;text-decoration:none" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(232,114,154,0.3)'" onmouseout="this.style.transform='';this.style.borderColor=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#e8a84c,#e8729a);border-radius:12px 12px 0 0"></div>
       <div style="font-size:24px;margin-bottom:6px">🗺</div>
       <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;color:var(--tx)">Learning Roadmap</div>
       <div style="font-size:10px;color:var(--txD);line-height:1.5">N5→N4→N3→日本就職ガイド</div>
     </a>
-    <a href="guide.html" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;display:block;text-decoration:none" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(74,140,74,0.4)'" onmouseout="this.style.transform='';this.style.borderColor=''">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#4a8c4a,#2c5f8a)"></div>
+    <a href="guide.html" style="background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;display:block;text-decoration:none" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(93,186,125,0.3)'" onmouseout="this.style.transform='';this.style.borderColor=''">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#5dba7d,#5a9fd4);border-radius:12px 12px 0 0"></div>
       <div style="font-size:24px;margin-bottom:6px">📖</div>
       <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;color:var(--tx)">How to Use</div>
       <div style="font-size:10px;color:var(--txD);line-height:1.5">クイズの使い方ガイド</div>
     </a>
   </div>
 
-  <div style="text-align:center;padding:20px 0 40px;color:var(--txD);font-size:10px;letter-spacing:.08em">NIHONGO WORK v10 — Built for Bangladeshi workers in Japan</div>
+  <div style="text-align:center;padding:20px 0 40px;color:var(--txD);font-size:10px;letter-spacing:.08em">🌸 NIHONGO WORK v10 — Built for Bangladeshi workers in Japan 🌸</div>
 
 </div>
 
@@ -931,15 +1041,9 @@ function setLang(l){
 <script src="./enhanced.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════
-//  BATTLE MAP ENGINE — 全機能実装
+//  SAKURA MAP ENGINE — 全機能実装
 // ═══════════════════════════════════════════════════════
 
-// ── SRS キーから全問データを集計
-// SRS._key = 'nw3_srs_' + mod + '_' + item[0 or q or p]
-// ここではlocalStorageを直接スキャンして集計する
-
-// モジュール定義: hex id → SRS modKey + data配列
-// data配列はdata.jsが読み込まれた後に参照
 function getBattleData() {
   const mods = [
     { id:'hex-kana',   pctId:'hpct-kana',   mod:'kana',    getData:()=>[...HB,...HD],
@@ -968,7 +1072,6 @@ function getBattleData() {
   return mods;
 }
 
-// SRS から正答率を取得（modKey + items配列から）
 function calcModAcc(modKey, items) {
   let c=0, w=0;
   items.forEach(function(item){
@@ -982,7 +1085,6 @@ function calcModAcc(modKey, items) {
   return t>0 ? {pct:Math.round(c/t*100), c, w, t} : null;
 }
 
-// 全モジュールの「間違えた問題数」を取得（w > c のアイテム = 苦手なアイテム）
 function getAllWrongItems() {
   const results = [];
   const modDefs = [
@@ -1003,7 +1105,7 @@ function getAllWrongItems() {
       try {
         const d = JSON.parse(localStorage.getItem(key)||'{}');
         const w = d.w||0;
-        if(w > 0) {  // 1回でも間違えたら永久にカウント（減らない）
+        if(w > 0) {
           results.push({ item, mod:def.mod, label:def.label, key, w, c:d.c||0 });
         }
       } catch(e){}
@@ -1012,11 +1114,9 @@ function getAllWrongItems() {
   return results;
 }
 
-// 制圧数 = シンプルなカウンター（攻略クイズで1問正解 → +1）
 function getControlled() { return parseInt(localStorage.getItem('nw3_controlled')||'0'); }
 function addControlled(n) { var v = getControlled() + (n||1); localStorage.setItem('nw3_controlled', String(v)); return v; }
 
-// ── メイン：バトルマップ描画
 function renderBattleMap() {
   const mods = getBattleData();
   const lang = (typeof _lang !== 'undefined') ? _lang : 'ja';
@@ -1026,7 +1126,6 @@ function renderBattleMap() {
     const pctEl = document.getElementById(m.pctId);
     const nameEl = el ? el.querySelector('.hex-name') : null;
 
-    // 言語別の名前を更新
     if(nameEl){
       nameEl.textContent = lang==='en' ? m.nameEn : lang==='bn' ? m.nameBn : m.nameJa;
     }
@@ -1042,21 +1141,18 @@ function renderBattleMap() {
 
     const acc = calcModAcc(m.mod, items);
     if(!acc){
-      // 未回答 = 0%・真っ赤
       if(pctEl) pctEl.textContent = '0%';
       if(el) el.className = 'hex-cell status-danger';
       return;
     }
     if(pctEl) pctEl.textContent = acc.pct + '%';
 
-    // 色更新: 0%=danger(赤), 1-49%=red, 50-79%=yellow, 80%+=green
     if(el){
       const cls = acc.pct>=80 ? 'status-green' : acc.pct>=50 ? 'status-yellow' : acc.pct>0 ? 'status-red' : 'status-danger';
       el.className = 'hex-cell ' + cls;
     }
   });
 
-  // 間違えた問題数 & 制圧カウンター更新
   const wrongItems = getAllWrongItems();
   const totalWrong = wrongItems.length;
   const controlled = getControlled();
@@ -1066,17 +1162,16 @@ function renderBattleMap() {
   if(enemEl) enemEl.textContent = totalWrong;
   if(ctrlEl) ctrlEl.textContent = controlled;
 
-  // 言語別ラベル
   const lblMap = {
-    'lbl-enemies':    {ja:'💀 過去に1回でも間違えた問題数', en:'💀 Ever Answered Wrong', bn:'💀 কখনো ভুল হয়েছে'},
+    'lbl-enemies':    {ja:'🌸 復習が必要な問題', en:'🌸 Questions to Review', bn:'🌸 পুনরালোচনা প্রয়োজন'},
     'lbl-wrong-sub':  {ja:'問題', en:'questions', bn:'প্রশ্ন'},
-    'lbl-controlled': {ja:'⚔ 間違えた問題の中を克服した数', en:'⚔ Overcome from Mistakes', bn:'⚔ ভুল থেকে কাটিয়ে উঠেছে'},
-    'lbl-ctrl-sub':   {ja:'問克服済', en:'overcome', bn:'কাটিয়ে উঠেছে'},
-    'attack-btn-label':{ja:'間違えた問題を攻略開始', en:'Start Wrong Answer Quiz', bn:'ভুল প্রশ্নের কুইজ শুরু'},
+    'lbl-controlled': {ja:'✨ 克服した問題', en:'✨ Questions Mastered', bn:'✨ আয়ত্ত করেছে'},
+    'lbl-ctrl-sub':   {ja:'問克服済', en:'mastered', bn:'আয়ত্ত'},
+    'attack-btn-label':{ja:'復習クイズを始めよう！', en:'Start Review Quiz!', bn:'পুনরালোচনা কুইজ শুরু!'},
     'samurai-speech': {
-      ja:['諦めるな、武士！','弱点を制圧せよ！','今日も修行だ！','敵を倒せ！'],
-      en:['Never give up!','Conquer your weaknesses!','Train hard today!','Defeat the enemy!'],
-      bn:['হাল ছেড়ো না!','দুর্বলতা জয় করো!','আজও অনুশীলন করো!','শত্রু পরাজিত করো!']
+      ja:['一緒に頑張ろう！','花を咲かせよう！','今日も楽しく学ぼう！','できるよ！'],
+      en:['Let\'s do this together!','Let\'s bloom!','Enjoy learning today!','You can do it!'],
+      bn:['একসাথে করি!','ফুল ফোটাই!','আজও মজা করে শিখি!','তুমি পারবে!']
     }
   };
 
@@ -1085,7 +1180,6 @@ function renderBattleMap() {
     if(!el2) return;
     const v = lblMap[id];
     if(Array.isArray(v[lang])){
-      // random speech
       const arr = v[lang]||v['ja'];
       el2.textContent = arr[Math.floor(Math.random()*arr.length)];
     } else {
@@ -1093,12 +1187,11 @@ function renderBattleMap() {
     }
   });
 
-  // 凡例の言語
   const legendMap = {
-    'leg-red':    {ja:'敵支配', en:'Enemy', bn:'শত্রু'},
-    'leg-yellow': {ja:'交戦中', en:'Fighting', bn:'লড়াই'},
-    'leg-green':  {ja:'制圧済', en:'Conquered', bn:'জয়'},
-    'leg-dark':   {ja:'霧の戦場', en:'Unknown', bn:'অজানা'},
+    'leg-red':    {ja:'つぼみ', en:'Budding', bn:'কুঁড়ি'},
+    'leg-yellow': {ja:'開花中', en:'Blooming', bn:'ফুটছে'},
+    'leg-green':  {ja:'満開', en:'Full Bloom', bn:'পূর্ণ প্রস্ফুটিত'},
+    'leg-dark':   {ja:'未開花', en:'Not yet', bn:'এখনো না'},
   };
   Object.keys(legendMap).forEach(function(id){
     const el3 = document.getElementById(id);
@@ -1106,17 +1199,15 @@ function renderBattleMap() {
   });
 }
 
-// ── 「間違えた問題を攻略開始」クイズ機能
 function startWrongQuiz() {
   const wrongItems = getAllWrongItems();
   if(wrongItems.length === 0){
     const lang = (typeof _lang !== 'undefined') ? _lang : 'ja';
-    const msg = {ja:'間違えた問題がありません！すごい！', en:'No wrong answers! Amazing!', bn:'কোনো ভুল নেই! অসাধারণ!'};
+    const msg = {ja:'間違えた問題がありません！すごい！🌸', en:'No wrong answers! Amazing! 🌸', bn:'কোনো ভুল নেই! অসাধারণ! 🌸'};
     alert(msg[lang]||msg['ja']);
     return;
   }
 
-  // 10問ランダムに選出
   const shuffled = wrongItems.slice().sort(()=>Math.random()-0.5);
   const selected = shuffled.slice(0, 10);
 
@@ -1131,23 +1222,19 @@ function startWrongQuiz() {
 function runWrongQuiz(questions, container, overlay) {
   const lang = (typeof _lang !== 'undefined') ? _lang : 'ja';
   let currentIdx = 0;
-  let results = []; // {item, mod, correct: bool}
+  let results = [];
   const total = questions.length;
 
   function shuf(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
 
   function getQuestion(q) {
-    // q = { item, mod, label, key, w, c }
     const item = q.item;
     const mod = q.mod;
-    // Build question: show word/kanji, ask meaning
     let question = '', answer = '', opts = [];
 
     if(mod === 'kana') {
-      // item: [char, romaji, ...]
       question = item[0]||'';
       answer = item[1]||'';
-      // generate distractors from kana pool
       const pool = [...HB,...HD,...KB,...KD];
       const wrongs = shuf(pool.filter(x=>x[1]!==answer)).slice(0,3).map(x=>x[1]);
       opts = shuf([answer, ...wrongs]);
@@ -1197,39 +1284,34 @@ function runWrongQuiz(questions, container, overlay) {
 
     const btnsHTML = qData.opts.map(opt =>
       `<button onclick="handleWrongAns(this,'${opt.replace(/'/g,"\\'")}','${qData.answer.replace(/'/g,"\\'")}',${currentIdx})"
-        style="width:100%;padding:14px 16px;margin:4px 0;background:rgba(30,20,8,0.9);border:1px solid rgba(200,150,60,0.2);
-        color:#e8d5b0;font-size:14px;font-family:inherit;cursor:pointer;border-radius:4px;text-align:left;
-        transition:all 0.15s" onmouseover="this.style.borderColor='rgba(200,150,60,0.6)'" onmouseout="if(!this.dataset.answered)this.style.borderColor='rgba(200,150,60,0.2)'">${opt}</button>`
+        style="width:100%;padding:14px 16px;margin:4px 0;background:#fff8f3;border:1px solid rgba(232,114,154,0.15);
+        color:#3a2a1e;font-size:14px;font-family:inherit;cursor:pointer;border-radius:12px;text-align:left;
+        transition:all 0.15s" onmouseover="this.style.borderColor='rgba(232,114,154,0.4)';this.style.background='#ffeee4'" onmouseout="if(!this.dataset.answered){this.style.borderColor='rgba(232,114,154,0.15)';this.style.background='#fff8f3'}">${opt}</button>`
     ).join('');
 
     container.innerHTML = `
       <div style="padding:16px 0">
-        <!-- Close -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <div style="font-size:11px;color:#a89070">${currentIdx+1} / ${total}</div>
-          <button onclick="closeWrongQuiz()" style="background:none;border:1px solid rgba(200,150,60,0.3);color:#a89070;padding:4px 12px;border-radius:3px;cursor:pointer;font-size:11px">✕ 閉じる</button>
+          <div style="font-size:11px;color:#8a7060">${currentIdx+1} / ${total}</div>
+          <button onclick="closeWrongQuiz()" style="background:none;border:1px solid rgba(232,114,154,0.2);color:#8a7060;padding:4px 12px;border-radius:20px;cursor:pointer;font-size:11px">✕ 閉じる</button>
         </div>
-        <!-- Progress bar -->
-        <div style="background:rgba(255,255,255,0.08);height:4px;border-radius:2px;margin-bottom:20px;overflow:hidden">
-          <div style="background:linear-gradient(90deg,#c0392b,#c8960a);height:100%;width:${progressPct}%;transition:width 0.3s"></div>
+        <div style="background:rgba(232,114,154,0.1);height:6px;border-radius:3px;margin-bottom:20px;overflow:hidden">
+          <div style="background:linear-gradient(90deg,#e8729a,#f4a0b8);height:100%;width:${progressPct}%;transition:width 0.3s;border-radius:3px"></div>
         </div>
-        <!-- Category badge -->
-        <div style="font-size:10px;color:#c8960a;background:rgba(200,150,10,0.1);border:1px solid rgba(200,150,10,0.3);
-          display:inline-block;padding:2px 10px;border-radius:3px;margin-bottom:12px">${qData.label}</div>
-        <!-- Question -->
-        <div style="background:linear-gradient(160deg,#1a1208,#120d04);border:1px solid rgba(200,150,60,0.2);
-          border-radius:4px;padding:28px;text-align:center;margin-bottom:14px;position:relative">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#c0392b,#c8960a)"></div>
-          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:52px;font-weight:900;color:#e8d5b0;
-            text-shadow:0 0 30px rgba(192,57,43,0.2);line-height:1.2">${qData.question}</div>
-          <div style="font-size:11px;color:#6b5840;margin-top:8px">${{ja:'意味は？',en:'What does this mean?',bn:'এর অর্থ কী?'}[lang]||'意味は？'}</div>
+        <div style="font-size:10px;color:#e8729a;background:rgba(232,114,154,0.08);border:1px solid rgba(232,114,154,0.2);
+          display:inline-block;padding:2px 12px;border-radius:12px;margin-bottom:12px">${qData.label}</div>
+        <div style="background:linear-gradient(160deg,#fff8f3,#fef2e8);border:1px solid rgba(232,114,154,0.15);
+          border-radius:16px;padding:28px;text-align:center;margin-bottom:14px;position:relative">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e8729a,#f4a0b8);border-radius:16px 16px 0 0"></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:52px;font-weight:900;color:#3a2a1e;
+            text-shadow:0 0 30px rgba(232,114,154,0.12);line-height:1.2">${qData.question}</div>
+          <div style="font-size:11px;color:#b09888;margin-top:8px">${{ja:'意味は？',en:'What does this mean?',bn:'এর অর্থ কী?'}[lang]||'意味は？'}</div>
         </div>
-        <!-- Options -->
         <div id="wq-opts">${btnsHTML}</div>
-        <div id="wq-feedback" style="display:none;padding:12px 16px;border-radius:4px;margin-top:8px;font-size:13px;line-height:1.7"></div>
+        <div id="wq-feedback" style="display:none;padding:12px 16px;border-radius:12px;margin-top:8px;font-size:13px;line-height:1.7"></div>
         <div id="wq-next" style="display:none;margin-top:12px">
-          <button onclick="nextWrongQ()" style="width:100%;padding:12px;background:linear-gradient(135deg,#b02a1e,#8b1a10);
-            color:#f5d5c0;border:none;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+          <button onclick="nextWrongQ()" style="width:100%;padding:12px;background:linear-gradient(135deg,#e8729a,#f4a0b8);
+            color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
             ${currentIdx<total-1 ? {ja:'次の問題 →',en:'Next →',bn:'পরবর্তী →'}[lang]||'次の問題 →' : {ja:'結果を見る',en:'See Results',bn:'ফলাফল দেখুন'}[lang]||'結果を見る'}
           </button>
         </div>
@@ -1237,7 +1319,6 @@ function runWrongQuiz(questions, container, overlay) {
   }
 
   window.handleWrongAns = function(btn, chosen, answer, idx) {
-    // Disable all buttons
     const opts = document.querySelectorAll('#wq-opts button');
     opts.forEach(b => {
       b.dataset.answered = '1';
@@ -1248,25 +1329,23 @@ function runWrongQuiz(questions, container, overlay) {
     const isOk = chosen === answer;
     results[idx] = { q: questions[idx], correct: isOk };
 
-    // Color buttons
     opts.forEach(b => {
       const bText = b.textContent.trim();
-      if(bText === answer) { b.style.background='rgba(74,140,74,0.25)'; b.style.borderColor='rgba(74,140,74,0.7)'; b.style.color='#7dd87d'; }
-      else if(bText === chosen && !isOk) { b.style.background='rgba(192,57,43,0.2)'; b.style.borderColor='rgba(192,57,43,0.5)'; b.style.color='#e07070'; }
+      if(bText === answer) { b.style.background='rgba(93,186,125,0.15)'; b.style.borderColor='rgba(93,186,125,0.5)'; b.style.color='#2a8848'; }
+      else if(bText === chosen && !isOk) { b.style.background='rgba(232,114,154,0.1)'; b.style.borderColor='rgba(232,114,154,0.4)'; b.style.color='#d45a7a'; }
     });
 
-    // Feedback
     const fb = document.getElementById('wq-feedback');
     fb.style.display = 'block';
     if(isOk){
-      fb.style.background = 'rgba(74,140,74,0.1)';
-      fb.style.border = '1px solid rgba(74,140,74,0.3)';
-      fb.style.color = '#7dd87d';
-      fb.innerHTML = '✓ ' + ({ja:'正解！',en:'Correct!',bn:'সঠিক!'}[lang]||'正解！');
+      fb.style.background = 'rgba(93,186,125,0.08)';
+      fb.style.border = '1px solid rgba(93,186,125,0.25)';
+      fb.style.color = '#2a8848';
+      fb.innerHTML = '✓ ' + ({ja:'正解！🌸',en:'Correct! 🌸',bn:'সঠিক! 🌸'}[lang]||'正解！🌸');
     } else {
-      fb.style.background = 'rgba(192,57,43,0.1)';
-      fb.style.border = '1px solid rgba(192,57,43,0.3)';
-      fb.style.color = '#e07070';
+      fb.style.background = 'rgba(232,114,154,0.06)';
+      fb.style.border = '1px solid rgba(232,114,154,0.2)';
+      fb.style.color = '#d45a7a';
       fb.innerHTML = '✗ ' + ({ja:'不正解。正解: ',en:'Wrong. Answer: ',bn:'ভুল। সঠিক: '}[lang]||'不正解。正解: ') + '<b>' + answer + '</b>';
     }
 
@@ -1293,7 +1372,6 @@ function runWrongQuiz(questions, container, overlay) {
     const wrongCount = results.filter(r=>r&&!r.correct).length;
     const pct = Math.round(correctCount/total*100);
 
-    // Update SRS + 制圧カウンター
     results.forEach(function(r){
       if(!r) return;
       const q = r.q;
@@ -1301,13 +1379,11 @@ function runWrongQuiz(questions, container, overlay) {
       try {
         const d = JSON.parse(localStorage.getItem(srsKey)||'{}');
         if(r.correct){
-          // 正解: SRS correct++ & 制圧+1
           d.c = (d.c||0)+1;
           localStorage.setItem(srsKey, JSON.stringify(d));
           addControlled(1);
           try{ addS(); }catch(e){}
         } else {
-          // 不正解: wrong++ 
           d.w = (d.w||0)+1;
           localStorage.setItem(srsKey, JSON.stringify(d));
           try{ if(typeof rstS==='function')rstS(); }catch(e){}
@@ -1315,52 +1391,51 @@ function runWrongQuiz(questions, container, overlay) {
       } catch(e){}
     });
 
-    // Wrong items for display
     const wrongList = results.filter(r=>r&&!r.correct).map(r=>{
       const item = r.q.item;
       return (item[0]||item.q||'') + ' → ' + (item[1]||item.a||'');
     });
 
-    const emoji = pct>=90?'🏆':pct>=70?'⚔':pct>=50?'💪':'📚';
+    const emoji = pct>=90?'🌸':pct>=70?'🌷':pct>=50?'🌱':'📚';
     const msg = {
-      ja: pct>=90?'完璧！':pct>=70?'よくできました！':pct>=50?'頑張りました！':'もっと練習しよう！',
-      en: pct>=90?'Perfect!':pct>=70?'Well done!':pct>=50?'Good effort!':'Keep practicing!',
-      bn: pct>=90?'নিখুঁত!':pct>=70?'ভালো করেছ!':pct>=50?'চেষ্টা ভালো!':'অনুশীলন চালিয়ে যাও!'
+      ja: pct>=90?'完璧！満開です！':pct>=70?'よくできました！':pct>=50?'頑張りました！':'もっと練習しよう！',
+      en: pct>=90?'Perfect! Full bloom!':pct>=70?'Well done!':pct>=50?'Good effort!':'Keep practicing!',
+      bn: pct>=90?'নিখুঁত! পূর্ণ প্রস্ফুটিত!':pct>=70?'ভালো করেছ!':pct>=50?'চেষ্টা ভালো!':'অনুশীলন চালিয়ে যাও!'
     }[lang]||'';
 
     const wrongListHTML = wrongList.length > 0 ?
-      `<div style="margin-top:16px;padding:12px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);border-radius:4px">
-        <div style="font-size:11px;color:#a89070;margin-bottom:8px">${{ja:'まだ間違えた問題',en:'Still wrong',bn:'এখনও ভুল'}[lang]||'まだ間違えた問題'}:</div>
-        ${wrongList.map(w=>`<div style="font-size:13px;color:#e07070;padding:3px 0;border-bottom:1px solid rgba(192,57,43,0.15)">${w}</div>`).join('')}
+      `<div style="margin-top:16px;padding:12px;background:rgba(232,114,154,0.06);border:1px solid rgba(232,114,154,0.15);border-radius:12px">
+        <div style="font-size:11px;color:#8a7060;margin-bottom:8px">${{ja:'まだ間違えた問題',en:'Still wrong',bn:'এখনও ভুল'}[lang]||'まだ間違えた問題'}:</div>
+        ${wrongList.map(w=>`<div style="font-size:13px;color:#d45a7a;padding:3px 0;border-bottom:1px solid rgba(232,114,154,0.1)">${w}</div>`).join('')}
       </div>` : '';
 
     container.innerHTML = `
       <div style="padding:16px 0;text-align:center">
         <div style="font-size:60px;margin-bottom:8px">${emoji}</div>
         <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:64px;font-weight:900;
-          background:linear-gradient(135deg,#c0392b,#c8960a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">${pct}%</div>
-        <div style="font-size:16px;color:#a89070;margin:8px 0 24px">${msg}</div>
+          background:linear-gradient(135deg,#e8729a,#e8a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">${pct}%</div>
+        <div style="font-size:16px;color:#8a7060;margin:8px 0 24px">${msg}</div>
 
         <div style="display:flex;gap:12px;justify-content:center;margin-bottom:20px">
-          <div style="background:rgba(74,140,74,0.12);border:1px solid rgba(74,140,74,0.3);border-radius:4px;padding:14px 24px">
-            <div style="font-size:10px;color:#a89070;margin-bottom:4px">${{ja:'正解',en:'Correct',bn:'সঠিক'}[lang]||'正解'}</div>
-            <div style="font-size:28px;font-weight:900;color:#7dd87d">${correctCount}</div>
+          <div style="background:rgba(93,186,125,0.08);border:1px solid rgba(93,186,125,0.2);border-radius:12px;padding:14px 24px">
+            <div style="font-size:10px;color:#8a7060;margin-bottom:4px">${{ja:'正解',en:'Correct',bn:'সঠিক'}[lang]||'正解'}</div>
+            <div style="font-size:28px;font-weight:900;color:#2a8848">${correctCount}</div>
           </div>
-          <div style="background:rgba(192,57,43,0.12);border:1px solid rgba(192,57,43,0.3);border-radius:4px;padding:14px 24px">
-            <div style="font-size:10px;color:#a89070;margin-bottom:4px">${{ja:'不正解',en:'Wrong',bn:'ভুল'}[lang]||'不正解'}</div>
-            <div style="font-size:28px;font-weight:900;color:#e07070">${wrongCount}</div>
+          <div style="background:rgba(232,114,154,0.06);border:1px solid rgba(232,114,154,0.15);border-radius:12px;padding:14px 24px">
+            <div style="font-size:10px;color:#8a7060;margin-bottom:4px">${{ja:'不正解',en:'Wrong',bn:'ভুল'}[lang]||'不正解'}</div>
+            <div style="font-size:28px;font-weight:900;color:#d45a7a">${wrongCount}</div>
           </div>
         </div>
 
         ${wrongListHTML}
 
         <div style="display:flex;gap:8px;margin-top:20px">
-          <button onclick="closeWrongQuiz()" style="flex:1;padding:14px;background:rgba(30,20,8,0.9);border:1px solid rgba(200,150,60,0.3);
-            color:#e8d5b0;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+          <button onclick="closeWrongQuiz()" style="flex:1;padding:14px;background:#fff8f3;border:1px solid rgba(232,114,154,0.2);
+            color:#3a2a1e;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
             ${lang==='en'?'Back to Map':lang==='bn'?'ম্যাপে ফিরুন':'マップに戻る'}
           </button>
-          <button onclick="startWrongQuiz()" style="flex:1;padding:14px;background:linear-gradient(135deg,#b02a1e,#8b1a10);
-            color:#f5d5c0;border:none;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+          <button onclick="startWrongQuiz()" style="flex:1;padding:14px;background:linear-gradient(135deg,#e8729a,#f4a0b8);
+            color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
             ${lang==='en'?'Try Again':lang==='bn'?'আবার চেষ্টা':'もう一度'}
           </button>
         </div>
@@ -1370,8 +1445,7 @@ function runWrongQuiz(questions, container, overlay) {
   renderQuestion();
 }
 
-// ── setLang フック: 言語切替後にバトルマップ再描画
-// head内のsetLangはリロードするが、念のためフック
+// ── setLang フック
 (function(){
   const _orig = window.setLang;
   if(typeof _orig === 'function'){
@@ -1382,11 +1456,10 @@ function runWrongQuiz(questions, container, overlay) {
   }
 })();
 
-// ── 初期化（DOMContentLoaded 後）
+// ── 初期化
 document.addEventListener('DOMContentLoaded', function(){
   renderBattleMap();
 });
-// Fallback for if DOMContentLoaded already fired
 if(document.readyState !== 'loading') {
   setTimeout(renderBattleMap, 0);
 }
