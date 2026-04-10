@@ -556,24 +556,7 @@ function setLang(l){
 </script>
 </head>
 <body>
-<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;position:sticky;top:0;z-index:200">
-  <a href="index.html" style="font-size:16px;font-weight:700;color:#fff;text-decoration:none">Nihongo<span style="color:#e74c3c">-Work</span></a>
-  <button id="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('nav-open')" style="display:none;background:none;border:1px solid #555;border-radius:6px;color:#ccc;padding:5px 10px;cursor:pointer;font-size:18px">☰</button>
-  <div id="nav-menu" style="display:flex;gap:16px;align-items:center">
-    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px">Home</a>
-    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px">About</a>
-    <a href="roadmap.html" style="color:#ccc;text-decoration:none;font-size:13px">Roadmap</a>
-    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px">Contact</a>
-  </div>
-</nav>
-<style>
-@media(max-width:600px){
-  #nav-toggle{display:block!important}
-  #nav-menu{display:none;position:absolute;top:50px;left:0;right:0;background:#1a1a1a;flex-direction:column;padding:16px 20px;gap:14px;border-bottom:1px solid #333;z-index:199}
-  #nav-menu.nav-open{display:flex!important}
-  #nav-menu a{font-size:15px}
-}
-</style>
+
 
 <div class="topbar">
   <a href="index.html" class="logo" style="text-decoration:none;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
@@ -588,6 +571,9 @@ function setLang(l){
   <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px">🕐 時間・数字 — Time & Numbers</h1>
   <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px">Learn Japanese time expressions, numbers, dates, weekdays and counters with quizzes and flashcards in Bengali and English. Essential for daily life in Japan.</p>
   <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:20px">🇧🇩 বাংলায় জাপানি সময় প্রকাশ, সংখ্যা, তারিখ, বার এবং গণনা অনুশীলন। জাপানে দৈনন্দিন জীবনের জন্য অপরিহার্য।</p>
+  <div class="mod on" id="m-timenum" style="display:block;padding:0"></div>
+
+<div style="max-width:720px;margin:0 auto;padding:0 16px"><hr style="border:none;border-top:1px solid var(--brd);margin:24px 0"></div>
 <article style="max-width:720px;margin:0 auto;padding:32px 16px 8px;font-family:'Noto Sans JP',sans-serif">
   <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;color:#1a1a1e">Japanese Time, Numbers &amp; Counters — Complete Guide for JLPT N5/N4</h2>
   <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:14px">
@@ -626,7 +612,6 @@ function setLang(l){
     This module covers all time, date, number, and counter expressions needed for JLPT N5 and N4, with Bengali translations, sound-change rules, and quiz practice.
   </p>
 </article>
-  <div class="mod on" id="m-timenum" style="display:block;padding:0"></div>
 </div>
 
 
