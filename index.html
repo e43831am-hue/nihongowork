@@ -632,6 +632,243 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;
 .lvl-b.n3{opacity:.55;border-style:dashed}.lvl-b.n3:hover{opacity:1}
 .cd .cd-sub{font-size:10px;color:var(--txD);margin-top:4px}
 
+/* ══ SEO HERO SECTION ══ */
+.seo-hero {
+  margin: 10px 12px 0;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(160deg, rgba(255,247,242,0.98) 0%, rgba(253,240,235,0.95) 100%);
+  border: 1px solid rgba(232,114,154,0.18);
+  border-bottom: none;
+  padding: 28px 24px 22px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.seo-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(232,114,154,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 80%, rgba(93,186,125,0.07) 0%, transparent 45%);
+  pointer-events: none;
+}
+.seo-hero-inner { position: relative; z-index: 1; }
+
+/* Decorative floating petals */
+.seo-petal {
+  position: absolute;
+  font-size: 22px;
+  opacity: 0.18;
+  pointer-events: none;
+  animation: seopetalDrift 6s ease-in-out infinite alternate;
+}
+.seo-petal-1 { top: 10px; left: 14px; animation-delay: 0s; font-size: 18px; }
+.seo-petal-2 { top: 14px; right: 16px; animation-delay: 1.5s; font-size: 24px; }
+.seo-petal-3 { bottom: 30px; left: 50%; animation-delay: 3s; font-size: 16px; opacity: 0.12; }
+@keyframes seopetalDrift {
+  0%   { transform: translateY(0) rotate(-8deg); }
+  100% { transform: translateY(-8px) rotate(8deg); }
+}
+
+.seo-tagline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--acc);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+.seo-h1 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--tx);
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.seo-desc {
+  font-size: 12px;
+  color: var(--txM);
+  line-height: 1.9;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+.seo-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.seo-feat {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(232,114,154,0.15);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+}
+.seo-feat-icon { color: var(--grn); font-size: 12px; }
+.seo-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.seo-badge {
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 4px 12px;
+  letter-spacing: 0.04em;
+}
+.seo-badge-pink  { background: rgba(232,114,154,0.12); color: var(--acc);  border: 1px solid rgba(232,114,154,0.25); }
+.seo-badge-green { background: rgba(93,186,125,0.10);  color: var(--grn);  border: 1px solid rgba(93,186,125,0.25);  }
+.seo-badge-blue  { background: rgba(90,159,212,0.10);  color: var(--accB); border: 1px solid rgba(90,159,212,0.25);  }
+.seo-trust {
+  margin-top: 14px;
+  padding: 8px 16px;
+  background: rgba(232,168,76,0.08);
+  border: 1px solid rgba(232,168,76,0.2);
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--txM);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+}
+.seo-trust-icon { font-size: 15px; }
+
+@media(max-width:600px) {
+  .seo-hero { margin: 8px 8px 0; padding: 22px 16px 18px; }
+  .seo-h1 { font-size: 18px; }
+  .seo-desc { font-size: 11px; }
+  .seo-feat { font-size: 10px; padding: 4px 10px; }
+}
+
+/* ══ SAKURA CATEGORY NAV (Bottom) ══ */
+.sakura-cat-nav {
+  margin: 12px 12px 0;
+  background: linear-gradient(180deg, #fff8f3 0%, #fdf4ed 60%, #fef0e8 100%);
+  border: 1px solid rgba(232,114,154,0.15);
+  border-radius: 16px;
+  padding: 22px 16px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.sakura-cat-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(232,114,154,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(93,186,125,0.05) 0%, transparent 35%);
+  pointer-events: none;
+}
+.sakura-cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.sakura-cat-branch { font-size: 12px; color: rgba(232,114,154,0.45); letter-spacing: 0.05em; }
+.sakura-cat-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--tx);
+  letter-spacing: 0.08em;
+}
+.sakura-cat-subtitle {
+  text-align: center;
+  font-size: 11px;
+  color: var(--txM);
+  margin-bottom: 18px;
+  letter-spacing: 0.06em;
+}
+.sakura-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+.scat-card {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(232,114,154,0.13);
+  border-radius: 14px;
+  padding: 12px 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+  position: relative;
+  overflow: hidden;
+  display: block;
+  backdrop-filter: blur(4px);
+}
+.scat-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(232,114,154,0.35);
+  box-shadow: 0 8px 24px rgba(232,114,154,0.15);
+}
+.scat-card:hover .scat-bloom { opacity: 0.55; transform: scale(1.2) rotate(15deg); }
+
+/* Colour-coded top bar */
+.scat-c1::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,#e8729a,#f4a0b8); border-radius:14px 14px 0 0; }
+.scat-c2::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,#5dba7d,#88d4a0); border-radius:14px 14px 0 0; }
+.scat-c3::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,#5a9fd4,#7cc0e8); border-radius:14px 14px 0 0; }
+.scat-c4::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,#e8a84c,#f4c87c); border-radius:14px 14px 0 0; }
+.scat-c5::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,#9b7dff,#b8a0ff); border-radius:14px 14px 0 0; }
+
+.scat-bloom {
+  position: absolute;
+  top: 6px; right: 7px;
+  font-size: 11px;
+  opacity: 0.22;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.scat-icon {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  line-height: 1;
+  color: var(--tx);
+}
+.scat-name {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.scat-sub {
+  font-size: 9px;
+  color: var(--txD);
+  line-height: 1.4;
+}
+
+@media(max-width:600px) {
+  .sakura-cat-nav { margin: 10px 8px 0; padding: 18px 10px 20px; }
+  .sakura-cat-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .scat-icon { font-size: 18px; }
+  .scat-name { font-size: 10px; }
+  .scat-sub { font-size: 8px; }
+}
+
 /* ── Hex petal bloom animation ── */
 @keyframes petalBloom{
   0%,100%{filter:drop-shadow(0 3px 8px rgba(232,114,154,0.2))}
@@ -868,6 +1105,33 @@ function setLang(l){
 
 <div class="home" id="homeV">
 
+  <!-- ── SEO HERO SECTION ── -->
+  <div class="seo-hero" id="seo-hero-section">
+    <div class="seo-hero-inner">
+      <div class="seo-petal seo-petal-1">🌸</div>
+      <div class="seo-petal seo-petal-2">🌸</div>
+      <div class="seo-petal seo-petal-3">🌸</div>
+      <div class="seo-tagline" id="seo-tagline">バングラデシュから日本へ</div>
+      <h1 class="seo-h1" id="seo-h1">無料日本語学習プラットフォーム</h1>
+      <p class="seo-desc" id="seo-desc">JLPT N5・N4の単語・漢字・文法をベンガル語訳付きで学べます。日本就職を目指すバングラデシュの方のために作られた、唯一の3言語対応プラットフォームです。</p>
+      <div class="seo-features">
+        <div class="seo-feat" id="seo-feat-1"><span class="seo-feat-icon">✅</span><span id="seo-f1">JLPT N5・N4 単語 1,500語以上</span></div>
+        <div class="seo-feat" id="seo-feat-2"><span class="seo-feat-icon">✅</span><span id="seo-f2">漢字の成り立ちを絵で視覚的に理解</span></div>
+        <div class="seo-feat" id="seo-feat-3"><span class="seo-feat-icon">✅</span><span id="seo-f3">電気工事士専門語彙 599語対応</span></div>
+        <div class="seo-feat" id="seo-feat-4"><span class="seo-feat-icon">✅</span><span id="seo-f4">全てベンガル語訳付き・3言語対応</span></div>
+      </div>
+      <div class="seo-badges">
+        <div class="seo-badge seo-badge-pink" id="seo-badge-target">🇧🇩 バングラデシュの学習者向け</div>
+        <div class="seo-badge seo-badge-green" id="seo-badge-free">🆓 完全無料</div>
+        <div class="seo-badge seo-badge-blue" id="seo-badge-jlpt">🎓 JLPT N5→N4→N3対応</div>
+      </div>
+    </div>
+    <div class="seo-trust" id="seo-trust">
+      <span class="seo-trust-icon">👩‍🏫</span>
+      <span id="seo-trust-text">日本語教師 10年以上の経験に基づいて制作されました</span>
+    </div>
+  </div>
+
   <!-- ── SAKURA HEADER ── -->
   <div class="battle-header">
     <div class="bh-top" style="gap:0">
@@ -1027,6 +1291,90 @@ function setLang(l){
       <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;color:var(--tx)">How to Use</div>
       <div style="font-size:10px;color:var(--txD);line-height:1.5">クイズの使い方ガイド</div>
     </a>
+  </div>
+
+  <!-- ── SAKURA CATEGORY NAVIGATION (Bottom) ── -->
+  <div class="sakura-cat-nav">
+    <div class="sakura-cat-header">
+      <div class="sakura-cat-branch">🌸 ─────</div>
+      <div class="sakura-cat-title" id="cat-nav-title">全カテゴリー</div>
+      <div class="sakura-cat-branch">───── 🌸</div>
+    </div>
+    <div class="sakura-cat-subtitle" id="cat-nav-sub">学びたいカテゴリーを選ぼう</div>
+    <div class="sakura-cat-grid">
+      <a href="kana-practice.html" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">あ</div>
+        <div class="scat-name" data-ja="ひらがな" data-en="Hiragana" data-bn="হিরাগানা">ひらがな</div>
+        <div class="scat-sub" data-ja="46文字の基礎" data-en="46 basic characters" data-bn="৪৬টি মূল অক্ষর">46文字の基礎</div>
+      </a>
+      <a href="kana-practice.html#kata" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">ア</div>
+        <div class="scat-name" data-ja="カタカナ" data-en="Katakana" data-bn="কাতাকানা">カタカナ</div>
+        <div class="scat-sub" data-ja="外来語に必須" data-en="For loanwords" data-bn="বিদেশি শব্দের জন্য">外来語に必須</div>
+      </a>
+      <a href="vocab.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📖</div>
+        <div class="scat-name" data-ja="語彙 N5/N4" data-en="Vocab N5/N4" data-bn="শব্দ N5/N4">語彙 N5/N4</div>
+        <div class="scat-sub" data-ja="1,500語以上" data-en="1,500+ words" data-bn="১,৫০০+ শব্দ">1,500語以上</div>
+      </a>
+      <a href="kanji.html" class="scat-card scat-c3">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">漢</div>
+        <div class="scat-name" data-ja="漢字 N5/N4" data-en="Kanji N5/N4" data-bn="কাঞ্জি N5/N4">漢字 N5/N4</div>
+        <div class="scat-sub" data-ja="300字マスター" data-en="Master 300 kanji" data-bn="৩০০ কাঞ্জি">300字マスター</div>
+      </a>
+      <a href="grammar.html" class="scat-card scat-c4">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📗</div>
+        <div class="scat-name" data-ja="文法・助詞" data-en="Grammar" data-bn="ব্যাকরণ">文法・助詞</div>
+        <div class="scat-sub" data-ja="N5文型 + 18助詞" data-en="N5 patterns + particles" data-bn="N5 প্যাটার্ন">N5文型 + 18助詞</div>
+      </a>
+      <a href="verb.html" class="scat-card scat-c5">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🔄</div>
+        <div class="scat-name" data-ja="動詞活用" data-en="Verb Forms" data-bn="ক্রিয়া রূপ">動詞活用</div>
+        <div class="scat-sub" data-ja="て形・ない形 etc." data-en="te/nai/ta forms" data-bn="তে/নাই ফর্ম">て形・ない形 etc.</div>
+      </a>
+      <a href="adj.html" class="scat-card scat-c5">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📝</div>
+        <div class="scat-name" data-ja="形容詞活用" data-en="Adjectives" data-bn="বিশেষণ">形容詞活用</div>
+        <div class="scat-sub" data-ja="い形・な形" data-en="i-adj / na-adj" data-bn="ই/না-বিশেষণ">い形・な形</div>
+      </a>
+      <a href="timenum.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🕐</div>
+        <div class="scat-name" data-ja="時間・数字" data-en="Time & Numbers" data-bn="সময় ও সংখ্যা">時間・数字</div>
+        <div class="scat-sub" data-ja="日常生活に必須" data-en="Daily life essentials" data-bn="দৈনন্দিন জীবন">日常生活に必須</div>
+      </a>
+      <a href="biz.html" class="scat-card scat-c3">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">💼</div>
+        <div class="scat-name" data-ja="ビジネスマナー" data-en="Business" data-bn="ব্যবসা">ビジネスマナー</div>
+        <div class="scat-sub" data-ja="○×クイズ 99問" data-en="99 etiquette Qs" data-bn="৯৯টি কুইজ">○×クイズ 99問</div>
+      </a>
+      <a href="denkou.html" class="scat-card scat-c4">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">⚡</div>
+        <div class="scat-name" data-ja="電気工事士" data-en="Electrician" data-bn="ইলেকট্রিশিয়ান">電気工事士</div>
+        <div class="scat-sub" data-ja="専門用語 599語" data-en="599 technical terms" data-bn="৫৯৯ পারিভাষিক">専門用語 599語</div>
+      </a>
+      <a href="kanjiforminghistory.html" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🖼️</div>
+        <div class="scat-name" data-ja="漢字の成り立ち" data-en="Kanji Origins" data-bn="কাঞ্জির উৎস">漢字の成り立ち</div>
+        <div class="scat-sub" data-ja="絵で学ぶ象形文字" data-en="Learn through pictures" data-bn="ছবি দিয়ে শিখুন">絵で学ぶ象形文字</div>
+      </a>
+      <a href="roadmap.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🗺</div>
+        <div class="scat-name" data-ja="学習ロードマップ" data-en="Study Roadmap" data-bn="শেখার রোডম্যাপ">学習ロードマップ</div>
+        <div class="scat-sub" data-ja="N5→N4→N3→就職" data-en="N5→N4→N3→Japan" data-bn="N5→N4→N3→জাপান">N5→N4→N3→就職</div>
+      </a>
+    </div>
   </div>
 
   <div style="text-align:center;padding:20px 0 40px;color:var(--txD);font-size:10px;letter-spacing:.08em">🌸 NIHONGO WORK v10 — Built for Bangladeshi workers in Japan 🌸</div>
@@ -1451,17 +1799,60 @@ function runWrongQuiz(questions, container, overlay) {
   if(typeof _orig === 'function'){
     window.setLang = function(l){
       _orig(l);
-      setTimeout(function(){ if(typeof renderBattleMap==='function') renderBattleMap(); }, 200);
+      setTimeout(function(){ if(typeof renderBattleMap==='function') renderBattleMap(); updateSeoLang(l); }, 200);
     };
   }
 })();
 
+function updateSeoLang(l) {
+  var lang = l || (typeof _lang !== 'undefined' ? _lang : 'ja');
+  var taglines = {ja:'バングラデシュから日本へ', en:'From Bangladesh to Japan', bn:'বাংলাদেশ থেকে জাপানে'};
+  var h1s = {ja:'無料日本語学習プラットフォーム', en:'Free Japanese Learning Platform', bn:'বিনামূল্যে জাপানি শেখার প্ল্যাটফর্ম'};
+  var descs = {
+    ja:'JLPT N5・N4の単語・漢字・文法をベンガル語訳付きで学べます。日本就職を目指すバングラデシュの方のために作られた、唯一の3言語対応プラットフォームです。',
+    en:'Learn JLPT N5 & N4 vocabulary, kanji, and grammar with Bengali translations. The only trilingual platform built specifically for Bangladeshi learners aiming to work in Japan.',
+    bn:'JLPT N5 ও N4-এর শব্দ, কাঞ্জি এবং ব্যাকরণ বাংলা অনুবাদ সহ শিখুন। বাংলাদেশি শিক্ষার্থীদের জন্য তৈরি একমাত্র ত্রিভাষিক প্ল্যাটফর্ম।'
+  };
+  var feats = {
+    f1:{ja:'JLPT N5・N4 単語 1,500語以上', en:'1,500+ JLPT N5/N4 vocabulary words', bn:'১,৫০০+ JLPT N5/N4 শব্দ'},
+    f2:{ja:'漢字の成り立ちを絵で視覚的に理解', en:'Learn kanji origins through pictographs', bn:'ছবির মাধ্যমে কাঞ্জির উৎস শিখুন'},
+    f3:{ja:'電気工事士専門語彙 599語対応', en:'599 Electrical Worker specialist terms', bn:'৫৯৯টি ইলেকট্রিশিয়ান পারিভাষিক শব্দ'},
+    f4:{ja:'全てベンガル語訳付き・3言語対応', en:'Bengali translations · 3 languages', bn:'সব কিছুতে বাংলা অনুবাদ · ৩ ভাষা'}
+  };
+  var badges = {
+    target:{ja:'🇧🇩 バングラデシュの学習者向け', en:'🇧🇩 Built for Bangladeshi learners', bn:'🇧🇩 বাংলাদেশি শিক্ষার্থীদের জন্য'},
+    free:  {ja:'🆓 完全無料', en:'🆓 Completely Free', bn:'🆓 সম্পূর্ণ বিনামূল্যে'},
+    jlpt:  {ja:'🎓 JLPT N5→N4→N3対応', en:'🎓 JLPT N5→N4→N3', bn:'🎓 JLPT N5→N4→N3'}
+  };
+  var trustTx = {ja:'日本語教師 10年以上の経験に基づいて制作されました', en:'Created by a Japanese language teacher with 10+ years of experience', bn:'১০+ বছরের অভিজ্ঞতাসম্পন্ন জাপানি ভাষা শিক্ষক দ্বারা তৈরি'};
+  var catTitle = {ja:'全カテゴリー', en:'All Categories', bn:'সব বিভাগ'};
+  var catSub = {ja:'学びたいカテゴリーを選ぼう', en:'Choose a category to study', bn:'পড়তে চাও এমন বিভাগ বেছে নাও'};
+
+  function setText(id, map) { var el=document.getElementById(id); if(el) el.textContent = map[lang]||map['ja']; }
+  setText('seo-tagline', taglines);
+  setText('seo-h1', h1s);
+  setText('seo-desc', descs);
+  setText('seo-f1', feats.f1); setText('seo-f2', feats.f2);
+  setText('seo-f3', feats.f3); setText('seo-f4', feats.f4);
+  setText('seo-badge-target', badges.target);
+  setText('seo-badge-free', badges.free);
+  setText('seo-badge-jlpt', badges.jlpt);
+  setText('seo-trust-text', trustTx);
+  setText('cat-nav-title', catTitle);
+  setText('cat-nav-sub', catSub);
+
+  document.querySelectorAll('[data-ja]').forEach(function(el){
+    el.textContent = el.getAttribute('data-'+lang) || el.getAttribute('data-ja');
+  });
+}
+
 // ── 初期化
 document.addEventListener('DOMContentLoaded', function(){
   renderBattleMap();
+  updateSeoLang();
 });
 if(document.readyState !== 'loading') {
-  setTimeout(renderBattleMap, 0);
+  setTimeout(function(){ renderBattleMap(); updateSeoLang(); }, 0);
 }
 </script>
 </body>
