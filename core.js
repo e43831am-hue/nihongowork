@@ -2894,25 +2894,19 @@ function mkDenkou(c) {
     h+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">`;
     batches.forEach((batch,bi)=>{
       const done=dkIsDone(bt.key,bi);
-      const accessible=bi===0||dkIsDone(bt.key,bi-1);
       const startWord=batch[0]?batch[0].k:'';
       const endWord=batch[batch.length-1]?batch[batch.length-1].k:'';
-      let cardStyle=`background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;position:relative;overflow:hidden;`;
-      if(!accessible) cardStyle+=`opacity:0.5;cursor:default;`;
-      else if(done) cardStyle+=`border-color:${bt.cls}55;cursor:pointer;`;
-      else cardStyle+=`cursor:pointer;`;
-      h+=`<div style="${cardStyle}" ${accessible?`onclick="dkOpenBatch_${sid}(${bi})"`:''}>`;
+      let cardStyle=`background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;position:relative;overflow:hidden;cursor:pointer;`;
+      if(done) cardStyle+=`border-color:${bt.cls}55;`;
+      h+=`<div style="${cardStyle}" onclick="dkOpenBatch_${sid}(${bi})">`;
       if(done){h+=`<div style="position:absolute;top:8px;right:8px;background:#6bbf8a;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">✓ 完了</div>`;}
-      else if(!accessible){h+=`<div style="position:absolute;top:8px;right:8px;font-size:14px">🔒</div>`;}
       else{h+=`<div style="position:absolute;top:8px;right:8px;background:#e8a84c;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">▶ 開始</div>`;}
       h+=`<div style="font-size:10px;color:#5a5856;margin-bottom:6px">セット ${bi+1}</div>`;
       h+=`<div style="font-size:${startWord.length>4?'18':'26'}px;font-family:'Noto Serif JP',serif;font-weight:700;color:#e8e6df;margin-bottom:3px">${startWord}</div>`;
       h+=`<div style="font-size:10px;color:#8a8880">〜 ${endWord}</div>`;
       h+=`<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">`;
-      if(accessible){
-        h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(107,191,138,.15);color:#6bbf8a':'background:#252730;color:#8a8880'}">📇${done?'✓':''}</span>`;
-        h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(232,168,76,.15);color:#e8a84c':'background:#252730;color:#5a5856'}">${done?'🎯':'🔒'}</span>`;
-      }
+      h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(107,191,138,.15);color:#6bbf8a':'background:#252730;color:#8a8880'}">📇${done?'✓':''}</span>`;
+      h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(232,168,76,.15);color:#e8a84c':'background:rgba(232,168,76,.08);color:#e8a84c'}">🎯</span>`;
       h+=`</div></div>`;
     });
     h+=`</div></div>`;
@@ -2942,15 +2936,10 @@ function mkDenkou(c) {
     h+=`<button onclick="dkStartFlash_${sid}(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
     h+=`<div style="width:48px;height:48px;border-radius:12px;background:#1e2028;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📇</div>`;
     h+=`<div><div style="font-size:15px;font-weight:700;color:#e8e6df;margin-bottom:3px">フラッシュカード${done?' ✓':''}</div><div style="font-size:12px;color:#8a8880">${batch.length}枚のカードで学習</div></div></button>`;
-    if(done){
-      h+=`<button onclick="dkStartQuiz_${sid}(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(232,168,76,.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
-      h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
-      h+=`<div><div style="font-size:15px;font-weight:700;color:#e8a84c;margin-bottom:3px">クイズ 🔓</div><div style="font-size:12px;color:#8a8880">意味・読み・用例クイズ</div></div></button>`;
-    } else {
-      h+=`<div style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;opacity:0.5">`;
-      h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔒</div>`;
-      h+=`<div><div style="font-size:15px;font-weight:700;color:#8a8880;margin-bottom:3px">クイズ（ロック中）</div><div style="font-size:12px;color:#5a5856">フラッシュカードを完了するとアンロック</div></div></div>`;
-    }
+    // クイズボタン — 常にアンロック
+    h+=`<button onclick="dkStartQuiz_${sid}(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(232,168,76,.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
+    h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+    h+=`<div><div style="font-size:15px;font-weight:700;color:#e8a84c;margin-bottom:3px">クイズ${done?' 🔓':''}</div><div style="font-size:12px;color:#8a8880">意味・読み・用例クイズ</div></div></button>`;
     h+=`</div></div>`;
     target.innerHTML=h;
   }
@@ -3083,24 +3072,16 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
       const endWord = batch[batch.length-1][0] || '';
       const batchNum = bi + 1;
 
-      // Determine state
-      const isFirstOrPrevDone = bi === 0 || isDone(lvl, bi-1);
-      const accessible = isFirstOrPrevDone;
+      // All batches always accessible
+      let cardStyle = done
+        ? `background:linear-gradient(135deg,rgba(107,163,104,0.08),rgba(8,145,178,0.06));border:1px solid rgba(107,163,104,0.3);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`
+        : `background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`;
 
-      let cardStyle = `background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`;
-      if (!accessible) {
-        cardStyle = `background:var(--s2);border:1px solid var(--brd);border-radius:14px;padding:14px;cursor:default;opacity:0.6;position:relative;overflow:hidden`;
-      } else if (done) {
-        cardStyle = `background:linear-gradient(135deg,rgba(107,163,104,0.08),rgba(8,145,178,0.06));border:1px solid rgba(107,163,104,0.3);border-radius:14px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden`;
-      }
-
-      h += `<div style="${cardStyle}" ${accessible ? `onclick="${sid}_openBatch(${bi})"` : ''}>`;
+      h += `<div style="${cardStyle}" onclick="${sid}_openBatch(${bi})">`;
 
       // Status badge
       if (done) {
         h += `<div style="position:absolute;top:8px;right:8px;background:var(--grn);color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">✓ 完了</div>`;
-      } else if (!accessible) {
-        h += `<div style="position:absolute;top:8px;right:8px;font-size:14px">🔒</div>`;
       } else {
         h += `<div style="position:absolute;top:8px;right:8px;background:var(--acc);color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">▶ 開始</div>`;
       }
@@ -3110,15 +3091,9 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
       h += `<div style="font-size:11px;color:var(--txM)">〜 ${endWord}</div>`;
       h += `<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">`;
       // Flash badge
-      if (accessible) {
-        h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;${done?'background:rgba(107,163,104,0.15);color:var(--grn)':'background:var(--s2);color:var(--txM)'}">📇 カード${done?'✓':''}</div>`;
-        // Quiz badge
-        if (done) {
-          h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(228,87,46,0.15);color:var(--acc)">🎯 クイズ</div>`;
-        } else {
-          h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;background:var(--s2);color:var(--txD)">🔒 クイズ</div>`;
-        }
-      }
+      h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;${done?'background:rgba(107,163,104,0.15);color:var(--grn)':'background:var(--s2);color:var(--txM)'}">📇 カード${done?'✓':''}</div>`;
+      // Quiz badge — always unlocked
+      h += `<div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(228,87,46,0.15);color:var(--acc)">🎯 クイズ</div>`;
       h += `</div>`;
       h += `</div>`;
     });
@@ -3374,18 +3349,11 @@ function mkBatch(c, modKey, levels, frontFn, backFn, qFn, optFn, verbQF) {
     h += `<div><div style="font-size:15px;font-weight:700;color:var(--tx);margin-bottom:3px">フラッシュカード${done?' ✓':''}</div>`;
     h += `<div style="font-size:12px;color:var(--txM)">10枚のカードで学習する</div></div></button>`;
 
-    // Quiz button
-    if (done) {
-      h += `<button onclick="${sid}_startQuiz(${bi})" style="display:flex;align-items:center;gap:14px;background:var(--s1);border:1px solid rgba(228,87,46,0.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s">`;
-      h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
-      h += `<div><div style="font-size:15px;font-weight:700;color:var(--acc);margin-bottom:3px">クイズ 🔓</div>`;
-      h += `<div style="font-size:12px;color:var(--txM)">10問のクイズに挑戦</div></div></button>`;
-    } else {
-      h += `<div style="display:flex;align-items:center;gap:14px;background:var(--s2);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;opacity:0.6">`;
-      h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔒</div>`;
-      h += `<div><div style="font-size:15px;font-weight:700;color:var(--txM);margin-bottom:3px">クイズ（ロック中）</div>`;
-      h += `<div style="font-size:12px;color:var(--txD)">フラッシュカードを完了するとアンロック</div></div></div>`;
-    }
+    // Quiz button — always unlocked
+    h += `<button onclick="${sid}_startQuiz(${bi})" style="display:flex;align-items:center;gap:14px;background:var(--s1);border:1px solid rgba(228,87,46,0.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s">`;
+    h += `<div style="width:48px;height:48px;border-radius:12px;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+    h += `<div><div style="font-size:15px;font-weight:700;color:var(--acc);margin-bottom:3px">クイズ${done?' 🔓':''}</div>`;
+    h += `<div style="font-size:12px;color:var(--txM)">10問のクイズに挑戦</div></div></button>`;
     h += `</div>`;
 
     const target = c.querySelector('.u-content') || c;
