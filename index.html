@@ -1053,7 +1053,17 @@ const L={
   dkAllCards:{ja:'全て',en:'All',bn:'সব'},
   adv:{ja:'🔒 上級 (N3)',en:'🔒 Advanced (N3)',bn:'🔒 উন্নত (N3)'},
   spKaigoN:{ja:'SSW介護の漢字',en:'Care Welfare Kanji',bn:'SSW কেয়ার কাঞ্জি'},
-  spKaigoD:{ja:'介護福祉専門語彙 384語',en:'Care welfare vocab · 384 words',bn:'কেয়ার ওয়েলফেয়ার শব্দ · ৩৮৪টি'}
+  spKaigoD:{ja:'介護福祉専門語彙 384語',en:'Care welfare vocab · 384 words',bn:'কেয়ার ওয়েলফেয়ার শব্দ · ৩৮৪টি'},
+  featHeadline:{ja:'🌟 注目コンテンツ',en:'🌟 Featured Courses',bn:'🌟 বিশেষ কোর্স'},
+  featSub:{ja:'このサイトの目玉コンテンツ — 他にはない専門日本語',en:"Flagship courses — specialist Japanese you won't find elsewhere",bn:'মূল কোর্স — অন্য কোথাও না পাওয়া বিশেষ জাপানি'},
+  featKaigoT:{ja:'SSW介護の漢字学習',en:'Care Welfare Kanji Learning',bn:'SSW কেয়ার কাঞ্জি শিক্ষা'},
+  featKaigoD:{ja:'介護福祉専門用語384語。フラッシュカード+クイズで効率的にマスター。',en:'384 care welfare terms. Master efficiently with flashcards + quizzes.',bn:'৩৮৪টি কেয়ার পরিভাষা। ফ্ল্যাশকার্ড+কুইজ দিয়ে দক্ষতা অর্জন।'},
+  featKaigoB:{ja:'今すぐ学習 →',en:'Study now →',bn:'এখনই শিখুন →'},
+  featKanjiT:{ja:'漢字の成り立ち',en:'Kanji Origins',bn:'কাঞ্জির উৎস'},
+  featKanjiD:{ja:'N5漢字の成り立ちをSVGイラストで視覚的に学習。象形文字の歴史から意味を深く理解。',en:'Learn N5 kanji origins through SVG illustrations. Understand meaning through pictographic history.',bn:'SVG চিত্রের মাধ্যমে N5 কাঞ্জির উৎস শিখুন। ছবির ইতিহাস থেকে অর্থ গভীরভাবে বুঝুন।'},
+  featKanjiB:{ja:'今すぐ学習 →',en:'Study now →',bn:'এখনই শিখুন →'},
+  quizMapLbl:{ja:'🗺 学習マップ & 復習クイズ',en:'🗺 Study Map & Review Quiz',bn:'🗺 শেখার ম্যাপ ও পুনরালোচনা কুইজ'},
+  quizMapSub:{ja:'間違えた問題を克服して、花を満開にしよう！',en:'Overcome wrong answers and bloom to full flower!',bn:'ভুল উত্তর কাটিয়ে উঠুন — ফুল ফুটিয়ে তুলুন!'}
 };
 function T(k){return (L[k]&&L[k][_lang])||L[k]?.ja||k}
 function setLang(l){
@@ -1064,9 +1074,22 @@ function setLang(l){
     var c=document.getElementById('m-'+_curMod);
     if(c){c.innerHTML='';if(typeof initM==='function')initM(c,_curMod);}
   } else {
+    applyFeaturedTranslations();
     location.reload();
   }
 }
+
+// ── Apply featured spotlight translations ──
+function applyFeaturedTranslations(){
+  var ids={
+    'feat-headline':'featHeadline','feat-sub':'featSub',
+    'feat-kaigo-t':'featKaigoT','feat-kaigo-d':'featKaigoD','feat-kaigo-b':'featKaigoB',
+    'feat-kanji-t':'featKanjiT','feat-kanji-d':'featKanjiD','feat-kanji-b':'featKanjiB',
+    'quiz-map-label':'quizMapLbl','quiz-map-sub':'quizMapSub'
+  };
+  for(var id in ids){var el=document.getElementById(id);if(el)el.textContent=T(ids[id]);}
+}
+document.addEventListener('DOMContentLoaded', applyFeaturedTranslations);
 
 </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874205665564653"
@@ -1134,6 +1157,151 @@ function setLang(l){
     </div>
   </div>
 
+  <!-- ── FEATURED SPOTLIGHT ── -->
+  <div style="margin:16px 12px 0;position:relative;z-index:1">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:15px;font-weight:900;color:var(--tx)" id="feat-headline"></div>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(232,114,154,0.3),transparent)"></div>
+    </div>
+    <div style="font-size:11px;color:var(--txM);margin-bottom:14px;line-height:1.6" id="feat-sub"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <!-- SSW介護 card -->
+      <a href="SSWkaigo.html" style="text-decoration:none;display:block;position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#0e1a2e,#1a2a4a);border:1px solid rgba(91,200,175,0.35);transition:all .25s cubic-bezier(.34,1.56,.64,1)" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(91,200,175,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5bc8af,#6bbf8a)"></div>
+        <div style="position:absolute;top:-20px;right:-20px;font-size:80px;opacity:0.07;pointer-events:none">🏥</div>
+        <div style="padding:16px 14px 14px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.12em;color:#5bc8af;margin-bottom:8px;text-transform:uppercase">NEW ✦ SSW 介護</div>
+          <div style="font-family:'Noto Serif JP',serif;font-size:28px;font-weight:700;color:#e8e6df;line-height:1;margin-bottom:8px">介護</div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;color:#e8e6df;margin-bottom:6px" id="feat-kaigo-t"></div>
+          <div style="font-size:10px;color:rgba(232,230,223,0.65);line-height:1.6;margin-bottom:12px" id="feat-kaigo-d"></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <span style="background:rgba(91,200,175,.15);border:1px solid rgba(91,200,175,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#5bc8af;font-weight:700">384語</span>
+            <span style="background:rgba(91,200,175,.15);border:1px solid rgba(91,200,175,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#5bc8af;font-weight:700">漢字・カタカナ・専門用語</span>
+            <span style="background:rgba(91,200,175,.15);border:1px solid rgba(91,200,175,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#5bc8af;font-weight:700">セット学習+クイズ</span>
+          </div>
+          <div style="background:#5bc8af;color:#000;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:700;text-align:center" id="feat-kaigo-b"></div>
+        </div>
+      </a>
+      <!-- 漢字の成り立ち card -->
+      <a href="kanjiforminghistory.html" style="text-decoration:none;display:block;position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#1e1608,#2e2210);border:1px solid rgba(232,168,76,0.35);transition:all .25s cubic-bezier(.34,1.56,.64,1)" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(232,168,76,0.22)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e8a84c,#f4c87c)"></div>
+        <div style="position:absolute;top:-20px;right:-20px;font-size:80px;opacity:0.07;pointer-events:none">🖼️</div>
+        <div style="padding:16px 14px 14px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.12em;color:#e8a84c;margin-bottom:8px;text-transform:uppercase">VISUAL ✦ N5 漢字</div>
+          <div style="font-family:'Noto Serif JP',serif;font-size:28px;font-weight:700;color:#f4e8d0;line-height:1;margin-bottom:8px">象形</div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;color:#f4e8d0;margin-bottom:6px" id="feat-kanji-t"></div>
+          <div style="font-size:10px;color:rgba(244,232,208,0.65);line-height:1.6;margin-bottom:12px" id="feat-kanji-d"></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <span style="background:rgba(232,168,76,.15);border:1px solid rgba(232,168,76,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8a84c;font-weight:700">N5 漢字</span>
+            <span style="background:rgba(232,168,76,.15);border:1px solid rgba(232,168,76,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8a84c;font-weight:700">SVGイラスト</span>
+            <span style="background:rgba(232,168,76,.15);border:1px solid rgba(232,168,76,.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8a84c;font-weight:700">象形文字の歴史</span>
+          </div>
+          <div style="background:#e8a84c;color:#000;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:700;text-align:center" id="feat-kanji-b"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── スペシャル学習 ── -->
+  <div class="sec-t" style="margin:20px 12px 10px"><script>document.write(T('specialSec'))</script></div>
+  <div class="cg">
+    <a class="cd c1" href="biz.html" style="text-decoration:none;color:inherit"><span class="cd-i">💼</span><div class="cd-n"><script>document.write(T('spBizN'))</script></div><div class="cd-d"><script>document.write(T('spBizD'))</script></div></a>
+    <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n"><script>document.write(T('spDkN'))</script></div><div class="cd-d"><script>document.write(T('spDkD'))</script></div></a>
+    <a class="cd c2" href="SSWkaigo.html" style="text-decoration:none;color:inherit"><span class="cd-i">🏥</span><div class="cd-n"><script>document.write(T('spKaigoN'))</script></div><div class="cd-d"><script>document.write(T('spKaigoD'))</script></div></a>
+    <a class="cd c3" href="kanjiforminghistory.html" style="text-decoration:none;color:inherit"><span class="cd-i">🖼️</span><div class="cd-n"><script>document.write(T('spKanjiN'))</script></div><div class="cd-d"><script>document.write(T('spKanjiD'))</script></div></a>
+  </div>
+
+  <!-- ── SAKURA CATEGORY NAVIGATION (Bottom) ── -->
+  <div class="sakura-cat-nav">
+    <div class="sakura-cat-header">
+      <div class="sakura-cat-branch">🌸 ─────</div>
+      <div class="sakura-cat-title" id="cat-nav-title">全カテゴリー</div>
+      <div class="sakura-cat-branch">───── 🌸</div>
+    </div>
+    <div class="sakura-cat-subtitle" id="cat-nav-sub">学びたいカテゴリーを選ぼう</div>
+    <div class="sakura-cat-grid">
+      <a href="kana-practice.html" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">あ</div>
+        <div class="scat-name" data-ja="ひらがな" data-en="Hiragana" data-bn="হিরাগানা">ひらがな</div>
+        <div class="scat-sub" data-ja="46文字の基礎" data-en="46 basic characters" data-bn="৪৬টি মূল অক্ষর">46文字の基礎</div>
+      </a>
+      <a href="kana-practice.html#kata" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">ア</div>
+        <div class="scat-name" data-ja="カタカナ" data-en="Katakana" data-bn="কাতাকানা">カタカナ</div>
+        <div class="scat-sub" data-ja="外来語に必須" data-en="For loanwords" data-bn="বিদেশি শব্দের জন্য">外来語に必須</div>
+      </a>
+      <a href="vocab.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📖</div>
+        <div class="scat-name" data-ja="語彙 N5/N4" data-en="Vocab N5/N4" data-bn="শব্দ N5/N4">語彙 N5/N4</div>
+        <div class="scat-sub" data-ja="1,500語以上" data-en="1,500+ words" data-bn="১,৫০০+ শব্দ">1,500語以上</div>
+      </a>
+      <a href="kanji.html" class="scat-card scat-c3">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">漢</div>
+        <div class="scat-name" data-ja="漢字 N5/N4" data-en="Kanji N5/N4" data-bn="কাঞ্জি N5/N4">漢字 N5/N4</div>
+        <div class="scat-sub" data-ja="300字マスター" data-en="Master 300 kanji" data-bn="৩০০ কাঞ্জি">300字マスター</div>
+      </a>
+      <a href="grammar.html" class="scat-card scat-c4">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📗</div>
+        <div class="scat-name" data-ja="文法・助詞" data-en="Grammar" data-bn="ব্যাকরণ">文法・助詞</div>
+        <div class="scat-sub" data-ja="N5文型 + 18助詞" data-en="N5 patterns + particles" data-bn="N5 প্যাটার্ন">N5文型 + 18助詞</div>
+      </a>
+      <a href="verb.html" class="scat-card scat-c5">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🔄</div>
+        <div class="scat-name" data-ja="動詞活用" data-en="Verb Forms" data-bn="ক্রিয়া রূপ">動詞活用</div>
+        <div class="scat-sub" data-ja="て形・ない形 etc." data-en="te/nai/ta forms" data-bn="তে/নাই ফর্ম">て形・ない形 etc.</div>
+      </a>
+      <a href="adj.html" class="scat-card scat-c5">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">📝</div>
+        <div class="scat-name" data-ja="形容詞活用" data-en="Adjectives" data-bn="বিশেষণ">形容詞活用</div>
+        <div class="scat-sub" data-ja="い形・な形" data-en="i-adj / na-adj" data-bn="ই/না-বিশেষণ">い形・な形</div>
+      </a>
+      <a href="timenum.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🕐</div>
+        <div class="scat-name" data-ja="時間・数字" data-en="Time & Numbers" data-bn="সময় ও সংখ্যা">時間・数字</div>
+        <div class="scat-sub" data-ja="日常生活に必須" data-en="Daily life essentials" data-bn="দৈনন্দিন জীবন">日常生活に必須</div>
+      </a>
+      <a href="biz.html" class="scat-card scat-c3">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">💼</div>
+        <div class="scat-name" data-ja="ビジネスマナー" data-en="Business" data-bn="ব্যবসা">ビジネスマナー</div>
+        <div class="scat-sub" data-ja="○×クイズ 99問" data-en="99 etiquette Qs" data-bn="৯৯টি কুইজ">○×クイズ 99問</div>
+      </a>
+      <a href="denkou.html" class="scat-card scat-c4">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">⚡</div>
+        <div class="scat-name" data-ja="電気工事士" data-en="Electrician" data-bn="ইলেকট্রিশিয়ান">電気工事士</div>
+        <div class="scat-sub" data-ja="専門用語 599語" data-en="599 technical terms" data-bn="৫৯৯ পারিভাষিক">専門用語 599語</div>
+      </a>
+      <a href="kanjiforminghistory.html" class="scat-card scat-c1">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🖼️</div>
+        <div class="scat-name" data-ja="漢字の成り立ち" data-en="Kanji Origins" data-bn="কাঞ্জির উৎস">漢字の成り立ち</div>
+        <div class="scat-sub" data-ja="絵で学ぶ象形文字" data-en="Learn through pictures" data-bn="ছবি দিয়ে শিখুন">絵で学ぶ象形文字</div>
+      </a>
+      <a href="roadmap.html" class="scat-card scat-c2">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🗺</div>
+        <div class="scat-name" data-ja="学習ロードマップ" data-en="Study Roadmap" data-bn="শেখার রোডম্যাপ">学習ロードマップ</div>
+        <div class="scat-sub" data-ja="N5→N4→N3→就職" data-en="N5→N4→N3→Japan" data-bn="N5→N4→N3→জাপান">N5→N4→N3→就職</div>
+      </a>
+    </div>
+  </div>
+  <!-- ── 復習クイズマップ ── -->
+  <div style="margin:20px 12px 0">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:0">
+      <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:15px;font-weight:900;color:var(--tx)" id="quiz-map-label">🗺 学習マップ &amp; 復習クイズ</div>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(232,114,154,0.3),transparent)"></div>
+    </div>
+    <div style="font-size:11px;color:var(--txM);padding:4px 0 0" id="quiz-map-sub">間違えた問題を克服して、花を満開にしよう！</div>
+  </div>
   <!-- ── SAKURA HEADER ── -->
   <div class="battle-header">
     <div class="bh-top" style="gap:0">
@@ -1270,15 +1438,6 @@ function setLang(l){
     </div>
   </div>
 
-  <!-- ── スペシャル学習 ── -->
-  <div class="sec-t" style="margin:20px 12px 10px"><script>document.write(T('specialSec'))</script></div>
-  <div class="cg">
-    <a class="cd c1" href="biz.html" style="text-decoration:none;color:inherit"><span class="cd-i">💼</span><div class="cd-n"><script>document.write(T('spBizN'))</script></div><div class="cd-d"><script>document.write(T('spBizD'))</script></div></a>
-    <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n"><script>document.write(T('spDkN'))</script></div><div class="cd-d"><script>document.write(T('spDkD'))</script></div></a>
-    <a class="cd c2" href="SSWkaigo.html" style="text-decoration:none;color:inherit"><span class="cd-i">🏥</span><div class="cd-n"><script>document.write(T('spKaigoN'))</script></div><div class="cd-d"><script>document.write(T('spKaigoD'))</script></div></a>
-    <a class="cd c3" href="kanjiforminghistory.html" style="text-decoration:none;color:inherit"><span class="cd-i">🖼️</span><div class="cd-n"><script>document.write(T('spKanjiN'))</script></div><div class="cd-d"><script>document.write(T('spKanjiD'))</script></div></a>
-  </div>
-
   <!-- ── Articles & Guides ── -->
   <div class="sec-t" style="margin:20px 12px 10px">📚 Articles &amp; Guides</div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin:0 12px 8px">
@@ -1296,95 +1455,6 @@ function setLang(l){
     </a>
   </div>
 
-  <!-- ── SAKURA CATEGORY NAVIGATION (Bottom) ── -->
-  <div class="sakura-cat-nav">
-    <div class="sakura-cat-header">
-      <div class="sakura-cat-branch">🌸 ─────</div>
-      <div class="sakura-cat-title" id="cat-nav-title">全カテゴリー</div>
-      <div class="sakura-cat-branch">───── 🌸</div>
-    </div>
-    <div class="sakura-cat-subtitle" id="cat-nav-sub">学びたいカテゴリーを選ぼう</div>
-    <div class="sakura-cat-grid">
-      <a href="kana-practice.html" class="scat-card scat-c1">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">あ</div>
-        <div class="scat-name" data-ja="ひらがな" data-en="Hiragana" data-bn="হিরাগানা">ひらがな</div>
-        <div class="scat-sub" data-ja="46文字の基礎" data-en="46 basic characters" data-bn="৪৬টি মূল অক্ষর">46文字の基礎</div>
-      </a>
-      <a href="kana-practice.html#kata" class="scat-card scat-c1">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">ア</div>
-        <div class="scat-name" data-ja="カタカナ" data-en="Katakana" data-bn="কাতাকানা">カタカナ</div>
-        <div class="scat-sub" data-ja="外来語に必須" data-en="For loanwords" data-bn="বিদেশি শব্দের জন্য">外来語に必須</div>
-      </a>
-      <a href="vocab.html" class="scat-card scat-c2">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">📖</div>
-        <div class="scat-name" data-ja="語彙 N5/N4" data-en="Vocab N5/N4" data-bn="শব্দ N5/N4">語彙 N5/N4</div>
-        <div class="scat-sub" data-ja="1,500語以上" data-en="1,500+ words" data-bn="১,৫০০+ শব্দ">1,500語以上</div>
-      </a>
-      <a href="kanji.html" class="scat-card scat-c3">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">漢</div>
-        <div class="scat-name" data-ja="漢字 N5/N4" data-en="Kanji N5/N4" data-bn="কাঞ্জি N5/N4">漢字 N5/N4</div>
-        <div class="scat-sub" data-ja="300字マスター" data-en="Master 300 kanji" data-bn="৩০০ কাঞ্জি">300字マスター</div>
-      </a>
-      <a href="grammar.html" class="scat-card scat-c4">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">📗</div>
-        <div class="scat-name" data-ja="文法・助詞" data-en="Grammar" data-bn="ব্যাকরণ">文法・助詞</div>
-        <div class="scat-sub" data-ja="N5文型 + 18助詞" data-en="N5 patterns + particles" data-bn="N5 প্যাটার্ন">N5文型 + 18助詞</div>
-      </a>
-      <a href="verb.html" class="scat-card scat-c5">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">🔄</div>
-        <div class="scat-name" data-ja="動詞活用" data-en="Verb Forms" data-bn="ক্রিয়া রূপ">動詞活用</div>
-        <div class="scat-sub" data-ja="て形・ない形 etc." data-en="te/nai/ta forms" data-bn="তে/নাই ফর্ম">て形・ない形 etc.</div>
-      </a>
-      <a href="adj.html" class="scat-card scat-c5">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">📝</div>
-        <div class="scat-name" data-ja="形容詞活用" data-en="Adjectives" data-bn="বিশেষণ">形容詞活用</div>
-        <div class="scat-sub" data-ja="い形・な形" data-en="i-adj / na-adj" data-bn="ই/না-বিশেষণ">い形・な形</div>
-      </a>
-      <a href="timenum.html" class="scat-card scat-c2">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">🕐</div>
-        <div class="scat-name" data-ja="時間・数字" data-en="Time & Numbers" data-bn="সময় ও সংখ্যা">時間・数字</div>
-        <div class="scat-sub" data-ja="日常生活に必須" data-en="Daily life essentials" data-bn="দৈনন্দিন জীবন">日常生活に必須</div>
-      </a>
-      <a href="biz.html" class="scat-card scat-c3">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">💼</div>
-        <div class="scat-name" data-ja="ビジネスマナー" data-en="Business" data-bn="ব্যবসা">ビジネスマナー</div>
-        <div class="scat-sub" data-ja="○×クイズ 99問" data-en="99 etiquette Qs" data-bn="৯৯টি কুইজ">○×クイズ 99問</div>
-      </a>
-      <a href="denkou.html" class="scat-card scat-c4">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">⚡</div>
-        <div class="scat-name" data-ja="電気工事士" data-en="Electrician" data-bn="ইলেকট্রিশিয়ান">電気工事士</div>
-        <div class="scat-sub" data-ja="専門用語 599語" data-en="599 technical terms" data-bn="৫৯৯ পারিভাষিক">専門用語 599語</div>
-      </a>
-      <a href="kanjiforminghistory.html" class="scat-card scat-c1">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">🖼️</div>
-        <div class="scat-name" data-ja="漢字の成り立ち" data-en="Kanji Origins" data-bn="কাঞ্জির উৎস">漢字の成り立ち</div>
-        <div class="scat-sub" data-ja="絵で学ぶ象形文字" data-en="Learn through pictures" data-bn="ছবি দিয়ে শিখুন">絵で学ぶ象形文字</div>
-      </a>
-      <a href="SSWkaigo.html" class="scat-card scat-c5">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">🏥</div>
-        <div class="scat-name" data-ja="SSW介護漢字" data-en="Care Welfare" data-bn="SSW কেয়ার">SSW介護漢字</div>
-        <div class="scat-sub" data-ja="介護福祉 384語" data-en="384 care terms" data-bn="৩৮৪টি কেয়ার শব্দ">介護福祉 384語</div>
-      </a>
-      <a href="roadmap.html" class="scat-card scat-c2">
-        <div class="scat-bloom">🌸</div>
-        <div class="scat-icon">🗺</div>
-        <div class="scat-name" data-ja="学習ロードマップ" data-en="Study Roadmap" data-bn="শেখার রোডম্যাপ">学習ロードマップ</div>
-        <div class="scat-sub" data-ja="N5→N4→N3→就職" data-en="N5→N4→N3→Japan" data-bn="N5→N4→N3→জাপান">N5→N4→N3→就職</div>
-      </a>
-    </div>
-  </div>
 
   <div style="text-align:center;padding:20px 0 40px;color:var(--txD);font-size:10px;letter-spacing:.08em">🌸 NIHONGO WORK v10 — Built for Bangladeshi workers in Japan 🌸</div>
 
