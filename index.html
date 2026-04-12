@@ -1051,7 +1051,9 @@ const L={
   dkBackCards:{ja:'カードに戻る',en:'Back to Cards',bn:'কার্ডে ফিরুন'},
   dkNextQ:{ja:'次へ →',en:'Next →',bn:'পরবর্তী →'},
   dkAllCards:{ja:'全て',en:'All',bn:'সব'},
-  adv:{ja:'🔒 上級 (N3)',en:'🔒 Advanced (N3)',bn:'🔒 উন্নত (N3)'}
+  adv:{ja:'🔒 上級 (N3)',en:'🔒 Advanced (N3)',bn:'🔒 উন্নত (N3)'},
+  spKaigoN:{ja:'SSW介護の漢字',en:'Care Welfare Kanji',bn:'SSW কেয়ার কাঞ্জি'},
+  spKaigoD:{ja:'介護福祉専門語彙 384語',en:'Care welfare vocab · 384 words',bn:'কেয়ার ওয়েলফেয়ার শব্দ · ৩৮৪টি'}
 };
 function T(k){return (L[k]&&L[k][_lang])||L[k]?.ja||k}
 function setLang(l){
@@ -1273,6 +1275,7 @@ function setLang(l){
   <div class="cg">
     <a class="cd c1" href="biz.html" style="text-decoration:none;color:inherit"><span class="cd-i">💼</span><div class="cd-n"><script>document.write(T('spBizN'))</script></div><div class="cd-d"><script>document.write(T('spBizD'))</script></div></a>
     <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n"><script>document.write(T('spDkN'))</script></div><div class="cd-d"><script>document.write(T('spDkD'))</script></div></a>
+    <a class="cd c2" href="SSWkaigo.html" style="text-decoration:none;color:inherit"><span class="cd-i">🏥</span><div class="cd-n"><script>document.write(T('spKaigoN'))</script></div><div class="cd-d"><script>document.write(T('spKaigoD'))</script></div></a>
     <a class="cd c3" href="kanjiforminghistory.html" style="text-decoration:none;color:inherit"><span class="cd-i">🖼️</span><div class="cd-n"><script>document.write(T('spKanjiN'))</script></div><div class="cd-d"><script>document.write(T('spKanjiD'))</script></div></a>
   </div>
 
@@ -1367,6 +1370,12 @@ function setLang(l){
         <div class="scat-icon">🖼️</div>
         <div class="scat-name" data-ja="漢字の成り立ち" data-en="Kanji Origins" data-bn="কাঞ্জির উৎস">漢字の成り立ち</div>
         <div class="scat-sub" data-ja="絵で学ぶ象形文字" data-en="Learn through pictures" data-bn="ছবি দিয়ে শিখুন">絵で学ぶ象形文字</div>
+      </a>
+      <a href="SSWkaigo.html" class="scat-card scat-c5">
+        <div class="scat-bloom">🌸</div>
+        <div class="scat-icon">🏥</div>
+        <div class="scat-name" data-ja="SSW介護漢字" data-en="Care Welfare" data-bn="SSW কেয়ার">SSW介護漢字</div>
+        <div class="scat-sub" data-ja="介護福祉 384語" data-en="384 care terms" data-bn="৩৮৪টি কেয়ার শব্দ">介護福祉 384語</div>
       </a>
       <a href="roadmap.html" class="scat-card scat-c2">
         <div class="scat-bloom">🌸</div>

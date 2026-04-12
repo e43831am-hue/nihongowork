@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WK94Y3TPM0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WK94Y3TPM0');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Welfare Japanese - SSW 介護 Vocabulary | NIHONGO WORK</title>
+<meta name="description" content="Study Japanese vocabulary for Care Welfare (介護) SSW candidates. Kanji, katakana terms and quizzes for nursing care work in Japan.">
+<link rel="canonical" href="https://nihongo-work.site/SSWkaigo.html">
+<meta property="og:title" content="Care Welfare Japanese - SSW 介護 Vocabulary | NIHONGO WORK">
+<meta property="og:description" content="Study Japanese vocabulary for Care Welfare SSW candidates. Kanji, katakana, and specialized terms with quizzes.">
+<meta property="og:url" content="https://nihongo-work.site/SSWkaigo.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NIHONGO WORK">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Care Welfare Japanese Technical Vocabulary",
+  "description": "Study Japanese vocabulary for Care Welfare SSW (Specified Skilled Worker) candidates. Kanji, katakana terms and quizzes for nursing care work.",
+  "educationalLevel": "SSW Technical Japanese",
+  "inLanguage": ["ja", "en", "bn"],
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "NIHONGO WORK",
+    "url": "https://nihongo-work.site"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>
+// ── Language System ──
+let _lang = localStorage.getItem('nw3_lang') || 'ja';
+let curMod = 'kaigo';
+
+const L = {
+  // Page header
+  pageTitle:   {ja:'🏥 介護福祉 — Care Welfare Japanese', en:'🏥 Care Welfare Japanese', bn:'🏥 কেয়ার ওয়েলফেয়ার জাপানিজ'},
+  pageDesc:    {ja:'SSW介護分野の専門語彙。漢字・カタカナ・専門用語とクイズで日本語力を強化しましょう。',
+                en:'Specialized vocabulary for Care Welfare SSW candidates. Kanji, katakana terms and quizzes.',
+                bn:'কেয়ার ওয়েলফেয়ার SSW প্রার্থীদের জন্য বিশেষ শব্দভাণ্ডার। কাঞ্জি, কাতাকানা ও কুইজ।'},
+  pageBn:      {ja:'🇧🇩 介護分野でSSWとして日本で働く人のための専門日本語学習ツール。',
+                en:'🇧🇩 Japanese language learning tool for Care Welfare SSW workers in Japan.',
+                bn:'🇧🇩 জাপানে কেয়ার ওয়েলফেয়ার SSW হিসেবে কাজ করা মানুষদের জন্য জাপানি ভাষা শেখার টুল।'},
+  // Stats
+  statKanji:   {ja:'漢字',      en:'Kanji',     bn:'কাঞ্জি'},
+  statKata:    {ja:'カタカナ',   en:'Katakana',  bn:'কাতাকানা'},
+  statTerms:   {ja:'専門用語',  en:'Spec.Terms', bn:'বিশেষ পরিভাষা'},
+  statQuiz:    {ja:'クイズ',    en:'Quizzes',   bn:'কুইজ'},
+  // Tab labels
+  tabFlash:    {ja:'⚡ フラッシュ',        en:'⚡ Flash',         bn:'⚡ ফ্ল্যাশ'},
+  tabMean:     {ja:'🔤 意味クイズ',         en:'🔤 Meaning Quiz',  bn:'🔤 অর্থ কুইজ'},
+  tabRead:     {ja:'📖 読みクイズ',         en:'📖 Reading Quiz',  bn:'📖 পড়া কুইজ'},
+  tabEx:       {ja:'🔧 用例クイズ',         en:'🔧 Usage Quiz',    bn:'🔧 ব্যবহার কুইজ'},
+  tabVoc:      {ja:'🎯 用語クイズ',         en:'🎯 Vocab Quiz',    bn:'🎯 শব্দ কুইজ'},
+  // Filter buttons
+  filterAll:   {ja:'すべて',    en:'All',       bn:'সব'},
+  filterKanji: {ja:'漢字',      en:'Kanji',     bn:'কাঞ্জি'},
+  filterKata:  {ja:'カタカナ',   en:'Katakana',  bn:'কাতাকানা'},
+  filterTerms: {ja:'専門用語',  en:'Spec.Terms', bn:'পরিভাষা'},
+  filterFlag:  {ja:'🔖 要復習', en:'🔖 Review',  bn:'🔖 পুনরালোচনা'},
+  filterShuffle:{ja:'🔀',       en:'🔀',         bn:'🔀'},
+  filterReset: {ja:'↺ リセット',en:'↺ Reset',   bn:'↺ রিসেট'},
+  // Card labels
+  tapHint:     {ja:'タップして答えを見る', en:'Tap to see answer', bn:'উত্তর দেখতে ট্যাপ করুন'},
+  onYomi:      {ja:'音読み',    en:'On-yomi',   bn:'অন-ইয়োমি'},
+  kunYomi:     {ja:'訓読み',    en:'Kun-yomi',  bn:'কুন-ইয়োমি'},
+  reading:     {ja:'読み方',    en:'Reading',   bn:'পড়া'},
+  category:    {ja:'カテゴリー', en:'Category',  bn:'বিভাগ'},
+  meaning:     {ja:'意味',      en:'Meaning',   bn:'অর্থ'},
+  examEx:      {ja:'試験用例',  en:'Exam example', bn:'পরীক্ষার উদাহরণ'},
+  desc:        {ja:'説明',      en:'Description', bn:'বিবরণ'},
+  prev:        {ja:'← 前',      en:'← Prev',    bn:'← আগে'},
+  next:        {ja:'次 →',      en:'Next →',    bn:'পরবর্তী →'},
+  reviewing:   {ja:'🔖 復習中', en:'🔖 Reviewing', bn:'🔖 পুনরালোচনা'},
+  markReview:  {ja:'🔖 要復習', en:'🔖 Review',  bn:'🔖 চিহ্নিত করুন'},
+  noCards:     {ja:'カードが見つかりません。', en:'No cards found.', bn:'কোনো কার্ড পাওয়া যায়নি।'},
+  // Quiz labels
+  selMean:     {ja:'意味を選んでください',   en:'Choose the meaning',     bn:'অর্থ নির্বাচন করুন'},
+  selRead:     {ja:'音読みを選んでください', en:'Choose the on-yomi',     bn:'অন-ইয়োমি নির্বাচন করুন'},
+  selEx:       {ja:'用例を選んでください',   en:'Choose the usage',       bn:'ব্যবহার নির্বাচন করুন'},
+  selVoc:      {ja:'日本語を選んでください', en:'Choose the Japanese term', bn:'জাপানি পরিভাষা নির্বাচন করুন'},
+  correct:     {ja:'✓ 正解！',  en:'✓ Correct!', bn:'✓ সঠিক!'},
+  wrong:       {ja:'✗ 不正解。正解: ', en:'✗ Wrong. Answer: ', bn:'✗ ভুল। সঠিক উত্তর: '},
+  tryAgain:    {ja:'もう一度',  en:'Try Again',  bn:'আবার চেষ্টা'},
+  backCards:   {ja:'カードに戻る', en:'Back to Cards', bn:'কার্ডে ফিরুন'},
+  nextQ:       {ja:'次へ →',   en:'Next →',     bn:'পরবর্তী →'},
+  speak:       {ja:'🔊',        en:'🔊',          bn:'🔊'},
+  // Sets
+  set1:        {ja:'セット1',   en:'Set 1',      bn:'সেট ১'},
+  set2:        {ja:'セット2',   en:'Set 2',      bn:'সেট ২'},
+  set3:        {ja:'セット3',   en:'Set 3',      bn:'সেট ৩'},
+  set4:        {ja:'セット4',   en:'Set 4',      bn:'সেট ৪'},
+  set5:        {ja:'セット5',   en:'Set 5',      bn:'সেট ৫'},
+  allCards:    {ja:'全て',      en:'All',        bn:'সব'},
+  // Score
+  scoreCo:     {ja:'正解',      en:'Correct',    bn:'সঠিক'},
+  scoreWr:     {ja:'不正解',    en:'Wrong',      bn:'ভুল'},
+  again:       {ja:'もう一度',  en:'Try again',  bn:'আবার চেষ্টা'},
+  home:        {ja:'ホーム',    en:'Home',       bn:'হোম'},
+  // Nav
+  homeBtn:     {ja:'🏠 ホーム', en:'🏠 Home',    bn:'🏠 হোম'},
+  // Weak
+  weak:        {ja:'💀 弱点',   en:'💀 Weak',    bn:'💀 দুর্বল'},
+  // Other modules section
+  otherMod:    {ja:'他のモジュール', en:'Other Modules', bn:'অন্য মডিউল'},
+  // Nav links
+  navVocab:    {ja:'語彙',      en:'Vocabulary', bn:'শব্দ'},
+  navKanji:    {ja:'漢字',      en:'Kanji',      bn:'কাঞ্জি'},
+  navKana:     {ja:'かな',      en:'Kana',       bn:'কানা'},
+  navVerb:     {ja:'動詞',      en:'Verb Forms', bn:'ক্রিয়া'},
+  navAdj:      {ja:'形容詞',    en:'Adjective',  bn:'বিশেষণ'},
+  navTime:     {ja:'時間・数字', en:'Time & Num', bn:'সময় ও সংখ্যা'},
+  navGram:     {ja:'文法',      en:'Grammar',    bn:'ব্যাকরণ'},
+  navBiz:      {ja:'ビジネス',  en:'Business',   bn:'ব্যবসা'},
+  navElec:     {ja:'⚡電気工事士',en:'⚡ Electrician',bn:'⚡ ইলেকট্রিশিয়ান'},
+  // Footer
+  footerText:  {ja:'無料日本語学習 for バングラデシュ人', en:'Free Japanese Learning for Bangladeshi Learners', bn:'বাংলাদেশী শিক্ষার্থীদের জন্য বিনামূল্যে জাপানি শিক্ষা'},
+};
+function T(k){ return (L[k]&&L[k][_lang]) || (L[k]&&L[k].ja) || k; }
+
+function setLang(l){
+  _lang = l;
+  localStorage.setItem('nw3_lang', l);
+  ['ja','en','bn'].forEach(lg=>{
+    const b=document.getElementById('lb-'+lg);
+    if(b) b.classList.toggle('on', lg===l);
+  });
+  // Re-render current module
+  const c = document.getElementById('m-kaigo');
+  if(c){ c.innerHTML=''; mkKaigo(c); }
+  // Update static text
+  applyLang();
+}
+function applyLang(){
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k=el.getAttribute('data-t');
+    if(L[k]) el.textContent=T(k);
+  });
+}
+</script>
+
+<style>
+:root {
+  --bg: #F7F6F2;
+  --s1: #FFFFFF;
+  --s2: #F0EFE9;
+  --s3: #E8E7E0;
+  --acc: #E4572E;
+  --acc2: #C94120;
+  --accG: #6BA368;
+  --accB: #1F3A5F;
+  --accY: #D4A017;
+  --accP: #8B5CF6;
+  --accC: #0891B2;
+  --tx: #1A1A2E;
+  --txM: #4A5568;
+  --txD: #9AA5B4;
+  --grn: #6BA368;
+  --red: #D96B6B;
+  --brd: rgba(0,0,0,0.08);
+  --g1: linear-gradient(135deg,#E4572E,#C94120);
+  --g2: linear-gradient(135deg,#1F3A5F,#2D4A7A);
+  --g3: linear-gradient(135deg,#D4A017,#E4572E);
+  --g4: linear-gradient(135deg,#8B5CF6,#1F3A5F);
+  --g5: linear-gradient(135deg,#6BA368,#0891B2);
+  /* Care-theme accent: teal-green */
+  --g6: linear-gradient(135deg,#0891B2,#6BA368);
+  --r: 14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#E8E7E0;border-radius:3px}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;cursor:pointer;
+  background:var(--g6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px}
+.logo-jp{font-size:11px;color:var(--txM);-webkit-text-fill-color:var(--txM);font-weight:400}
+.top-r{display:flex;gap:8px;align-items:center}
+.pill{background:var(--s2);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:12px;
+  color:var(--txM);display:flex;align-items:center;gap:5px}
+.pill b{color:var(--accY)}
+
+/* Language switcher */
+.lang-bar{display:flex;gap:0;background:var(--s2);border:1px solid var(--brd);border-radius:10px;overflow:hidden;flex-shrink:0}
+.lb{padding:5px 10px;font-size:11px;font-weight:600;color:var(--txM);cursor:pointer;transition:all .15s;border:none;background:none;font-family:inherit}
+.lb:hover{color:var(--tx)}
+.lb.on{background:var(--acc);color:#fff}
+
+/* Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:32px}
+.stat-card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:16px;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card.c1::before{background:var(--g1)}.stat-card.c2::before{background:var(--g6)}
+.stat-card.c3::before{background:var(--g3)}.stat-card.c4::before{background:var(--g5)}
+.stat-num{font-family:'Zen Maru Gothic',sans-serif;font-size:28px;font-weight:900;margin-bottom:2px}
+.stat-card.c1 .stat-num{color:var(--acc)}.stat-card.c2 .stat-num{color:var(--accC)}
+.stat-card.c3 .stat-num{color:var(--accY)}.stat-card.c4 .stat-num{color:var(--grn)}
+.stat-lbl{font-size:10px;color:var(--txD);letter-spacing:.06em;text-transform:uppercase}
+
+/* MODULE */
+.mod{display:none;padding:16px;max-width:720px;margin:0 auto}
+.mod.on{display:block}
+
+/* Sub tabs */
+.stabs{display:flex;gap:0;background:var(--s1);border-radius:12px;border:1px solid var(--brd);margin-bottom:16px;overflow-x:auto}
+.stab{padding:10px 14px;font-size:11px;font-weight:500;color:var(--txM);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.stab:hover{color:var(--tx)}.stab.on{color:var(--acc);border-bottom-color:var(--acc)}
+
+/* Filters */
+.flts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fb{padding:5px 12px;border-radius:20px;border:1px solid var(--brd);background:var(--s2);
+  color:var(--txM);font-size:11px;cursor:pointer;transition:all .15s;font-family:inherit;font-weight:500}
+.fb:hover{border-color:rgba(255,255,255,.12);color:var(--tx)}
+.fb.on{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.35);color:var(--acc)}
+
+/* Progress */
+.prg{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.prg-bar{flex:1;height:4px;background:var(--s3);border-radius:2px;overflow:hidden}
+.prg-fill{height:100%;background:var(--g6);border-radius:2px;transition:width .3s}
+.prg-tx{font-size:11px;color:var(--txM);min-width:55px;text-align:right}
+
+/* Quiz */
+.qb{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:32px;
+  text-align:center;margin-bottom:14px;min-height:160px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.qb::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--g6);opacity:.5}
+.qB{font-family:'Zen Maru Gothic',sans-serif;font-size:64px;font-weight:900;color:var(--tx);line-height:1}
+.qP{font-size:13px;color:var(--txM);margin-top:8px}
+.qT{display:inline-block;margin-bottom:10px;background:var(--s3);border:1px solid var(--brd);
+  border-radius:20px;padding:3px 12px;font-size:10px;color:var(--acc);letter-spacing:.06em}
+.qos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.qo{padding:13px 16px;border-radius:12px;border:1px solid var(--brd);background:var(--s2);
+  color:var(--tx);font-size:13px;cursor:pointer;transition:all .15s;text-align:left;
+  font-family:inherit;line-height:1.5;display:flex;align-items:center;gap:8px}
+.qo:hover:not(.dis){background:var(--s3)}
+.qo.ok{background:rgba(107,191,138,.12);border-color:var(--grn);color:var(--grn)}
+.qo.no{background:rgba(217,107,107,.1);border-color:var(--red);color:var(--red)}
+.qo.dis{cursor:default}
+.qo .ol{display:flex;align-items:center;justify-content:center;width:22px;height:22px;min-width:22px;
+  background:var(--s3);border-radius:6px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
+.qo.ok .ol{background:rgba(107,191,138,.2);color:var(--grn)}
+.qo.no .ol{background:rgba(217,107,107,.15);color:var(--red)}
+.qfb{padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:12px;display:none;line-height:1.7}
+.qfb.ok{background:rgba(107,191,138,.08);border:1px solid rgba(107,191,138,.2);color:var(--grn);display:block}
+.qfb.no{background:rgba(217,107,107,.06);border:1px solid rgba(217,107,107,.15);color:#e89090;display:block}
+.qnx{padding:10px 28px;border-radius:10px;background:var(--acc);color:#fff;border:none;
+  font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:none}
+.qnx:hover{background:var(--acc2)}.qnx.sh{display:inline-block}
+
+/* Score */
+.scr{text-align:center;padding:44px 20px;display:none}
+.scr.sh{display:block}
+.scr-big{font-family:'Zen Maru Gothic',sans-serif;font-size:72px;font-weight:900;
+  background:var(--g6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.scr-msg{font-size:13px;color:var(--txM);margin:8px 0 24px}
+.scr-tiles{display:flex;gap:12px;justify-content:center;margin-bottom:24px}
+.scr-t{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:14px 20px;min-width:80px}
+.scr-t .tl{font-size:10px;color:var(--txD);margin-bottom:4px}
+.scr-t .tv{font-size:22px;font-weight:700}
+.scr-t.g .tv{color:var(--grn)}.scr-t.r .tv{color:var(--red)}
+.rbtn{padding:10px 24px;border-radius:10px;background:var(--acc);color:#fff;border:none;
+  font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin:0 4px}
+
+/* TTS button */
+.tts{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:5px 11px;
+  font-size:11px;cursor:pointer;font-family:inherit;transition:all .15s;color:var(--txM)}
+.tts:hover{background:var(--s3);color:var(--tx)}
+
+/* Kaigo dark module theme (same dark as denkou) */
+#m-kaigo { background:#0e0f13; min-height:100vh; color:#e8e6df; }
+.kg-wrap { max-width:720px; margin:0 auto; padding:16px; font-family:'Noto Sans JP',sans-serif; }
+.kg-mode-tabs { display:flex; gap:0; background:#16181f; border:1px solid rgba(255,255,255,.07); border-radius:10px; margin-bottom:14px; overflow:hidden; }
+.kg-tab { flex:1; padding:9px 6px; font-size:11px; font-weight:600; color:#8a8880; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; text-align:center; white-space:nowrap; }
+.kg-tab:hover { color:#e8e6df; }
+.kg-tab.kg-on { color:#5bc8af; border-bottom-color:#5bc8af; background:#1e2028; }
+.kg-ctrl { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; align-items:center; }
+.kg-btn { padding:6px 12px; border-radius:6px; border:1px solid rgba(255,255,255,.07); background:#16181f; color:#e8e6df; font-size:11px; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.kg-btn:hover { background:#252730; }
+.kg-btn.kg-on { background:#5bc8af; color:#000; border-color:#5bc8af; }
+.kg-sep { width:1px; height:20px; background:rgba(255,255,255,.07); }
+.kg-prog-bar { flex:1; height:3px; background:#1e2028; border-radius:2px; overflow:hidden; }
+.kg-prog-fill { height:100%; background:#5bc8af; border-radius:2px; transition:width .3s; }
+.kg-prog-text { font-size:11px; color:#8a8880; min-width:48px; text-align:right; }
+.kg-fc-wrap { perspective:1200px; height:320px; margin-bottom:16px; cursor:pointer; }
+.kg-fc { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.23,1,.32,1); }
+.kg-fc.kg-flip { transform:rotateY(180deg); }
+.kg-face { position:absolute; inset:0; backface-visibility:hidden; border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.07); overflow:hidden; }
+.kg-front { background:#16181f; }
+.kg-back { background:#1e2028; transform:rotateY(180deg); align-items:flex-start; padding:24px 28px; justify-content:flex-start; }
+.kg-kanji-big { font-family:'Noto Serif JP',serif; font-size:110px; font-weight:700; color:#e8e6df; line-height:1; text-shadow:0 2px 20px rgba(91,200,175,.15); }
+.kg-card-hint { margin-top:12px; font-size:11px; color:#5a5856; letter-spacing:.1em; display:flex; align-items:center; gap:6px; }
+.kg-card-hint::before,.kg-card-hint::after { content:''; width:16px; height:1px; background:#5a5856; }
+.kg-badge { position:absolute; top:12px; right:12px; background:#252730; border:1px solid rgba(255,255,255,.07); border-radius:4px; padding:2px 8px; font-size:10px; color:#8a8880; }
+.kg-back-row { display:flex; gap:14px; width:100%; margin-bottom:14px; }
+.kg-back-sec { flex:1; }
+.kg-blbl { font-size:9px; color:#5a5856; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
+.kg-bval { font-size:15px; color:#5bc8af; font-family:'DM Mono',monospace; font-weight:500; }
+.kg-bmean { font-size:18px; font-weight:600; color:#e8e6df; border-left:3px solid #5bc8af; padding-left:10px; margin-bottom:12px; }
+.kg-bex { background:#252730; border-radius:8px; border:1px solid rgba(255,255,255,.07); padding:10px 12px; width:100%; font-size:12px; color:#e8e6df; line-height:1.6; }
+.kg-bex-lbl { font-size:9px; color:#5a5856; letter-spacing:.1em; margin-bottom:4px; }
+.kg-bksmall { font-family:'Noto Serif JP',serif; font-weight:700; color:#5a5856; position:absolute; top:16px; right:20px; opacity:.35; }
+.kg-acts { display:flex; gap:10px; justify-content:center; margin-top:4px; }
+.kg-act { padding:9px 20px; border-radius:8px; border:1px solid rgba(255,255,255,.07); font-size:12px; font-weight:500; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.kg-act.prev { background:#16181f; color:#8a8880; } .kg-act.prev:hover { background:#252730; color:#e8e6df; }
+.kg-act.flag { background:#16181f; color:#d96b6b; border-color:rgba(217,107,107,.25); } .kg-act.flag:hover { background:rgba(217,107,107,.1); }
+.kg-act.flag.kg-flagged { background:rgba(217,107,107,.15); }
+.kg-act.nxt { background:#5bc8af; color:#000; border-color:transparent; } .kg-act.nxt:hover { background:#3da890; }
+.kg-qbox { background:#16181f; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:32px; text-align:center; margin-bottom:16px; min-height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.kg-qkanji { font-family:'Noto Serif JP',serif; font-size:88px; font-weight:700; color:#e8e6df; line-height:1; }
+.kg-qctx { margin-top:10px; font-size:12px; color:#8a8880; }
+.kg-qbadge { display:inline-block; margin-bottom:12px; background:#252730; border:1px solid rgba(255,255,255,.07); border-radius:20px; padding:3px 14px; font-size:10px; color:#5bc8af; letter-spacing:.08em; }
+.kg-opts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.kg-opt { padding:12px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.07); background:#1e2028; color:#e8e6df; font-size:13px; cursor:pointer; transition:all .15s; text-align:left; font-family:'Noto Sans JP',sans-serif; line-height:1.5; display:flex; align-items:center; gap:8px; }
+.kg-opt:hover:not(.kg-dis) { background:#252730; }
+.kg-opt.kg-ok { background:rgba(107,191,138,.15); border-color:#6bbf8a; color:#6bbf8a; }
+.kg-opt.kg-ng { background:rgba(217,107,107,.12); border-color:#d96b6b; color:#d96b6b; }
+.kg-opt.kg-dis { cursor:default; }
+.kg-ollbl { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; min-width:20px; background:#252730; border-radius:4px; font-size:10px; color:#8a8880; font-family:'DM Mono',monospace; flex-shrink:0; }
+.kg-opt.kg-ok .kg-ollbl { background:rgba(107,191,138,.2); color:#6bbf8a; }
+.kg-opt.kg-ng .kg-ollbl { background:rgba(217,107,107,.15); color:#d96b6b; }
+/* dk- aliases for quiz options */
+.dk-opts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.dk-opt { padding:12px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.07); background:#1e2028; color:#e8e6df; font-size:13px; cursor:pointer; transition:all .15s; text-align:left; font-family:'Noto Sans JP',sans-serif; line-height:1.5; display:flex; align-items:center; gap:8px; }
+.dk-opt:hover:not(.dk-dis) { background:#252730; }
+.dk-opt.dk-ok { background:rgba(107,191,138,.15); border-color:#6bbf8a; color:#6bbf8a; }
+.dk-opt.dk-ng { background:rgba(217,107,107,.12); border-color:#d96b6b; color:#d96b6b; }
+.dk-opt.dk-dis { cursor:default; pointer-events:none; }
+.dk-ollbl { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; min-width:20px; background:#252730; border-radius:4px; font-size:10px; color:#8a8880; font-family:'DM Mono',monospace; flex-shrink:0; }
+.dk-opt.dk-ok .dk-ollbl { background:rgba(107,191,138,.2); color:#6bbf8a; }
+.dk-opt.dk-ng .dk-ollbl { background:rgba(217,107,107,.15); color:#d96b6b; }
+.kg-fb { padding:12px 16px; border-radius:10px; margin-bottom:12px; font-size:12px; line-height:1.7; }
+.kg-fb.ok { background:rgba(107,191,138,.1); border:1px solid rgba(107,191,138,.25); color:#6bbf8a; }
+.kg-fb.ng { background:rgba(217,107,107,.08); border:1px solid rgba(217,107,107,.2); color:#d96b6b; }
+.kg-nx-btn { padding:9px 28px; border-radius:8px; background:#5bc8af; color:#000; border:none; font-size:12px; font-weight:700; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:background .15s; }
+.kg-nx-btn:hover { background:#3da890; }
+.kg-scr { text-align:center; padding:40px 16px; }
+.kg-scr-big { font-family:'Noto Serif JP',serif; font-size:72px; font-weight:700; color:#5bc8af; line-height:1; margin-bottom:8px; }
+.kg-scr-msg { font-size:13px; color:#8a8880; margin-bottom:20px; }
+.kg-tiles { display:flex; gap:12px; justify-content:center; margin-bottom:20px; }
+.kg-tile { background:#1e2028; border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:12px 20px; min-width:70px; }
+.kg-tile .tl { font-size:10px; color:#5a5856; margin-bottom:3px; }
+.kg-tile .tv { font-size:22px; font-weight:700; }
+.kg-tile.g .tv { color:#6bbf8a; }
+.kg-tile.r .tv { color:#d96b6b; }
+
+@media(max-width:600px){
+  .qos{grid-template-columns:1fr}
+  .kg-qkanji{font-size:64px}
+  .kg-kanji-big{font-size:80px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .kg-opts{grid-template-columns:1fr}
+}
+
+/* ── dk- Flashcard & Quiz CSS (used by mkKaigo renderFlash/renderQuiz) ── */
+.dk-wrap { max-width:720px; margin:0 auto; padding:16px; font-family:'Noto Sans JP',sans-serif; }
+.dk-mode-tabs { display:flex; gap:0; background:#16181f; border:1px solid rgba(255,255,255,.07); border-radius:10px; margin-bottom:14px; overflow:hidden; }
+.dk-tab { flex:1; padding:9px 6px; font-size:11px; font-weight:600; color:#8a8880; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; text-align:center; white-space:nowrap; }
+.dk-tab:hover { color:#e8e6df; }
+.dk-tab.dk-on { color:#5bc8af; border-bottom-color:#5bc8af; background:#1e2028; }
+.dk-prog-bar { flex:1; height:3px; background:#1e2028; border-radius:2px; overflow:hidden; }
+.dk-prog-fill { height:100%; background:#5bc8af; border-radius:2px; transition:width .3s; }
+.dk-fc-wrap { perspective:1200px; height:340px; margin-bottom:16px; cursor:pointer; }
+.dk-fc { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.23,1,.32,1); }
+.dk-fc.dk-flip { transform:rotateY(180deg); }
+.dk-face { position:absolute; inset:0; backface-visibility:hidden; border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.07); overflow:hidden; }
+.dk-front { background:#16181f; }
+.dk-back { background:#1e2028; transform:rotateY(180deg); align-items:flex-start; padding:20px 24px; justify-content:flex-start; overflow-y:auto; }
+.dk-kanji-big { font-family:'Noto Serif JP',serif; font-size:110px; font-weight:700; color:#e8e6df; line-height:1; text-shadow:0 2px 20px rgba(91,200,175,.15); }
+.dk-card-hint { margin-top:12px; font-size:11px; color:#5a5856; letter-spacing:.1em; display:flex; align-items:center; gap:6px; }
+.dk-card-hint::before,.dk-card-hint::after { content:''; width:16px; height:1px; background:#5a5856; }
+.dk-badge { position:absolute; top:12px; right:12px; background:#252730; border:1px solid rgba(255,255,255,.07); border-radius:4px; padding:2px 8px; font-size:10px; color:#8a8880; }
+.dk-back-row { display:flex; gap:14px; width:100%; margin-bottom:14px; }
+.dk-back-sec { flex:1; min-width:0; }
+.dk-blbl { font-size:9px; color:#5a5856; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
+.dk-bval { font-size:14px; color:#5bc8af; font-family:'DM Mono',monospace; font-weight:500; word-break:break-all; }
+.dk-bmean { font-size:16px; font-weight:600; color:#e8e6df; border-left:3px solid #5bc8af; padding-left:10px; margin-bottom:12px; line-height:1.4; }
+.dk-bex-lbl { font-size:9px; color:#5a5856; letter-spacing:.1em; margin-bottom:4px; }
+.dk-bex { background:#252730; border-radius:8px; border:1px solid rgba(255,255,255,.07); padding:10px 12px; width:100%; font-size:12px; color:#e8e6df; line-height:1.6; }
+.dk-acts { display:flex; gap:10px; justify-content:center; margin-top:8px; }
+.dk-act { padding:9px 20px; border-radius:8px; border:1px solid rgba(255,255,255,.07); font-size:12px; font-weight:500; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.dk-act.prev { background:#16181f; color:#8a8880; }
+.dk-act.prev:hover { background:#252730; color:#e8e6df; }
+.dk-act.nxt { background:#5bc8af; color:#000; border-color:transparent; }
+.dk-act.nxt:hover { background:#3da890; }
+.dk-qbox { background:#16181f; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:28px; text-align:center; margin-bottom:16px; min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.dk-qkanji { font-family:'Noto Serif JP',serif; font-size:80px; font-weight:700; color:#e8e6df; line-height:1; }
+.dk-qbadge { display:inline-block; margin-bottom:12px; background:#252730; border:1px solid rgba(255,255,255,.07); border-radius:20px; padding:3px 14px; font-size:10px; color:#5bc8af; letter-spacing:.08em; }
+</style>
+</head>
+<body>
+
+<!-- Site nav -->
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#1a1a1a;border-bottom:1px solid #333;font-family:'Noto Sans JP',sans-serif;">
+  <span style="font-size:16px;font-weight:700;color:#fff;">Nihongo<span style="color:#e74c3c;">-Work</span></span>
+  <div style="display:flex;gap:20px;">
+    <a href="index.html" style="color:#ccc;text-decoration:none;font-size:13px;">Home</a>
+    <a href="about.html" style="color:#ccc;text-decoration:none;font-size:13px;">About</a>
+    <a href="contact.html" style="color:#ccc;text-decoration:none;font-size:13px;">Contact</a>
+    <a href="privacy.html" style="color:#ccc;text-decoration:none;font-size:13px;">Privacy</a>
+  </div>
+</nav>
+
+<!-- Topbar with language switcher -->
+<div class="topbar">
+  <a href="index.html" class="logo" style="text-decoration:none;background:var(--g6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+    NIHONGO WORK <span class="logo-jp" style="-webkit-text-fill-color:var(--txM)">にほんごワーク</span>
+  </a>
+  <div class="top-r">
+    <!-- Language toggle -->
+    <div class="lang-bar">
+      <button class="lb" id="lb-ja" onclick="setLang('ja')">日本語</button>
+      <button class="lb" id="lb-en" onclick="setLang('en')">EN</button>
+      <button class="lb" id="lb-bn" onclick="setLang('bn')">বাং</button>
+    </div>
+    <a href="index.html" style="background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);text-decoration:none;display:flex;align-items:center;gap:4px" data-t="homeBtn">🏠 ホーム</a>
+  </div>
+</div>
+
+<!-- Hero section -->
+<div style="max-width:720px;margin:0 auto;padding:20px 16px 10px">
+  <h1 style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px" data-t="pageTitle">🏥 介護福祉 — Care Welfare Japanese</h1>
+  <p style="font-size:14px;color:var(--txM);line-height:1.8;margin-bottom:6px" data-t="pageDesc">SSW介護分野の専門語彙。漢字・カタカナ・専門用語とクイズで日本語力を強化しましょう。</p>
+  <p style="font-size:13px;color:var(--txD);line-height:1.8;margin-bottom:16px" data-t="pageBn">🇧🇩 介護分野でSSWとして日本で働く人のための専門日本語学習ツール。</p>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-card c1"><div class="stat-num">116</div><div class="stat-lbl" data-t="statKanji">漢字</div></div>
+    <div class="stat-card c2"><div class="stat-num">106</div><div class="stat-lbl" data-t="statKata">カタカナ</div></div>
+    <div class="stat-card c3"><div class="stat-num">162</div><div class="stat-lbl" data-t="statTerms">専門用語</div></div>
+    <div class="stat-card c4"><div class="stat-num">5</div><div class="stat-lbl" data-t="statQuiz">クイズ</div></div>
+  </div>
+
+  <!-- Module container -->
+  <div class="mod on" id="m-kaigo" style="display:block;padding:0"></div>
+</div>
+
+<!-- Other modules nav -->
+<nav style="max-width:720px;margin:0 auto;padding:20px 16px 40px;border-top:1px solid var(--brd)">
+  <div style="font-size:12px;font-weight:700;color:var(--txM);margin-bottom:12px" data-t="otherMod">他のモジュール</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">
+    <a href="denkou.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">⚡<br><span data-t="navElec">電気工事士</span></a>
+    <a href="vocab.html"  style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">📖<br><span data-t="navVocab">語彙</span></a>
+    <a href="kanji.html"  style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">🈶<br><span data-t="navKanji">漢字</span></a>
+    <a href="kana-practice.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">あ<br><span data-t="navKana">かな</span></a>
+    <a href="verb.html"   style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">🔄<br><span data-t="navVerb">動詞</span></a>
+    <a href="grammar.html" style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">📗<br><span data-t="navGram">文法</span></a>
+    <a href="biz.html"    style="display:block;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:12px 10px;text-align:center;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:all .2s">💼<br><span data-t="navBiz">ビジネス</span></a>
+  </div>
+</nav>
+
+<footer style="text-align:center;padding:20px 0 60px;color:var(--txD);font-size:11px">
+  <a href="index.html" style="color:var(--txM);text-decoration:none">NIHONGO WORK</a> —
+  <span data-t="footerText">無料日本語学習 for バングラデシュ人</span> |
+  <a href="about.html" style="color:var(--txM)">About</a> |
+  <a href="privacy.html" style="color:var(--txM)">Privacy</a> |
+  <a href="contact.html" style="color:var(--txM)">Contact</a>
+</footer>
+
+<!-- ── DATA (inlined from kaigo_kanji_vocab.xlsx) ── -->
+<script>
+// ══════════════════════════════════════════════════════════════
+//  KAIGO DATA  —  sourced from 介護漢字単語.xlsx
+//  Sheet 1: 漢字 (116), Sheet 2: カタカナ単語 (106), Sheet 3: 専門用語 (162)
+// ══════════════════════════════════════════════════════════════
+
+const KAIGO_KANJI = [
+  {k:`介`,on:`カイ`,kun:`たす(ける)・はさ(む)`,en:`to assist / to be between`,ex:`介護 (nursing care), 介助 (assistance)`},
+  {k:`護`,on:`ゴ`,kun:`まも(る)`,en:`to protect / to guard`,ex:`介護 (nursing care), 看護 (nursing)`},
+  {k:`福`,on:`フク`,kun:`—`,en:`good fortune / welfare`,ex:`福祉 (welfare), 福利 (benefits)`},
+  {k:`祉`,on:`シ`,kun:`—`,en:`welfare / blessing`,ex:`福祉 (welfare), 社会福祉 (social welfare)`},
+  {k:`養`,on:`ヨウ`,kun:`やしな(う)`,en:`to nourish / to raise`,ex:`栄養 (nutrition), 療養 (recuperation)`},
+  {k:`療`,on:`リョウ`,kun:`—`,en:`treatment / cure`,ex:`治療 (treatment), 医療 (medical care)`},
+  {k:`排`,on:`ハイ`,kun:`—`,en:`to excrete / to discharge`,ex:`排泄 (excretion), 排尿 (urination)`},
+  {k:`泄`,on:`セツ`,kun:`—`,en:`to leak / to discharge`,ex:`排泄 (excretion), 不感蒸泄 (insensible loss)`},
+  {k:`嚥`,on:`エン`,kun:`—`,en:`to swallow`,ex:`嚥下 (swallowing / deglutition)`},
+  {k:`下`,on:`カ・ゲ`,kun:`した・くだ(す)`,en:`below / to lower`,ex:`嚥下 (swallowing), 下肢 (lower limb)`},
+  {k:`浴`,on:`ヨク`,kun:`あ(びる)`,en:`to bathe / bathing`,ex:`入浴 (taking a bath), 足浴 (foot bath)`},
+  {k:`眠`,on:`ミン`,kun:`ねむ(る)`,en:`to sleep / sleep`,ex:`不眠 (insomnia), 安眠 (good sleep)`},
+  {k:`脈`,on:`ミャク`,kun:`—`,en:`pulse / vein / artery`,ex:`脈拍 (pulse), 動脈 (artery), 静脈 (vein)`},
+  {k:`圧`,on:`アツ`,kun:`お(す)`,en:`pressure`,ex:`血圧 (blood pressure), 腹圧 (abdominal pressure)`},
+  {k:`感`,on:`カン`,kun:`かん(じる)`,en:`to feel / sense`,ex:`感染 (infection), 感覚 (sensation)`},
+  {k:`染`,on:`セン`,kun:`そ(める)`,en:`to dye / to infect`,ex:`感染 (infection), 院内感染 (hospital infection)`},
+  {k:`障`,on:`ショウ`,kun:`さわ(る)`,en:`obstacle / impediment`,ex:`障害 (disorder/disability), 障壁 (barrier)`},
+  {k:`害`,on:`ガイ`,kun:`—`,en:`harm / damage`,ex:`障害 (disability), 障害者 (person with disability)`},
+  {k:`認`,on:`ニン`,kun:`みと(める)`,en:`to recognize / to approve`,ex:`認知症 (dementia), 認知機能 (cognitive function)`},
+  {k:`知`,on:`チ`,kun:`し(る)`,en:`to know / wisdom`,ex:`認知 (recognition), 知覚 (perception)`},
+  {k:`症`,on:`ショウ`,kun:`—`,en:`disease / condition / symptom`,ex:`認知症 (dementia), 症状 (symptom)`},
+  {k:`骨`,on:`コツ`,kun:`ほね`,en:`bone`,ex:`骨折 (fracture), 骨格 (skeleton), 骨髄 (bone marrow)`},
+  {k:`折`,on:`セツ`,kun:`お(る)・おれ(る)`,en:`to break / to fold`,ex:`骨折 (bone fracture), 大腿骨頸部骨折`},
+  {k:`脳`,on:`ノウ`,kun:`—`,en:`brain`,ex:`脳梗塞 (cerebral infarction), 脳出血 (cerebral hemorrhage)`},
+  {k:`梗`,on:`コウ`,kun:`—`,en:`to obstruct / to block`,ex:`脳梗塞 (infarction), 心筋梗塞 (myocardial infarction)`},
+  {k:`塞`,on:`ソク`,kun:`ふさ(ぐ)`,en:`to block / to obstruct`,ex:`梗塞 (infarction), 腸閉塞 (intestinal obstruction)`},
+  {k:`血`,on:`ケツ`,kun:`ち`,en:`blood`,ex:`血圧 (blood pressure), 血管 (blood vessel), 出血 (hemorrhage)`},
+  {k:`管`,on:`カン`,kun:`くだ`,en:`pipe / tube / to manage`,ex:`血管 (blood vessel), 気管 (trachea)`},
+  {k:`麻`,on:`マ`,kun:`—`,en:`hemp / numb / paralysis`,ex:`麻痺 (paralysis), 片麻痺 (hemiplegia)`},
+  {k:`痺`,on:`ヒ`,kun:`しび(れる)`,en:`to be numb / paralysis`,ex:`麻痺 (paralysis), 四肢麻痺 (quadriplegia)`},
+  {k:`肺`,on:`ハイ`,kun:`—`,en:`lung`,ex:`肺炎 (pneumonia), 肺活量 (lung capacity)`},
+  {k:`炎`,on:`エン`,kun:`ほのお`,en:`flame / inflammation`,ex:`肺炎 (pneumonia), 肝炎 (hepatitis)`},
+  {k:`糖`,on:`トウ`,kun:`—`,en:`sugar / starch`,ex:`糖尿病 (diabetes mellitus), 血糖値 (blood glucose)`},
+  {k:`尿`,on:`ニョウ`,kun:`—`,en:`urine`,ex:`糖尿病 (diabetes), 尿失禁 (incontinence), 排尿 (urination)`},
+  {k:`腎`,on:`ジン`,kun:`—`,en:`kidney`,ex:`腎臓 (kidney), 腎不全 (renal failure)`},
+  {k:`筋`,on:`キン`,kun:`すじ`,en:`muscle / tendon`,ex:`筋力 (muscle strength), 筋萎縮 (muscle atrophy)`},
+  {k:`力`,on:`リョク・リキ`,kun:`ちから`,en:`power / strength`,ex:`筋力 (muscle strength), 体力 (physical strength)`},
+  {k:`呼`,on:`コ`,kun:`よ(ぶ)`,en:`to call / to breathe`,ex:`呼吸 (breathing), 呼吸困難 (dyspnea)`},
+  {k:`吸`,on:`キュウ`,kun:`す(う)`,en:`to inhale / to absorb`,ex:`呼吸 (respiration), 吸引 (suction)`},
+  {k:`神`,on:`シン・ジン`,kun:`かみ`,en:`spirit / nerve / god`,ex:`神経 (nerve), 精神 (mental), 自律神経`},
+  {k:`経`,on:`ケイ・キョウ`,kun:`へ(る)`,en:`to pass through / nerve`,ex:`神経 (nerve), 経管 (tube feeding)`},
+  {k:`心`,on:`シン`,kun:`こころ`,en:`heart / mind`,ex:`心臓 (heart), 心疾患 (heart disease)`},
+  {k:`臓`,on:`ゾウ`,kun:`—`,en:`internal organ`,ex:`心臓 (heart), 腎臓 (kidney), 肝臓 (liver)`},
+  {k:`胃`,on:`イ`,kun:`—`,en:`stomach`,ex:`胃潰瘍 (stomach ulcer), 胃ろう (gastric fistula)`},
+  {k:`腸`,on:`チョウ`,kun:`—`,en:`intestine`,ex:`大腸 (large intestine), 小腸 (small intestine)`},
+  {k:`肝`,on:`カン`,kun:`きも`,en:`liver`,ex:`肝臓 (liver), 肝炎 (hepatitis), 肝硬変 (cirrhosis)`},
+  {k:`膵`,on:`スイ`,kun:`—`,en:`pancreas`,ex:`膵臓 (pancreas)`},
+  {k:`皮`,on:`ヒ`,kun:`かわ`,en:`skin / peel`,ex:`皮膚 (skin), 皮下組織 (subcutaneous tissue)`},
+  {k:`膚`,on:`フ`,kun:`—`,en:`skin`,ex:`皮膚 (skin), 皮膚掻痒症 (pruritus)`},
+  {k:`関`,on:`カン`,kun:`かか(わる)・せき`,en:`related to / joint`,ex:`関節 (joint), 関節可動域 (range of motion)`},
+  {k:`節`,on:`セツ・セチ`,kun:`ふし`,en:`joint / section`,ex:`関節 (joint), 関節炎 (arthritis)`},
+  {k:`移`,on:`イ`,kun:`うつ(る)・うつ(す)`,en:`to move / to transfer`,ex:`移動 (movement), 移乗 (transferring)`},
+  {k:`乗`,on:`ジョウ`,kun:`の(る)`,en:`to ride / to get on`,ex:`移乗 (transferring), 乗車 (boarding)`},
+  {k:`清`,on:`セイ`,kun:`きよ(い)・きよ(める)`,en:`clean / pure / to cleanse`,ex:`清拭 (bed bath), 清潔 (cleanliness)`},
+  {k:`拭`,on:`シキ`,kun:`ふ(く)`,en:`to wipe / to clean`,ex:`清拭 (bed bath), 部分清拭 (partial bed bath)`},
+  {k:`褥`,on:`ジョク`,kun:`しとね`,en:`bedding / mattress`,ex:`褥瘡 (pressure ulcer / bedsore)`},
+  {k:`瘡`,on:`ソウ`,kun:`かさ`,en:`sore / ulcer`,ex:`褥瘡 (pressure ulcer)`},
+  {k:`痛`,on:`ツウ`,kun:`いた(い)`,en:`pain / ache`,ex:`疼痛 (pain), 胸痛 (chest pain), 腰痛 (lower back pain)`},
+  {k:`熱`,on:`ネツ`,kun:`あつ(い)`,en:`heat / fever`,ex:`発熱 (fever), 体熱 (body heat)`},
+  {k:`嘔`,on:`オウ`,kun:`—`,en:`to vomit`,ex:`嘔吐 (vomiting), 嘔気 (nausea)`},
+  {k:`吐`,on:`ト`,kun:`は(く)・つ(く)`,en:`to vomit / to spit`,ex:`嘔吐 (vomiting), 吐血 (hematemesis)`},
+  {k:`眼`,on:`ガン`,kun:`め`,en:`eye / eyeball`,ex:`眼圧 (ocular pressure), 眼内圧 (intraocular pressure)`},
+  {k:`視`,on:`シ`,kun:`み(る)`,en:`to see / vision`,ex:`視覚 (vision), 視力 (eyesight), 視野 (visual field)`},
+  {k:`聴`,on:`チョウ`,kun:`き(く)`,en:`to hear / to listen`,ex:`聴覚 (hearing), 聴力 (hearing ability)`},
+  {k:`覚`,on:`カク`,kun:`おぼ(える)・さ(める)`,en:`to awaken / to memorize`,ex:`感覚 (sensation), 聴覚 (hearing)`},
+  {k:`代`,on:`タイ・ダイ`,kun:`か(わる)・よ`,en:`to replace / generation / metabolism`,ex:`代謝 (metabolism)`},
+  {k:`謝`,on:`シャ`,kun:`あやま(る)`,en:`to apologize / to metabolize`,ex:`代謝 (metabolism)`},
+  {k:`栄`,on:`エイ`,kun:`さか(える)`,en:`to prosper / nutrition`,ex:`栄養 (nutrition), 栄養士 (dietitian)`},
+  {k:`援`,on:`エン`,kun:`—`,en:`assistance / support`,ex:`支援 (support), 援助 (assistance/aid)`},
+  {k:`支`,on:`シ`,kun:`ささ(える)`,en:`to support / to sustain`,ex:`支援 (support), 支持 (support/backing)`},
+  {k:`利`,on:`リ`,kun:`き(く)`,en:`benefit / advantage`,ex:`利用者 (user), 利益 (benefit), 権利 (rights)`},
+  {k:`用`,on:`ヨウ`,kun:`もち(いる)・つか(う)`,en:`use / to use`,ex:`利用 (use), 使用 (usage), 介護用具 (care tools)`},
+  {k:`者`,on:`シャ`,kun:`もの`,en:`person / one who`,ex:`利用者 (user), 患者 (patient), 介護者 (caregiver)`},
+  {k:`看`,on:`カン`,kun:`み(る)`,en:`to watch / to nurse`,ex:`看護 (nursing), 看取り (deathwatch)`},
+  {k:`取`,on:`シュ`,kun:`と(る)`,en:`to take / to get`,ex:`看取り (deathwatch), 摂取 (intake)`},
+  {k:`記`,on:`キ`,kun:`しる(す)`,en:`to record / to note`,ex:`記録 (record), 記憶 (memory)`},
+  {k:`憶`,on:`オク`,kun:`—`,en:`memory / to remember`,ex:`記憶 (memory), 記憶障害 (memory impairment)`},
+  {k:`観`,on:`カン`,kun:`み(る)・みな(す)`,en:`to observe / view`,ex:`観察 (observation), 価値観 (values)`},
+  {k:`察`,on:`サツ`,kun:`—`,en:`to examine / to observe`,ex:`観察 (observation), 診察 (examination)`},
+  {k:`動`,on:`ドウ`,kun:`うご(く)`,en:`to move / to act`,ex:`移動 (movement), 運動 (exercise), 活動 (activity)`},
+  {k:`安`,on:`アン`,kun:`やす(い)`,en:`safe / peaceful / cheap`,ex:`安全 (safety), 安静 (rest), 安眠 (good sleep)`},
+  {k:`全`,on:`ゼン`,kun:`すべ(て)・まった(く)`,en:`whole / complete / all`,ex:`安全 (safety), 全介助 (total assistance)`},
+  {k:`自`,on:`ジ・シ`,kun:`みずか(ら)`,en:`self / oneself`,ex:`自立 (independence), 自助 (self-help)`},
+  {k:`立`,on:`リツ・リュウ`,kun:`た(つ)`,en:`to stand / to establish`,ex:`自立 (independence), 立位 (standing position)`},
+  {k:`生`,on:`セイ・ショウ`,kun:`い(きる)・う(む)`,en:`life / to live`,ex:`生活 (daily life), 生命 (life), 生存 (survival)`},
+  {k:`活`,on:`カツ`,kun:`い(きる)`,en:`to live / active`,ex:`生活 (daily life), 活動 (activity), 活力 (vitality)`},
+  {k:`社`,on:`シャ`,kun:`やしろ`,en:`society / company / shrine`,ex:`社会 (society), 社会福祉 (social welfare)`},
+  {k:`会`,on:`カイ・エ`,kun:`あ(う)`,en:`to meet / association / society`,ex:`社会 (society), 社会保険 (social insurance)`},
+  {k:`保`,on:`ホ`,kun:`たも(つ)`,en:`to preserve / to maintain / insurance`,ex:`保険 (insurance), 保健 (health)`},
+  {k:`険`,on:`ケン`,kun:`けわ(しい)`,en:`risk / insurance`,ex:`保険 (insurance), 介護保険 (nursing care insurance)`},
+  {k:`権`,on:`ケン`,kun:`—`,en:`right / authority`,ex:`権利 (right), 人権 (human rights), 権利擁護`},
+  {k:`施`,on:`シ・セ`,kun:`ほどこ(す)`,en:`to apply / to carry out`,ex:`施設 (facility), 施行 (enforcement)`},
+  {k:`設`,on:`セツ`,kun:`もう(ける)`,en:`to establish / to set up`,ex:`施設 (facility), 設備 (equipment)`},
+  {k:`地`,on:`チ・ジ`,kun:`つち`,en:`land / ground / region`,ex:`地域 (area/region), 地位 (position/status)`},
+  {k:`域`,on:`イキ`,kun:`—`,en:`region / area`,ex:`地域 (area), 可動域 (range of motion)`},
+  {k:`医`,on:`イ`,kun:`—`,en:`medicine / doctor`,ex:`医師 (doctor), 医療 (medical care), 医薬品 (drug)`},
+  {k:`師`,on:`シ`,kun:`—`,en:`teacher / expert / army`,ex:`医師 (doctor), 看護師 (nurse), 介護福祉士`},
+  {k:`訓`,on:`クン`,kun:`—`,en:`instruction / training`,ex:`訓練 (training), 機能訓練 (functional training)`},
+  {k:`練`,on:`レン`,kun:`ね(る)`,en:`to train / to refine`,ex:`訓練 (training), 関節可動域訓練 (ROM exercise)`},
+  {k:`老`,on:`ロウ`,kun:`お(いる)`,en:`to age / old age`,ex:`老人 (elderly person), 老化 (aging)`},
+  {k:`齢`,on:`レイ`,kun:`とし`,en:`age / years`,ex:`高齢 (old age), 高齢者 (elderly person)`},
+  {k:`徘`,on:`ハイ`,kun:`さまよ(う)`,en:`to wander`,ex:`徘徊 (wandering)`},
+  {k:`徊`,on:`カイ`,kun:`さまよ(う)`,en:`to wander / roam`,ex:`徘徊 (wandering)`},
+  {k:`言`,on:`ゲン・ゴン`,kun:`い(う)・こと`,en:`to say / word / language`,ex:`言語 (language), 言語聴覚士`},
+  {k:`語`,on:`ゴ`,kun:`かた(る)`,en:`language / to talk`,ex:`言語 (language), 失語 (aphasia)`},
+  {k:`食`,on:`ショク・ジキ`,kun:`た(べる)・く(う)`,en:`food / to eat`,ex:`食事 (meal), 食欲 (appetite), 摂食 (eating)`},
+  {k:`欲`,on:`ヨク`,kun:`ほ(しい)`,en:`desire / greed`,ex:`食欲 (appetite), 意欲 (motivation/will)`},
+  {k:`水`,on:`スイ`,kun:`みず`,en:`water`,ex:`水分 (water/moisture), 脱水 (dehydration)`},
+  {k:`薬`,on:`ヤク`,kun:`くすり`,en:`medicine / drug`,ex:`薬剤 (drug), 医薬品 (pharmaceutical)`},
+  {k:`剤`,on:`ザイ`,kun:`—`,en:`medicine / preparation`,ex:`薬剤 (medication), 錠剤 (tablet), 鎮痛剤 (painkiller)`},
+  {k:`注`,on:`チュウ`,kun:`そそ(ぐ)・き(をつける)`,en:`to pour / injection`,ex:`注射 (injection), 注意 (attention)`},
+  {k:`射`,on:`シャ`,kun:`い(る)`,en:`to shoot / injection`,ex:`注射 (injection), 放射 (radiation)`}
+];
+
+const KAIGO_KATA = [
+  {k:`アウトリーチ`,on:`outreach`,kun:`カタカナ`,en:`outreach`,ex:`Community-based support reaching out to users in need`},
+  {k:`アクティビティ`,on:`activity`,kun:`カタカナ`,en:`activity`,ex:`Purposeful activities provided to care recipients to maintain quality of life`},
+  {k:`アドボカシー`,on:`advocacy`,kun:`カタカナ`,en:`advocacy`,ex:`Action to protect the rights and interests of care recipients`},
+  {k:`インフォーマル・ケア`,on:`informal care`,kun:`カタカナ`,en:`informal care`,ex:`Care provided by family, friends, neighbors or volunteers (non-professional)`},
+  {k:`ウエルビーイング`,on:`wellbeing`,kun:`カタカナ`,en:`wellbeing`,ex:`State of complete physical, mental, and social health and happiness`},
+  {k:`エンパワメント`,on:`empowerment`,kun:`カタカナ`,en:`empowerment`,ex:`Process of enabling individuals to gain control over their own lives`},
+  {k:`ノーマライゼーション`,on:`normalization`,kun:`カタカナ`,en:`normalization`,ex:`Philosophy that people with disabilities should live as normal a life as possible`},
+  {k:`バリアフリー`,on:`barrier-free`,kun:`カタカナ`,en:`barrier-free`,ex:`Design removing obstacles for people with disabilities`},
+  {k:`フォーマルケア`,on:`formal care`,kun:`カタカナ`,en:`formal care`,ex:`Professional care provided by licensed workers and institutions`},
+  {k:`メンタルヘルス`,on:`mental health`,kun:`カタカナ`,en:`mental health`,ex:`Psychological and emotional wellbeing of an individual`},
+  {k:`ユニバーサルデザイン`,on:`universal design`,kun:`カタカナ`,en:`universal design`,ex:`Design of environments usable by all people regardless of ability`},
+  {k:`ライフサイクル`,on:`life cycle`,kun:`カタカナ`,en:`life cycle`,ex:`Stages of a person's life from birth to death`},
+  {k:`ライフヒストリー`,on:`life history`,kun:`カタカナ`,en:`life history`,ex:`Record of a person's personal history, used in care to personalize services`},
+  {k:`ラポール`,on:`rapport`,kun:`カタカナ`,en:`rapport`,ex:`Trusting relationship built between caregiver and care recipient`},
+  {k:`リハビリテーション`,on:`rehabilitation`,kun:`カタカナ`,en:`rehabilitation`,ex:`Process of recovery and restoration of function after illness or injury`},
+  {k:`レスパイト・ケア`,on:`respite care`,kun:`カタカナ`,en:`respite care`,ex:`Temporary care provided to give family caregivers a break`},
+  {k:`ワークライフバランス`,on:`work-life balance`,kun:`カタカナ`,en:`work-life balance`,ex:`Balance between professional responsibilities and personal life`},
+  {k:`ソーシャルインクルージョン`,on:`social inclusion`,kun:`カタカナ`,en:`social inclusion`,ex:`Effort to ensure all people can participate equally in society`},
+  {k:`ストレングス`,on:`strength`,kun:`カタカナ`,en:`strength`,ex:`Person-centered approach focusing on an individual's abilities and strengths`},
+  {k:`セルフケア`,on:`self care`,kun:`カタカナ`,en:`self care`,ex:`Actions taken by individuals to maintain their own health and wellbeing`},
+  {k:`エアマット`,on:`air mattress`,kun:`カタカナ`,en:`air mattress`,ex:`Air-filled mattress used to prevent pressure ulcers / bedsores`},
+  {k:`ギャッチベッド`,on:`gatch bed`,kun:`カタカナ`,en:`gatch bed`,ex:`Hospital bed with adjustable head and foot sections`},
+  {k:`スロープ`,on:`slope / ramp`,kun:`カタカナ`,en:`slope / ramp`,ex:`Inclined surface used for wheelchair access`},
+  {k:`ポータブルトイレ`,on:`portable toilet`,kun:`カタカナ`,en:`portable toilet`,ex:`Bedside commode toilet for users who cannot access the bathroom`},
+  {k:`シャワーチェア`,on:`shower chair`,kun:`カタカナ`,en:`shower chair`,ex:`Chair designed for use in the bath or shower for elderly or disabled users`},
+  {k:`ヒヤリハット`,on:`near miss`,kun:`カタカナ`,en:`near miss (near accident)`,ex:`Minor incidents or near-misses logged to prevent future accidents`},
+  {k:`バイタルサイン`,on:`vital signs`,kun:`カタカナ`,en:`vital signs`,ex:`Basic physiological measurements: temperature, blood pressure, pulse, respiration`},
+  {k:`ケアマネジメント`,on:`care management`,kun:`カタカナ`,en:`care management`,ex:`Process of assessing needs and coordinating care services`},
+  {k:`アセスメント`,on:`assessment`,kun:`カタカナ`,en:`assessment`,ex:`Systematic evaluation of a care recipient's needs and condition`},
+  {k:`モニタリング`,on:`monitoring`,kun:`カタカナ`,en:`monitoring`,ex:`Ongoing observation and review of a care plan's effectiveness`},
+  {k:`エコマップ`,on:`eco-map`,kun:`カタカナ`,en:`eco-map`,ex:`Diagram showing social relationships and support networks around a person`},
+  {k:`ジェノグラム`,on:`genogram`,kun:`カタカナ`,en:`genogram`,ex:`Family tree diagram used in care to understand family structure`},
+  {k:`フェイスシート`,on:`face sheet`,kun:`カタカナ`,en:`face sheet`,ex:`Basic information sheet about a care recipient`},
+  {k:`インフォームドコンセント`,on:`informed consent`,kun:`カタカナ`,en:`informed consent`,ex:`Process of obtaining agreement after providing full information about care`},
+  {k:`チームケア`,on:`team care`,kun:`カタカナ`,en:`team care`,ex:`Coordinated care provided by a multidisciplinary team`},
+  {k:`スタンダード・プリコーション`,on:`standard precaution`,kun:`カタカナ`,en:`standard precaution`,ex:`Basic infection control measures applied to all patients regardless of diagnosis`},
+  {k:`ディスポーザブルグローブ`,on:`disposable gloves`,kun:`カタカナ`,en:`disposable gloves`,ex:`Single-use protective gloves used in infection control`},
+  {k:`ボディメカニクス`,on:`body mechanics`,kun:`カタカナ`,en:`body mechanics`,ex:`Use of correct body posture and movement to prevent injury during care`},
+  {k:`バイスティックの7原則`,on:`seven principles of Biestek`,kun:`カタカナ`,en:`seven principles of Biestek`,ex:`Foundational principles of social work relationships by Felix Biestek`},
+  {k:`クロックポジション`,on:`clock position`,kun:`カタカナ`,en:`clock position`,ex:`Method of describing food placement using clock positions for visually impaired`},
+  {k:`アルブミン`,on:`albumin`,kun:`カタカナ`,en:`albumin`,ex:`Protein measured in blood to assess nutritional status`},
+  {k:`ビタミン`,on:`vitamin`,kun:`カタカナ`,en:`vitamin`,ex:`Essential organic micronutrients needed in small amounts for body function`},
+  {k:`ミネラル`,on:`mineral`,kun:`カタカナ`,en:`mineral (inorganic substance)`,ex:`Inorganic nutrients essential for body function (e.g., calcium, iron)`},
+  {k:`ホルモン`,on:`hormone`,kun:`カタカナ`,en:`hormone`,ex:`Chemical messenger produced by endocrine glands regulating body functions`},
+  {k:`ホメオスタシス`,on:`homeostasis`,kun:`カタカナ`,en:`homeostasis`,ex:`Body's ability to maintain stable internal conditions despite external changes`},
+  {k:`サーカディアンリズム`,on:`circadian rhythm`,kun:`カタカナ`,en:`circadian rhythm`,ex:`Natural 24-hour biological cycle regulating sleep/wake patterns`},
+  {k:`メラトニン`,on:`melatonin`,kun:`カタカナ`,en:`melatonin`,ex:`Hormone regulating sleep-wake cycles, produced by the pineal gland`},
+  {k:`アルツハイマー型認知症`,on:`Alzheimer's dementia`,kun:`カタカナ`,en:`dementia of the Alzheimer's type`,ex:`Most common form of dementia caused by progressive brain cell death`},
+  {k:`パーソンセンタードケア`,on:`person-centered care`,kun:`カタカナ`,en:`person-centered care`,ex:`Care approach focusing on the individual's preferences and personhood`},
+  {k:`シャイ・ドレーガー症候群`,on:`Shy-Drager syndrome`,kun:`カタカナ`,en:`Shy-Drager syndrome`,ex:`Rare degenerative disease affecting the autonomic nervous system`},
+  {k:`アスペルガー症候群`,on:`Asperger syndrome`,kun:`カタカナ`,en:`Asperger syndrome`,ex:`Neurodevelopmental disorder characterized by social difficulties`},
+  {k:`インフルエンザ`,on:`influenza`,kun:`カタカナ`,en:`influenza`,ex:`Highly contagious viral respiratory illness (flu)`},
+  {k:`ノロウイルス`,on:`norovirus`,kun:`カタカナ`,en:`norovirus`,ex:`Highly contagious virus causing gastroenteritis (vomiting and diarrhea)`},
+  {k:`カンピロバクター感染症`,on:`campylobacter infection`,kun:`カタカナ`,en:`campylobacter infection`,ex:`Bacterial food poisoning from contaminated poultry or water`},
+  {k:`サルモネラ菌`,on:`salmonella`,kun:`カタカナ`,en:`salmonella`,ex:`Bacteria causing food poisoning, often from contaminated eggs or poultry`},
+  {k:`メチシリン耐性黄色ブドウ球菌`,on:`MRSA`,kun:`カタカナ`,en:`methicillin-resistant staphylococcus aureus (MRSA)`,ex:`Drug-resistant bacterial infection common in healthcare settings`},
+  {k:`アイデンティティ`,on:`identity`,kun:`カタカナ`,en:`identity`,ex:`Sense of self, one's own unique characteristics and values`},
+  {k:`アタッチメント`,on:`attachment`,kun:`カタカナ`,en:`attachment`,ex:`Strong emotional bond formed between people, especially caregiver and child`},
+  {k:`バーンアウト`,on:`burnout`,kun:`カタカナ`,en:`burnout`,ex:`State of emotional and physical exhaustion from prolonged work stress`},
+  {k:`ワーキングメモリー`,on:`working memory`,kun:`カタカナ`,en:`working memory`,ex:`Short-term memory system that temporarily holds and processes information`},
+  {k:`フレイル`,on:`frailty`,kun:`カタカナ`,en:`frailty`,ex:`State of increased vulnerability and decreased function in elderly people`},
+  {k:`チアノーゼ`,on:`cyanosis`,kun:`カタカナ`,en:`cyanosis`,ex:`Bluish discoloration of skin due to lack of oxygen in the blood`},
+  {k:`せん妄`,on:`delirium`,kun:`カタカナ`,en:`delirium`,ex:`Acute state of confusion with disturbed consciousness and cognition`},
+  {k:`ピア・カウンセリング`,on:`peer counseling`,kun:`カタカナ`,en:`peer counseling`,ex:`Support and counseling provided by peers with similar experiences`},
+  {k:`パルスオキシメーター`,on:`pulse oximeter`,kun:`カタカナ`,en:`pulse oximeter`,ex:`Device measuring blood oxygen saturation via fingertip sensor`},
+  {k:`ペースメーカー`,on:`pacemaker`,kun:`カタカナ`,en:`pacemaker`,ex:`Implanted medical device regulating abnormal heart rhythms`},
+  {k:`イルリガートル`,on:`irrigator`,kun:`カタカナ`,en:`irrigator`,ex:`Device for administering enemas or irrigation solutions`},
+  {k:`ストレス`,on:`stress`,kun:`カタカナ`,en:`stress`,ex:`Physical or emotional tension from demanding circumstances`},
+  {k:`リスクマネジメント`,on:`risk management`,kun:`カタカナ`,en:`risk management`,ex:`Systematic process to identify, assess, and reduce potential risks`},
+  {k:`ネグレクト`,on:`neglect`,kun:`カタカナ`,en:`neglect`,ex:`Failure to provide proper care or supervision; abandonment of nursing care`},
+  {k:`チョークサイン`,on:`choke sign`,kun:`カタカナ`,en:`choke sign`,ex:`Visual signal indicating choking; hands clutching throat`},
+  {k:`チェーンストークス呼吸`,on:`Cheyne-Stokes breathing`,kun:`カタカナ`,en:`Cheyne-Stokes breathing`,ex:`Abnormal breathing pattern alternating between apnea and hyperpnea`},
+  {k:`ドライマウス`,on:`dry mouth`,kun:`カタカナ`,en:`dry mouth`,ex:`Chronic dryness of the mouth due to reduced saliva production`},
+  {k:`メタボリックシンドローム`,on:`metabolic syndrome`,kun:`カタカナ`,en:`metabolic syndrome`,ex:`Cluster of conditions increasing risk of heart disease and diabetes`},
+  {k:`ヒートショック`,on:`heat shock`,kun:`カタカナ`,en:`heat shock`,ex:`Sudden blood pressure change from temperature differences (e.g., bath to cold air)`},
+  {k:`パーキンソン病`,on:`Parkinson's disease`,kun:`カタカナ`,en:`Parkinson's disease`,ex:`Progressive neurological disorder affecting movement and coordination`},
+  {k:`ベーチェット病`,on:`Behcet's disease`,kun:`カタカナ`,en:`Behcet's disease`,ex:`Rare inflammatory disorder causing sores in mouth and other organs`},
+  {k:`イレウス`,on:`ileus`,kun:`カタカナ`,en:`ileus (intestinal obstruction)`,ex:`Blockage or cessation of normal intestinal movement`},
+  {k:`アドバンス・ケア・プランニング`,on:`ACP`,kun:`カタカナ`,en:`advance care planning (ACP)`,ex:`Process of making decisions about future medical care in advance`},
+  {k:`グリーフケア`,on:`grief care`,kun:`カタカナ`,en:`grief care`,ex:`Support provided to those experiencing bereavement or loss`},
+  {k:`ターミナルケア`,on:`terminal care`,kun:`カタカナ`,en:`terminal care`,ex:`Medical and emotional care provided in the final stages of life`},
+  {k:`緩和ケア`,on:`palliative care`,kun:`カタカナ`,en:`palliative care`,ex:`Holistic care focused on quality of life for those with serious illness`},
+  {k:`PDCA`,on:`PDCA`,kun:`カタカナ`,en:`PDCA cycle`,ex:`Plan-Do-Check-Act quality improvement cycle used in care management`},
+  {k:`QOL`,on:`QOL`,kun:`カタカナ`,en:`quality of life (QOL)`,ex:`Overall wellbeing including physical, mental, and social aspects`},
+  {k:`ADL`,on:`ADL`,kun:`カタカナ`,en:`activities of daily living (ADL)`,ex:`Basic self-care tasks: bathing, dressing, eating, toileting, transferring`},
+  {k:`IADL`,on:`IADL`,kun:`カタカナ`,en:`instrumental activities of daily living (IADL)`,ex:`Complex daily tasks: cooking, shopping, managing finances`},
+  {k:`ICF`,on:`ICF`,kun:`カタカナ`,en:`International Classification of Functioning`,ex:`WHO framework for describing health and disability in a holistic way`},
+  {k:`AED`,on:`AED`,kun:`カタカナ`,en:`automatic external defibrillator (AED)`,ex:`Portable device delivering electric shock to restore normal heart rhythm`},
+  {k:`HOT`,on:`HOT`,kun:`カタカナ`,en:`home oxygen therapy (HOT)`,ex:`Long-term oxygen therapy administered at home for chronic lung disease`},
+  {k:`PEG`,on:`PEG`,kun:`カタカナ`,en:`percutaneous endoscopic gastrostomy (PEG)`,ex:`Feeding tube inserted through abdominal wall into stomach`},
+  {k:`ROM`,on:`ROM`,kun:`カタカナ`,en:`range of motion exercise (ROM)`,ex:`Exercises moving joints through their full range to maintain mobility`},
+  {k:`BPSD`,on:`BPSD`,kun:`カタカナ`,en:`behavioral and psychological symptoms of dementia (BPSD)`,ex:`Non-cognitive symptoms of dementia: agitation, wandering, hallucinations`},
+  {k:`MCI`,on:`MCI`,kun:`カタカナ`,en:`mild cognitive impairment (MCI)`,ex:`Early stage of cognitive decline that may progress to dementia`},
+  {k:`ALS`,on:`ALS`,kun:`カタカナ`,en:`amyotrophic lateral sclerosis (ALS)`,ex:`Progressive disease causing motor neuron degeneration and paralysis`},
+  {k:`ADHD`,on:`ADHD`,kun:`カタカナ`,en:`attention deficit hyperactivity disorder (ADHD)`,ex:`Neurodevelopmental disorder causing inattention and hyperactivity`},
+  {k:`PTSD`,on:`PTSD`,kun:`カタカナ`,en:`post-traumatic stress disorder (PTSD)`,ex:`Anxiety disorder following exposure to traumatic events`},
+  {k:`HIV`,on:`HIV`,kun:`カタカナ`,en:`human immunodeficiency virus (HIV)`,ex:`Virus attacking the immune system, leading to AIDS if untreated`},
+  {k:`SpO2`,on:`SpO2`,kun:`カタカナ`,en:`blood oxygen saturation level (SpO2)`,ex:`Percentage of hemoglobin carrying oxygen, measured by pulse oximeter`},
+  {k:`フットケア`,on:`foot care`,kun:`カタカナ`,en:`foot care`,ex:`Care of feet including nail trimming and skin care, important for diabetic patients`},
+  {k:`オストメイト`,on:`ostomate`,kun:`カタカナ`,en:`ostomate`,ex:`Person who has undergone ostomy surgery creating an artificial opening`},
+  {k:`ロービジョン`,on:`low vision`,kun:`カタカナ`,en:`low vision`,ex:`Significant visual impairment not correctable by standard glasses`},
+  {k:`ウロストミー`,on:`urostomy`,kun:`カタカナ`,en:`urostomy`,ex:`Surgical procedure creating an artificial opening for urinary drainage`},
+  {k:`イレオストミー`,on:`ileostomy`,kun:`カタカナ`,en:`ileostomy`,ex:`Surgical opening from the ileum (small intestine) to the abdomen surface`}
+];
+
+const KAIGO_TERMS = [
+  {k:`意思決定支援`,on:`いしけっていしえん`,kun:`コミュニケーション`,en:`decision-making support`,ex:`Supporting care recipients to make their own decisions about care and life choices`},
+  {k:`一部介助`,on:`いちぶかいじょ`,kun:`介助レベル`,en:`partial assistance`,ex:`Level of care where the caregiver assists only in the parts the recipient cannot do alone`},
+  {k:`全介助`,on:`ぜんかいじょ`,kun:`介助レベル`,en:`total assistance`,ex:`Level of care where the caregiver performs all tasks for the recipient`},
+  {k:`権利擁護`,on:`けんりようご`,kun:`権利・倫理`,en:`advocacy / rights protection`,ex:`Protecting and promoting the legal rights and interests of care recipients`},
+  {k:`自己決定`,on:`じこけってい`,kun:`権利・倫理`,en:`self-determination`,ex:`The right of care recipients to make their own choices about their care and life`},
+  {k:`自己実現`,on:`じこじつげん`,kun:`権利・倫理`,en:`self-actualization`,ex:`The process of fulfilling one's potential and personal goals`},
+  {k:`守秘義務`,on:`しゅひぎむ`,kun:`権利・倫理`,en:`duty of confidentiality`,ex:`Legal and professional obligation to keep client information private`},
+  {k:`職業倫理`,on:`しょくぎょうりんり`,kun:`権利・倫理`,en:`professional ethics`,ex:`Ethical standards and principles guiding behavior in care professions`},
+  {k:`個人情報保護`,on:`こじんじょうほうほご`,kun:`権利・倫理`,en:`protection of personal information`,ex:`Legal requirement to protect and properly handle personal data of care recipients`},
+  {k:`秘密保持`,on:`ひみつほじ`,kun:`権利・倫理`,en:`confidentiality / privacy`,ex:`Obligation to not disclose personal or sensitive information about clients`},
+  {k:`残存能力`,on:`ざんそんのうりょく`,kun:`ケア原則`,en:`residual ability`,ex:`Remaining functional abilities of a care recipient used to promote independence`},
+  {k:`自立支援`,on:`じりつしえん`,kun:`ケア原則`,en:`independence support`,ex:`Care approach focusing on maximizing the recipient's own abilities and independence`},
+  {k:`尊厳`,on:`そんげん`,kun:`ケア原則`,en:`dignity`,ex:`Respect for the inherent worth and individuality of every person in care`},
+  {k:`地域包括ケア`,on:`ちいきほうかつけあ`,kun:`制度・サービス`,en:`community comprehensive care`,ex:`Integrated care system providing medical, nursing, and welfare services within communities`},
+  {k:`地域福祉`,on:`ちいきふくし`,kun:`制度・サービス`,en:`community welfare`,ex:`Welfare services and support provided within local communities`},
+  {k:`社会資源`,on:`しゃかいしげん`,kun:`制度・サービス`,en:`societal resource`,ex:`Available services, facilities, and support systems in the community for care recipients`},
+  {k:`互助`,on:`ごじょ`,kun:`制度・サービス`,en:`mutual assistance`,ex:`Support and assistance provided within communities by neighbors and volunteers`},
+  {k:`公助`,on:`こうじょ`,kun:`制度・サービス`,en:`public help`,ex:`Government-provided welfare and social assistance services`},
+  {k:`自助`,on:`じじょ`,kun:`制度・サービス`,en:`self-help`,ex:`Individual's own efforts to maintain health and manage daily living independently`},
+  {k:`共助`,on:`きょうじょ`,kun:`制度・サービス`,en:`mutual legal assistance`,ex:`Cooperative support among community members or through social insurance systems`},
+  {k:`介護保険`,on:`かいごほけん`,kun:`社会保険制度`,en:`nursing care insurance`,ex:`Japan's compulsory public insurance covering nursing care costs for eligible elderly`},
+  {k:`医療保険`,on:`いりょうほけん`,kun:`社会保険制度`,en:`health insurance`,ex:`Public insurance system covering medical treatment costs`},
+  {k:`雇用保険`,on:`こようほけん`,kun:`社会保険制度`,en:`employment insurance`,ex:`Insurance providing benefits when workers become unemployed`},
+  {k:`年金保険`,on:`ねんきんほけん`,kun:`社会保険制度`,en:`pension insurance`,ex:`Retirement and disability insurance providing regular income to beneficiaries`},
+  {k:`労働者災害補償保険`,on:`ろうどうしゃさいがいほしょうほけん`,kun:`社会保険制度`,en:`workers' accident compensation insurance`,ex:`Insurance compensating workers injured or ill due to work-related causes`},
+  {k:`介護予防`,on:`かいごよぼう`,kun:`介護サービス`,en:`care prevention`,ex:`Programs designed to prevent the need for nursing care or slow its progression`},
+  {k:`在宅介護`,on:`ざいたくかいご`,kun:`介護サービス`,en:`in-home care`,ex:`Nursing and personal care provided in the recipient's own home`},
+  {k:`居宅サービス`,on:`きょたくさーびす`,kun:`介護サービス`,en:`in-home service`,ex:`Care insurance services provided in the user's home environment`},
+  {k:`施設サービス`,on:`しせつさーびす`,kun:`介護サービス`,en:`facility service`,ex:`Care services provided within designated care facilities`},
+  {k:`訪問系サービス`,on:`ほうもんけいさーびす`,kun:`介護サービス`,en:`home visit service`,ex:`Care services delivered through visits to the user's home`},
+  {k:`通所系サービス`,on:`つうしょけいさーびす`,kun:`介護サービス`,en:`day service`,ex:`Care services delivered at facilities where users visit during the day`},
+  {k:`通所施設`,on:`つうしょしせつ`,kun:`介護サービス`,en:`day care facility`,ex:`Facility providing daytime care services to users who return home each evening`},
+  {k:`介護過程`,on:`かいごかてい`,kun:`ケアプロセス`,en:`care process`,ex:`Systematic process of assessing, planning, implementing, and evaluating care`},
+  {k:`介護計画`,on:`かいごけいかく`,kun:`ケアプロセス`,en:`care plan`,ex:`Written document detailing the specific care to be provided based on assessment`},
+  {k:`事前評価`,on:`じぜんひょうか`,kun:`ケアプロセス`,en:`advance assessment`,ex:`Initial comprehensive evaluation of a care recipient's needs and condition`},
+  {k:`評価`,on:`ひょうか`,kun:`ケアプロセス`,en:`evaluation`,ex:`Review and assessment of whether care goals and plans have been achieved`},
+  {k:`立案`,on:`りつあん`,kun:`ケアプロセス`,en:`planning`,ex:`Development of a care plan based on assessment findings and identified needs`},
+  {k:`実施`,on:`じっし`,kun:`ケアプロセス`,en:`implementation`,ex:`Carrying out the planned care activities with the care recipient`},
+  {k:`観察`,on:`かんさつ`,kun:`ケアプロセス`,en:`observation`,ex:`Systematic watching and monitoring of a care recipient's condition and response`},
+  {k:`課題`,on:`かだい`,kun:`ケアプロセス`,en:`issue / agenda`,ex:`Problem or need identified during assessment that requires care intervention`},
+  {k:`体位変換`,on:`たいいへんかん`,kun:`体位・移動`,en:`repositioning`,ex:`Changing a bedridden person's body position to prevent pressure ulcers`},
+  {k:`移乗`,on:`いじょう`,kun:`体位・移動`,en:`transferring`,ex:`Moving a person from one surface to another (e.g., bed to wheelchair)`},
+  {k:`移動`,on:`いどう`,kun:`体位・移動`,en:`movement / transfer`,ex:`Moving a care recipient from one place to another`},
+  {k:`離床`,on:`りしょう`,kun:`体位・移動`,en:`leaving one's bed`,ex:`Getting a bedridden patient out of bed to prevent deterioration`},
+  {k:`仰臥位`,on:`ぎょうがい・はいがい`,kun:`体位`,en:`supine / dorsal position`,ex:`Lying on the back; also called dorsal position (背臥位)`},
+  {k:`側臥位`,on:`そくがい`,kun:`体位`,en:`lateral position`,ex:`Lying on one's side; used for repositioning and comfort`},
+  {k:`腹臥位`,on:`ふくがい`,kun:`体位`,en:`prone position`,ex:`Lying face down; used for specific medical procedures`},
+  {k:`半座位`,on:`はんざい`,kun:`体位`,en:`semi-sitting (Fowler's position)`,ex:`Semi-upright position (30-60 degrees); helps breathing and prevents aspiration`},
+  {k:`端座位`,on:`たんざい`,kun:`体位`,en:`dangling position`,ex:`Sitting on the edge of a bed with legs hanging down`},
+  {k:`良肢位`,on:`りょうしい`,kun:`体位`,en:`functional position`,ex:`Position placing joints in optimal alignment to prevent contracture`},
+  {k:`褥瘡`,on:`じょくそう`,kun:`皮膚ケア`,en:`pressure ulcer / bedsore`,ex:`Skin damage caused by prolonged pressure, especially over bony prominences`},
+  {k:`栄養改善`,on:`えいようかいぜん`,kun:`栄養管理`,en:`nutrition improvement`,ex:`Program to address and improve inadequate nutritional intake`},
+  {k:`栄養摂取`,on:`えいようせっしゅ`,kun:`栄養管理`,en:`nutrient intake`,ex:`Consumption of adequate nutrients necessary for health`},
+  {k:`低栄養`,on:`ていえいよう`,kun:`栄養管理`,en:`undernutrition / malnutrition`,ex:`Insufficient intake of nutrients leading to health deterioration`},
+  {k:`嚥下体操`,on:`えんげたいそう`,kun:`食事ケア`,en:`swallowing exercise`,ex:`Exercises to strengthen swallowing muscles and prevent dysphagia`},
+  {k:`摂食障害`,on:`せっしょくしょうがい`,kun:`食事ケア`,en:`eating disorder`,ex:`Serious mental health condition characterized by abnormal eating behaviors`},
+  {k:`誤嚥性肺炎`,on:`ごえんせいはいえん`,kun:`食事ケア`,en:`aspiration pneumonia`,ex:`Pneumonia caused by food, liquid, or stomach contents entering the lungs`},
+  {k:`口腔ケア`,on:`こうくうけあ`,kun:`口腔・清潔ケア`,en:`oral care`,ex:`Cleaning and hygiene care for the mouth, teeth, and gums`},
+  {k:`清拭`,on:`せいしき`,kun:`清潔ケア`,en:`bed bath / sponge bath`,ex:`Cleaning the body with warm towels when a full bath is not possible`},
+  {k:`更衣`,on:`こうい`,kun:`清潔ケア`,en:`changing clothes / dressing`,ex:`Assistance with putting on and taking off clothing`},
+  {k:`排尿`,on:`はいにょう`,kun:`排泄ケア`,en:`urination`,ex:`The process of expelling urine from the body`},
+  {k:`排便`,on:`はいべん`,kun:`排泄ケア`,en:`defecation / bowel movement`,ex:`The process of expelling feces from the body`},
+  {k:`排泄`,on:`はいせつ`,kun:`排泄ケア`,en:`excretion / elimination`,ex:`The process of expelling waste products from the body`},
+  {k:`尿失禁`,on:`にょうしっきん`,kun:`排泄ケア`,en:`urinary incontinence`,ex:`Involuntary leakage of urine; classified into several types`},
+  {k:`便失禁`,on:`べんしっきん`,kun:`排泄ケア`,en:`fecal incontinence`,ex:`Involuntary leakage or loss of control of bowel movements`},
+  {k:`便秘`,on:`べんぴ`,kun:`排泄ケア`,en:`constipation`,ex:`Infrequent or difficult bowel movements`},
+  {k:`下痢`,on:`げり`,kun:`排泄ケア`,en:`diarrhea`,ex:`Frequent passage of loose, watery stools`},
+  {k:`安眠`,on:`あんみん`,kun:`睡眠ケア`,en:`good sleep`,ex:`Restful, adequate sleep essential for health and recovery`},
+  {k:`不眠`,on:`ふみん`,kun:`睡眠ケア`,en:`insomnia`,ex:`Persistent difficulty falling asleep or staying asleep`},
+  {k:`睡眠行動障害`,on:`すいみんこうどうしょうがい`,kun:`睡眠ケア`,en:`sleep behavior disorder`,ex:`Acting out dreams during REM sleep; risk of injury`},
+  {k:`中途覚醒`,on:`ちゅうとかくせい`,kun:`睡眠ケア`,en:`nocturnal awakening`,ex:`Waking up in the middle of the night and having difficulty returning to sleep`},
+  {k:`昼夜逆転`,on:`ちゅうやぎゃくてん`,kun:`睡眠ケア`,en:`reversed day-night cycle`,ex:`Pattern of being awake at night and sleeping during the day; common in dementia`},
+  {k:`感染症対策`,on:`かんせんしょうたいさく`,kun:`感染管理`,en:`measures for infectious diseases`,ex:`Procedures and protocols to prevent spread of infectious diseases in care settings`},
+  {k:`感染予防`,on:`かんせんよぼう`,kun:`感染管理`,en:`infection prevention`,ex:`Actions taken to prevent the occurrence and spread of infection`},
+  {k:`感染経路`,on:`かんせんけいろ`,kun:`感染管理`,en:`route of infection`,ex:`The pathway through which infectious agents spread from one person to another`},
+  {k:`空気感染`,on:`くうきかんせん`,kun:`感染経路`,en:`airborne infection`,ex:`Spread of infection through tiny airborne particles (e.g., tuberculosis, measles)`},
+  {k:`飛沫感染`,on:`ひまつかんせん`,kun:`感染経路`,en:`droplet infection`,ex:`Spread through respiratory droplets from coughing or sneezing (e.g., influenza)`},
+  {k:`接触感染`,on:`せっしょくかんせん`,kun:`感染経路`,en:`contact infection`,ex:`Spread through direct physical contact or contaminated surfaces (e.g., norovirus)`},
+  {k:`経口感染`,on:`けいこうかんせん`,kun:`感染経路`,en:`oral infection`,ex:`Spread through ingestion of contaminated food or water`},
+  {k:`血液感染`,on:`けつえきかんせん`,kun:`感染経路`,en:`blood-borne infection`,ex:`Spread through contact with infected blood or body fluids`},
+  {k:`院内感染`,on:`いんないかんせん`,kun:`感染管理`,en:`hospital-acquired infection`,ex:`Infection acquired during hospitalization or medical care`},
+  {k:`標準予防策`,on:`ひょうじゅんよぼうさく`,kun:`感染管理`,en:`standard precautions`,ex:`Universal infection control measures applied to all patients regardless of diagnosis`},
+  {k:`殺菌`,on:`さっきん`,kun:`感染管理`,en:`sterilization / disinfection`,ex:`Process of killing microorganisms on surfaces or objects`},
+  {k:`消毒`,on:`しょうどく`,kun:`感染管理`,en:`disinfection`,ex:`Process of eliminating or reducing harmful microorganisms on surfaces`},
+  {k:`滅菌`,on:`めっきん`,kun:`感染管理`,en:`antisepsis / sterilization`,ex:`Complete elimination of all microorganisms including spores`},
+  {k:`免疫力`,on:`めんえきりょく`,kun:`感染管理`,en:`immunity`,ex:`The body's ability to resist infection through immune system function`},
+  {k:`予防接種`,on:`よぼうせっしゅ`,kun:`感染管理`,en:`immunization / vaccination`,ex:`Administration of vaccines to stimulate immunity against specific diseases`},
+  {k:`糖尿病`,on:`とうにょうびょう`,kun:`生活習慣病`,en:`diabetes mellitus`,ex:`Chronic metabolic disease characterized by elevated blood glucose levels`},
+  {k:`高血圧症`,on:`こうけつあつしょう`,kun:`生活習慣病`,en:`hypertension`,ex:`Persistently elevated blood pressure; major risk factor for stroke and heart disease`},
+  {k:`脂質異常症`,on:`ししついじょうしょう`,kun:`生活習慣病`,en:`dyslipidemia`,ex:`Abnormal levels of lipids (cholesterol, triglycerides) in the blood`},
+  {k:`生活習慣病`,on:`せいかつしゅうかんびょう`,kun:`生活習慣病`,en:`lifestyle disease`,ex:`Diseases caused by unhealthy lifestyle habits including diet, exercise, and smoking`},
+  {k:`脳梗塞`,on:`のうこうそく`,kun:`脳血管疾患`,en:`cerebral infarction`,ex:`Brain damage caused by blockage of blood supply to brain tissue`},
+  {k:`脳出血`,on:`のうしゅっけつ`,kun:`脳血管疾患`,en:`cerebral hemorrhage`,ex:`Bleeding into the brain tissue from ruptured blood vessels`},
+  {k:`脳血管疾患`,on:`のうけっかんしっかん`,kun:`脳血管疾患`,en:`cerebrovascular disease`,ex:`Diseases affecting blood vessels supplying the brain, including stroke`},
+  {k:`虚血性心疾患`,on:`きょけつせいしんしっかん`,kun:`心臓病`,en:`ischemic heart disease`,ex:`Heart disease caused by reduced blood supply due to coronary artery narrowing`},
+  {k:`心筋梗塞`,on:`しんきんこうそく`,kun:`心臓病`,en:`myocardial infarction`,ex:`Death of heart muscle tissue due to complete blockage of coronary artery`},
+  {k:`心不全`,on:`しんふぜん`,kun:`心臓病`,en:`cardiac failure / heart failure`,ex:`Heart's inability to pump sufficient blood to meet the body's needs`},
+  {k:`骨粗鬆症`,on:`こつそしょうしょう`,kun:`骨・関節疾患`,en:`osteoporosis`,ex:`Disease characterized by decreased bone density and increased fracture risk`},
+  {k:`骨折`,on:`こっせつ`,kun:`骨・関節疾患`,en:`bone fracture`,ex:`Break or crack in a bone; common in elderly due to osteoporosis`},
+  {k:`大腿骨頸部骨折`,on:`だいたいこつけいぶこっせつ`,kun:`骨・関節疾患`,en:`femoral neck fracture`,ex:`Fracture of the upper part of the thigh bone; major cause of disability in elderly`},
+  {k:`関節リウマチ`,on:`かんせつりうまち`,kun:`骨・関節疾患`,en:`rheumatoid arthritis`,ex:`Chronic autoimmune disease causing joint inflammation and damage`},
+  {k:`廃用症候群`,on:`はいようしょうこうぐん`,kun:`廃用・機能低下`,en:`disuse syndrome`,ex:`Physical deterioration from prolonged immobility or inactivity`},
+  {k:`誤嚥`,on:`ごえん`,kun:`嚥下障害`,en:`aspiration / accidental swallowing`,ex:`Entry of food, liquid, or foreign material into the airway instead of esophagus`},
+  {k:`嚥下障害`,on:`えんげしょうがい`,kun:`嚥下障害`,en:`dysphagia`,ex:`Difficulty or inability to swallow safely and effectively`},
+  {k:`認知症`,on:`にんちしょう`,kun:`認知症`,en:`dementia`,ex:`Progressive decline in cognitive function affecting daily living`},
+  {k:`血管性認知症`,on:`けっかんせいにんちしょう`,kun:`認知症`,en:`vascular dementia`,ex:`Dementia caused by reduced blood flow to the brain from vascular disease`},
+  {k:`若年性認知症`,on:`じゃくねんせいにんちしょう`,kun:`認知症`,en:`early-onset dementia`,ex:`Dementia occurring before age 65; requires different support approach`},
+  {k:`記憶障害`,on:`きおくしょうがい`,kun:`認知症症状`,en:`memory impairment`,ex:`Loss or significant reduction in the ability to form, store, or retrieve memories`},
+  {k:`見当識障害`,on:`けんとうしきしょうがい`,kun:`認知症症状`,en:`disorientation / cognitive impairment`,ex:`Confusion about time, place, or person; characteristic symptom of dementia`},
+  {k:`徘徊`,on:`はいかい`,kun:`認知症症状`,en:`wandering`,ex:`Aimless or purposeless walking; common and dangerous symptom in dementia`},
+  {k:`実行機能障害`,on:`じっこうきのうしょうがい`,kun:`認知症症状`,en:`executive function disorder`,ex:`Difficulty planning, organizing, and carrying out complex tasks`},
+  {k:`失語`,on:`しつご`,kun:`認知症症状・障害`,en:`aphasia`,ex:`Impairment of language ability due to brain damage`},
+  {k:`失行`,on:`しっこう`,kun:`認知症症状`,en:`apraxia`,ex:`Inability to perform purposeful movements despite intact motor function`},
+  {k:`失認`,on:`しつにん`,kun:`認知症症状`,en:`agnosia`,ex:`Inability to recognize objects, people, or sounds despite intact sensory function`},
+  {k:`中核症状`,on:`ちゅうかくしょうじょう`,kun:`認知症症状`,en:`core symptoms`,ex:`Primary cognitive symptoms of dementia directly caused by brain cell death`},
+  {k:`周辺症状`,on:`しゅうへんしょうじょう`,kun:`認知症症状`,en:`BPSD / behavioral symptoms`,ex:`Secondary behavioral and psychological symptoms resulting from dementia core symptoms`},
+  {k:`身体障害`,on:`しんたいしょうがい`,kun:`障害`,en:`physical disability`,ex:`Impairment of physical functions affecting mobility or body structure`},
+  {k:`知的障害`,on:`ちてきしょうがい`,kun:`障害`,en:`intellectual disability`,ex:`Condition characterized by significantly limited intellectual functioning`},
+  {k:`精神障害`,on:`せいしんしょうがい`,kun:`障害`,en:`mental disability / psychiatric disorder`,ex:`Disorders affecting thinking, mood, and behavior`},
+  {k:`発達障害`,on:`はったつしょうがい`,kun:`障害`,en:`developmental disorder`,ex:`Group of conditions affecting development; includes autism spectrum, ADHD, LD`},
+  {k:`脊髄損傷`,on:`せきずいそんしょう`,kun:`障害`,en:`spinal cord injury`,ex:`Damage to spinal cord causing paralysis or sensory loss below injury level`},
+  {k:`筋萎縮性側索硬化症`,on:`きんいしゅくせいそくさくこうかしょう`,kun:`難病`,en:`amyotrophic lateral sclerosis (ALS)`,ex:`Progressive motor neuron disease causing muscle weakness and eventual paralysis`},
+  {k:`視覚障害`,on:`しかくしょうがい`,kun:`感覚障害`,en:`visual impairment`,ex:`Significant loss of vision not correctable by glasses or contact lenses`},
+  {k:`聴覚障害`,on:`ちょうかくしょうがい`,kun:`感覚障害`,en:`hearing disorder`,ex:`Significant impairment of hearing ability ranging from mild loss to deafness`},
+  {k:`言語（機能）障害`,on:`げんごきのうしょうがい`,kun:`コミュニケーション障害`,en:`speech and language impairment`,ex:`Difficulty with speaking, understanding, reading, or writing language`},
+  {k:`高次脳機能障害`,on:`こうじのうきのうしょうがい`,kun:`脳機能障害`,en:`higher brain dysfunction`,ex:`Cognitive difficulties following acquired brain injury affecting memory and attention`},
+  {k:`統合失調症`,on:`とうごうしっちょうしょう`,kun:`精神疾患`,en:`schizophrenia`,ex:`Severe mental disorder characterized by hallucinations, delusions, and disorganized thinking`},
+  {k:`片麻痺`,on:`かたまひ・へんまひ`,kun:`麻痺`,en:`hemiplegia`,ex:`Paralysis affecting one side of the body`},
+  {k:`四肢麻痺`,on:`ししまひ`,kun:`麻痺`,en:`quadriplegia`,ex:`Paralysis of all four limbs`},
+  {k:`対麻痺`,on:`ついまひ`,kun:`麻痺`,en:`paraplegia`,ex:`Paralysis of both lower limbs`},
+  {k:`患側`,on:`かんそく`,kun:`リハビリ用語`,en:`affected side`,ex:`The side of the body affected by paralysis or impairment`},
+  {k:`健側`,on:`けんそく`,kun:`リハビリ用語`,en:`unaffected side / healthy side`,ex:`The side of the body not affected by paralysis or impairment`},
+  {k:`喀痰吸引`,on:`かくたんきゅういん`,kun:`医療的ケア`,en:`sputum suction`,ex:`Removal of secretions from the airway using suction equipment`},
+  {k:`経管栄養法`,on:`けいかんえいようほう`,kun:`医療的ケア`,en:`tube feeding`,ex:`Delivery of nutrition directly into the stomach or intestine via a tube`},
+  {k:`気管切開`,on:`きかんせっかい`,kun:`医療的ケア`,en:`tracheotomy`,ex:`Surgical opening in the trachea for assisted breathing`},
+  {k:`心肺蘇生法`,on:`しんぱいそせいほう`,kun:`救急処置`,en:`cardiopulmonary resuscitation (CPR)`,ex:`Emergency procedure combining chest compressions and rescue breathing`},
+  {k:`人工透析`,on:`じんこうとうせき`,kun:`医療的ケア`,en:`artificial dialysis`,ex:`Medical procedure filtering waste and excess fluid from blood when kidneys fail`},
+  {k:`在宅酸素療法`,on:`ざいたくさんそりょうほう`,kun:`医療的ケア`,en:`home oxygen therapy (HOT)`,ex:`Long-term oxygen therapy administered at home for respiratory diseases`},
+  {k:`導尿`,on:`どうにょう`,kun:`医療的ケア`,en:`urethral catheterization`,ex:`Insertion of catheter into bladder to drain urine`},
+  {k:`人工肛門`,on:`じんこうこうもん`,kun:`医療的ケア`,en:`artificial anus / colostomy`,ex:`Surgically created opening connecting intestine to the abdominal wall`},
+  {k:`延命治療`,on:`えんめいちりょう`,kun:`終末期医療`,en:`life-prolonging treatment`,ex:`Medical treatments aimed at extending life without expectation of recovery`},
+  {k:`多職種連携`,on:`たしょくしゅれんけい`,kun:`チームケア`,en:`interprofessional collaboration`,ex:`Coordinated care provided by multiple professionals from different disciplines`},
+  {k:`介護福祉士`,on:`かいごふくしし`,kun:`資格・職種`,en:`certified care worker`,ex:`National qualification for professional care workers in Japan`},
+  {k:`社会福祉士`,on:`しゃかいふくしし`,kun:`資格・職種`,en:`certified social worker`,ex:`National qualification for social welfare professionals in Japan`},
+  {k:`精神保健福祉士`,on:`せいしんほけんふくしし`,kun:`資格・職種`,en:`mental health social worker`,ex:`National qualification for mental health and welfare professionals`},
+  {k:`理学療法士`,on:`りがくりょうほうし`,kun:`資格・職種`,en:`physical therapist (PT)`,ex:`Licensed therapist specializing in movement rehabilitation and physical recovery`},
+  {k:`作業療法士`,on:`さぎょうりょうほうし`,kun:`資格・職種`,en:`occupational therapist (OT)`,ex:`Licensed therapist helping clients regain daily living skills and functional independence`},
+  {k:`言語聴覚士`,on:`げんごちょうかくし`,kun:`資格・職種`,en:`speech-language-hearing therapist (ST)`,ex:`Specialist in communication disorders, hearing, and swallowing rehabilitation`},
+  {k:`管理栄養士`,on:`かんりえいようし`,kun:`資格・職種`,en:`registered dietitian`,ex:`Licensed nutrition specialist managing therapeutic diets and nutritional care`},
+  {k:`歯科衛生士`,on:`しかえいせいし`,kun:`資格・職種`,en:`dental hygienist`,ex:`Dental professional providing preventive oral care and education`},
+  {k:`リスク管理`,on:`りすくかんり`,kun:`安全管理`,en:`risk management`,ex:`Systematic identification and reduction of potential hazards in care settings`},
+  {k:`身体拘束`,on:`しんたいこうそく`,kun:`虐待・権利侵害`,en:`physical restraint`,ex:`Restriction of physical movement; banned except in specific emergency situations in Japan`},
+  {k:`高齢者虐待`,on:`こうれいしゃぎゃくたい`,kun:`虐待・権利侵害`,en:`elderly abuse`,ex:`Physical, psychological, financial, or neglect-based abuse of elderly people`},
+  {k:`児童虐待`,on:`じどうぎゃくたい`,kun:`虐待・権利侵害`,en:`child abuse`,ex:`Physical, emotional, sexual abuse, or neglect of children`},
+  {k:`欲求階層説`,on:`よっきゅうかいそうせつ`,kun:`心理学`,en:`Maslow's hierarchy of needs`,ex:`Maslow's theory of human motivation with five hierarchical levels of needs`},
+  {k:`短期記憶`,on:`たんきおく`,kun:`記憶`,en:`short-term memory`,ex:`Memory lasting seconds to minutes; limited capacity for recent information`},
+  {k:`長期記憶`,on:`ちょうきおく`,kun:`記憶`,en:`long-term memory`,ex:`Memory lasting days, years, or lifetime`},
+  {k:`適応機制`,on:`てきおうきせい`,kun:`心理学`,en:`adjustment / coping mechanism`,ex:`Unconscious psychological strategies used to manage stress and anxiety`}
+];
+</script>
+
+<!-- ── mkKaigo Engine (denkou-style set grid) ── -->
+<script>
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function pick(arr,n,excl){const f=arr.filter(x=>x!==excl);return shuf(f).slice(0,n)}
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ja-JP';u.rate=0.85;
+  const voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith('ja'));
+  if(voices.length)u.voice=voices[0];
+  speechSynthesis.speak(u);
+}
+
+// ── mkKaigo: denkou-style 10-item batch select + flash + quiz ──
+function mkKaigo(c) {
+  const BATCH = 10;
+  const BATCH_TYPES = [
+    {key:'kanji',  label:{ja:'漢字',en:'Kanji',bn:'কাঞ্জি'},   items:KAIGO_KANJI, cls:'#5bc8af'},
+    {key:'kata',   label:{ja:'カタカナ語',en:'Katakana',bn:'কাতাকানা'}, items:KAIGO_KATA,  cls:'#6bbf8a'},
+    {key:'terms',  label:{ja:'専門用語',en:'Spec.Terms',bn:'পরিভাষা'}, items:KAIGO_TERMS, cls:'#6b9fd4'}
+  ];
+
+  let curType = BATCH_TYPES[0];
+  let curBatch = 0;
+  let view = 'select'; // 'select' | 'menu' | 'flash' | 'quiz'
+
+  // localStorage helpers
+  function dKey(typeKey,bi,k){return 'kg_'+typeKey+'_'+bi+'_'+k;}
+  function isDone(typeKey,bi){return !!localStorage.getItem(dKey(typeKey,bi,'done'));}
+  function setDone(typeKey,bi){localStorage.setItem(dKey(typeKey,bi,'done'),'1');}
+  function getBatches(items){const out=[];for(let i=0;i<items.length;i+=BATCH)out.push(items.slice(i,i+BATCH));return out;}
+  function getLbl(bt){return bt.label[_lang]||bt.label.ja;}
+
+  // ── SELECT SCREEN ──
+  function renderSelect(){
+    view='select';
+    const bt=curType;
+    const batches=getBatches(bt.items);
+    const doneCount=batches.filter((_,bi)=>isDone(bt.key,bi)).length;
+    const pct=batches.length?Math.round(doneCount/batches.length*100):0;
+
+    let h=`<div class="dk-wrap">`;
+    // Type tabs (漢字 / カタカナ語 / 専門用語)
+    h+=`<div class="dk-mode-tabs">`;
+    BATCH_TYPES.forEach(bt2=>{
+      h+=`<div class="dk-tab ${curType.key===bt2.key?'dk-on':''}" onclick="kgSelType('${bt2.key}')">${getLbl(bt2)}</div>`;
+    });
+    h+=`</div>`;
+
+    // Progress bar block
+    h+=`<div style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;margin-bottom:16px">`;
+    h+=`<div style="display:flex;justify-content:space-between;margin-bottom:8px">`;
+    const progressLbl={ja:`${getLbl(bt)} 進捗`,en:`${getLbl(bt)} Progress`,bn:`${getLbl(bt)} অগ্রগতি`};
+    const setsLbl={ja:`${doneCount}/${batches.length} セット完了`,en:`${doneCount}/${batches.length} sets done`,bn:`${doneCount}/${batches.length} সেট সম্পন্ন`};
+    h+=`<span style="font-size:13px;font-weight:700;color:#e8e6df">${progressLbl[_lang]||progressLbl.ja}</span>`;
+    h+=`<span style="font-size:12px;color:#8a8880">${setsLbl[_lang]||setsLbl.ja}</span>`;
+    h+=`</div>`;
+    h+=`<div style="background:#252730;border-radius:20px;height:6px;overflow:hidden">`;
+    h+=`<div style="height:100%;width:${pct}%;background:${bt.cls};border-radius:20px;transition:width .4s"></div>`;
+    h+=`</div>`;
+    const totalLbl={ja:`${bt.items.length}語 / ${batches.length}セット × 10語`,en:`${bt.items.length} words / ${batches.length} sets × 10`,bn:`${bt.items.length} শব্দ / ${batches.length} সেট × ১০`};
+    h+=`<div style="margin-top:8px;display:flex;justify-content:space-between">`;
+    h+=`<span style="font-size:11px;color:#5a5856">${totalLbl[_lang]||totalLbl.ja}</span>`;
+    if(doneCount>0){
+      const rLbl={ja:'↺ リセット',en:'↺ Reset',bn:'↺ রিসেট'};
+      h+=`<button onclick="kgResetAll()" style="font-size:11px;color:#5a5856;background:none;border:none;cursor:pointer;font-family:inherit">${rLbl[_lang]||rLbl.ja}</button>`;
+    }
+    h+=`</div></div>`;
+
+    // Batch grid (same as denkou screenshot)
+    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">`;
+    batches.forEach((batch,bi)=>{
+      const done=isDone(bt.key,bi);
+      const startWord=batch[0]?batch[0].k:'';
+      const endWord=batch[batch.length-1]?batch[batch.length-1].k:'';
+      let cs=`background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;position:relative;overflow:hidden;cursor:pointer;`;
+      if(done) cs+=`border-color:${bt.cls}55;`;
+      h+=`<div style="${cs}" onclick="kgOpenBatch(${bi})">`;
+      const setLbl={ja:`セット ${bi+1}`,en:`Set ${bi+1}`,bn:`সেট ${bi+1}`};
+      if(done){
+        const doneLbl={ja:'完了',en:'Done',bn:'সম্পন্ন'};
+        h+=`<div style="position:absolute;top:8px;right:8px;background:#6bbf8a;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">✓ ${doneLbl[_lang]||doneLbl.ja}</div>`;
+      } else {
+        const startLbl={ja:'▶ 開始',en:'▶ Start',bn:'▶ শুরু'};
+        h+=`<div style="position:absolute;top:8px;right:8px;background:#e8a84c;color:#000;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">${startLbl[_lang]||startLbl.ja}</div>`;
+      }
+      h+=`<div style="font-size:10px;color:#5a5856;margin-bottom:6px">${setLbl[_lang]||setLbl.ja}</div>`;
+      const dispSize=startWord.length>4?'16px':startWord.length>2?'22px':'28px';
+      h+=`<div style="font-size:${dispSize};font-family:'Noto Serif JP',serif;font-weight:700;color:#e8e6df;margin-bottom:3px">${startWord}</div>`;
+      h+=`<div style="font-size:10px;color:#8a8880">〜 ${endWord}</div>`;
+      h+=`<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">`;
+      h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;${done?'background:rgba(91,200,175,.15);color:#5bc8af':'background:#252730;color:#8a8880'}">📇${done?'✓':''}</span>`;
+      h+=`<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:rgba(232,168,76,.15);color:#e8a84c">🎯${done?'✓':''}</span>`;
+      h+=`</div></div>`;
+    });
+    h+=`</div></div>`;
+    c.innerHTML=h;
+  }
+
+  // ── BATCH MENU ──
+  function renderMenu(bi){
+    view='menu'; curBatch=bi;
+    const bt=curType;
+    const batches=getBatches(bt.items);
+    const batch=batches[bi];
+    const done=isDone(bt.key,bi);
+    const setLbl={ja:`セット${bi+1}`,en:`Set ${bi+1}`,bn:`সেট ${bi+1}`};
+    const backLbl={ja:'← 一覧',en:'← List',bn:'← তালিকা'};
+    const wordsLbl={ja:'このセットの語',en:'Words in this set',bn:'এই সেটের শব্দ'};
+
+    let h=`<div class="dk-wrap">`;
+    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">`;
+    h+=`<button onclick="kgBack()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 12px;font-size:12px;color:#8a8880;cursor:pointer;font-family:inherit">${backLbl[_lang]||backLbl.ja}</button>`;
+    h+=`<div style="font-size:15px;font-weight:700;color:#e8e6df">${setLbl[_lang]||setLbl.ja} — ${getLbl(bt)}</div>`;
+    h+=`</div>`;
+    // Word preview
+    h+=`<div style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 16px;margin-bottom:20px">`;
+    h+=`<div style="font-size:10px;color:#5a5856;margin-bottom:8px;letter-spacing:.1em">${wordsLbl[_lang]||wordsLbl.ja}</div>`;
+    h+=`<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    batch.forEach(item=>{h+=`<span style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:3px 10px;font-size:13px;color:#e8e6df">${item.k}</span>`;});
+    h+=`</div></div>`;
+    // Buttons
+    const flashLbl={ja:'フラッシュカード',en:'Flashcards',bn:'ফ্ল্যাশকার্ড'};
+    const flashSub={ja:`${batch.length}枚のカードで学習`,en:`Study with ${batch.length} cards`,bn:`${batch.length}টি কার্ডে শিখুন`};
+    const quizLbl={ja:'クイズ 🔓',en:'Quiz 🔓',bn:'কুইজ 🔓'};
+    const quizSub={ja:'意味・読み・用例クイズ',en:'Meaning · reading · usage quiz',bn:'অর্থ · পড়া · ব্যবহার কুইজ'};
+    const quizLock={ja:'クイズ（ロック中）',en:'Quiz (locked)',bn:'কুইজ (লক)'};
+    const quizLockSub={ja:'フラッシュカードを完了するとアンロック',en:'Complete flashcards to unlock',bn:'ফ্ল্যাশকার্ড সম্পন্ন করলে আনলক হবে'};
+    h+=`<div style="display:flex;flex-direction:column;gap:12px">`;
+    h+=`<button onclick="kgStartFlash(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
+    h+=`<div style="width:48px;height:48px;border-radius:12px;background:#1e2028;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📇</div>`;
+    h+=`<div><div style="font-size:15px;font-weight:700;color:#e8e6df;margin-bottom:3px">${flashLbl[_lang]||flashLbl.ja}${done?' ✓':''}</div><div style="font-size:12px;color:#8a8880">${flashSub[_lang]||flashSub.ja}</div></div></button>`;
+    h+=`<button onclick="kgStartQuiz(${bi})" style="display:flex;align-items:center;gap:14px;background:#16181f;border:1px solid rgba(232,168,76,.4);border-radius:14px;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left">`;
+    h+=`<div style="width:48px;height:48px;border-radius:12px;background:#252730;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎯</div>`;
+    h+=`<div><div style="font-size:15px;font-weight:700;color:#e8a84c;margin-bottom:3px">${quizLbl[_lang]||quizLbl.ja}</div><div style="font-size:12px;color:#8a8880">${quizSub[_lang]||quizSub.ja}</div></div></button>`;
+    h+=`</div></div>`;
+    c.innerHTML=h;
+  }
+
+  // ── FLASH SCREEN ──
+  function renderFlash(bi){
+    view='flash'; curBatch=bi;
+    const bt=curType;
+    const batch=getBatches(bt.items)[bi];
+    let pos=0;
+    const order=shuf(batch.map((_,i)=>i));
+
+    const draw=()=>{
+      const item=batch[order[pos]];
+      const isKanji=item.kun!=='カタカナ'&&item.k.length<=2;
+      const pct=(pos+1)/order.length*100;
+      const fcId='kgfc_'+bi+'_'+pos;
+      const dispSize=item.k.length>5?'38px':item.k.length>3?'56px':item.k.length>1?'72px':'110px';
+      const backLbl={ja:'← 一覧',en:'← List',bn:'← তালিকা'};
+      const tapLbl={ja:'タップして答えを見る',en:'Tap to see answer',bn:'উত্তর দেখতে ট্যাপ করুন'};
+      const prevLbl={ja:'← 前',en:'← Prev',bn:'← আগে'};
+      const doneLbl={ja:'✓ 完了！',en:'✓ Done!',bn:'✓ সম্পন্ন!'};
+      const nextLbl={ja:'次 →',en:'Next →',bn:'পরবর্তী →'};
+      const onLbl={ja:'音読み',en:'On-yomi',bn:'অন-ইয়োমি'};
+      const kunLbl={ja:'訓読み',en:'Kun-yomi',bn:'কুন-ইয়োমি'};
+      const readLbl={ja:'読み方',en:'Reading',bn:'পড়া'};
+      const catLbl={ja:'カテゴリー',en:'Category',bn:'বিভাগ'};
+      const meanLbl={ja:'意味',en:'Meaning',bn:'অর্থ'};
+      const descLbl={ja:'説明',en:'Description',bn:'বিবরণ'};
+      const setLbl={ja:`セット${bi+1}`,en:`Set ${bi+1}`,bn:`সেট ${bi+1}`};
+
+      let h=`<div class="dk-wrap">`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
+      h+=`<button onclick="kgBack()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 12px;font-size:12px;color:#8a8880;cursor:pointer;font-family:inherit">${backLbl[_lang]||backLbl.ja}</button>`;
+      h+=`<div style="flex:1;font-size:13px;font-weight:700;color:#8a8880">${setLbl[_lang]||setLbl.ja} ${_lang==='en'?'Flashcards':_lang==='bn'?'ফ্ল্যাশকার্ড':'フラッシュカード'}</div>`;
+      h+=`<div style="font-size:12px;color:#5a5856">${pos+1}/${order.length}</div>`;
+      h+=`</div>`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">`;
+      h+=`<div class="dk-prog-bar"><div class="dk-prog-fill" style="width:${pct}%"></div></div>`;
+      h+=`</div>`;
+      // Flip card (same structure as denkou)
+      h+=`<div class="dk-fc-wrap" id="${fcId}_w"><div class="dk-fc" id="${fcId}">`;
+      // Front
+      h+=`<div class="dk-face dk-front">`;
+      h+=`<div class="dk-kanji-big" style="font-size:${dispSize}">${item.k}</div>`;
+      h+=`<div class="dk-card-hint">${tapLbl[_lang]||tapLbl.ja}</div>`;
+      h+=`</div>`;
+      // Back
+      h+=`<div class="dk-face dk-back">`;
+      h+=`<div style="font-size:${item.k.length>4?'18':'24'}px;font-family:'Noto Serif JP',serif;font-weight:700;color:#e8e6df;margin-bottom:14px">${item.k}</div>`;
+      if(isKanji){
+        h+=`<div class="dk-back-row"><div class="dk-back-sec"><div class="dk-blbl">${onLbl[_lang]||onLbl.ja}</div><div class="dk-bval">${item.on}</div></div>`;
+        h+=`<div class="dk-back-sec"><div class="dk-blbl">${kunLbl[_lang]||kunLbl.ja}</div><div class="dk-bval">${item.kun}</div></div></div>`;
+      } else if(item.kun==='カタカナ'){
+        h+=`<div class="dk-back-row"><div class="dk-back-sec"><div class="dk-blbl">English</div><div class="dk-bval" style="font-size:12px">${item.on}</div></div></div>`;
+      } else {
+        h+=`<div class="dk-back-row"><div class="dk-back-sec"><div class="dk-blbl">${readLbl[_lang]||readLbl.ja}</div><div class="dk-bval">${item.on}</div></div>`;
+        h+=`<div class="dk-back-sec"><div class="dk-blbl">${catLbl[_lang]||catLbl.ja}</div><div class="dk-bval" style="font-size:11px;color:#8a8880">${item.kun}</div></div></div>`;
+      }
+      h+=`<div class="dk-blbl">${meanLbl[_lang]||meanLbl.ja}</div><div class="dk-bmean">${item.en}</div>`;
+      h+=`<div class="dk-bex-lbl">${descLbl[_lang]||descLbl.ja}</div>`;
+      h+=`<div class="dk-bex">${item.ex}</div>`;
+      h+=`</div></div></div>`;
+      // Actions
+      h+=`<div class="dk-acts">`;
+      h+=`<button class="dk-act prev" onclick="kgFP()">${prevLbl[_lang]||prevLbl.ja}</button>`;
+      h+=`<button onclick="speak('${item.k.replace(/'/g,"\\'")}')" style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:6px;color:#8a8880;padding:6px 14px;font-size:13px;cursor:pointer">🔊</button>`;
+      if(pos<order.length-1){
+        h+=`<button class="dk-act nxt" onclick="kgFN()">${nextLbl[_lang]||nextLbl.ja}</button>`;
+      } else {
+        h+=`<button class="dk-act nxt" onclick="kgFDone(${bi})">${doneLbl[_lang]||doneLbl.ja}</button>`;
+      }
+      h+=`</div></div>`;
+      c.innerHTML=h;
+      const fw=document.getElementById(fcId+'_w');
+      if(fw) fw.onclick=()=>document.getElementById(fcId).classList.toggle('dk-flip');
+    };
+
+    window.kgFP=()=>{pos=Math.max(0,pos-1);draw();};
+    window.kgFN=()=>{pos=Math.min(order.length-1,pos+1);draw();};
+    window.kgFDone=(batchIdx)=>{setDone(curType.key,batchIdx);renderComplete(batchIdx);};
+    draw();
+  }
+
+  // ── COMPLETE SCREEN ──
+  function renderComplete(bi){
+    const bt=curType;
+    const setLbl={ja:`セット${bi+1}のカード完了！`,en:`Set ${bi+1} Complete!`,bn:`সেট ${bi+1} সম্পন্ন!`};
+    const subLbl={ja:'クイズがアンロックされました！同じ語でクイズを試しましょう。',en:'Quiz unlocked! Try the quiz with these words.',bn:'কুইজ আনলক হয়েছে! এই শব্দগুলো দিয়ে কুইজ করুন।'};
+    const qBtnLbl={ja:'🎯 クイズを開始',en:'🎯 Start Quiz',bn:'🎯 কুইজ শুরু'};
+    const backBtnLbl={ja:'← 戻る',en:'← Back',bn:'← ফিরুন'};
+    let h=`<div class="dk-wrap"><div style="text-align:center;padding:40px 20px">`;
+    h+=`<div style="font-size:48px;margin-bottom:12px">🎉</div>`;
+    h+=`<div style="font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;color:#e8e6df;margin-bottom:8px">${setLbl[_lang]||setLbl.ja}</div>`;
+    h+=`<div style="font-size:14px;color:#8a8880;margin-bottom:24px;line-height:1.8">${subLbl[_lang]||subLbl.ja}</div>`;
+    h+=`<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">`;
+    h+=`<button onclick="kgStartQuiz(${bi})" style="background:#e8a84c;color:#000;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">${qBtnLbl[_lang]||qBtnLbl.ja}</button>`;
+    h+=`<button onclick="kgBack()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 24px;font-size:14px;color:#8a8880;cursor:pointer;font-family:inherit">${backBtnLbl[_lang]||backBtnLbl.ja}</button>`;
+    h+=`</div></div></div>`;
+    c.innerHTML=h;
+  }
+
+  // ── QUIZ SCREEN ──
+  function renderQuiz(bi){
+    view='quiz'; curBatch=bi;
+    const bt=curType;
+    const batch=getBatches(bt.items)[bi];
+    const ALL=bt.items; // pool for wrong answers
+    let pos=0;
+    const order=shuf(batch.map((_,i)=>i));
+    let sc={c:0,w:0};
+
+    const QUIZ_MODES=[
+      // meaning: show kanji/term, pick English meaning
+      {q:item=>`<div class="dk-qbox"><div class="dk-qbadge">${_lang==='en'?'Choose the meaning':_lang==='bn'?'অর্থ নির্বাচন করুন':'意味を選んでください'}</div><div class="dk-qkanji" style="font-size:${item.k.length>5?'32px':item.k.length>2?'54px':'80px'}">${item.k}</div></div>`,
+        correct:item=>item.en,
+        opts:(item)=>{const w=pick(ALL,3,item);return shuf([item,...w]).map(x=>x.en);}},
+      // reading: show kanji, pick reading
+      {q:item=>`<div class="dk-qbox"><div class="dk-qbadge">${_lang==='en'?'Choose the reading':_lang==='bn'?'পড়া নির্বাচন করুন':'読み方を選んでください'}</div><div class="dk-qkanji" style="font-size:${item.k.length>5?'32px':item.k.length>2?'54px':'80px'}">${item.k}</div></div>`,
+        correct:item=>item.on,
+        opts:(item)=>{const w=pick(ALL,3,item);return shuf([item,...w]).map(x=>x.on);}},
+      // term: show English, pick Japanese
+      {q:item=>`<div class="dk-qbox"><div class="dk-qbadge">${_lang==='en'?'Choose the Japanese term':_lang==='bn'?'জাপানি পরিভাষা নির্বাচন করুন':'日本語を選んでください'}</div><div class="dk-qkanji" style="font-size:18px;line-height:1.5">${item.en}</div></div>`,
+        correct:item=>item.k,
+        opts:(item)=>{const w=pick(ALL,3,item);return shuf([item,...w]).map(x=>x.k);}},
+    ];
+
+    const draw=()=>{
+      if(pos>=order.length){
+        // Score screen
+        const t=sc.c+sc.w,p=t?Math.round(sc.c/t*100):0;
+        const msgs={ja:p>=90?'完璧！素晴らしい！🏆':p>=70?'よくできました！👍':'もう一度頑張ろう！💪',en:p>=90?'Perfect! Amazing! 🏆':p>=70?'Well done! 👍':'Keep trying! 💪',bn:p>=90?'নিখুঁত! অসাধারণ! 🏆':p>=70?'ভালো করেছেন! 👍':'চেষ্টা চালিয়ে যান! 💪'};
+        const batches=getBatches(bt.items);
+        const retryLbl={ja:'🔄 もう一度',en:'🔄 Retry',bn:'🔄 আবার'};
+        const nextLbl={ja:`次のセット → セット${bi+2}`,en:`Next Set → Set ${bi+2}`,bn:`পরবর্তী সেট → সেট ${bi+2}`};
+        const allDoneLbl={ja:'🎉 全セット完了！',en:'🎉 All Sets Done!',bn:'🎉 সব সেট সম্পন্ন!'};
+        const backLbl={ja:'← 一覧',en:'← List',bn:'← তালিকা'};
+        let h=`<div class="dk-wrap"><div style="text-align:center;padding:32px 20px">`;
+        h+=`<div style="font-size:64px;font-family:'Noto Serif JP',serif;font-weight:700;color:#5bc8af;line-height:1;margin-bottom:8px">${p}%</div>`;
+        h+=`<div style="font-size:15px;color:#8a8880;margin-bottom:6px">${msgs[_lang]||msgs.ja}</div>`;
+        h+=`<div style="font-size:13px;color:#5a5856;margin-bottom:24px">${_lang==='en'?'Correct':'正解'} ${sc.c} / ${t}</div>`;
+        h+=`<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">`;
+        h+=`<button onclick="kgStartQuiz(${bi})" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 24px;font-size:13px;color:#8a8880;cursor:pointer;font-family:inherit">${retryLbl[_lang]||retryLbl.ja}</button>`;
+        if(bi+1<batches.length){
+          h+=`<button onclick="kgOpenBatch(${bi+1})" style="background:#e8a84c;color:#000;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">${nextLbl[_lang]||nextLbl.ja}</button>`;
+        } else {
+          h+=`<button onclick="kgBack()" style="background:#5bc8af;color:#000;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">${allDoneLbl[_lang]||allDoneLbl.ja}</button>`;
+        }
+        h+=`</div><div style="margin-top:12px"><button onclick="kgBack()" style="background:none;border:none;color:#5a5856;font-size:12px;cursor:pointer;font-family:inherit">${backLbl[_lang]||backLbl.ja}</button></div>`;
+        h+=`</div></div>`;
+        c.innerHTML=h; return;
+      }
+      const item=batch[order[pos]];
+      const pct=pos/order.length*100;
+      // Rotate through quiz modes
+      const qm=QUIZ_MODES[pos%QUIZ_MODES.length];
+      const opts=qm.opts(item);
+      const correct=qm.correct(item);
+      const ci=opts.indexOf(correct);
+      const qid='kgq_'+bi+'_'+pos;
+      const setLbl={ja:`セット${bi+1}`,en:`Set ${bi+1}`,bn:`সেট ${bi+1}`};
+      const quizLbl={ja:'クイズ',en:'Quiz',bn:'কুইজ'};
+      const backLbl={ja:'← 一覧',en:'← List',bn:'← তালিকা'};
+
+      let h=`<div class="dk-wrap">`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
+      h+=`<button onclick="kgBack()" style="background:#252730;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 12px;font-size:12px;color:#8a8880;cursor:pointer;font-family:inherit">${backLbl[_lang]||backLbl.ja}</button>`;
+      h+=`<div style="flex:1;font-size:13px;font-weight:700;color:#8a8880">${setLbl[_lang]||setLbl.ja} ${quizLbl[_lang]||quizLbl.ja}</div>`;
+      h+=`<div style="font-size:12px;color:#5a5856">${pos+1}/${order.length}</div>`;
+      h+=`</div>`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><div class="dk-prog-bar"><div class="dk-prog-fill" style="width:${pct}%"></div></div></div>`;
+      h+=qm.q(item);
+      h+=`<div class="dk-opts" id="${qid}">`;
+      opts.forEach((opt,oi)=>{
+        h+=`<div class="dk-opt" onclick="kgQA(this,${oi},${ci},'${qid}')"><span class="dk-ollbl">${'ABCD'[oi]}</span><span style="line-height:1.4;font-size:${opt.length>40?'11':'13'}px">${opt}</span></div>`;
+      });
+      h+=`</div>`;
+      h+=`<div id="${qid}_fb" style="min-height:28px;padding:6px;text-align:center;font-size:13px;font-weight:700"></div>`;
+      h+=`<div style="text-align:center;margin-top:4px"><button onclick="speak('${item.k.replace(/'/g,"\\'")}')" style="background:#16181f;border:1px solid rgba(255,255,255,.07);border-radius:6px;color:#8a8880;padding:5px 14px;font-size:12px;cursor:pointer">🔊</button></div>`;
+      h+=`</div>`;
+      c.innerHTML=h;
+
+      // Store current ci/pos for answer handler
+      window._kgQci=ci; window._kgQpos=pos; window._kgQitem=item;
+    };
+
+    window.kgQA=(el,chosen,ci,qid)=>{
+      const grid=document.getElementById(qid);
+      if(!grid||el.classList.contains('dk-dis'))return;
+      grid.querySelectorAll('.dk-opt').forEach(o=>{
+        o.classList.add('dk-dis');
+        const oi=parseInt(o.dataset&&o.dataset.oi||[...grid.children].indexOf(o));
+      });
+      // Use closure ci
+      const isOk=(chosen===window._kgQci);
+      grid.querySelectorAll('.dk-opt').forEach((o,oi)=>{
+        o.classList.add('dk-dis');
+        if(oi===window._kgQci) o.classList.add('dk-ok');
+        else if(oi===chosen&&!isOk) o.classList.add('dk-ng');
+      });
+      const fb=document.getElementById(qid+'_fb');
+      if(fb){
+        fb.style.color=isOk?'#6bbf8a':'#d96b6b';
+        const cLbl={ja:'✓ 正解！',en:'✓ Correct!',bn:'✓ সঠিক!'};
+        const wLbl={ja:'✗ 不正解',en:'✗ Wrong',bn:'✗ ভুল'};
+        fb.textContent=isOk?(cLbl[_lang]||cLbl.ja):(wLbl[_lang]||wLbl.ja)+' → '+QUIZ_MODES[window._kgQpos%QUIZ_MODES.length].correct(window._kgQitem);
+      }
+      if(isOk)sc.c++;else sc.w++;
+      setTimeout(()=>{pos++;draw();},900);
+    };
+    draw();
+  }
+
+  // ── Global handlers (called from onclick) ──
+  window.kgSelType=(key)=>{const bt=BATCH_TYPES.find(x=>x.key===key);if(bt){curType=bt;}renderSelect();};
+  window.kgOpenBatch=(bi)=>renderMenu(bi);
+  window.kgBack=()=>{if(view==='flash'||view==='quiz')renderMenu(curBatch);else renderSelect();};
+  window.kgStartFlash=(bi)=>renderFlash(bi);
+  window.kgStartQuiz=(bi)=>renderQuiz(bi);
+  window.kgResetAll=()=>{
+    const bt=curType;
+    const batches=getBatches(bt.items);
+    const confirmLbl={ja:'このタイプの進捗をリセットしますか？',en:'Reset all progress for this type?',bn:'এই ধরনের অগ্রগতি রিসেট করবেন?'};
+    if(!confirm(confirmLbl[_lang]||confirmLbl.ja))return;
+    batches.forEach((_,bi)=>localStorage.removeItem(dKey(bt.key,bi,'done')));
+    renderSelect();
+  };
+
+  // Boot
+  renderSelect();
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', function(){
+  // Set active lang button
+  ['ja','en','bn'].forEach(l=>{
+    const b=document.getElementById('lb-'+l);
+    if(b) b.classList.toggle('on',l===_lang);
+  });
+  // Apply all data-t translations
+  applyLang();
+  // Boot module
+  const c=document.getElementById('m-kaigo');
+  if(c) mkKaigo(c);
+});
+</script>
+</body>
+</html>
