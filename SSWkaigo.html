@@ -24,8 +24,10 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 .cat-bn{font-size:.75rem;color:var(--txM)}
 /* MODULE */
 .mod{display:none;padding:16px;max-width:700px;margin:0 auto}
-/* HOME BTN */
-#home-btn{display:none;position:fixed;bottom:20px;right:20px;background:var(--acc);color:#000;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-size:.9rem;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+/* TOP NAV BAR */
+#top-nav{display:none;position:sticky;top:0;z-index:100;background:var(--s1);border-bottom:1px solid var(--brd);padding:10px 16px;align-items:center;gap:12px}
+#home-btn{background:var(--acc);color:#000;border:none;border-radius:50px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:.88rem;white-space:nowrap}
+#nav-title{font-size:.95rem;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* TAB */
 .tabs{display:flex;gap:8px;margin-bottom:18px;justify-content:center}
 .tab-btn{padding:10px 24px;border-radius:50px;border:1px solid var(--brd);background:var(--s2);color:var(--txM);cursor:pointer;font-size:.9rem;font-weight:700;transition:.2s}
@@ -80,6 +82,9 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 
 <!-- HOME -->
 <div id="homeV">
+  <div style="padding:12px 16px 0">
+    <button onclick="history.back()" style="background:var(--s2);border:1px solid var(--brd);color:var(--txM);padding:7px 16px;border-radius:50px;cursor:pointer;font-size:.85rem;font-family:inherit">← ホームへ戻る</button>
+  </div>
   <h1>🏮 介護の日本語</h1>
   <p class="subtitle">介護士のための日本語単語・漢字学習 | পরিচর্যা কর্মীদের জন্য জাপানি ভাষা</p>
   <div class="cat-grid" id="catGrid"></div>
@@ -87,7 +92,10 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 
 <!-- MODULE containers per category -->
 
-<button id="home-btn" onclick="goHome()">🏠 ホームへ</button>
+<div id="top-nav">
+  <button id="home-btn" onclick="goHome()">🏠 ホーム</button>
+  <span id="nav-title"></span>
+</div>
 
 <script>
 // ============================================================
@@ -142,14 +150,15 @@ function openCat(catId){
   m.style.display='block';
   document.body.appendChild(m);
   renderCatView(m, catId, 'kanji-flash');
-  document.getElementById('home-btn').style.display='flex';
+  const nav=document.getElementById('top-nav');nav.style.display='flex';
+  document.getElementById('nav-title').textContent=cat.icon+' '+catId;
   window.scrollTo(0,0);
 }
 
 function goHome(){
   document.querySelectorAll('.mod').forEach(m=>{m.style.display='none';m.remove()});
   document.getElementById('homeV').style.display='block';
-  document.getElementById('home-btn').style.display='none';
+  document.getElementById('top-nav').style.display='none';
 }
 
 // ============================================================
