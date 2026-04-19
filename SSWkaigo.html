@@ -145,9 +145,10 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 <!-- ================ STATIC SEO / ADSENSE CONTENT (BENGALI) ================ -->
 <!-- This content block is indexable by search engines and ad systems.
      It is placed BELOW the quiz grid so learners can access the study
-     tool immediately without scrolling past long introductory text. -->
+     tool immediately without scrolling past long introductory text.
+     It is hidden when a category is opened (see openCat / goHome). -->
 
-<section style="max-width:860px;margin:32px auto 0;padding:28px 20px 10px;color:var(--tx);font-family:'Noto Sans Bengali','Noto Sans JP',Arial,sans-serif;line-height:1.8">
+<section id="seoBlock" style="max-width:860px;margin:32px auto 0;padding:28px 20px 10px;color:var(--tx);font-family:'Noto Sans Bengali','Noto Sans JP',Arial,sans-serif;line-height:1.8">
 
   <div style="text-align:center;margin-bottom:22px">
     <div style="font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;font-weight:700">📚 এই পেজ সম্পর্কে বিস্তারিত</div>
@@ -283,7 +284,11 @@ function renderHome(){
 // ============================================================
 function openCat(catId){
   curCat=catId;
+  const cat=KAIGO_CATS.find(c=>c.id===catId);
   document.getElementById('homeV').style.display='none';
+  // Hide the static SEO/Bengali intro section when a category is open
+  const seo=document.getElementById('seoBlock');
+  if(seo) seo.style.display='none';
   // Remove old mod if exists
   let old=document.getElementById('mod-'+catId.replace(/[^a-z0-9]/gi,'_'));
   if(old)old.remove();
@@ -291,7 +296,14 @@ function openCat(catId){
   m.id='mod-'+catId.replace(/[^a-z0-9]/gi,'_');
   m.className='mod';
   m.style.display='block';
-  document.body.appendChild(m);
+  // Insert the category view BEFORE the SEO block (and before top-nav)
+  // so the quiz appears immediately at the top when a category opens.
+  const insertBefore=seo||document.getElementById('top-nav');
+  if(insertBefore && insertBefore.parentNode){
+    insertBefore.parentNode.insertBefore(m, insertBefore);
+  } else {
+    document.body.appendChild(m);
+  }
   renderCatView(m, catId, 'kanji-flash');
   const nav=document.getElementById('top-nav');nav.style.display='flex';
   document.getElementById('nav-title').textContent=cat.icon+' '+catId;
@@ -301,6 +313,9 @@ function openCat(catId){
 function goHome(){
   document.querySelectorAll('.mod').forEach(m=>{m.style.display='none';m.remove()});
   document.getElementById('homeV').style.display='block';
+  // Show the static SEO/Bengali intro section again when returning home
+  const seo=document.getElementById('seoBlock');
+  if(seo) seo.style.display='block';
   document.getElementById('top-nav').style.display='none';
 }
 
