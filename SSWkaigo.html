@@ -43,6 +43,9 @@
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874205665564653"
      crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0f1923;--s1:#1a2533;--s2:#243040;--acc:#d4af37;--accB:#c0392b;
@@ -119,105 +122,116 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 </head>
 <body>
 
-<!-- ================ STATIC SEO / ADSENSE CONTENT ================ -->
-<!-- This intro block gives search engines and ad systems indexable
-     content while the interactive app loads via JavaScript below. -->
+<!-- HOME -->
+<div id="homeV">
+  <div style="padding:12px 16px 0">
+    <button onclick="history.back()" style="background:var(--s2);border:1px solid var(--brd);color:var(--txM);padding:7px 16px;border-radius:50px;cursor:pointer;font-size:.85rem;font-family:inherit">← ホームへ戻る</button>
+  </div>
+  <div style="text-align:center;padding:18px 20px 4px;max-width:860px;margin:0 auto">
+    <div style="font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;font-weight:700">SSW Caregiving Japanese · 介護の日本語</div>
+    <h1 style="font-size:1.5rem;font-weight:900;color:var(--acc);line-height:1.3;padding:0;margin:0">
+      🏮 介護の日本語 · SSW পরিচর্যা জাপানি ভাষা
+    </h1>
+    <p style="color:var(--txM);font-size:.88rem;margin-top:10px">
+      介護士のための日本語単語・漢字学習 | পরিচর্যা কর্মীদের জন্য জাপানি ভাষা
+    </p>
+    <p style="color:var(--acc);font-size:.82rem;margin-top:6px;font-weight:700">
+      👇 নিচে যেকোনো ক্যাটাগরি বেছে নিন / Select a category below
+    </p>
+  </div>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
 
-<section style="max-width:860px;margin:0 auto;padding:28px 20px 10px;color:var(--tx);font-family:'Noto Sans JP',Arial,sans-serif;line-height:1.75">
+<!-- ================ STATIC SEO / ADSENSE CONTENT (BENGALI) ================ -->
+<!-- This content block is indexable by search engines and ad systems.
+     It is placed BELOW the quiz grid so learners can access the study
+     tool immediately without scrolling past long introductory text. -->
+
+<section style="max-width:860px;margin:32px auto 0;padding:28px 20px 10px;color:var(--tx);font-family:'Noto Sans Bengali','Noto Sans JP',Arial,sans-serif;line-height:1.8">
 
   <div style="text-align:center;margin-bottom:22px">
-    <div style="font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:8px">SSW Caregiving Japanese · 介護の日本語</div>
-    <h1 style="font-size:1.7rem;font-weight:900;color:var(--acc);line-height:1.3;padding:0;margin:0">
-      Japanese Kanji &amp; Vocabulary for SSW Caregiving Workers
-    </h1>
+    <div style="font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;font-weight:700">📚 এই পেজ সম্পর্কে বিস্তারিত</div>
+    <h2 style="font-size:1.45rem;font-weight:900;color:var(--acc);line-height:1.4;padding:0;margin:0">
+      SSW পরিচর্যা কর্মীদের জন্য জাপানি কাঞ্জি ও শব্দভাণ্ডার
+    </h2>
     <p style="color:var(--txM);font-size:.92rem;margin-top:10px">
       বাংলাদেশ থেকে জাপানে পরিচর্যা কর্মী (SSW 介護) হিসেবে যেতে ইচ্ছুকদের জন্য বিনামূল্যের জাপানি ভাষা শেখার টুল
     </p>
   </div>
 
   <div style="background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:22px 24px;margin-bottom:18px">
-    <h2 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">What is this page?</h2>
+    <h3 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">এই পেজটি কী?</h3>
     <p style="color:var(--tx);font-size:.95rem;margin-bottom:12px">
-      This page is a free, interactive Japanese study tool for <strong>Bangladeshi care-worker candidates</strong> preparing for the Specified Skilled Worker (特定技能 / SSW) visa in the caregiving (介護) field. It contains <strong>384+ kanji and vocabulary entries</strong> spread across 11 practical care categories — from parts of the body and common symptoms to meal support, bathing, and facility-operations language used daily on the job in Japan.
+      এই পেজটি <strong>বাংলাদেশি পরিচর্যা কর্মী প্রার্থীদের</strong> জন্য একটি বিনামূল্যের, ইন্টারঅ্যাকটিভ জাপানি ভাষা অধ্যয়ন টুল, যারা পরিচর্যা (介護) ক্ষেত্রে Specified Skilled Worker (特定技能 / SSW) ভিসার প্রস্তুতি নিচ্ছেন। এখানে <strong>৩৮৪+ কাঞ্জি ও শব্দভাণ্ডার</strong> রয়েছে, যা ১১টি ব্যবহারিক পরিচর্যা বিভাগে বিভক্ত — শরীরের অংশ এবং সাধারণ লক্ষণ থেকে শুরু করে খাওয়ার সহায়তা, স্নান, এবং জাপানের কর্মক্ষেত্রে প্রতিদিন ব্যবহৃত প্রতিষ্ঠান পরিচালনার ভাষা পর্যন্ত।
     </p>
     <p style="color:var(--tx);font-size:.95rem;margin:0">
-      Every word comes with its Japanese reading (hiragana / katakana), its kanji form where applicable, and a <strong>Bengali translation</strong> so that learners can absorb the meaning in their own language before practising in Japanese. The learning is organised into <strong>flashcards</strong> and <strong>three rotating quiz modes</strong>, which you can access by tapping any category tile below.
+      প্রতিটি শব্দের সাথে আছে এর জাপানি উচ্চারণ (হিরাগানা / কাতাকানা), প্রযোজ্য ক্ষেত্রে কাঞ্জি রূপ, এবং একটি <strong>বাংলা অনুবাদ</strong> — যাতে শিক্ষার্থীরা জাপানি ভাষায় অনুশীলনের আগে নিজের ভাষায় অর্থ বুঝতে পারেন। শেখাটি <strong>ফ্ল্যাশকার্ড</strong> এবং <strong>তিনটি ঘূর্ণায়মান কুইজ মোডে</strong> সাজানো আছে, যা আপনি উপরের যেকোনো ক্যাটাগরি টাইলে ট্যাপ করে ব্যবহার করতে পারেন।
     </p>
   </div>
 
   <div style="background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:22px 24px;margin-bottom:18px">
-    <h2 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">Who is this for?</h2>
+    <h3 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">এটি কাদের জন্য?</h3>
     <p style="color:var(--tx);font-size:.95rem;margin-bottom:10px">
-      SSW caregiving is one of the fastest-growing visa pathways from Bangladesh to Japan. Candidates must pass the <strong>Japan Foundation Test for Basic Japanese (JFT-Basic)</strong> or JLPT N4, plus the <strong>介護日本語評価試験 (Nursing Care Japanese Evaluation Test)</strong> which specifically covers the vocabulary on this page.
+      SSW পরিচর্যা বাংলাদেশ থেকে জাপানে যাওয়ার দ্রুততম বর্ধনশীল ভিসা পথগুলোর একটি। প্রার্থীদের <strong>Japan Foundation Test for Basic Japanese (JFT-Basic)</strong> অথবা JLPT N4 পাস করতে হয়, পাশাপাশি <strong>介護日本語評価試験 (Nursing Care Japanese Evaluation Test)</strong> যা বিশেষভাবে এই পেজের শব্দভাণ্ডার নিয়ে পরীক্ষা নেয়।
     </p>
     <p style="color:var(--tx);font-size:.95rem;margin:0">
-      This tool is designed for:
+      এই টুলটি তৈরি করা হয়েছে তাদের জন্য:
     </p>
     <ul style="padding-left:22px;margin-top:8px;color:var(--tx);font-size:.94rem">
-      <li style="margin-bottom:6px">Bangladeshi learners preparing for the SSW 介護 test</li>
-      <li style="margin-bottom:6px">Nursing and elder-care students who want to work in Japan</li>
-      <li style="margin-bottom:6px">Anyone studying JLPT N4 who wants job-oriented vocabulary</li>
-      <li style="margin-bottom:6px">Japanese teachers running SSW prep classes in Bangladesh</li>
+      <li style="margin-bottom:6px">বাংলাদেশি শিক্ষার্থী যারা SSW 介護 পরীক্ষার প্রস্তুতি নিচ্ছেন</li>
+      <li style="margin-bottom:6px">নার্সিং ও বয়স্ক পরিচর্যা শিক্ষার্থী যারা জাপানে কাজ করতে চান</li>
+      <li style="margin-bottom:6px">যে কেউ JLPT N4 পড়ছেন এবং কাজমুখী শব্দভাণ্ডার চান</li>
+      <li style="margin-bottom:6px">বাংলাদেশে SSW প্রস্তুতি ক্লাস পরিচালনাকারী জাপানি ভাষা শিক্ষক</li>
     </ul>
   </div>
 
   <div style="background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:22px 24px;margin-bottom:18px">
-    <h2 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">The 11 care categories covered</h2>
+    <h3 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">১১টি পরিচর্যা বিভাগ যা এখানে আছে</h3>
     <p style="color:var(--tx);font-size:.94rem;margin-bottom:12px">
-      Each category is a self-contained study module. Tap a tile further down this page to enter it.
+      প্রতিটি বিভাগ একটি স্বয়ংসম্পূর্ণ অধ্যয়ন মডিউল। উপরের যেকোনো টাইল ট্যাপ করে ভিতরে যান।
     </p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;color:var(--tx);font-size:.88rem">
-      <div>🫀 <strong>体の部位</strong> — Parts of the body</div>
-      <div>🛏️ <strong>体位</strong> — Body positions</div>
-      <div>🤒 <strong>症状</strong> — Symptoms</div>
-      <div>🏥 <strong>病気</strong> — Illnesses</div>
-      <div>♿ <strong>移動の介護</strong> — Mobility support</div>
-      <div>🍱 <strong>食事の介護</strong> — Meal support</div>
-      <div>🚿 <strong>排泄の介護</strong> — Toileting support</div>
-      <div>👔 <strong>みじたくの介護</strong> — Grooming support</div>
-      <div>🛁 <strong>入浴・清潔保持</strong> — Bathing &amp; hygiene</div>
-      <div>🏠 <strong>家事の介護</strong> — Household support</div>
-      <div>📋 <strong>文章（施設・業務）</strong> — Facility &amp; operations</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;color:var(--tx);font-size:.9rem">
+      <div>🫀 <strong>体の部位</strong> — শরীরের অংশ</div>
+      <div>🛏️ <strong>体位</strong> — শরীরের অবস্থান</div>
+      <div>🤒 <strong>症状</strong> — লক্ষণ</div>
+      <div>🏥 <strong>病気</strong> — রোগ</div>
+      <div>♿ <strong>移動の介護</strong> — চলাচলের পরিচর্যা</div>
+      <div>🍱 <strong>食事の介護</strong> — খাওয়ার পরিচর্যা</div>
+      <div>🚿 <strong>排泄の介護</strong> — মলমূত্রের পরিচর্যা</div>
+      <div>👔 <strong>みじたくの介護</strong> — সাজগোজের পরিচর্যা</div>
+      <div>🛁 <strong>入浴・清潔保持</strong> — স্নান ও পরিচ্ছন্নতা</div>
+      <div>🏠 <strong>家事の介護</strong> — গৃহস্থালি পরিচর্যা</div>
+      <div>📋 <strong>文章（施設・業務）</strong> — প্রতিষ্ঠান ও কাজের ভাষা</div>
     </div>
   </div>
 
   <div style="background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:22px 24px;margin-bottom:18px">
-    <h2 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">How to use this page</h2>
-    <ol style="padding-left:22px;color:var(--tx);font-size:.94rem;line-height:1.85">
-      <li><strong>Pick a category</strong> from the grid below.</li>
-      <li><strong>Flip through the flashcards</strong> to see the kanji, reading, and Bengali meaning.</li>
-      <li><strong>Tap the speaker icon</strong> to hear the Japanese pronunciation.</li>
-      <li><strong>Take the quiz</strong> in three rotating modes — reading → meaning, meaning → kanji, and kanji → reading.</li>
-      <li>Come back the next day and repeat. <strong>Spaced repetition</strong> is the single most important habit for learning 介護 vocabulary.</li>
+    <h3 style="font-size:1.1rem;color:var(--acc);margin-bottom:10px;font-weight:700">এই পেজ কীভাবে ব্যবহার করবেন</h3>
+    <ol style="padding-left:22px;color:var(--tx);font-size:.94rem;line-height:1.95">
+      <li>উপরের গ্রিড থেকে <strong>একটি ক্যাটাগরি বেছে নিন</strong>।</li>
+      <li><strong>ফ্ল্যাশকার্ডগুলো উল্টে দেখুন</strong> — কাঞ্জি, উচ্চারণ এবং বাংলা অর্থ।</li>
+      <li><strong>স্পিকার আইকনে ট্যাপ করুন</strong> — জাপানি উচ্চারণ শোনার জন্য।</li>
+      <li><strong>কুইজ দিন</strong> তিনটি ঘূর্ণায়মান মোডে — উচ্চারণ → অর্থ, অর্থ → কাঞ্জি, এবং কাঞ্জি → উচ্চারণ।</li>
+      <li>পরের দিন আবার ফিরে আসুন এবং পুনরাবৃত্তি করুন। <strong>স্পেসড রিপিটিশন</strong> হলো 介護 শব্দভাণ্ডার শেখার সবচেয়ে গুরুত্বপূর্ণ অভ্যাস।</li>
     </ol>
   </div>
 
   <div style="background:linear-gradient(145deg,#1a2533,#243040);border:1px solid var(--acc);border-radius:14px;padding:22px 24px;margin-bottom:22px">
-    <h2 style="font-size:1.05rem;color:var(--acc);margin-bottom:10px;font-weight:700">Related free resources on NIHONGO WORK</h2>
+    <h3 style="font-size:1.05rem;color:var(--acc);margin-bottom:10px;font-weight:700">NIHONGO WORK এর সম্পর্কিত বিনামূল্যের রিসোর্স</h3>
     <p style="color:var(--tx);font-size:.92rem;margin-bottom:10px">
-      SSW caregiving Japanese sits on top of basic N5–N4 Japanese. If you are new to the language, start with the kana and grammar modules first.
+      SSW পরিচর্যা জাপানি ভাষা মূলত N5–N4 স্তরের জাপানি ভাষার উপরে গঠিত। যদি আপনি এই ভাষায় নতুন হন, তাহলে প্রথমে কানা এবং ব্যাকরণ মডিউল দিয়ে শুরু করুন।
     </p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
-      <a href="kana-practice.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">あ Kana Practice</a>
-      <a href="kanji.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🈶 Kanji N5/N4</a>
-      <a href="grammar.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">📗 Grammar</a>
-      <a href="roadmap.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🗺 Study Roadmap</a>
-      <a href="index.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🏠 Home</a>
+      <a href="kana-practice.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">あ কানা অনুশীলন</a>
+      <a href="kanji.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🈶 কাঞ্জি N5/N4</a>
+      <a href="grammar.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">📗 ব্যাকরণ</a>
+      <a href="roadmap.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🗺 শেখার রোডম্যাপ</a>
+      <a href="index.html" style="color:var(--acc);text-decoration:none;border:1px solid var(--acc);border-radius:20px;padding:6px 14px;font-size:.82rem">🏠 হোম</a>
     </div>
   </div>
 
 </section>
 <!-- ================ END STATIC CONTENT ================ -->
-
-<!-- HOME -->
-<div id="homeV">
-  <div style="padding:12px 16px 0">
-    <button onclick="history.back()" style="background:var(--s2);border:1px solid var(--brd);color:var(--txM);padding:7px 16px;border-radius:50px;cursor:pointer;font-size:.85rem;font-family:inherit">← ホームへ戻る</button>
-  </div>
-  <h2 style="font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:18px 0 4px">🏮 Choose a Category · カテゴリーを選んでください</h2>
-  <p class="subtitle">介護士のための日本語単語・漢字学習 | পরিচর্যা কর্মীদের জন্য জাপানি ভাষা</p>
-  <div class="cat-grid" id="catGrid"></div>
-</div>
 
 <!-- MODULE containers per category -->
 
