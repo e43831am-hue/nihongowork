@@ -124,8 +124,8 @@ h1{font-size:1.5rem;font-weight:900;color:var(--acc);text-align:center;padding:1
 
 <!-- HOME -->
 <div id="homeV">
-  <div style="padding:12px 16px 0">
-    <button onclick="history.back()" style="background:var(--s2);border:1px solid var(--brd);color:var(--txM);padding:7px 16px;border-radius:50px;cursor:pointer;font-size:.85rem;font-family:inherit">← ホームへ戻る</button>
+  <div style="position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--brd);padding:10px 16px">
+    <button onclick="location.href='index.html'" style="background:var(--s2);border:1px solid var(--brd);color:var(--tx);padding:8px 18px;border-radius:50px;cursor:pointer;font-size:.88rem;font-family:inherit;font-weight:700">← NIHONGO WORK ホームへ</button>
   </div>
   <div style="text-align:center;padding:18px 20px 4px;max-width:860px;margin:0 auto">
     <div style="font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;font-weight:700">SSW Caregiving Japanese · 介護の日本語</div>
@@ -286,9 +286,9 @@ function openCat(catId){
   curCat=catId;
   const cat=KAIGO_CATS.find(c=>c.id===catId);
   document.getElementById('homeV').style.display='none';
-  // Hide the static SEO/Bengali intro section when a category is open
-  const seo=document.getElementById('seoBlock');
-  if(seo) seo.style.display='none';
+  // Note: We intentionally keep the static SEO/Bengali intro section
+  // visible at all times — it acts as page-level educational context
+  // that also benefits AdSense and search engine indexing.
   // Remove old mod if exists
   let old=document.getElementById('mod-'+catId.replace(/[^a-z0-9]/gi,'_'));
   if(old)old.remove();
@@ -296,8 +296,9 @@ function openCat(catId){
   m.id='mod-'+catId.replace(/[^a-z0-9]/gi,'_');
   m.className='mod';
   m.style.display='block';
-  // Insert the category view BEFORE the SEO block (and before top-nav)
-  // so the quiz appears immediately at the top when a category opens.
+  // Insert the category view BEFORE the SEO block so the quiz appears
+  // at the top; the SEO block remains visible below as reference content.
+  const seo=document.getElementById('seoBlock');
   const insertBefore=seo||document.getElementById('top-nav');
   if(insertBefore && insertBefore.parentNode){
     insertBefore.parentNode.insertBefore(m, insertBefore);
@@ -313,10 +314,8 @@ function openCat(catId){
 function goHome(){
   document.querySelectorAll('.mod').forEach(m=>{m.style.display='none';m.remove()});
   document.getElementById('homeV').style.display='block';
-  // Show the static SEO/Bengali intro section again when returning home
-  const seo=document.getElementById('seoBlock');
-  if(seo) seo.style.display='block';
   document.getElementById('top-nav').style.display='none';
+  // SEO block was never hidden, so no need to show it again.
 }
 
 // ============================================================
