@@ -3,3 +3,8 @@ Allow: /
 
 User-agent: Google-adstxt
 Allow: /app-ads.txt
+
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://nihongo-work.site/sitemap.xml
