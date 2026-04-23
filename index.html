@@ -53,7 +53,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Zen+Antique&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=DM+Mono:wght@400;500&family=Zen+Antique&display=swap" rel="stylesheet">
 <style>
 :root {
   /* ── Sakura Palette ── */
@@ -1240,6 +1240,284 @@ document.addEventListener('DOMContentLoaded', applyFeaturedTranslations);
     <a class="cd c5" href="denkou.html" style="text-decoration:none;color:inherit"><span class="cd-i">⚡</span><div class="cd-n"><script>document.write(T('spDkN'))</script></div><div class="cd-d"><script>document.write(T('spDkD'))</script></div></a>
     <a class="cd c2" href="SSWkaigo.html" style="text-decoration:none;color:inherit"><span class="cd-i">🏥</span><div class="cd-n"><script>document.write(T('spKaigoN'))</script></div><div class="cd-d"><script>document.write(T('spKaigoD'))</script></div></a>
     <a class="cd c3" href="kanjiforminghistory.html" style="text-decoration:none;color:inherit"><span class="cd-i">🖼️</span><div class="cd-n"><script>document.write(T('spKanjiN'))</script></div><div class="cd-d"><script>document.write(T('spKanjiD'))</script></div></a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       💰 MONEY & CAREER ARTICLES — PROMINENT SECTION
+       Placed above "All Categories" for high visibility
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    @keyframes moneyShine {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes moneyPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    @keyframes newBadgePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232, 72, 86, 0.7); }
+      50% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(232, 72, 86, 0); }
+    }
+    .money-section {
+      margin: 24px 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .money-section-header {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .money-section-header::before,
+    .money-section-header::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e8a84c, transparent);
+    }
+    .money-section-header::before { left: calc(50% - 150px); }
+    .money-section-header::after { right: calc(50% - 150px); }
+    .money-badge-new {
+      display: inline-block;
+      background: linear-gradient(135deg, #e84856, #ff6b5c);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      animation: newBadgePulse 2s ease infinite;
+    }
+    .money-section-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: 900;
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #d4a017, #e8729a, #9b7dff, #d4a017);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: moneyShine 4s ease infinite;
+    }
+    .money-section-sub {
+      font-size: 11.5px;
+      color: var(--txM);
+      margin-bottom: 2px;
+    }
+    .money-section-sub-bn {
+      font-size: 11px;
+      color: var(--txD);
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+    .money-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .money-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+      transition: all .3s cubic-bezier(.34,1.56,.64,1);
+      min-height: 140px;
+      padding: 14px 12px 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .money-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    }
+    .money-card.m-kaigo {
+      background: linear-gradient(145deg, #8b1a1a, #c0392b);
+    }
+    .money-card.m-agri {
+      background: linear-gradient(145deg, #1e5a2e, #2d8a3e);
+    }
+    .money-card.m-it {
+      background: linear-gradient(145deg, #1a3a5c, #2c5f8a);
+    }
+    .money-card.m-cost {
+      background: linear-gradient(145deg, #4a2870, #7b4fa8);
+    }
+    .money-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd700, #fff, #ffd700);
+      background-size: 200% 100%;
+      animation: moneyShine 3s linear infinite;
+    }
+    .money-card-icon {
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .money-card-tag {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: rgba(255,215,0,0.95);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .money-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      font-family: 'Noto Sans Bengali', 'Zen Maru Gothic', sans-serif;
+    }
+    .money-card-desc {
+      font-size: 10px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.5;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      margin-bottom: 8px;
+    }
+    .money-card-stat {
+      display: inline-block;
+      background: rgba(255,215,0,0.18);
+      border: 1px solid rgba(255,215,0,0.45);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 9.5px;
+      color: #ffd700;
+      font-weight: 700;
+    }
+    .money-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(212,160,23,0.12), rgba(232,114,154,0.08), rgba(155,125,255,0.1));
+      border: 1px dashed rgba(212,160,23,0.35);
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--tx);
+      text-align: center;
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+    @media (min-width: 600px) {
+      .money-grid { grid-template-columns: repeat(4, 1fr); }
+      .money-card { min-height: 160px; padding: 16px 14px 14px; }
+      .money-card-icon { font-size: 34px; }
+      .money-card-title { font-size: 14px; }
+      .money-card-desc { font-size: 11px; }
+    }
+    @media (max-width: 380px) {
+      .money-section-header::before,
+      .money-section-header::after { display: none; }
+    }
+  </style>
+
+  <div class="money-section">
+    <div class="money-section-header">
+      <div class="money-badge-new"><span data-ja="✦ 新着" data-en="✦ NEW ✦" data-bn="✦ নতুন ✦">✦ NEW ✦ 新着</span></div>
+      <div class="money-section-title"
+        data-ja="💰 日本の給与・生活費ガイド"
+        data-en="💰 Japan Salary &amp; Cost of Living Guide"
+        data-bn="💰 জাপানে বেতন ও জীবনযাত্রার গাইড">💰 জাপানে বেতন ও জীবনযাত্রার গাইড</div>
+      <div class="money-section-sub"
+        data-ja="SSW介護・農業・ITエンジニア・都市別比較"
+        data-en="SSW Kaigo, Agri, IT Engineer &amp; Regional Comparison"
+        data-bn="Japan Salary &amp; Cost of Living — Bengali Guide Series">Japan Salary &amp; Cost of Living — Bengali Guide Series</div>
+      <div class="money-section-sub-bn"
+        data-ja="ベンガル語で詳細な金額・税金・手取りを全解説 · 2026"
+        data-en="Complete breakdown with Bengali Taka conversion · 2026"
+        data-bn="বাংলাদেশি টাকায় সম্পূর্ণ হিসাব · ২০২৬">বাংলাদেশি টাকায় সম্পূর্ণ হিসাব · ২০২৬</div>
+    </div>
+
+    <div class="money-grid">
+      <a href="salary-ssw-kaigo.html" class="money-card m-kaigo">
+        <div class="money-card-icon">🏥</div>
+        <div class="money-card-tag">ARTICLE 1 · SSW</div>
+        <div class="money-card-title"
+          data-ja="介護職の給料"
+          data-en="SSW Kaigo Salary"
+          data-bn="পরিচর্যা কর্মীর বেতন">পরিচর্যা কর্মীর বেতন</div>
+        <div class="money-card-desc"
+          data-ja="月21万円〜 手取りと実生活を徹底解説"
+          data-en="From ¥210K/mo — take-home breakdown"
+          data-bn="介護 · মাসিক ২,১০,০০০ ইয়েন থেকে — হাতে কত আসে?">介護 · মাসিক ২,১০,০০০ ইয়েন থেকে — হাতে কত আসে?</div>
+        <span class="money-card-stat"
+          data-ja="年70万タカ"
+          data-en="~₹9L BDT/year"
+          data-bn="~৯ লাখ ৳/বছর">~৯ লাখ ৳/বছর</span>
+      </a>
+
+      <a href="salary-ssw-agri.html" class="money-card m-agri">
+        <div class="money-card-icon">🌾</div>
+        <div class="money-card-tag">ARTICLE 2 · SSW</div>
+        <div class="money-card-title"
+          data-ja="農業職の給料"
+          data-en="SSW Agriculture Salary"
+          data-bn="কৃষি কর্মীর বেতন">কৃষি কর্মীর বেতন</div>
+        <div class="money-card-desc"
+          data-ja="農業 · 田舎生活・高貯蓄・SSW-2可能"
+          data-en="Rural life, more savings, SSW-2 path"
+          data-bn="農業 · গ্রামীণ জীবন, বেশি সেভিংস, SSW-2 সুবিধা">農業 · গ্রামীণ জীবন, বেশি সেভিংস, SSW-2 সুবিধা</div>
+        <span class="money-card-stat"
+          data-ja="年10万タカ"
+          data-en="~₹10L BDT/year"
+          data-bn="~১০ লাখ ৳/বছর">~১০ লাখ ৳/বছর</span>
+      </a>
+
+      <a href="salary-it-engineer.html" class="money-card m-it">
+        <div class="money-card-icon">💻</div>
+        <div class="money-card-tag">ARTICLE 3 · IT</div>
+        <div class="money-card-title"
+          data-ja="ITエンジニアの給料"
+          data-en="IT Engineer Salary"
+          data-bn="IT ইঞ্জিনিয়ারের বেতন">IT ইঞ্জিনিয়ারের বেতন</div>
+        <div class="money-card-desc"
+          data-ja="Jr→Sr · Google / Mercari / Rakuten全データ"
+          data-en="Jr→Sr · Google / Mercari / Rakuten data"
+          data-bn="Jr. → Sr. · Google / Mercari / Rakuten — সব ডেটা">Jr. → Sr. · Google / Mercari / Rakuten — সব ডেটা</div>
+        <span class="money-card-stat"
+          data-ja="年130-500万タカ"
+          data-en="₹13L-₹50L BDT/year"
+          data-bn="১৩–৫০ লাখ ৳/বছর">১৩–৫০ লাখ ৳/বছর</span>
+      </a>
+
+      <a href="cost-of-living-japan.html" class="money-card m-cost">
+        <div class="money-card-icon">🏘️</div>
+        <div class="money-card-tag">ARTICLE 4 · COST</div>
+        <div class="money-card-title"
+          data-ja="東京 vs 田舎"
+          data-en="Tokyo vs Rural"
+          data-bn="টোকিও vs গ্রাম">টোকিও vs গ্রাম</div>
+        <div class="money-card-desc"
+          data-ja="4都市の生活費比較・隠れ費用・家賃マップ"
+          data-en="4-city cost comparison · hidden fees · rent map"
+          data-bn="৪টি শহরে জীবনযাত্রার খরচের সম্পূর্ণ তুলনা">৪টি শহরে জীবনযাত্রার খরচের সম্পূর্ণ তুলনা</div>
+        <span class="money-card-stat"
+          data-ja="4都市分析"
+          data-en="4 cities analyzed"
+          data-bn="৪ শহর বিশ্লেষণ">৪ শহর বিশ্লেষণ</span>
+      </a>
+    </div>
+
+    <div class="money-cta">
+      <span>📊</span>
+      <span
+        data-ja="4記事 · 5万字以上 · 完全ベンガル語版 — 日本行き前の必読資料"
+        data-en="4 articles · 50,000+ words · full Bengali — must-read before going to Japan"
+        data-bn="৪টি আর্টিকেল · ৫০,০০০+ শব্দ · সম্পূর্ণ বাংলায় — আপনার জাপান যাত্রা শুরুর আগে অবশ্যই পড়ুন"><strong>৪টি আর্টিকেল · ৫০,০০০+ শব্দ · সম্পূর্ণ বাংলায়</strong> — আপনার জাপান যাত্রা শুরুর আগে অবশ্যই পড়ুন</span>
+    </div>
   </div>
 
   <!-- ── SAKURA CATEGORY NAVIGATION (Bottom) ── -->
