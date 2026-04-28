@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バングラ実用フレーズ集 - オフィス・ドライバー・家政婦さん | NIHONGO WORK</title>
+<meta name="description" content="バングラデシュ駐在の日本人向け実用フレーズ集。オフィス、タクシー/ドライバー、あいさつ、家政婦さん向けの計35フレーズ。カタカナ発音つき。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--s1:#FFFFFF;--s2:#F0EFE9;--s3:#E8E7E0;
+  --acc:#f42a41;--acc2:#c91f33;
+  --bd-green:#006a4e;--bd-red:#f42a41;
+  --tx:#1A1A2E;--txM:#4A5568;--txD:#9AA5B4;
+  --grn:#6BA368;--red:#D96B6B;
+  --brd:rgba(0,0,0,0.08);
+  --g1:linear-gradient(135deg,#f42a41,#ff6b3d);
+  --g2:linear-gradient(135deg,#006a4e,#0a8862);
+  --r:14px;
+  --c-office:#1F3A5F;
+  --c-driver:#D4A017;
+  --c-greet:#6BA368;
+  --c-house:#8B5CF6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP','Noto Sans Bengali',sans-serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#E8E7E0;border-radius:3px}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;text-decoration:none;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px}
+.logo-jp{font-size:11px;color:var(--txM);-webkit-text-fill-color:var(--txM);font-weight:400}
+.top-r{display:flex;gap:6px;align-items:center}
+.back-link{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);text-decoration:none;display:flex;align-items:center;gap:4px;transition:all .15s}
+.back-link:hover{background:var(--s3);color:var(--tx)}
+
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.head{margin-bottom:18px}
+.head-t{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px}
+.head-d{font-size:13px;color:var(--txM);line-height:1.8}
+.head-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:12px;color:var(--txD);margin-top:4px}
+
+/* Mode tabs */
+.u-tabs{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap}
+.u-tab{flex:1;min-width:90px;padding:10px 6px;border:1px solid var(--brd);border-radius:10px;background:var(--s1);color:var(--txM);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;font-family:inherit}
+.u-tab:hover{background:var(--s2);color:var(--tx)}
+.u-tab.on{background:var(--bd-red);color:#fff;border-color:transparent}
+
+/* Category filter */
+.cat-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:8px}
+.cat-b{padding:7px 12px;border-radius:8px;border:1px solid var(--brd);background:var(--s2);color:var(--txM);font-size:11px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s;display:flex;align-items:center;gap:5px}
+.cat-b:hover{color:var(--tx)}
+.cat-b.on{color:#fff;border-color:transparent}
+.cat-b.on.all{background:#444}
+.cat-b.on.office{background:var(--c-office)}
+.cat-b.on.driver{background:var(--c-driver)}
+.cat-b.on.greet{background:var(--c-greet)}
+.cat-b.on.house{background:var(--c-house)}
+.cat-b .ct-n{background:var(--s3);color:var(--txM);border-radius:8px;padding:0 6px;font-size:9px;margin-left:2px}
+.cat-b.on .ct-n{background:rgba(255,255,255,.25);color:#fff}
+
+/* ============= LIST VIEW ============= */
+.cat-section{margin-bottom:28px}
+.cat-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 4px}
+.cat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;flex-shrink:0}
+.cat-icon.office{background:var(--c-office)}
+.cat-icon.driver{background:var(--c-driver)}
+.cat-icon.greet{background:var(--c-greet)}
+.cat-icon.house{background:var(--c-house)}
+.cat-head-t{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:900}
+.cat-head-d{font-size:11px;color:var(--txM)}
+.cat-head-c{margin-left:auto;background:var(--s2);border:1px solid var(--brd);border-radius:14px;padding:3px 10px;font-size:11px;color:var(--txM);font-weight:600}
+
+.phrase-list{display:flex;flex-direction:column;gap:10px}
+.phrase-row{background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:14px 16px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.phrase-row:hover{box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.phrase-row::before{content:'';position:absolute;top:0;bottom:0;left:0;width:3px}
+.phrase-row.office::before{background:var(--c-office)}
+.phrase-row.driver::before{background:var(--c-driver)}
+.phrase-row.greet::before{background:var(--c-greet)}
+.phrase-row.house::before{background:var(--c-house)}
+.phrase-jp{font-size:15px;font-weight:600;color:var(--tx);line-height:1.5;margin-bottom:8px;padding-left:6px}
+.phrase-kt{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--bd-red);line-height:1.4;margin-bottom:4px;padding-left:6px}
+.phrase-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:14px;color:var(--txM);line-height:1.5;padding-left:6px}
+.phrase-num{position:absolute;top:12px;right:14px;background:var(--s2);color:var(--txD);border-radius:6px;padding:2px 8px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700}
+
+/* ============= FLASHCARD ============= */
+.fcw{margin-bottom:16px;cursor:pointer}
+.fc{background:var(--s1);border:1px solid var(--brd);border-radius:18px;padding:32px 22px;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;transition:transform .2s}
+.fc:hover{transform:translateY(-2px)}
+.fc-bdg{position:absolute;top:12px;right:14px;background:var(--s3);border:1px solid var(--brd);border-radius:6px;padding:3px 9px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
+.fc-cat-tag{position:absolute;top:12px;left:14px;border-radius:6px;padding:3px 9px;font-size:10px;font-weight:600;color:#fff}
+.fc-cat-tag.office{background:var(--c-office)}
+.fc-cat-tag.driver{background:var(--c-driver)}
+.fc-cat-tag.greet{background:var(--c-greet)}
+.fc-cat-tag.house{background:var(--c-house)}
+.fc-front .fc-jp-big{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:700;color:var(--tx);line-height:1.5;margin-bottom:14px;max-width:90%}
+.fc-back{display:none;width:100%}
+.fc.flip .fc-front{display:none}
+.fc.flip .fc-back{display:flex;flex-direction:column;align-items:center}
+.fc-katakana{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:900;color:var(--bd-red);line-height:1.4;margin-bottom:10px;max-width:95%}
+.fc-bengali{font-family:'Noto Sans Bengali',sans-serif;font-size:18px;font-weight:500;color:var(--tx);line-height:1.5;margin-bottom:14px;max-width:95%}
+.fc-jp-back{font-size:14px;color:var(--txM);border-top:1px solid var(--brd);padding-top:12px;width:80%;max-width:90%}
+.fc-hint{margin-top:14px;font-size:10px;color:var(--txD);letter-spacing:.1em;display:flex;align-items:center;gap:8px}
+.fc-hint::before,.fc-hint::after{content:'';width:18px;height:1px;background:var(--txD)}
+
+.fc-acts{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.fc-b{padding:11px 20px;border-radius:10px;border:1px solid var(--brd);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:6px;background:var(--s1);color:var(--txM)}
+.fc-b:hover{background:var(--s2);color:var(--tx)}
+.fc-b.nx{background:var(--bd-red);color:#fff;border-color:transparent}
+.fc-b.nx:hover{background:var(--acc2)}
+
+/* Progress */
+.prg{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.prg-bar{flex:1;height:4px;background:var(--s3);border-radius:2px;overflow:hidden}
+.prg-fill{height:100%;background:var(--g1);border-radius:2px;transition:width .3s}
+.prg-tx{font-size:11px;color:var(--txM);min-width:55px;text-align:right;font-family:'DM Mono',monospace}
+
+/* ============= QUIZ ============= */
+.qb{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:26px 22px;text-align:center;margin-bottom:14px;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.qb::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--g1)}
+.qB{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--tx);line-height:1.5}
+.qT{display:inline-block;margin-bottom:10px;background:var(--s3);border:1px solid var(--brd);border-radius:14px;padding:4px 12px;font-size:11px;color:var(--bd-red);letter-spacing:.06em;font-weight:600}
+.qP{font-size:12px;color:var(--txM);margin-top:6px;font-family:'Noto Sans Bengali',sans-serif}
+
+.qos{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+.qo{padding:12px 14px;border-radius:12px;border:1px solid var(--brd);background:var(--s1);color:var(--tx);font-size:13px;cursor:pointer;transition:all .15s;text-align:left;font-family:inherit;line-height:1.5;display:flex;align-items:flex-start;gap:9px;min-height:50px}
+.qo:hover:not(.dis){background:var(--s2);border-color:var(--bd-red)}
+.qo.ok{background:rgba(107,163,104,.12);border-color:var(--grn);color:var(--grn)}
+.qo.no{background:rgba(217,107,107,.1);border-color:var(--red);color:var(--red)}
+.qo.dis{cursor:default}
+.qo .ol{display:flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;background:var(--s3);border-radius:6px;font-size:11px;color:var(--txM);font-family:'DM Mono',monospace;font-weight:700;margin-top:1px}
+.qo.ok .ol{background:rgba(107,163,104,.25);color:var(--grn)}
+.qo.no .ol{background:rgba(217,107,107,.2);color:var(--red)}
+.qo-content{flex:1;display:flex;flex-direction:column;gap:3px}
+.qo-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:11px;color:var(--txD)}
+.qfb{padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:13px;display:none;line-height:1.7}
+.qfb.ok{background:rgba(107,163,104,.08);border:1px solid rgba(107,163,104,.25);color:var(--grn);display:block}
+.qfb.no{background:rgba(217,107,107,.06);border:1px solid rgba(217,107,107,.2);color:#c54343;display:block}
+.qfb b{font-weight:700}
+.qfb .ans-bn{font-family:'Noto Sans Bengali',sans-serif;display:block;margin-top:4px;color:var(--txM);font-size:12px}
+.qnx{padding:11px 28px;border-radius:10px;background:var(--bd-red);color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:none}
+.qnx:hover{background:var(--acc2)}
+.qnx.sh{display:inline-block}
+
+.scr{text-align:center;padding:36px 20px;display:none}
+.scr.sh{display:block}
+.scr-big{font-family:'Zen Maru Gothic',sans-serif;font-size:60px;font-weight:900;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.scr-msg{font-size:14px;color:var(--txM);margin:8px 0 22px}
+.scr-tiles{display:flex;gap:12px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+.scr-t{background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:14px 22px;min-width:90px}
+.scr-t .tl{font-size:10px;color:var(--txD);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase}
+.scr-t .tv{font-size:24px;font-weight:800;font-family:'Zen Maru Gothic',sans-serif}
+.scr-t.g .tv{color:var(--grn)}.scr-t.r .tv{color:var(--red)}
+.rbtn{padding:11px 26px;border-radius:10px;background:var(--bd-red);color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin:0 4px;transition:background .15s}
+.rbtn:hover{background:var(--acc2)}
+.rbtn.alt{background:var(--s2);color:var(--txM);border:1px solid var(--brd)}
+.rbtn.alt:hover{background:var(--s3);color:var(--tx)}
+
+@media(max-width:600px){
+  .phrase-jp{font-size:14px}
+  .phrase-kt{font-size:16px}
+  .phrase-bn{font-size:13px}
+  .fc-front .fc-jp-big{font-size:18px}
+  .fc-katakana{font-size:22px}
+  .fc-bengali{font-size:16px}
+  .qB{font-size:16px}
+}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fi .25s ease}
+
+footer{background:#111;color:#888;padding:28px 24px;font-size:12px;text-align:center;line-height:1.8;margin-top:40px}
+footer a{color:#aaa;text-decoration:none;margin:0 6px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="logo">
+    NIHONGO WORK <span class="logo-jp">にほんごワーク</span>
+  </a>
+  <div class="top-r">
+    <a href="banglastudy.html" class="back-link">← 戻る</a>
+    <a href="index.html" class="back-link">🏠 ホーム</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="head">
+    <h1 class="head-t">💬 バングラ実用フレーズ集</h1>
+    <p class="head-d">バングラデシュの日常で本当に使う35フレーズ。オフィス10・タクシー/ドライバー10・あいさつ5・家政婦さん10。</p>
+    <p class="head-bn">দৈনন্দিন বাংলা বাক্য — ৩৫টি দরকারি বাক্য</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="u-tabs">
+    <button class="u-tab on" data-mode="list">📋 一覧表</button>
+    <button class="u-tab" data-mode="flash">📇 フラッシュカード</button>
+    <button class="u-tab" data-mode="quiz">🎯 クイズ</button>
+  </div>
+
+  <!-- Category filter -->
+  <div class="cat-bar">
+    <button class="cat-b on all" data-cat="all">🌐 全部 <span class="ct-n" id="cnt-all">35</span></button>
+    <button class="cat-b office" data-cat="office">🏢 オフィス <span class="ct-n" id="cnt-office">10</span></button>
+    <button class="cat-b driver" data-cat="driver">🚕 ドライバー <span class="ct-n" id="cnt-driver">10</span></button>
+    <button class="cat-b greet" data-cat="greet">👋 あいさつ <span class="ct-n" id="cnt-greet">5</span></button>
+    <button class="cat-b house" data-cat="house">🏠 家政婦さん <span class="ct-n" id="cnt-house">10</span></button>
+  </div>
+
+  <!-- ============= LIST VIEW ============= -->
+  <div id="vList"></div>
+
+  <!-- ============= FLASHCARD VIEW ============= -->
+  <div id="vFlash" style="display:none">
+    <div class="prg">
+      <div class="prg-bar"><div class="prg-fill" id="prgFlashFill" style="width:0%"></div></div>
+      <span class="prg-tx" id="prgFlashTx">0 / 0</span>
+    </div>
+    <div class="fcw" id="fcw">
+      <div class="fc" id="fc">
+        <span class="fc-bdg" id="fcBdg">1 / 1</span>
+        <span class="fc-cat-tag" id="fcCatTag">オフィス</span>
+        <div class="fc-front" id="fcFront">
+          <div class="fc-jp-big" id="fcQ">こんにちは。</div>
+          <div class="fc-hint">タップして答えを見る</div>
+        </div>
+        <div class="fc-back" id="fcBack">
+          <div class="fc-katakana" id="fcKt">アシュサラム アライクム</div>
+          <div class="fc-bengali" id="fcBn">আসসালামু আলাইকুম</div>
+          <div class="fc-jp-back" id="fcJpBack">こんにちは。</div>
+          <div class="fc-hint">もう一度タップで戻る</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-acts">
+      <button class="fc-b" id="fcPrev">← 前</button>
+      <button class="fc-b" id="fcShuf">🔀 シャッフル</button>
+      <button class="fc-b nx" id="fcNext">次 →</button>
+    </div>
+  </div>
+
+  <!-- ============= QUIZ VIEW ============= -->
+  <div id="vQuiz" style="display:none">
+    <div class="prg">
+      <div class="prg-bar"><div class="prg-fill" id="prgQuizFill" style="width:0%"></div></div>
+      <span class="prg-tx" id="prgQuizTx">0 / 0</span>
+    </div>
+    <div class="qb">
+      <span class="qT">日本語に合うベンガル語を選んでください</span>
+      <div class="qB" id="qB">こんにちは。</div>
+    </div>
+    <div class="qos" id="qos"></div>
+    <div class="qfb" id="qfb"></div>
+    <div style="text-align:center"><button class="qnx" id="qnx">次へ →</button></div>
+  </div>
+
+  <!-- ============= SCORE VIEW ============= -->
+  <div class="scr" id="vScore">
+    <div class="scr-big" id="scrBig">0%</div>
+    <div class="scr-msg" id="scrMsg">よくできました！</div>
+    <div class="scr-tiles">
+      <div class="scr-t g"><div class="tl">正解</div><div class="tv" id="scrCo">0</div></div>
+      <div class="scr-t r"><div class="tl">不正解</div><div class="tv" id="scrWr">0</div></div>
+    </div>
+    <button class="rbtn" id="scrRetry">もう一度</button>
+    <button class="rbtn alt" id="scrList">📋 一覧へ</button>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 NIHONGO WORK &middot; バングラ実用フレーズ集 &middot;
+  <a href="banglastudy.html">← Bangla Hub</a>
+  <a href="index.html">🏠 Home</a>
+</footer>
+
+<script>
+/* =========================================================
+   PHRASES — 35 entries across 4 categories
+   Format: [japanese, katakana_pron, bengali_script, category, category_label]
+   Categories: office (10), driver (10), greet (5), house (10) = 35 total
+   ========================================================= */
+const PHRASES = [
+  // ===== あいさつ Greetings (5) =====
+  ["こんにちは。","アッサラーム アライクム","আসসালামু আলাইকুম","greet","あいさつ"],
+  ["おはようございます。","シュプロバット","শুভ সকাল","greet","あいさつ"],
+  ["ありがとう。","ドンノバド","ধন্যবাদ","greet","あいさつ"],
+  ["元気ですか？","ケモン アチェン？","কেমন আছেন?","greet","あいさつ"],
+  ["さようなら。","アッラー ハフェズ","আল্লাহ হাফেজ","greet","あいさつ"],
+
+  // ===== オフィス Office (10) =====
+  ["おはようございます、皆さん。","ショバイケ シュプロバット","সবাইকে শুভ সকাল","office","オフィス"],
+  ["会議は何時からですか？","ミーティン コタエ シュル ホベ？","মিটিং কয়টায় শুরু হবে?","office","オフィス"],
+  ["この書類を確認してください。","エイ カゴジティ チェック コルン","এই কাগজটি চেক করুন","office","オフィス"],
+  ["少し待ってください。","エクトゥ オペッカ コルン","একটু অপেক্ষা করুন","office","オフィス"],
+  ["これを印刷してください。","エタ プリント コルン","এটা প্রিন্ট করুন","office","オフィス"],
+  ["メールを送ってください。","イメイル パタイエ ディン","ইমেইল পাঠিয়ে দিন","office","オフィス"],
+  ["電話してもいいですか？","アミ キ フォン コルテ パリ？","আমি কি ফোন করতে পারি?","office","オフィス"],
+  ["分かりました。","ブジェチ","বুঝেছি","office","オフィス"],
+  ["お疲れ様でした。","アジケル カジ シェシュ","আজকের কাজ শেষ","office","オフィス"],
+  ["明日また話しましょう。","アガミカル アバル コタ ホベ","আগামীকাল আবার কথা হবে","office","オフィス"],
+
+  // ===== タクシー/ドライバー Driver (10) =====
+  ["グルシャンへ行ってください。","グルシャネ チョルン","গুলশানে চলুন","driver","ドライバー"],
+  ["まっすぐ行ってください。","ショジャ チョルン","সোজা চলুন","driver","ドライバー"],
+  ["右に曲がってください。","ダネ ジャン","ডানে যান","driver","ドライバー"],
+  ["左に曲がってください。","バメ ジャン","বামে যান","driver","ドライバー"],
+  ["ここで止めてください。","エカネ タマン","এখানে থামান","driver","ドライバー"],
+  ["もっとゆっくり運転してください。","アロ アシュテ チャラン","আরও আস্তে চালান","driver","ドライバー"],
+  ["渋滞がひどいですね。","ジャム ベシ","জ্যাম বেশি","driver","ドライバー"],
+  ["いくらですか？","コト タカ？","কত টাকা?","driver","ドライバー"],
+  ["メーターで行ってください。","ミタレ ジャン","মিটারে যান","driver","ドライバー"],
+  ["お釣りをください。","バキ タカ ディン","বাকি টাকা দিন","driver","ドライバー"],
+
+  // ===== 家政婦さん Housekeeper (10) =====
+  ["おはようございます。仕事を始めてください。","シュプロバット、カジ シュル コルン","শুভ সকাল, কাজ শুরু করুন","house","家政婦さん"],
+  ["床を掃除してください。","メジェ ポリシュカル コルン","মেঝে পরিষ্কার করুন","house","家政婦さん"],
+  ["洗濯物を洗ってください。","カパル ドゥエ ディン","কাপড় ধুয়ে দিন","house","家政婦さん"],
+  ["皿を洗ってください。","タラ バシュン ドゥエ ディン","থালা বাসন ধুয়ে দিন","house","家政婦さん"],
+  ["料理を作ってください。","ラナ コルン","রান্না করুন","house","家政婦さん"],
+  ["買い物に行ってください。","バザル コルテ ジャン","বাজার করতে যান","house","家政婦さん"],
+  ["これは辛くしないでください。","エタ ジャル コルベン ナ","এটা ঝাল করবেন না","house","家政婦さん"],
+  ["明日来てください。","アガミカル アシュベン","আগামীকাল আসবেন","house","家政婦さん"],
+  ["今日は休みです。","アジ チュッティ","আজ ছুটি","house","家政婦さん"],
+  ["お給料です。","エイ アプナル ベトン","এই আপনার বেতন","house","家政婦さん"]
+];
+
+// Update counts
+const counts = { office:0, driver:0, greet:0, house:0 };
+PHRASES.forEach(p=>counts[p[3]]++);
+document.getElementById('cnt-all').textContent = PHRASES.length;
+document.getElementById('cnt-office').textContent = counts.office;
+document.getElementById('cnt-driver').textContent = counts.driver;
+document.getElementById('cnt-greet').textContent = counts.greet;
+document.getElementById('cnt-house').textContent = counts.house;
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let mode = 'list';
+let cat = 'all';
+let order = [];
+let cur = 0;
+
+// Quiz state
+let qIndex = 0; let qScore = 0; let qWrong = 0; let qAnswered = false;
+
+function shuffleArr(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function getFiltered(){
+  return PHRASES.map((p,i)=>({p,i})).filter(x=>cat==='all' || x.p[3]===cat);
+}
+function buildOrder(shuf){
+  const filtered = getFiltered();
+  order = filtered.map(x=>x.i);
+  if (shuf) shuffleArr(order);
+  cur = 0;
+}
+
+/* =========================================================
+   LIST VIEW
+   ========================================================= */
+function renderList(){
+  const v = document.getElementById('vList');
+  v.innerHTML = '';
+  const cats = (cat === 'all') ? ['greet','office','driver','house'] : [cat];
+  const labels = {
+    greet:    {n:'👋 あいさつ',         d:'Greetings — শুভেচ্ছা',   icon:'👋', cls:'greet'},
+    office:   {n:'🏢 オフィスで',        d:'At the office — অফিসে',   icon:'🏢', cls:'office'},
+    driver:   {n:'🚕 タクシー・ドライバー', d:'Taxi & Driver — গাড়িতে', icon:'🚕', cls:'driver'},
+    house:    {n:'🏠 家政婦さんへ',       d:'Housekeeper — গৃহকর্মী',  icon:'🏠', cls:'house'}
+  };
+  cats.forEach(c=>{
+    const items = PHRASES.map((p,i)=>({p,i})).filter(x=>x.p[3]===c);
+    if (items.length === 0) return;
+    const sec = document.createElement('div');
+    sec.className = 'cat-section';
+    const lbl = labels[c];
+    sec.innerHTML = `
+      <div class="cat-head">
+        <div class="cat-icon ${lbl.cls}">${lbl.icon}</div>
+        <div>
+          <div class="cat-head-t">${lbl.n}</div>
+          <div class="cat-head-d">${lbl.d}</div>
+        </div>
+        <div class="cat-head-c">${items.length} 個</div>
+      </div>
+      <div class="phrase-list" id="pl-${c}"></div>`;
+    v.appendChild(sec);
+    const list = sec.querySelector('.phrase-list');
+    items.forEach((x, idx)=>{
+      const row = document.createElement('div');
+      row.className = 'phrase-row ' + c;
+      row.innerHTML = `
+        <div class="phrase-num">${String(idx+1).padStart(2,'0')}</div>
+        <div class="phrase-jp">🇯🇵 ${x.p[0]}</div>
+        <div class="phrase-kt">🔊 ${x.p[1]}</div>
+        <div class="phrase-bn">🇧🇩 ${x.p[2]}</div>`;
+      list.appendChild(row);
+    });
+  });
+}
+
+/* =========================================================
+   FLASHCARD
+   ========================================================= */
+const fc = document.getElementById('fc');
+const fcQ = document.getElementById('fcQ');
+const fcKt = document.getElementById('fcKt');
+const fcBn = document.getElementById('fcBn');
+const fcJpBack = document.getElementById('fcJpBack');
+const fcBdg = document.getElementById('fcBdg');
+const fcCatTag = document.getElementById('fcCatTag');
+
+function renderFlash(){
+  if (order.length === 0){
+    fcQ.textContent = '（このカテゴリーには項目がありません）';
+    fcBdg.textContent = '0 / 0';
+    return;
+  }
+  const item = PHRASES[order[cur]];
+  fcQ.textContent = item[0];
+  fcKt.textContent = item[1];
+  fcBn.textContent = item[2];
+  fcJpBack.textContent = '🇯🇵 ' + item[0];
+  fcBdg.textContent = (cur+1) + ' / ' + order.length;
+  fcCatTag.textContent = item[4];
+  fcCatTag.className = 'fc-cat-tag ' + item[3];
+  fc.classList.remove('flip');
+  fc.classList.remove('fade'); void fc.offsetWidth; fc.classList.add('fade');
+  document.getElementById('prgFlashFill').style.width = ((cur+1)/order.length*100)+'%';
+  document.getElementById('prgFlashTx').textContent = (cur+1) + ' / ' + order.length;
+}
+document.getElementById('fcw').addEventListener('click', ()=>{ fc.classList.toggle('flip'); });
+document.getElementById('fcNext').addEventListener('click', e=>{ e.stopPropagation(); cur=(cur+1)%order.length; renderFlash(); });
+document.getElementById('fcPrev').addEventListener('click', e=>{ e.stopPropagation(); cur=(cur-1+order.length)%order.length; renderFlash(); });
+document.getElementById('fcShuf').addEventListener('click', e=>{ e.stopPropagation(); buildOrder(true); renderFlash(); });
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+const qB = document.getElementById('qB');
+const qos = document.getElementById('qos');
+const qfb = document.getElementById('qfb');
+const qnx = document.getElementById('qnx');
+
+function startQuiz(){
+  buildOrder(true);
+  qIndex = 0; qScore = 0; qWrong = 0;
+  document.getElementById('vScore').classList.remove('sh');
+  document.getElementById('vQuiz').style.display = 'block';
+  if (order.length === 0){
+    qB.textContent = 'このカテゴリーには項目がありません';
+    qos.innerHTML = '';
+    return;
+  }
+  renderQuiz();
+}
+
+function renderQuiz(){
+  if (qIndex >= order.length){ showScore(); return; }
+  qAnswered = false;
+  const correctIdx = order[qIndex];
+  const item = PHRASES[correctIdx];
+  qB.textContent = item[0];
+
+  // Build 4 options — pick from full PHRASES pool, not just filtered, for variety
+  let optIdxs = [correctIdx];
+  const pool = PHRASES.map((_,i)=>i).filter(i=>i!==correctIdx);
+  shuffleArr(pool);
+  for (let i=0;i<3 && i<pool.length;i++) optIdxs.push(pool[i]);
+  shuffleArr(optIdxs);
+
+  qos.innerHTML = '';
+  optIdxs.forEach((idx, i)=>{
+    const it = PHRASES[idx];
+    const div = document.createElement('div');
+    div.className = 'qo';
+    div.dataset.idx = idx;
+    div.innerHTML = `
+      <span class="ol">${String.fromCharCode(65+i)}</span>
+      <div class="qo-content">
+        <span><b style="color:var(--bd-red)">${it[1]}</b></span>
+        <span class="qo-bn">${it[2]}</span>
+      </div>`;
+    div.addEventListener('click', ()=>chooseOpt(div, idx));
+    qos.appendChild(div);
+  });
+
+  qfb.style.display = 'none'; qfb.className = 'qfb';
+  qnx.classList.remove('sh');
+  document.getElementById('prgQuizFill').style.width = ((qIndex+1)/order.length*100)+'%';
+  document.getElementById('prgQuizTx').textContent = (qIndex+1) + ' / ' + order.length;
+}
+
+function chooseOpt(div, pickedIdx){
+  if (qAnswered) return;
+  qAnswered = true;
+  const correctIdx = order[qIndex];
+  const correct = pickedIdx === correctIdx;
+  document.querySelectorAll('.qo').forEach(o=>{
+    o.classList.add('dis');
+    const oi = parseInt(o.dataset.idx,10);
+    if (oi === correctIdx) o.classList.add('ok');
+    else if (oi === pickedIdx && !correct) o.classList.add('no');
+  });
+  const item = PHRASES[correctIdx];
+  if (correct){
+    qScore++;
+    qfb.className = 'qfb ok';
+    qfb.innerHTML = '✓ 正解！ <b>' + item[1] + '</b><span class="ans-bn">' + item[2] + '</span>';
+  } else {
+    qWrong++;
+    qfb.className = 'qfb no';
+    qfb.innerHTML = '✗ 正解は <b>' + item[1] + '</b><span class="ans-bn">' + item[2] + '</span>';
+  }
+  qfb.style.display = 'block';
+  qnx.classList.add('sh');
+}
+
+qnx.addEventListener('click', ()=>{
+  qIndex++;
+  if (qIndex >= order.length) showScore();
+  else renderQuiz();
+});
+
+function showScore(){
+  document.getElementById('vQuiz').style.display = 'none';
+  document.getElementById('vScore').classList.add('sh');
+  const total = qScore + qWrong;
+  const pct = total ? Math.round(qScore/total*100) : 0;
+  document.getElementById('scrBig').textContent = pct + '%';
+  document.getElementById('scrCo').textContent = qScore;
+  document.getElementById('scrWr').textContent = qWrong;
+  let msg = '';
+  if (pct >= 90) msg = '完璧！🏆 অসাধারণ!';
+  else if (pct >= 70) msg = 'すごい！🎉 চমৎকার!';
+  else if (pct >= 50) msg = 'いい感じ！👍 ভালো!';
+  else msg = 'もっと頑張ろう！💪 চেষ্টা চালিয়ে যান!';
+  document.getElementById('scrMsg').textContent = msg;
+}
+document.getElementById('scrRetry').addEventListener('click', ()=>{
+  document.getElementById('vScore').classList.remove('sh');
+  startQuiz();
+});
+document.getElementById('scrList').addEventListener('click', ()=>{
+  document.getElementById('vScore').classList.remove('sh');
+  switchMode('list');
+});
+
+/* =========================================================
+   MODE / CATEGORY SWITCHING
+   ========================================================= */
+function switchMode(m){
+  mode = m;
+  document.querySelectorAll('.u-tab').forEach(t=>t.classList.toggle('on', t.dataset.mode === m));
+  document.getElementById('vList').style.display  = (m === 'list')  ? 'block' : 'none';
+  document.getElementById('vFlash').style.display = (m === 'flash') ? 'block' : 'none';
+  document.getElementById('vQuiz').style.display  = (m === 'quiz')  ? 'block' : 'none';
+  document.getElementById('vScore').classList.remove('sh');
+
+  if (m === 'list') renderList();
+  else if (m === 'flash'){ buildOrder(false); renderFlash(); }
+  else { startQuiz(); }
+}
+document.querySelectorAll('.u-tab').forEach(t=>{
+  t.addEventListener('click', ()=>switchMode(t.dataset.mode));
+});
+
+document.querySelectorAll('.cat-b').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    cat = b.dataset.cat;
+    document.querySelectorAll('.cat-b').forEach(x=>x.classList.toggle('on', x.dataset.cat === cat));
+    // Re-render current mode with new filter
+    switchMode(mode);
+  });
+});
+
+// Initial
+renderList();
+</script>
+
+</body>
+</html>

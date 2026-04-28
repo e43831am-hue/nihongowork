@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ベンガル語 語彙 - 日本語↔ベンガル語フラッシュカード&クイズ | NIHONGO WORK</title>
+<meta name="description" content="バングラデシュ駐在の日本人向けベンガル語語彙学習。日本語↔ベンガル語のフラッシュカードとクイズ、カタカナ発音つき。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--s1:#FFFFFF;--s2:#F0EFE9;--s3:#E8E7E0;
+  --acc:#006a4e;--acc2:#004f3a;--accG:#6BA368;--accB:#1F3A5F;--accY:#D4A017;
+  --bd-green:#006a4e;--bd-red:#f42a41;
+  --tx:#1A1A2E;--txM:#4A5568;--txD:#9AA5B4;
+  --grn:#6BA368;--red:#D96B6B;
+  --brd:rgba(0,0,0,0.08);
+  --g1:linear-gradient(135deg,#006a4e,#0a8862);
+  --g2:linear-gradient(135deg,#f42a41,#ff6b3d);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP','Noto Sans Bengali',sans-serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#E8E7E0;border-radius:3px}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;text-decoration:none;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px}
+.logo-jp{font-size:11px;color:var(--txM);-webkit-text-fill-color:var(--txM);font-weight:400}
+.top-r{display:flex;gap:6px;align-items:center}
+.back-link{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);text-decoration:none;display:flex;align-items:center;gap:4px;transition:all .15s}
+.back-link:hover{background:var(--s3);color:var(--tx)}
+
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+.head{margin-bottom:18px}
+.head-t{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px}
+.head-d{font-size:13px;color:var(--txM);line-height:1.8}
+.head-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:12px;color:var(--txD);margin-top:4px}
+
+/* Tabs */
+.u-tabs{display:flex;gap:6px;margin:14px 0 14px;flex-wrap:wrap}
+.u-tab{flex:1;min-width:90px;padding:10px 6px;border:1px solid var(--brd);border-radius:10px;background:var(--s1);color:var(--txM);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;font-family:inherit}
+.u-tab:hover{background:var(--s2);color:var(--tx)}
+.u-tab.on{background:var(--bd-green);color:#fff;border-color:transparent}
+
+/* Direction toggle */
+.dir-bar{display:flex;align-items:center;justify-content:space-between;background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.dir-lbl{font-size:12px;color:var(--txM);font-weight:600}
+.dir-btns{display:flex;gap:4px;background:var(--s2);border-radius:8px;padding:3px}
+.dir-b{padding:5px 12px;border-radius:6px;border:none;background:transparent;color:var(--txM);font-size:11px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s}
+.dir-b.on{background:var(--bd-green);color:#fff}
+
+/* Progress */
+.prg{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.prg-bar{flex:1;height:4px;background:var(--s3);border-radius:2px;overflow:hidden}
+.prg-fill{height:100%;background:var(--g1);border-radius:2px;transition:width .3s}
+.prg-tx{font-size:11px;color:var(--txM);min-width:55px;text-align:right;font-family:'DM Mono',monospace}
+
+/* Flashcard */
+.fcw{margin-bottom:16px;cursor:pointer}
+.fc{background:var(--s1);border:1px solid var(--brd);border-radius:18px;padding:32px 24px;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;transition:transform .2s}
+.fc:hover{transform:translateY(-2px)}
+.fc-bdg{position:absolute;top:12px;right:14px;background:var(--s3);border:1px solid var(--brd);border-radius:6px;padding:3px 9px;font-size:10px;color:var(--txM);font-family:'DM Mono',monospace}
+.fc-cat{position:absolute;top:12px;left:14px;background:rgba(0,106,78,.1);color:var(--bd-green);border:1px solid rgba(0,106,78,.2);border-radius:6px;padding:3px 9px;font-size:10px;font-weight:600}
+.fc-front .fc-big{font-family:'Zen Maru Gothic',sans-serif;font-size:54px;font-weight:900;color:var(--tx);line-height:1.2;margin-bottom:8px}
+.fc-front .fc-read{font-size:16px;color:var(--txM);margin-bottom:12px}
+.fc-back{display:none;width:100%}
+.fc.flip .fc-front{display:none}
+.fc.flip .fc-back{display:flex;flex-direction:column;align-items:center}
+.fc-katakana{font-family:'Zen Maru Gothic',sans-serif;font-size:42px;font-weight:900;color:var(--bd-red);line-height:1.2;margin-bottom:10px;letter-spacing:.02em}
+.fc-bengali{font-family:'Noto Sans Bengali',sans-serif;font-size:28px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:14px}
+.fc-jp{font-size:18px;color:var(--txM);border-top:1px solid var(--brd);padding-top:12px;width:80%}
+.fc-hint{margin-top:14px;font-size:10px;color:var(--txD);letter-spacing:.1em;display:flex;align-items:center;gap:8px}
+.fc-hint::before,.fc-hint::after{content:'';width:18px;height:1px;background:var(--txD)}
+
+.fc-acts{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.fc-b{padding:11px 22px;border-radius:10px;border:1px solid var(--brd);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:6px;background:var(--s1);color:var(--txM)}
+.fc-b:hover{background:var(--s2);color:var(--tx)}
+.fc-b.nx{background:var(--bd-green);color:#fff;border-color:transparent}
+.fc-b.nx:hover{background:var(--acc2)}
+.fc-b.shuf{background:var(--s2)}
+
+/* Quiz */
+.qb{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:28px 22px;text-align:center;margin-bottom:14px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.qb::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--g1)}
+.qB{font-family:'Zen Maru Gothic',sans-serif;font-size:46px;font-weight:900;color:var(--tx);line-height:1.2;margin-bottom:6px}
+.qB.bn{font-family:'Noto Sans Bengali',sans-serif;font-size:36px;font-weight:600}
+.qB.kt{color:var(--bd-red);font-size:38px}
+.qP{font-size:13px;color:var(--txM);margin-top:6px}
+.qT{display:inline-block;margin-bottom:10px;background:var(--s3);border:1px solid var(--brd);border-radius:14px;padding:4px 12px;font-size:11px;color:var(--bd-green);letter-spacing:.06em;font-weight:600}
+.qos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.qo{padding:14px 14px;border-radius:12px;border:1px solid var(--brd);background:var(--s1);color:var(--tx);font-size:13px;cursor:pointer;transition:all .15s;text-align:left;font-family:inherit;line-height:1.5;display:flex;align-items:center;gap:9px;min-height:50px}
+.qo:hover:not(.dis){background:var(--s2);border-color:var(--bd-green)}
+.qo.ok{background:rgba(107,163,104,.12);border-color:var(--grn);color:var(--grn)}
+.qo.no{background:rgba(217,107,107,.1);border-color:var(--red);color:var(--red)}
+.qo.dis{cursor:default}
+.qo .ol{display:flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;background:var(--s3);border-radius:6px;font-size:11px;color:var(--txM);font-family:'DM Mono',monospace;font-weight:700}
+.qo.ok .ol{background:rgba(107,163,104,.25);color:var(--grn)}
+.qo.no .ol{background:rgba(217,107,107,.2);color:var(--red)}
+.qo-content{flex:1;display:flex;flex-direction:column;gap:2px}
+.qo-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:11px;color:var(--txD);margin-top:2px}
+.qfb{padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:13px;display:none;line-height:1.7}
+.qfb.ok{background:rgba(107,163,104,.08);border:1px solid rgba(107,163,104,.25);color:var(--grn);display:block}
+.qfb.no{background:rgba(217,107,107,.06);border:1px solid rgba(217,107,107,.2);color:#c54343;display:block}
+.qfb b{font-weight:700}
+.qfb .ans-bn{font-family:'Noto Sans Bengali',sans-serif;display:block;margin-top:4px;color:var(--txM);font-size:12px}
+.qnx{padding:11px 28px;border-radius:10px;background:var(--bd-green);color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:none}
+.qnx:hover{background:var(--acc2)}
+.qnx.sh{display:inline-block}
+
+/* Score */
+.scr{text-align:center;padding:40px 20px;display:none}
+.scr.sh{display:block}
+.scr-big{font-family:'Zen Maru Gothic',sans-serif;font-size:64px;font-weight:900;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.scr-msg{font-size:14px;color:var(--txM);margin:8px 0 22px}
+.scr-tiles{display:flex;gap:12px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+.scr-t{background:var(--s1);border:1px solid var(--brd);border-radius:12px;padding:14px 22px;min-width:90px}
+.scr-t .tl{font-size:10px;color:var(--txD);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase}
+.scr-t .tv{font-size:24px;font-weight:800;font-family:'Zen Maru Gothic',sans-serif}
+.scr-t.g .tv{color:var(--grn)}.scr-t.r .tv{color:var(--red)}
+.rbtn{padding:11px 26px;border-radius:10px;background:var(--bd-green);color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin:0 4px;transition:background .15s}
+.rbtn:hover{background:var(--acc2)}
+.rbtn.alt{background:var(--s2);color:var(--txM);border:1px solid var(--brd)}
+.rbtn.alt:hover{background:var(--s3);color:var(--tx)}
+
+@media(max-width:600px){
+  .qos{grid-template-columns:1fr}
+  .fc-front .fc-big{font-size:42px}
+  .fc-katakana{font-size:34px}
+  .fc-bengali{font-size:24px}
+  .qB{font-size:36px}.qB.bn{font-size:28px}.qB.kt{font-size:30px}
+}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fi .25s ease}
+
+footer{background:#111;color:#888;padding:28px 24px;font-size:12px;text-align:center;line-height:1.8;margin-top:40px}
+footer a{color:#aaa;text-decoration:none;margin:0 6px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="logo">
+    NIHONGO WORK <span class="logo-jp">にほんごワーク</span>
+  </a>
+  <div class="top-r">
+    <a href="banglastudy.html" class="back-link">← 戻る</a>
+    <a href="index.html" class="back-link">🏠 ホーム</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="head">
+    <h1 class="head-t">📖 ベンガル語 語彙 — Vocabulary</h1>
+    <p class="head-d">日本語 ↔ ベンガル語のフラッシュカード＆クイズ。発音はカタカナで、その下にベンガル文字も併記。</p>
+    <p class="head-bn">বাংলা শব্দভাণ্ডার — কাতাকানা উচ্চারণ সহ ফ্ল্যাশকার্ড ও কুইজ</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="u-tabs">
+    <button class="u-tab on" data-mode="flash">📇 フラッシュカード</button>
+    <button class="u-tab" data-mode="quiz">🎯 クイズ</button>
+  </div>
+
+  <!-- Direction switcher -->
+  <div class="dir-bar">
+    <span class="dir-lbl">出題方向 / Direction</span>
+    <div class="dir-btns">
+      <button class="dir-b on" data-dir="j2b">日本語 → বাংলা</button>
+      <button class="dir-b" data-dir="b2j">বাংলা → 日本語</button>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="prg">
+    <div class="prg-bar"><div class="prg-fill" id="prgFill" style="width:0%"></div></div>
+    <span class="prg-tx" id="prgTx">0 / 0</span>
+  </div>
+
+  <!-- ============= FLASHCARD VIEW ============= -->
+  <div id="vFlash">
+    <div class="fcw" id="fcw">
+      <div class="fc" id="fc">
+        <span class="fc-bdg" id="fcBdg">1 / 1</span>
+        <span class="fc-cat" id="fcCat">基本</span>
+
+        <div class="fc-front" id="fcFront">
+          <div class="fc-big" id="fcQ">水</div>
+          <div class="fc-read" id="fcQR">みず</div>
+          <div class="fc-hint">タップして答えを見る</div>
+        </div>
+
+        <div class="fc-back" id="fcBack">
+          <div class="fc-katakana" id="fcKt">パーニ</div>
+          <div class="fc-bengali" id="fcBn">পানি</div>
+          <div class="fc-jp" id="fcJp">水（みず）</div>
+          <div class="fc-hint">もう一度タップで戻る</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-acts">
+      <button class="fc-b" id="fcPrev">← 前</button>
+      <button class="fc-b shuf" id="fcShuf">🔀 シャッフル</button>
+      <button class="fc-b nx" id="fcNext">次 →</button>
+    </div>
+  </div>
+
+  <!-- ============= QUIZ VIEW ============= -->
+  <div id="vQuiz" style="display:none">
+    <div class="qb">
+      <span class="qT" id="qT">意味を選んでください</span>
+      <div class="qB" id="qB">水</div>
+      <div class="qP" id="qP">みず</div>
+    </div>
+    <div class="qos" id="qos"></div>
+    <div class="qfb" id="qfb"></div>
+    <div style="text-align:center"><button class="qnx" id="qnx">次へ →</button></div>
+  </div>
+
+  <!-- ============= SCORE VIEW ============= -->
+  <div class="scr" id="vScore">
+    <div class="scr-big" id="scrBig">0%</div>
+    <div class="scr-msg" id="scrMsg">よくできました！</div>
+    <div class="scr-tiles">
+      <div class="scr-t g"><div class="tl">正解</div><div class="tv" id="scrCo">0</div></div>
+      <div class="scr-t r"><div class="tl">不正解</div><div class="tv" id="scrWr">0</div></div>
+    </div>
+    <button class="rbtn" id="scrRetry">もう一度</button>
+    <button class="rbtn alt" id="scrFlash">📇 フラッシュへ</button>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 NIHONGO WORK &middot; ベンガル語学習 &middot;
+  <a href="banglastudy.html">← Bangla Hub</a>
+  <a href="index.html">🏠 Home</a>
+</footer>
+
+<script>
+/* =========================================================
+   VOCAB DATA — Japanese ↔ Bengali (Katakana phonetics + Bangla script)
+   Format: [japanese_kanji, japanese_reading, katakana_pron, bengali_script, english_meaning, category]
+   Source: JLPT N5 everyday vocabulary, translated to Bengali for daily use in Bangladesh.
+   ========================================================= */
+const VOCAB = [
+  // 基本動詞 / Basic verbs
+  ["会う","あう","デカ","দেখা","to meet","動詞"],
+  ["行く","いく","ジャオヤ","যাওয়া","to go","動詞"],
+  ["来る","くる","アシャ","আসা","to come","動詞"],
+  ["食べる","たべる","カオヤ","খাওয়া","to eat","動詞"],
+  ["飲む","のむ","パン カラ","পান করা","to drink","動詞"],
+  ["見る","みる","デカ","দেখা","to see","動詞"],
+  ["聞く","きく","ショナ","শোনা","to listen","動詞"],
+  ["話す","はなす","コタ ボラ","কথা বলা","to speak","動詞"],
+  ["書く","かく","レカ","লেখা","to write","動詞"],
+  ["読む","よむ","ポラ","পড়া","to read","動詞"],
+  ["買う","かう","ケナ","কেনা","to buy","動詞"],
+  ["売る","うる","ビクリ コラ","বিক্রি করা","to sell","動詞"],
+  ["作る","つくる","タイリ コラ","তৈরি করা","to make","動詞"],
+  ["寝る","ねる","ゴウマノ","ঘুমানো","to sleep","動詞"],
+  ["起きる","おきる","オタ","ওঠা","to get up","動詞"],
+  ["働く","はたらく","カジ コラ","কাজ করা","to work","動詞"],
+  ["休む","やすむ","ビショラム ネオヤ","বিশ্রাম নেওয়া","to rest","動詞"],
+  ["待つ","まつ","オペッカ コラ","অপেক্ষা করা","to wait","動詞"],
+  ["分かる","わかる","ボジャ","বোঝা","to understand","動詞"],
+  ["知る","しる","ジャナ","জানা","to know","動詞"],
+
+  // 食べ物 / Food
+  ["水","みず","パーニ","পানি","water","食べ物"],
+  ["お茶","おちゃ","チャ","চা","tea","食べ物"],
+  ["コーヒー","こーひー","コフィ","কফি","coffee","食べ物"],
+  ["ご飯","ごはん","バット","ভাত","rice (meal)","食べ物"],
+  ["米","こめ","チャル","চাল","rice (raw)","食べ物"],
+  ["パン","ぱん","ルティ","রুটি","bread","食べ物"],
+  ["肉","にく","マンショ","মাংস","meat","食べ物"],
+  ["魚","さかな","マチュ","মাছ","fish","食べ物"],
+  ["卵","たまご","ディム","ডিম","egg","食べ物"],
+  ["野菜","やさい","ショブジ","সবজি","vegetable","食べ物"],
+  ["果物","くだもの","フォル","ফল","fruit","食べ物"],
+  ["塩","しお","ロボン","লবণ","salt","食べ物"],
+  ["砂糖","さとう","チニ","চিনি","sugar","食べ物"],
+  ["牛乳","ぎゅうにゅう","ドゥド","দুধ","milk","食べ物"],
+  ["朝ご飯","あさごはん","ショカレル ナシュタ","সকালের নাশতা","breakfast","食べ物"],
+  ["昼ご飯","ひるごはん","ドゥプレル カバル","দুপুরের খাবার","lunch","食べ物"],
+  ["夜ご飯","ばんごはん","ラテル カバル","রাতের খাবার","dinner","食べ物"],
+
+  // 家族 / Family
+  ["家族","かぞく","ポリバル","পরিবার","family","家族"],
+  ["父","ちち","ババ","বাবা","father","家族"],
+  ["母","はは","マ","মা","mother","家族"],
+  ["兄","あに","ボロ バイ","বড় ভাই","older brother","家族"],
+  ["姉","あね","ボロ ボン","বড় বোন","older sister","家族"],
+  ["弟","おとうと","チョット バイ","ছোট ভাই","younger brother","家族"],
+  ["妹","いもうと","チョット ボン","ছোট বোন","younger sister","家族"],
+  ["子供","こども","バッチャ","বাচ্চা","child","家族"],
+  ["息子","むすこ","チェレ","ছেলে","son","家族"],
+  ["娘","むすめ","メエ","মেয়ে","daughter","家族"],
+  ["夫","おっと","シャミ","স্বামী","husband","家族"],
+  ["妻","つま","ストリ","স্ত্রী","wife","家族"],
+  ["友達","ともだち","ボンドゥ","বন্ধু","friend","家族"],
+
+  // 場所 / Places
+  ["家","いえ","バリ","বাড়ি","house","場所"],
+  ["部屋","へや","ルーム","রুম","room","場所"],
+  ["学校","がっこう","シュコル","স্কুল","school","場所"],
+  ["大学","だいがく","ビッショビッダロイ","বিশ্ববিদ্যালয়","university","場所"],
+  ["会社","かいしゃ","オフィシュ","অফিস","company","場所"],
+  ["銀行","ぎんこう","バンク","ব্যাংক","bank","場所"],
+  ["病院","びょういん","ハシュパタル","হাসপাতাল","hospital","場所"],
+  ["店","みせ","ドカン","দোকান","shop","場所"],
+  ["市場","いちば","バザル","বাজার","market","場所"],
+  ["駅","えき","シュテシャン","স্টেশন","station","場所"],
+  ["空港","くうこう","ビマンボンドル","বিমানবন্দর","airport","場所"],
+  ["道","みち","ラスタ","রাস্তা","road","場所"],
+  ["公園","こうえん","パルク","পার্ক","park","場所"],
+  ["トイレ","といれ","トイレット","টয়লেট","toilet","場所"],
+  ["台所","だいどころ","ラナゴル","রান্নাঘর","kitchen","場所"],
+
+  // 時間 / Time
+  ["時間","じかん","ショモイ","সময়","time","時間"],
+  ["今日","きょう","アジ","আজ","today","時間"],
+  ["昨日","きのう","ゴットカル","গতকাল","yesterday","時間"],
+  ["明日","あした","アガミカル","আগামীকাল","tomorrow","時間"],
+  ["朝","あさ","ショカル","সকাল","morning","時間"],
+  ["昼","ひる","ドゥプル","দুপুর","noon","時間"],
+  ["夜","よる","ラット","রাত","night","時間"],
+  ["夕方","ゆうがた","ビケル","বিকেল","evening","時間"],
+  ["週","しゅう","ショッタ","সপ্তাহ","week","時間"],
+  ["月","つき","マシュ","মাস","month","時間"],
+  ["年","とし","ボッチョル","বছর","year","時間"],
+  ["今","いま","エカン","এখন","now","時間"],
+  ["後で","あとで","ポレ","পরে","later","時間"],
+  ["毎日","まいにち","プロティディン","প্রতিদিন","every day","時間"],
+
+  // 数字 / Numbers
+  ["一","いち","エック","এক","one","数字"],
+  ["二","に","ドゥイ","দুই","two","数字"],
+  ["三","さん","ティン","তিন","three","数字"],
+  ["四","よん","チャル","চার","four","数字"],
+  ["五","ご","パンチ","পাঁচ","five","数字"],
+  ["六","ろく","チョイ","ছয়","six","数字"],
+  ["七","なな","シャット","সাত","seven","数字"],
+  ["八","はち","アット","আট","eight","数字"],
+  ["九","きゅう","ノエ","নয়","nine","数字"],
+  ["十","じゅう","ドッシュ","দশ","ten","数字"],
+  ["百","ひゃく","エック ショ","একশ","hundred","数字"],
+  ["千","せん","エック ハジャル","এক হাজার","thousand","数字"],
+
+  // 形容詞 / Adjectives
+  ["大きい","おおきい","ボロ","বড়","big","形容詞"],
+  ["小さい","ちいさい","チョット","ছোট","small","形容詞"],
+  ["新しい","あたらしい","ノトゥン","নতুন","new","形容詞"],
+  ["古い","ふるい","プラノ","পুরোনো","old","形容詞"],
+  ["良い","いい","バロ","ভালো","good","形容詞"],
+  ["悪い","わるい","カラプ","খারাপ","bad","形容詞"],
+  ["熱い","あつい","ゴロム","গরম","hot","形容詞"],
+  ["寒い","さむい","タンダ","ঠান্ডা","cold","形容詞"],
+  ["高い","たかい","ダミ","দামী","expensive","形容詞"],
+  ["安い","やすい","ショスタ","সস্তা","cheap","形容詞"],
+  ["長い","ながい","ロンバ","লম্বা","long","形容詞"],
+  ["短い","みじかい","チョット","ছোট","short","形容詞"],
+  ["速い","はやい","タラタリ","তাড়াতাড়ি","fast","形容詞"],
+  ["遅い","おそい","アシュテ","আস্তে","slow","形容詞"],
+  ["多い","おおい","ベシ","বেশি","many","形容詞"],
+  ["少ない","すくない","コム","কম","few","形容詞"],
+  ["美しい","うつくしい","シュンドル","সুন্দর","beautiful","形容詞"],
+  ["きれい","きれい","シュンドル","সুন্দর","pretty/clean","形容詞"],
+  ["難しい","むずかしい","コティン","কঠিন","difficult","形容詞"],
+  ["簡単","かんたん","ショホジ","সহজ","easy","形容詞"],
+
+  // 体 / Body
+  ["頭","あたま","マタ","মাথা","head","体"],
+  ["顔","かお","ムク","মুখ","face","体"],
+  ["目","め","チョク","চোখ","eye","体"],
+  ["耳","みみ","カン","কান","ear","体"],
+  ["鼻","はな","ナク","নাক","nose","体"],
+  ["口","くち","ムク","মুখ","mouth","体"],
+  ["手","て","ハット","হাত","hand","体"],
+  ["足","あし","パ","পা","foot/leg","体"],
+  ["体","からだ","シャリル","শরীর","body","体"],
+  ["心","こころ","モン","মন","heart/mind","体"],
+
+  // 色 / Colors
+  ["色","いろ","ロン","রঙ","color","色"],
+  ["赤","あか","ラル","লাল","red","色"],
+  ["青","あお","ニル","নীল","blue","色"],
+  ["白","しろ","シャダ","সাদা","white","色"],
+  ["黒","くろ","カロ","কালো","black","色"],
+  ["黄色","きいろ","ホルド","হলুদ","yellow","色"],
+  ["緑","みどり","ショブジ","সবুজ","green","色"],
+
+  // 天気 / Weather
+  ["天気","てんき","アボハオヤ","আবহাওয়া","weather","天気"],
+  ["雨","あめ","ブリシュティ","বৃষ্টি","rain","天気"],
+  ["風","かぜ","バタシュ","বাতাস","wind","天気"],
+  ["雪","ゆき","トゥシャル","তুষার","snow","天気"],
+  ["太陽","たいよう","シュルジョ","সূর্য","sun","天気"],
+  ["月","つき(夜)","チャンド","চাঁদ","moon","天気"],
+  ["雲","くも","メグ","মেঘ","cloud","天気"],
+  ["空","そら","アカシュ","আকাশ","sky","天気"],
+
+  // あいさつ / Greetings
+  ["こんにちは","こんにちは","ショラム","সালাম","hello","あいさつ"],
+  ["おはよう","おはよう","シュプロバット","শুভ সকাল","good morning","あいさつ"],
+  ["こんばんは","こんばんは","シュボ ションダ","শুভ সন্ধ্যা","good evening","あいさつ"],
+  ["さようなら","さようなら","ビダエ","বিদায়","goodbye","あいさつ"],
+  ["ありがとう","ありがとう","ドンノバド","ধন্যবাদ","thank you","あいさつ"],
+  ["ごめんなさい","ごめんなさい","ドゥキト","দুঃখিত","sorry","あいさつ"],
+  ["はい","はい","ジ","জি","yes","あいさつ"],
+  ["いいえ","いいえ","ナ","না","no","あいさつ"],
+
+  // 仕事・お金 / Work & Money
+  ["お金","おかね","タカ","টাকা","money","お金"],
+  ["仕事","しごと","カジ","কাজ","work/job","お金"],
+  ["値段","ねだん","ダム","দাম","price","お金"],
+  ["店員","てんいん","ドカニ","দোকানি","shop staff","お金"],
+  ["先生","せんせい","ショル","স্যার","teacher (sir)","お金"],
+  ["医者","いしゃ","ダクタル","ডাক্তার","doctor","お金"],
+  ["車","くるま","ガリ","গাড়ি","car","乗り物"],
+  ["バス","ばす","バシュ","বাস","bus","乗り物"],
+  ["電車","でんしゃ","トレン","ট্রেন","train","乗り物"],
+  ["飛行機","ひこうき","プレン","প্লেন","airplane","乗り物"],
+  ["自転車","じてんしゃ","シャイケル","সাইকেল","bicycle","乗り物"],
+  ["リキシャ","りきしゃ","リクシャ","রিকশা","rickshaw","乗り物"],
+  ["CNG","しーえぬじー","シエヌジ","সিএনজি","CNG (auto)","乗り物"]
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let mode = 'flash';     // 'flash' | 'quiz'
+let dir  = 'j2b';       // 'j2b' (Japanese → Bengali) | 'b2j' (Bengali → Japanese)
+let order = [];          // shuffled index array
+let cur = 0;             // pointer into `order`
+let flipped = false;
+// quiz state
+let qIndex = 0; let qScore = 0; let qWrong = 0; let qAnswered = false; let qOptions = [];
+
+/* =========================================================
+   INIT
+   ========================================================= */
+function shuffleArr(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function resetOrder(){ order = VOCAB.map((_,i)=>i); shuffleArr(order); cur = 0; flipped = false; }
+resetOrder();
+
+/* =========================================================
+   FLASHCARD
+   ========================================================= */
+const fc = document.getElementById('fc');
+const fcQ = document.getElementById('fcQ');
+const fcQR = document.getElementById('fcQR');
+const fcKt = document.getElementById('fcKt');
+const fcBn = document.getElementById('fcBn');
+const fcJp = document.getElementById('fcJp');
+const fcBdg = document.getElementById('fcBdg');
+const fcCat = document.getElementById('fcCat');
+
+function renderFlash(){
+  const item = VOCAB[order[cur]];
+  // [kanji, reading, katakana, bengali, english, category]
+  if (dir === 'j2b'){
+    // Front: Japanese, Back: Bengali (Katakana + Bangla)
+    fcQ.textContent = item[0];
+    fcQR.textContent = item[1] !== item[0] ? item[1] : '';
+    fcQR.style.display = item[1] !== item[0] ? 'block' : 'none';
+    fcKt.textContent = item[2];
+    fcBn.textContent = item[3];
+    fcJp.textContent = item[0] + (item[1] !== item[0] ? '（' + item[1] + '）' : '');
+  } else {
+    // Front: Bengali (Katakana + Bangla), Back: Japanese
+    fcQ.textContent = item[2];
+    fcQ.style.color = 'var(--bd-red)';
+    fcQR.textContent = item[3];
+    fcQR.style.display = 'block';
+    fcQR.style.fontFamily = "'Noto Sans Bengali',sans-serif";
+    fcQR.style.fontSize = '20px';
+    fcKt.textContent = item[0];
+    fcKt.style.color = 'var(--tx)';
+    fcBn.textContent = item[1] !== item[0] ? item[1] : '';
+    fcBn.style.fontFamily = "'Zen Maru Gothic',sans-serif";
+    fcBn.style.fontSize = '22px';
+    fcJp.textContent = item[2] + ' / ' + item[3];
+  }
+  // Reset for j2b style on next load if needed
+  if (dir === 'j2b'){
+    fcQ.style.color = '';
+    fcQR.style.fontFamily = '';
+    fcQR.style.fontSize = '';
+    fcKt.style.color = 'var(--bd-red)';
+    fcBn.style.fontFamily = "'Noto Sans Bengali',sans-serif";
+    fcBn.style.fontSize = '28px';
+  }
+
+  fcBdg.textContent = (cur+1) + ' / ' + order.length;
+  fcCat.textContent = item[5];
+  // Reset flip
+  fc.classList.remove('flip');
+  flipped = false;
+  // Animate
+  fc.classList.remove('fade'); void fc.offsetWidth; fc.classList.add('fade');
+  // Progress
+  document.getElementById('prgFill').style.width = ((cur+1)/order.length*100)+'%';
+  document.getElementById('prgTx').textContent = (cur+1) + ' / ' + order.length;
+}
+
+document.getElementById('fcw').addEventListener('click', function(){
+  fc.classList.toggle('flip');
+  flipped = !flipped;
+});
+document.getElementById('fcNext').addEventListener('click', function(e){
+  e.stopPropagation();
+  cur = (cur + 1) % order.length;
+  renderFlash();
+});
+document.getElementById('fcPrev').addEventListener('click', function(e){
+  e.stopPropagation();
+  cur = (cur - 1 + order.length) % order.length;
+  renderFlash();
+});
+document.getElementById('fcShuf').addEventListener('click', function(e){
+  e.stopPropagation();
+  resetOrder(); renderFlash();
+});
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+const qB = document.getElementById('qB');
+const qP = document.getElementById('qP');
+const qT = document.getElementById('qT');
+const qos = document.getElementById('qos');
+const qfb = document.getElementById('qfb');
+const qnx = document.getElementById('qnx');
+
+function startQuiz(){
+  qIndex = 0; qScore = 0; qWrong = 0;
+  resetOrder();
+  document.getElementById('vScore').classList.remove('sh');
+  document.getElementById('vQuiz').style.display = 'block';
+  renderQuiz();
+}
+
+function renderQuiz(){
+  if (qIndex >= order.length){ showScore(); return; }
+  qAnswered = false;
+  const item = VOCAB[order[qIndex]];
+  // [kanji, reading, katakana, bengali, english, category]
+  qB.classList.remove('bn','kt');
+  qP.style.display = 'block';
+  if (dir === 'j2b'){
+    // Show Japanese, ask for Bengali (display Katakana + Bangla as options)
+    qT.textContent = 'ベンガル語の意味を選んでください';
+    qB.textContent = item[0];
+    qP.textContent = item[1] !== item[0] ? item[1] : '';
+    if (!qP.textContent) qP.style.display = 'none';
+  } else {
+    // Show Bengali (Katakana + Bangla), ask for Japanese
+    qT.textContent = '日本語の意味を選んでください';
+    qB.textContent = item[2];
+    qB.classList.add('kt');
+    qP.textContent = item[3];
+    qP.style.fontFamily = "'Noto Sans Bengali',sans-serif";
+    qP.style.fontSize = '15px';
+  }
+
+  // Build 4 options
+  qOptions = [order[qIndex]];
+  const pool = VOCAB.map((_,i)=>i).filter(i=>i!==order[qIndex]);
+  shuffleArr(pool);
+  for (let i=0;i<3 && i<pool.length;i++) qOptions.push(pool[i]);
+  shuffleArr(qOptions);
+
+  qos.innerHTML = '';
+  qOptions.forEach((idx, i)=>{
+    const it = VOCAB[idx];
+    const div = document.createElement('div');
+    div.className = 'qo';
+    div.dataset.idx = idx;
+    let label, sub;
+    if (dir === 'j2b'){
+      label = it[2]; // katakana
+      sub = it[3];   // bengali script
+    } else {
+      label = it[0] + (it[1] !== it[0] ? '（' + it[1] + '）' : '');
+      sub = it[4];
+    }
+    div.innerHTML = `
+      <span class="ol">${String.fromCharCode(65+i)}</span>
+      <div class="qo-content">
+        <span>${label}</span>
+        <span class="qo-bn">${sub}</span>
+      </div>`;
+    div.addEventListener('click', ()=>chooseOpt(div, idx));
+    qos.appendChild(div);
+  });
+
+  qfb.style.display = 'none'; qfb.className = 'qfb';
+  qnx.classList.remove('sh');
+  // progress
+  document.getElementById('prgFill').style.width = ((qIndex+1)/order.length*100)+'%';
+  document.getElementById('prgTx').textContent = (qIndex+1) + ' / ' + order.length;
+}
+
+function chooseOpt(div, pickedIdx){
+  if (qAnswered) return;
+  qAnswered = true;
+  const correctIdx = order[qIndex];
+  const correct = pickedIdx === correctIdx;
+  document.querySelectorAll('.qo').forEach(o=>{
+    o.classList.add('dis');
+    const oi = parseInt(o.dataset.idx,10);
+    if (oi === correctIdx) o.classList.add('ok');
+    else if (oi === pickedIdx && !correct) o.classList.add('no');
+  });
+  const item = VOCAB[correctIdx];
+  if (correct){
+    qScore++;
+    qfb.className = 'qfb ok';
+    qfb.innerHTML = '✓ 正解！ <b>' + item[0] + '</b> = ' + item[2] + ' <span class="ans-bn">' + item[3] + '</span>';
+  } else {
+    qWrong++;
+    qfb.className = 'qfb no';
+    qfb.innerHTML = '✗ 正解は <b>' + (dir === 'j2b' ? item[2] : item[0]) + '</b>（' + (dir === 'j2b' ? item[0] : item[2]) + '）<span class="ans-bn">' + item[3] + '</span>';
+  }
+  qfb.style.display = 'block';
+  qnx.classList.add('sh');
+}
+
+qnx.addEventListener('click', ()=>{
+  qIndex++;
+  if (qIndex >= order.length) showScore();
+  else renderQuiz();
+});
+
+function showScore(){
+  document.getElementById('vQuiz').style.display = 'none';
+  document.getElementById('vScore').classList.add('sh');
+  const total = qScore + qWrong;
+  const pct = total ? Math.round(qScore/total*100) : 0;
+  document.getElementById('scrBig').textContent = pct + '%';
+  document.getElementById('scrCo').textContent = qScore;
+  document.getElementById('scrWr').textContent = qWrong;
+  let msg = '';
+  if (pct >= 90) msg = '完璧！🏆 অসাধারণ!';
+  else if (pct >= 70) msg = 'すごい！🎉 চমৎকার!';
+  else if (pct >= 50) msg = 'いい感じ！👍 ভালো!';
+  else msg = 'もっと頑張ろう！💪 চেষ্টা চালিয়ে যান!';
+  document.getElementById('scrMsg').textContent = msg;
+}
+
+document.getElementById('scrRetry').addEventListener('click', ()=>{
+  document.getElementById('vScore').classList.remove('sh');
+  startQuiz();
+});
+document.getElementById('scrFlash').addEventListener('click', ()=>{
+  document.getElementById('vScore').classList.remove('sh');
+  switchMode('flash');
+});
+
+/* =========================================================
+   MODE / DIR SWITCHING
+   ========================================================= */
+function switchMode(m){
+  mode = m;
+  document.querySelectorAll('.u-tab').forEach(t=>t.classList.toggle('on', t.dataset.mode === m));
+  document.getElementById('vFlash').style.display = (m === 'flash') ? 'block' : 'none';
+  document.getElementById('vQuiz').style.display = (m === 'quiz') ? 'block' : 'none';
+  document.getElementById('vScore').classList.remove('sh');
+  if (m === 'flash'){ resetOrder(); renderFlash(); }
+  else { startQuiz(); }
+}
+document.querySelectorAll('.u-tab').forEach(t=>{
+  t.addEventListener('click', ()=>switchMode(t.dataset.mode));
+});
+
+document.querySelectorAll('.dir-b').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    dir = b.dataset.dir;
+    document.querySelectorAll('.dir-b').forEach(x=>x.classList.toggle('on', x.dataset.dir === dir));
+    if (mode === 'flash') renderFlash();
+    else startQuiz();
+  });
+});
+
+// Initial render
+renderFlash();
+</script>
+
+</body>
+</html>

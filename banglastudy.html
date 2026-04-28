@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バングラ駐在者のためのベンガル語学習 | NIHONGO WORK</title>
+<meta name="description" content="バングラデシュに駐在する日本人向けのベンガル語学習ページ。語彙クイズと実用フレーズ集（オフィス・ドライバー・あいさつ・家政婦さん）を収録。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--s1:#FFFFFF;--s2:#F0EFE9;--s3:#E8E7E0;
+  --acc:#E4572E;--acc2:#C94120;--accG:#6BA368;--accB:#1F3A5F;--accY:#D4A017;
+  --bd-green:#006a4e;--bd-red:#f42a41;
+  --tx:#1A1A2E;--txM:#4A5568;--txD:#9AA5B4;
+  --brd:rgba(0,0,0,0.08);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP','Noto Sans Bengali',sans-serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(247,246,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;text-decoration:none;background:linear-gradient(135deg,var(--bd-green),var(--bd-red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:8px}
+.logo-jp{font-size:11px;color:var(--txM);-webkit-text-fill-color:var(--txM);font-weight:400}
+.home-link{background:var(--s2);border:1px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--txM);text-decoration:none;display:flex;align-items:center;gap:4px}
+
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+
+.hero{text-align:center;padding:44px 20px 24px;border-radius:20px;background:linear-gradient(135deg,#006a4e 0%,#f42a41 100%);position:relative;overflow:hidden;margin-bottom:28px;box-shadow:0 8px 28px rgba(0,106,78,.18)}
+.hero::before{content:'বাংলা';position:absolute;top:-30px;right:-20px;font-family:'Noto Sans Bengali',sans-serif;font-size:140px;font-weight:700;color:rgba(255,255,255,.1);line-height:1;letter-spacing:-.04em}
+.hero-flag{font-size:48px;margin-bottom:8px;display:block;position:relative;z-index:1}
+.hero-t{font-family:'Zen Maru Gothic',sans-serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.3;margin-bottom:6px;position:relative;z-index:1}
+.hero-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:14px;color:rgba(255,255,255,.92);margin-bottom:10px;position:relative;z-index:1}
+.hero-d{font-size:13px;color:rgba(255,255,255,.88);line-height:1.7;max-width:480px;margin:0 auto;position:relative;z-index:1}
+
+.intro{background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;margin-bottom:24px;font-size:13px;color:var(--txM);line-height:1.8}
+.intro b{color:var(--tx)}
+
+.sec-t{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:var(--txM);margin:8px 0 14px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.sec-t::after{content:'';flex:1;height:1px;background:var(--brd)}
+
+.modgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.modgrid{grid-template-columns:1fr}}
+
+.modcard{display:block;background:var(--s1);border:1px solid var(--brd);border-radius:18px;padding:22px 20px;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s;min-height:200px}
+.modcard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.modcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.modcard.vocab::before{background:linear-gradient(90deg,#006a4e,#0a8862)}
+.modcard.vocab:hover{border-color:#006a4e}
+.modcard.phrase::before{background:linear-gradient(90deg,#f42a41,#ff6b3d)}
+.modcard.phrase:hover{border-color:#f42a41}
+.modcard-icon{font-size:38px;line-height:1;margin-bottom:12px;display:block}
+.modcard-t{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:900;margin-bottom:4px;color:var(--tx)}
+.modcard-bn{font-family:'Noto Sans Bengali',sans-serif;font-size:13px;color:var(--txM);margin-bottom:10px}
+.modcard-d{font-size:12px;color:var(--txM);line-height:1.7;margin-bottom:14px}
+.modcard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.tag{font-size:10px;background:var(--s2);border:1px solid var(--brd);border-radius:10px;padding:3px 9px;color:var(--txM)}
+.modcard.vocab .tag{background:rgba(0,106,78,.08);color:var(--bd-green);border-color:rgba(0,106,78,.2)}
+.modcard.phrase .tag{background:rgba(244,42,65,.08);color:var(--bd-red);border-color:rgba(244,42,65,.2)}
+.modcard-go{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#fff;border-radius:10px;padding:9px 16px}
+.modcard.vocab .modcard-go{background:var(--bd-green)}
+.modcard.phrase .modcard-go{background:var(--bd-red)}
+
+.tip{background:#fffbe7;border:1px solid #f4e3a1;border-radius:12px;padding:14px 16px;font-size:12px;color:#7a5d10;line-height:1.7;margin-top:24px;display:flex;gap:10px;align-items:flex-start}
+.tip-i{font-size:18px;line-height:1.2}
+
+footer{background:#111;color:#888;padding:28px 24px;font-size:12px;text-align:center;line-height:1.8;margin-top:40px}
+footer a{color:#aaa;text-decoration:none;margin:0 6px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="logo">
+    NIHONGO WORK <span class="logo-jp">にほんごワーク</span>
+  </a>
+  <a href="index.html" class="home-link">🏠 ホーム</a>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="hero-flag">🇧🇩</span>
+    <div class="hero-t">バングラ駐在者のためのベンガル語</div>
+    <div class="hero-bn">প্রবাসী জাপানিদের জন্য বাংলা শিক্ষা</div>
+    <div class="hero-d">日々の生活、オフィス、ドライバーとのやり取り、家政婦さんとの会話 ── バングラデシュで暮らすために本当に必要なベンガル語を、カタカナ発音つきで素早くマスター。</div>
+  </div>
+
+  <div class="intro">
+    こちらは <b>バングラデシュに駐在する日本人</b> 向けのベンガル語学習ページです。発音はすべてカタカナで分かりやすく表記し、その下にベンガル文字も併記しています。フラッシュカード・クイズはすべて<b>最初からアンロック済み</b>。今日からすぐ使えます。
+  </div>
+
+  <div class="sec-t">📚 学習モジュール — Modules</div>
+
+  <div class="modgrid">
+
+    <a class="modcard vocab" href="bengalivocab.html">
+      <span class="modcard-icon">📖</span>
+      <div class="modcard-t">ベンガル語 語彙</div>
+      <div class="modcard-bn">বাংলা শব্দভাণ্ডার</div>
+      <div class="modcard-d">日常で使う基礎単語を日本語 ↔ ベンガル語で習得。発音はカタカナ表記でフラッシュカード&クイズ。</div>
+      <div class="modcard-tags">
+        <span class="tag">📇 フラッシュカード</span>
+        <span class="tag">🎯 クイズ</span>
+        <span class="tag">🔓 全アンロック</span>
+      </div>
+      <span class="modcard-go">START →</span>
+    </a>
+
+    <a class="modcard phrase" href="bengaliphrase.html">
+      <span class="modcard-icon">💬</span>
+      <div class="modcard-t">バングラ実用フレーズ集</div>
+      <div class="modcard-bn">দৈনন্দিন বাংলা বাক্য</div>
+      <div class="modcard-d">オフィス10・タクシー/ドライバー10・あいさつ5・家政婦さん10の計35フレーズ。一覧 / フラッシュ / クイズの3モード。</div>
+      <div class="modcard-tags">
+        <span class="tag">📋 一覧</span>
+        <span class="tag">📇 フラッシュ</span>
+        <span class="tag">🎯 クイズ</span>
+      </div>
+      <span class="modcard-go">START →</span>
+    </a>
+
+  </div>
+
+  <div class="tip">
+    <span class="tip-i">💡</span>
+    <div><b>カタカナ発音について：</b>ベンガル語の発音をカタカナで近似表記しています。実際の発音は地域や話者で揺れがありますが、ダッカ周辺で通じやすい標準的な発音を優先しています。母音の長さ（ー）と濁音（ガ・ジャ など）に注意。</div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 NIHONGO WORK &middot; バングラ駐在日本人向けベンガル語学習 &middot;
+  <a href="index.html">🏠 Home</a>
+</footer>
+
+</body>
+</html>
